@@ -1,0 +1,22 @@
+.idea
+venv
+backend/frontend/node_modules
+backend/frontend//.pnp
+backend/frontend/.pnp.js
+
+# testing
+backend/frontend//coverage
+
+# production
+backend/frontend//build
+
+# misc
+backend/frontend/.DS_Store
+backend/frontend/.env.local
+backend/frontend/.env.development.local
+backend/frontend/.env.test.local
+backend/frontend/.env.production.local
+
+backend/frontend/npm-debug.log*
+backend/frontend/yarn-debug.log*
+backend/frontend/yarn-error.log*

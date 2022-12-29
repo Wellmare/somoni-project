@@ -7,7 +7,10 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:8000/api/customers/').then((data) => {
       console.log(data);
+
     })
+
+
   }, [])
 
   return (

@@ -10,6 +10,8 @@ from .serializers import *
 @api_view(['GET', 'POST'])
 def customers_list(request):
 
-    if request.method == 'POST':
-        return Response({'data': 1})
+    if request.method == 'GET':
+        query = Post.objects.all()
+        ser = CustomerSerializer(query, context={'request': request})
+        return Response({'data': ser})
 

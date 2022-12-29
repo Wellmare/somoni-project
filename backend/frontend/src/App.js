@@ -5,7 +5,7 @@ import axios from 'axios'
 
 function App() {
   useEffect(() => {
-    axios.post('http://localhost:8000/api/customers/').then((data) => {
+    axios.get('http://localhost:8000/api/customers/').then((data) => {
       console.log(data);
     })
   }, [])

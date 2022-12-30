@@ -27,6 +27,6 @@ from rest_framework import routers
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/customers/', views.example_view),
-    path('', include('myapi.urls')),
+    path('api/', include('myapi.urls')),
 
 ]

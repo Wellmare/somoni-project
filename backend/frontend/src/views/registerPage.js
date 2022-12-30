@@ -3,13 +3,14 @@ import AuthContext from "../context/AuthContext";
 
 function Register() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const { registerUser } = useContext(AuthContext);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    registerUser(username, password, password2);
+    registerUser(username, email, password, password2);
   };
 
   return (
@@ -24,6 +25,16 @@ function Register() {
             id="username"
             onChange={e => setUsername(e.target.value)}
             placeholder="Username"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Username</label>
+          <input
+            type="email"
+            id="email"
+            onChange={e => setEmail(e.target.value)}
+            placeholder="Email"
             required
           />
         </div>

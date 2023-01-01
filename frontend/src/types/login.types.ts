@@ -34,6 +34,9 @@ export interface IAuthContext {
     registerUser: ({ username, password, password2, email }: IDataToRegister) => Promise<void>;
     loginUser: ({ username, password }: IDataToLogin) => Promise<void>;
     logoutUser: () => void;
+    loading: boolean;
+    errorCode: number;
+    errorMessage: string
 }
 
 export interface IUserJWTDecodeResponse {
@@ -45,3 +48,7 @@ export interface IUserJWTDecodeResponse {
     user_id: number;
     username: string;
 }
+
+// export interface IErrorResponse {
+//     code: number;
+// }

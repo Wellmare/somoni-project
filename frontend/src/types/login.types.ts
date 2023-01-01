@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface ILoginResponse {
     access: string;
     refresh: string;
@@ -17,4 +19,29 @@ export interface IDataToRegister {
 export interface IRegisterResponse {
     username: string;
     email: string;
+}
+
+export interface ITokens {
+    access: string;
+    refresh: string;
+}
+
+export interface IAuthContext {
+    user: IUserJWTDecodeResponse | null;
+    setUser: React.Dispatch<React.SetStateAction<IUserJWTDecodeResponse | null>>;
+    authTokens: ITokens | null;
+    setAuthTokens: React.Dispatch<React.SetStateAction<ITokens | null>>;
+    registerUser: ({ username, password, password2, email }: IDataToRegister) => Promise<void>;
+    loginUser: ({ username, password }: IDataToLogin) => Promise<void>;
+    logoutUser: () => void;
+}
+
+export interface IUserJWTDecodeResponse {
+    email: string;
+    exp: number;
+    iat: number;
+    jti: string;
+    token_type: string;
+    user_id: number;
+    username: string;
 }

@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import axios from 'axios';
 
 import { url } from '../constants/api';
 
-const emptyApi = createApi({
-    reducerPath: 'api',
-    baseQuery: fetchBaseQuery({
-        baseUrl: url,
-    }),
-    endpoints: (build) => ({}),
+export const baseAxiosInstance = axios.create({
+    headers: {
+        'Content-type': 'application/json',
+    },
+    baseURL: url,
 });
-
-export default emptyApi;

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { ThemeContext } from '../context/ThemeContext';
-import { Theme } from '../types/IThemeContext';
+import { Theme } from '../types/ITheme';
 import { localStorageKeys } from '../types/localStorageKeys';
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../utils/localStorage';
 

@@ -9,6 +9,8 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    background: var(--background);
 }
 
 code {
@@ -19,10 +21,14 @@ code {
 
 :root[data-theme="dark"] {
     --h1-text: #000000;
-    --background: #fff;
+    --background: #dadada;
+    --bg-button: #488868;
+    --bg-button-hover: #2e5b44;
 }
 
 :root[data-theme="light"] {
     --h1-text: #ffffff;
-    --background: #000;
+    --background: #4b4b4b;
+    --bg-button: #316049;
+    --bg-button-hover: #3a6e52;
 }

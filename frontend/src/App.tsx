@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
 
-import Test from './components/Test/Test';
+import Button from './components/Button/Button';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import { AuthContext } from './context/authContext';
 import useWithAuth from './hooks/useWithAuth';
 import { doAsyncFunc } from './utils/doAsyncFunc';
@@ -53,7 +54,8 @@ const App: FC = () => {
             <button onClick={onLogin}>LOGIN</button>
             <button onClick={onLogout}>LOGOUT</button>
             <button onClick={onPrivatePage}>PRIVATE</button>
-            <Test />
+            <ThemeSwitcher />
+            <Button />
         </>
     );
 };

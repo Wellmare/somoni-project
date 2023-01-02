@@ -21,14 +21,21 @@ code {
 
 :root[data-theme="dark"] {
     --h1-text: #000000;
-    --background: #dadada;
+    --background: #4b4b4b;
     --bg-button: #488868;
     --bg-button-hover: #2e5b44;
 }
 
 :root[data-theme="light"] {
     --h1-text: #ffffff;
-    --background: #4b4b4b;
-    --bg-button: #316049;
-    --bg-button-hover: #3a6e52;
+    --background: #dadada;
+    --bg-button-green: #1C6758;
+    --bg-button-green-hover: #237c6b;
+    --bg-button-green-active: #114c41;
+}
+
+:root{
+    --btn-padding-sm: 3rem;
+    --btn-padding-big: 13rem;
+    --btn-padding-md: 7rem;
 }

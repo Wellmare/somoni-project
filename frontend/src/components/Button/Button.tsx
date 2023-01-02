@@ -13,7 +13,7 @@ const Button: FC = () => {
     // const darkClasses =
     //     'p-5 text-black text-opacity-80 bg-blue-500 hover:bg-opacity hover:text-opacity-70 active:bg-blue-300 active:text-opacity-60';
 
-    return <button className={classNames(s.button, 'p-5', 'transition-all', 'ease-in', 'delay-50')}>Типо текст</button>;
+    return <button className={classNames(s.button)}>текст</button>;
 };
 
 export default Button;

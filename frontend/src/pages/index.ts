@@ -6,3 +6,4 @@ export { default as RestorePasswordPage } from './RestorePasswordPage/RestorePas
 export { default as PostPage } from './PostPage/PostPage';
 export { default as ProfilePage } from './ProfilePage/ProfilePage';
 export { default as WelcomePage } from './WelcomePage/WelcomePage';
+export { default as PageNotFound } from './PageNotFound/PageNotFound';

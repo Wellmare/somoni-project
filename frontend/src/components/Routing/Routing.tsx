@@ -5,6 +5,7 @@ import {
     ChangePasswordPage,
     LoginPage,
     MainPage,
+    PageNotFound,
     PostPage,
     ProfilePage,
     RegisterPage,
@@ -26,6 +27,7 @@ const Routing: FC = () => {
                 <Route path={'profile/:id'} element={<ProfilePage />} />
                 <Route path={'change-password'} element={<ChangePasswordPage />} />
                 <Route path={'restore-password'} element={<RestorePasswordPage />} />
+                <Route path={'*'} element={<PageNotFound />} />
             </Route>
         </Routes>
     );

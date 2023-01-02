@@ -36,7 +36,7 @@ export interface IAuthContext {
     logoutUser: () => void;
     loading: boolean;
     errorCode: number;
-    errorMessage: string
+    errorMessage: string;
 }
 
 export interface IUserJWTDecodeResponse {

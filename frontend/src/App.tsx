@@ -8,8 +8,8 @@ import { doAsyncFunc } from './utils/doAsyncFunc';
 
 const App: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { loginUser, registerUser, logoutUser, errorCode, errorMessage } = useContext(AuthContext)!;
-    const req = useWithAuth();
+    const { loginUser, registerUser, logoutUser, errorCode, errorMessage, loading } = useContext(AuthContext)!;
+    const [tokenIs, req] = useWithAuth();
 
     const onRegister = (): void => {
         doAsyncFunc(async () => {
@@ -36,18 +36,20 @@ const App: FC = () => {
     };
 
     const onPrivatePage = (): void => {
-        doAsyncFunc(async () => {
-            const res = await req.get('test');
-            console.log(res);
-        });
+        if (tokenIs === true) {
+            req.get('test')
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
     };
-
-    // useEffect(() => {
-    //
-    // }, [errorCode])
 
     return (
         <>
+            {loading || ''}
             {errorCode !== 200 ? errorCode : ''}
             {errorMessage}
             <button onClick={onRegister}>REGISTER</button>

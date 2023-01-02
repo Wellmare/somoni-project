@@ -52,6 +52,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         // } else {
         //     setErrorCode(response.status);
         // }
+        setLoading(true);
         loginApi
             .login({
                 username,
@@ -67,6 +68,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                     console.log(response.data);
                     setErrorMessage('');
                     setErrorCode(200);
+                    setLoading(false);
                 }
             })
             .catch((e: AxiosError) => {
@@ -74,6 +76,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                 if (e.response != null) {
                     setErrorCode(e.response.status);
                     setErrorMessage(e.response.statusText);
+                    setLoading(false);
                 }
             });
     };
@@ -85,6 +88,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         //     password2,
         //     email,
         // });
+        setLoading(true);
         loginApi
             .register({
                 username,
@@ -97,6 +101,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                     navigate('/login');
                     setErrorMessage('');
                     setErrorCode(200);
+                    setLoading(false);
                 }
             })
             .catch((e: AxiosError) => {
@@ -104,6 +109,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                 if (e.response != null) {
                     setErrorCode(e.response.status);
                     setErrorMessage(e.response.statusText);
+                    setLoading(false);
                 }
             });
 

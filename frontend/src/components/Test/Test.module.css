@@ -1,0 +1,6 @@
+.h1 {
+    color: var(--h1-text);
+}
+:root {
+    background: var(--background);
+}

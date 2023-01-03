@@ -8,6 +8,7 @@ import { useAppDispatch } from '../hooks/reduxHooks';
 import { logout, setAuthTokens } from '../redux/slices/authSlice';
 import { loginApi } from '../service/login.api';
 import { IAuthContext, IDataToLogin, IDataToRegister, IError } from '../types/login.types';
+import { Paths } from '../types/Paths';
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -173,7 +174,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             if (response.status === 200) {
                 dispatch(setAuthTokens(data));
 
-                navigate('/main');
+                navigate('/' + Paths.MAIN);
 
                 setError({ errorCode: null, errorMessage: null });
                 setIsLoading(false);
@@ -205,7 +206,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             const data = response.data;
             setError({ errorCode: null, errorMessage: null });
             setIsLoading(false);
-            navigate('/login');
+            navigate('/' + Paths.LOGIN);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
         } catch (e: AxiosError) {
@@ -220,7 +221,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     const logoutUser = (): void => {
         dispatch(logout());
-        navigate('/');
+        navigate('/' + Paths.WELCOME);
     };
 
     const contextData: IAuthContext = {

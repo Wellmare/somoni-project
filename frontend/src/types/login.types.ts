@@ -27,16 +27,11 @@ export interface ITokens {
 }
 
 export interface IAuthContext {
-    user: IUserJWTDecodeResponse | null;
-    setUser: React.Dispatch<React.SetStateAction<IUserJWTDecodeResponse | null>>;
-    authTokens: ITokens | null;
-    setAuthTokens: React.Dispatch<React.SetStateAction<ITokens | null>>;
     registerUser: ({ username, password, password2, email }: IDataToRegister) => Promise<void>;
     loginUser: ({ username, password }: IDataToLogin) => Promise<void>;
     logoutUser: () => void;
-    loading: boolean;
-    errorCode: number;
-    errorMessage: string;
+    isLoading: boolean;
+    error: IError;
 }
 
 export interface IUserJWTDecodeResponse {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface ILoginResponse {
     access: string;
     refresh: string;

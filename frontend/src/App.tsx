@@ -1,10 +1,9 @@
 import React, { FC, useContext } from 'react';
 
-import './App.css';
+import Test from './components/Test/Test';
 import { AuthContext } from './context/authContext';
 import useWithAuth from './hooks/useWithAuth';
 import { doAsyncFunc } from './utils/doAsyncFunc';
-// import Input from './components/Input/Input';
 
 const App: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -55,6 +54,7 @@ const App: FC = () => {
             <button onClick={onLogin}>LOGIN</button>
             <button onClick={onLogout}>LOGOUT</button>
             <button onClick={onPrivatePage}>PRIVATE</button>
+            <Test />
         </>
     );
 };

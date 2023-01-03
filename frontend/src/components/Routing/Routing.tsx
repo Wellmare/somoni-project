@@ -5,12 +5,12 @@ import {
     ChangePasswordPage,
     LoginPage,
     MainPage,
-    PageNotFound,
     PostPage,
     ProfilePage,
     RegisterPage,
     RestorePasswordPage,
     WelcomePage,
+    PageNotFound,
 } from '../../pages';
 import { Paths } from '../../types/Paths';
 import Layout from '../Layout/Layout';
@@ -49,7 +49,14 @@ const Routing: FC = () => {
                         </PrivateRoute>
                     }
                 />
-                <Route path={Paths.RESTORE_PASSWORD} element={<RestorePasswordPage />} />
+                <Route
+                    path={Paths.RESTORE_PASSWORD}
+                    element={
+                        <PrivateRoute renderTerm={(isAuth) => !isAuth} pathWhenIncorrect={Paths.MAIN}>
+                            <RestorePasswordPage />
+                        </PrivateRoute>
+                    }
+                />
                 <Route path={'*'} element={<PageNotFound />} />
             </Route>
         </Routes>

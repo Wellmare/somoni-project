@@ -5,10 +5,10 @@ import jwtDecode from 'jwt-decode';
 import { useContext } from 'react';
 
 import { url } from '../constants/api';
-import { apiEndpoints } from '../constants/apiEndpoints';
 import { AuthContext } from '../context/authContext';
 import { baseAxiosInstance } from '../service/api';
-import { IUserJWTDecodeResponse, ITokens } from '../types/login.types';
+import { loginApi } from '../service/login.api';
+import { IUserJWTDecodeResponse } from '../types/login.types';
 
 export const useWithAuth = (): [boolean, AxiosInstance] => {
     const context = useContext(AuthContext);
@@ -17,7 +17,7 @@ export const useWithAuth = (): [boolean, AxiosInstance] => {
 
     const axiosInstance = axios.create({
         baseURL: url,
-        headers: { Authorization: `Bearer ${authTokens.access}`, 'Content-type': 'application/json' },
+        headers: { Authorization: `Bearer ${authTokens?.access}`, 'Content-type': 'application/json' },
     });
 
     axiosInstance.interceptors.request.use(
@@ -26,11 +26,8 @@ export const useWithAuth = (): [boolean, AxiosInstance] => {
             const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
 
             if (!isExpired) return req;
-
             try {
-                const response = await axiosInstance.post<ITokens>(apiEndpoints.refreshToken, {
-                    refresh: authTokens.refresh,
-                });
+                const response = await loginApi.refreshToken(authTokens?.refresh);
                 localStorage.setItem('authTokens', JSON.stringify(response.data));
 
                 setAuthTokens(response.data);

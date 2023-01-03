@@ -77,7 +77,14 @@ const registerUser = async ({
     });
 };
 
+const refreshToken = async (refreshToken: string): Promise<AxiosResponse<ITokens>> => {
+    return await baseAxiosInstance.post<ITokens>(apiEndpoints.refreshToken, {
+        refresh: refreshToken,
+    });
+};
+
 export const loginApi = {
     login: loginUser,
     register: registerUser,
+    refreshToken,
 };

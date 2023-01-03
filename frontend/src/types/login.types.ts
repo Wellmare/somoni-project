@@ -52,3 +52,7 @@ export interface IUserJWTDecodeResponse {
 // export interface IErrorResponse {
 //     code: number;
 // }
+export interface IError {
+    errorCode: number | null;
+    errorMessage: string | null;
+}

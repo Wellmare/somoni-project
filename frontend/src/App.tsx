@@ -36,15 +36,14 @@ const App: FC = () => {
     };
 
     const onPrivatePage = (): void => {
-        if (tokenIs === true) {
-            req.get('test')
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        }
+        if (!tokenIs) return;
+        req.get('test')
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     };
 
     return (

@@ -1,19 +1,46 @@
 import classNames from 'classnames';
-import React, { FC, useContext } from 'react';
+import React, { FC, ReactNode } from 'react';
 
-import s from './Button.module.css';
+import s from './Button.module.scss';
 
-import { ThemeContext } from '../../context/ThemeContext';
-import { Theme } from '../../types/ITheme';
+import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
 
-const Button: FC = () => {
-    // const themeContext = useContext(ThemeContext);
-    // const lightClasses =
-    //     'p-5 text-black text-opacity-80 bg-blue-500 hover:bg-blue-400 hover:text-opacity-70 active:bg-blue-300 active:text-opacity-60';
-    // const darkClasses =
-    //     'p-5 text-black text-opacity-80 bg-blue-500 hover:bg-opacity hover:text-opacity-70 active:bg-blue-300 active:text-opacity-60';
+interface ButtonProps {
+    color: ButtonColors;
+    size: ButtonSizes;
+    width?: string;
+    children: ReactNode;
+}
 
-    return <button className={classNames(s.button)}>текст</button>;
+const Button: FC<ButtonProps> = ({ size, color, width, children }) => {
+    let sizeClass: string;
+    switch (size) {
+        case ButtonSizes.sm:
+            sizeClass = s.sm;
+            break;
+        case ButtonSizes.md:
+            sizeClass = s.md;
+            break;
+        case ButtonSizes.lg:
+            sizeClass = s.lg;
+            break;
+    }
+
+    let colorClass: string;
+    switch (color) {
+        case ButtonColors.green:
+            colorClass = s.green;
+            break;
+        case ButtonColors.blue:
+            colorClass = s.blue;
+            break;
+    }
+
+    return (
+        <button className={classNames(s.button, sizeClass, colorClass)} style={{ width }}>
+            {children}
+        </button>
+    );
 };
 
 export default Button;

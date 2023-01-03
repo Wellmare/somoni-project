@@ -1,0 +1,44 @@
+.button {
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  cursor: pointer;
+
+  &.green {
+    color: var(--text-color-button-green);
+    background-color: var(--bg-button-green);
+
+    &:hover {
+      background-color: var(--bg-button-green-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-green-active);
+    }
+  }
+
+  &.blue {
+    color: var(--text-color-button-blue);
+    background-color: var(--bg-button-blue);
+
+    &:hover {
+      background-color: var(--bg-button-blue-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-blue-active);
+    }
+  }
+
+  &.sm {
+    padding: 0.5rem var(--btn-padding-sm);
+  }
+;
+
+  &.md {
+    padding: 0.5rem var(--btn-padding-md);
+  };
+
+  &.lg {
+    padding: 0.5rem var(--btn-padding-lg);
+  }
+}

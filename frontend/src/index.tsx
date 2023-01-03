@@ -7,7 +7,7 @@ import App from './App';
 import { AuthProvider } from './providers/authProvider';
 import ThemeProvider from './providers/ThemeProvider';
 
-import './styles/global.css';
+import './styles/global.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

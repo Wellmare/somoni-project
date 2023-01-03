@@ -7,8 +7,8 @@ import { doAsyncFunc } from './utils/doAsyncFunc';
 
 const App: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { loginUser, registerUser, logoutUser, errorCode, errorMessage, loading } = useContext(AuthContext)!;
-    const [tokenIs, req] = useWithAuth();
+    const { loginUser, registerUser, logoutUser, isLoading, error } = useContext(AuthContext)!;
+    const [isAuth, req] = useWithAuth();
 
     const onRegister = (): void => {
         doAsyncFunc(async () => {
@@ -35,7 +35,7 @@ const App: FC = () => {
     };
 
     const onPrivatePage = (): void => {
-        if (!tokenIs) return;
+        if (!isAuth) return;
         req.get('test')
             .then((data) => {
                 console.log(data);
@@ -47,12 +47,14 @@ const App: FC = () => {
 
     return (
         <>
-            {/* {errorCode !== 200 ? errorCode : ''} */}
-            {/* {errorMessage} */}
-            {/* <button onClick={onRegister}>REGISTER</button> */}
-            {/* <button onClick={onLogin}>LOGIN</button> */}
-            {/* <button onClick={onLogout}>LOGOUT</button> */}
-            {/* <button onClick={onPrivatePage}>PRIVATE</button> */}
+            {error.errorCode !== null ? error.errorCode : ''}
+            {error.errorMessage !== null ? error.errorMessage : ''}
+            {isLoading ? 'LOADING...' : ''}
+
+            <button onClick={onRegister}>REGISTER</button>
+            <button onClick={onLogin}>LOGIN</button>
+            <button onClick={onLogout}>LOGOUT</button>
+            <button onClick={onPrivatePage}>PRIVATE</button>
             <Routing />
         </>
     );

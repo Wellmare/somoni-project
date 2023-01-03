@@ -2,12 +2,11 @@ import React, { FC, useContext } from 'react';
 
 import Button from './components/Button/Button';
 
-import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
-import Welcome from './components/Welcome/Welcome';
-import './App.css';
 import Routing from './components/Routing/Routing';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import { AuthContext } from './context/authContext';
 import useWithAuth from './hooks/useWithAuth';
+import { ButtonColors, ButtonSizes } from './types/UI/Button.types';
 import { doAsyncFunc } from './utils/doAsyncFunc';
 
 const App: FC = () => {
@@ -59,8 +58,10 @@ const App: FC = () => {
             {/* <button onClick={onLogout}>LOGOUT</button> */}
             {/* <button onClick={onPrivatePage}>PRIVATE</button> */}
             <ThemeSwitcher />
-            <Button />
-            <Button />
+            <Button color={ButtonColors.green} size={ButtonSizes.lg} width={'50vw'}>
+                Hello
+            </Button>
+            {/* <Button /> */}
             <Routing />
         </>
     );

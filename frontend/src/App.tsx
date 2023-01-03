@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 
-import Test from './components/Test/Test';
+import Routing from './components/Routing/Routing';
 import { AuthContext } from './context/authContext';
 import useWithAuth from './hooks/useWithAuth';
 import { doAsyncFunc } from './utils/doAsyncFunc';
@@ -47,14 +47,13 @@ const App: FC = () => {
 
     return (
         <>
-            {loading || ''}
-            {errorCode !== 200 ? errorCode : ''}
-            {errorMessage}
-            <button onClick={onRegister}>REGISTER</button>
-            <button onClick={onLogin}>LOGIN</button>
-            <button onClick={onLogout}>LOGOUT</button>
-            <button onClick={onPrivatePage}>PRIVATE</button>
-            <Test />
+            {/* {errorCode !== 200 ? errorCode : ''} */}
+            {/* {errorMessage} */}
+            {/* <button onClick={onRegister}>REGISTER</button> */}
+            {/* <button onClick={onLogin}>LOGIN</button> */}
+            {/* <button onClick={onLogout}>LOGOUT</button> */}
+            {/* <button onClick={onPrivatePage}>PRIVATE</button> */}
+            <Routing />
         </>
     );
 };

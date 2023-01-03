@@ -4,6 +4,8 @@ import Button from './components/Button/Button';
 
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Welcome from './components/Welcome/Welcome';
+import './App.css';
+import Routing from './components/Routing/Routing';
 import { AuthContext } from './context/authContext';
 import useWithAuth from './hooks/useWithAuth';
 import { doAsyncFunc } from './utils/doAsyncFunc';
@@ -59,7 +61,7 @@ const App: FC = () => {
             <ThemeSwitcher />
             <Button />
             <Button />
-            {/* <Welcome /> */}
+            <Routing />
         </>
     );
 };

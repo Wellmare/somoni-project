@@ -3,49 +3,85 @@
 @tailwind utilities;
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-    background: var(--background);
+  background: var(--background);
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
 }
 
-:root{
-    --btn-padding-sm: 3rem;
-    --btn-padding-md: 7rem;
-    --btn-padding-lg: 13rem;
-    --button-border-radius: .5rem;
-    --button-border: none;
+:root {
+  --btn-padding-sm: 3rem;
+  --btn-padding-md: 7rem;
+  --btn-padding-lg: 13rem;
+  --button-border-radius: .5rem;
+  --button-border: none;
 }
-
 
 
 :root[data-theme="dark"] {
-    --h1-text: #000000;
-    --background: #4b4b4b;
-    --bg-button: #488868;
-    --bg-button-hover: #2e5b44;
+  // text
+  --title-color: #D2D2D1;
+  --subtitle-color: #B5B5B5;
+  --post-text-color: #C6C5C5;
+  --rubric-text-color: #B5B5B5;
+  --header-text-color: #DDDDDD;
+
+  // global
+  --background: #171C20;
+
+  // blocks
+  --block-background: #22272B;
+  --block-border: #31363A;
+  --header-background: #22272B;
+
+  // button green
+  --bg-button-green: #1C6758;
+  --bg-button-green-hover: #287963;
+  --bg-button-green-active: #1f6053;
+  --text-color-button-green: #fff;
+
+  // button blue
+  --bg-button-blue: #3A6B87;
+  --bg-button-blue-hover: #3d769d;
+  --bg-button-blue-active: #3A6B87;
+  --text-color-button-blue: #fff;
 }
 
 :root[data-theme="light"] {
-    --h1-text: #000000;
-    --background: #dadada;
+  // text
+  --title-color: #000000;
+  --subtitle-color: #1C1C1C;
+  --post-text-color: #000000;
+  --rubric-text-color: #B5B5B5;
+  --header-text-color: #DDDDDD;
 
-    --bg-button-green: #1C6758;
-    --bg-button-green-hover: #237c6b;
-    --bg-button-green-active: #114c41;
-    --text-color-button-green: #fff;
+  // global
+  --background: #EEEEEE;
 
-    --bg-button-blue: #3A6B87;
-    --bg-button-blue-hover: #2f5469;
-    --bg-button-blue-active: #3A6B87;
-    --text-color-button-blue: #fff;
+  // blocks
+  --block-background: #FFFFFF;
+  --block-border: #E0E0E0;
+  --header-background: #38AB94;
+
+  // button green
+  --bg-button-green: #1C6758;
+  --bg-button-green-hover: #287963;
+  --bg-button-green-active: #1f6053;
+  --text-color-button-green: #fff;
+
+
+  // button blue
+  --bg-button-blue: #3A6B87;
+  --bg-button-blue-hover: #3d769d;
+  --bg-button-blue-active: #3A6B87;
+  --text-color-button-blue: #fff;
 }

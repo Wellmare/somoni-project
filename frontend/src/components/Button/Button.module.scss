@@ -2,6 +2,17 @@
   border-radius: var(--button-border-radius);
   border: var(--button-border);
   cursor: pointer;
+  transition: .2s;
+  //box-shadow: 0 .3rem 20px #021505;
+
+  //&:hover {
+    //transform: translateY(-.15rem);
+    //box-shadow: 0 6px 7px #05210c;
+  //}
+
+  //&:active {
+  //  transform: translateY(.15rem);
+  //}
 
   &.green {
     color: var(--text-color-button-green);

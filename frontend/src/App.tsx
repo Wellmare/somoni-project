@@ -58,10 +58,9 @@ const App: FC = () => {
             {/* <button onClick={onLogout}>LOGOUT</button> */}
             {/* <button onClick={onPrivatePage}>PRIVATE</button> */}
             <ThemeSwitcher />
-            <Button color={ButtonColors.green} size={ButtonSizes.lg} width={'50vw'}>
+            <Button color={ButtonColors.green} size={ButtonSizes.md}>
                 Hello
             </Button>
-            {/* <Button /> */}
             <Routing />
         </>
     );

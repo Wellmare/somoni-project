@@ -1,63 +1,36 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import {
-    ChangePasswordPage,
-    LoginPage,
-    MainPage,
-    PostPage,
-    ProfilePage,
-    RegisterPage,
-    RestorePasswordPage,
-    WelcomePage,
-    PageNotFound,
-} from '../../pages';
+import { routingData } from '../../constants/routingData';
 import { Paths } from '../../types/Paths';
 import Layout from '../Layout/Layout';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const Routing: FC = () => {
+    const routes = routingData.map(({ path, Element, withAuth }, i) => {
+        if (withAuth === undefined) {
+            return <Route path={path} element={<Element />} key={i} />;
+        }
+        return (
+            <Route
+                path={path}
+                element={
+                    <PrivateRoute
+                        renderTerm={(isAuth) => (withAuth ? isAuth : !isAuth)}
+                        pathWhenIncorrect={withAuth ? Paths.LOGIN : Paths.MAIN}
+                    >
+                        <Element />
+                    </PrivateRoute>
+                }
+                key={i}
+            />
+        );
+    });
+
     return (
         <Routes>
             <Route path={'/'} element={<Layout />}>
-                <Route
-                    path={Paths.WELCOME}
-                    element={
-                        <PrivateRoute pathWhenIncorrect={Paths.MAIN} renderTerm={(isAuth) => !isAuth}>
-                            <WelcomePage />
-                        </PrivateRoute>
-                    }
-                />
-                <Route path={Paths.MAIN} element={<MainPage />} />
-                <Route path={Paths.LOGIN} element={<LoginPage />} />
-                <Route path={Paths.REGISTER} element={<RegisterPage />} />
-                <Route path={`${Paths.POST}/:id`} element={<PostPage />} />
-                <Route
-                    path={Paths.PROFILE}
-                    element={
-                        <PrivateRoute pathWhenIncorrect={Paths.LOGIN} renderTerm={(isAuth) => isAuth}>
-                            <ProfilePage />
-                        </PrivateRoute>
-                    }
-                />
-                <Route path={`${Paths.PROFILE}/:id`} element={<ProfilePage />} />
-                <Route
-                    path={Paths.CHANGE_PASSWORD}
-                    element={
-                        <PrivateRoute renderTerm={(isAuth) => isAuth} pathWhenIncorrect={Paths.LOGIN}>
-                            <ChangePasswordPage />
-                        </PrivateRoute>
-                    }
-                />
-                <Route
-                    path={Paths.RESTORE_PASSWORD}
-                    element={
-                        <PrivateRoute renderTerm={(isAuth) => !isAuth} pathWhenIncorrect={Paths.MAIN}>
-                            <RestorePasswordPage />
-                        </PrivateRoute>
-                    }
-                />
-                <Route path={'*'} element={<PageNotFound />} />
+                {routes}
             </Route>
         </Routes>
     );

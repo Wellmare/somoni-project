@@ -1,4 +1,4 @@
-import { fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { url } from '../constants/api';
@@ -57,5 +57,6 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
+    tagTypes: ['Post'],
     endpoints: (builder) => ({}),
 });

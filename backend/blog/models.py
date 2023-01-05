@@ -23,3 +23,8 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
+
+
+class PostLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_likes')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likePost')

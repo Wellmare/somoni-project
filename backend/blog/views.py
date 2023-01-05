@@ -9,60 +9,42 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 
 from .serializers import PostSerializer, CreatePostSerializer
-from .models import Post
-from django.shortcuts import get_object_or_404
+from .models import Post, PostLike
+from django.db.models import Prefetch, Exists, OuterRef
 
 
-# views.py
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 10
 
 
-class PostViewSet(viewsets.ModelViewSet):
-    pagination_class = StandardResultsSetPagination
-    queryset = Post.objects.all().order_by('title')
-    serializer_class = PostSerializer
-
-
-class CreatePostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    permission_classes = (AllowAny,)
-    serializer_class = CreatePostSerializer
-
-
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def delete_post(request, pk):
-    if request.method == 'POST':
-        try:
-            post = get_object_or_404(Post, id=pk)
-            if request.user == post.author or request.user.is_superuser:
-                print(post)
-                post.delete()
-                data = 'удалено'
-                return Response({'response': data}, status=status.HTTP_200_OK)
-            data = 'пользователь не является автором поста'
-            return Response({'response': data}, status=status.HTTP_200_OK)
-        except Http404:
-            data = 'нет объекта'
-            return Response({'response': data}, status=status.HTTP_200_OK)
-    else:
-        data = 'не подходит метод запроса'
-        return Response({'response': data}, status=status.HTTP_200_OK)
-
-
 class get_create_post(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
     pagination_class = StandardResultsSetPagination
     permission_classes = (AllowAny,)
     serializer_class = CreatePostSerializer
+    queryset = Post.objects.none()
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Post.objects \
+                .annotate(isLked=Exists(PostLike.objects.filter(
+                user=self.request.user, post_id=OuterRef('pk')))) \
+                .order_by('title')
+        return Post.objects.all()
 
 
 class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.none()
     serializer_class = CreatePostSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Post.objects \
+                .annotate(isLked=Exists(PostLike.objects.filter(
+                user=self.request.user, post_id=OuterRef('pk')))) \
+                .order_by('title')
+        return Post.objects.all()
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -80,13 +62,13 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
 
             return Response(serializer.data)
         return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
+
     def perform_update(self, serializer):
         serializer.save()
 
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
-
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

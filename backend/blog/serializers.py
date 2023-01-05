@@ -35,5 +35,6 @@ class CreatePostSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.title = validated_data.get("title", instance.title)
         instance.content = validated_data.get("content", instance.content)
+        instance.image = validated_data.get("image", instance.image)
         instance.save()
         return instance

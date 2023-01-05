@@ -61,7 +61,7 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
                 instance._prefetched_objects_cache = {}
 
             return Response(serializer.data)
-        return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
+        return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_401_UNAUTHORIZED)
 
     def perform_update(self, serializer):
         serializer.save()

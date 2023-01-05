@@ -22,12 +22,13 @@ class CreatePostSerializer(serializers.ModelSerializer):
         post = Post()
         post.title = validated_data['title']
         post.content = validated_data['content']
-        # post.author = self.context['request'].user
-        post.author = validated_data['author']
+
+        #post.author = validated_data['author']
         try:
             post.image = validated_data['image']
         except KeyError:
             pass
+        post.author = self.context['request'].user
         post.save()
         return post
 

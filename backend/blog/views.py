@@ -79,3 +79,5 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.delete()
+
+

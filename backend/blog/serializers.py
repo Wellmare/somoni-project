@@ -3,7 +3,7 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    isLked = serializers.BooleanField(read_only=True, default=False)
+    isLiked = serializers.BooleanField(read_only=True, default=False)
 
     class Meta:
         model = Post
@@ -11,7 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CreatePostSerializer(serializers.ModelSerializer):
-    isLked = serializers.BooleanField(read_only=True, default=False)
+    isLiked = serializers.BooleanField(read_only=True, default=False)
 
     class Meta:
         model = Post

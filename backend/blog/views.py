@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from rest_framework import status, generics
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -28,7 +29,7 @@ class get_create_post(generics.ListCreateAPIView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             return Post.objects \
-                .annotate(isLked=Exists(PostLike.objects.filter(
+                .annotate(isLiked=Exists(PostLike.objects.filter(
                 user=self.request.user, post_id=OuterRef('pk')))) \
                 .order_by('title')
         return Post.objects.all()
@@ -41,7 +42,7 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             return Post.objects \
-                .annotate(isLked=Exists(PostLike.objects.filter(
+                .annotate(isLiked=Exists(PostLike.objects.filter(
                 user=self.request.user, post_id=OuterRef('pk')))) \
                 .order_by('title')
         return Post.objects.all()
@@ -81,3 +82,44 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
         instance.delete()
 
 
+@api_view(['DELETE', 'POST'])
+@permission_classes([IsAuthenticated])
+def like_post(request, pk):
+    if request.method == 'POST':
+        try:
+            post = get_object_or_404(Post, id=pk)
+            try:
+                get_object_or_404(PostLike, post=post, user=request.user)
+                return Response({'detail': 'the like is already worth it'},
+                                status=status.HTTP_400_BAD_REQUEST)
+            except Http404:
+                like = PostLike()
+                like.user = request.user
+                like.post = post
+                like.save()
+                post.likes += 1
+                post.save()
+                return Response({'лайк поставили'}, status=status.HTTP_200_OK)
+        except Http404:
+            return Response({'detail': 'post not found'},
+                            status=status.HTTP_404_NOT_FOUND)
+
+    elif request.method == 'DELETE':
+        try:
+            post = get_object_or_404(Post, id=pk)
+            try:
+                like = get_object_or_404(PostLike, post=post, user=request.user)
+                like.delete()
+                post.likes -= 1
+                post.save()
+                return Response({'лайк убрали'}, status=status.HTTP_200_OK)
+
+            except Http404:
+                return Response({'detail': 'лайка и не было'},
+                                status=status.HTTP_400_BAD_REQUEST)
+        except Http404:
+            return Response({'detail': 'post not found'},
+                            status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response({'detail': 'Method ' + request.method + ' not allowed.'},
+                        status=status.HTTP_405_METHOD_NOT_ALLOWED)

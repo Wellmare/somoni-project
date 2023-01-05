@@ -8,5 +8,6 @@ from blog import views
 
 urlpatterns = [
     path('posts/', views.get_create_post.as_view()),
-    path('post/<int:pk>', views.post_detail_view.as_view())
+    path('post/<int:pk>', views.post_detail_view.as_view()),
+    path('post/<int:pk>/like', views.like_post),
 ]

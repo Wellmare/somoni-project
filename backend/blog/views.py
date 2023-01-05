@@ -28,11 +28,10 @@ class get_create_post(generics.ListCreateAPIView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return Post.objects \
-                .annotate(isLiked=Exists(PostLike.objects.filter(
-                user=self.request.user, post_id=OuterRef('pk')))) \
-                .order_by('title')
-        return Post.objects.all()
+            return Post.objects.annotate(
+                isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                '-date')
+        return Post.objects.all().order_by('-date')
 
 
 class post_detail_view(generics.RetrieveUpdateDestroyAPIView):

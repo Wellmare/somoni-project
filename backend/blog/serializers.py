@@ -12,7 +12,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ('author', 'likes', 'comments')
+        read_only_fields = ('author', 'likes', 'comments', 'date')
 
     def create(self, validated_data):
         post = Post()

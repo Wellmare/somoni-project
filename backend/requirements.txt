@@ -9,3 +9,4 @@ pytz
 sqlparse
 toml
 tzdata
+Pillow

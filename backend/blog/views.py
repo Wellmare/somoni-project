@@ -9,8 +9,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
-from .serializers import PostSerializer, CreatePostSerializer
-from .models import Post, PostLike
+from .serializers import PostSerializer, CreatePostSerializer, CommentSerializer
+from .models import Post, PostLike, Comments
 from django.db.models import Prefetch, Exists, OuterRef
 
 
@@ -122,3 +122,15 @@ def like_post(request, pk):
     else:
         return Response({'detail': 'Method ' + request.method + ' not allowed.'},
                         status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+class get_create_comments(generics.ListCreateAPIView):
+    pagination_class = StandardResultsSetPagination
+    permission_classes = (AllowAny,)
+    serializer_class = CommentSerializer
+    queryset = Comments.objects.none()
+
+    def get_queryset(self):
+        post = get_object_or_404(Post, id=self.kwargs['pk'])
+        return Comments.objects.filter(post=post)
+

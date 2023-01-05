@@ -30,3 +30,10 @@ class PostLike(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likePost')
 
 
+class Comments(models.Model):
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='link')
+    def __str__(self):
+        return self.content

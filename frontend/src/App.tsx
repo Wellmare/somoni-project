@@ -1,10 +1,9 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 
 import Routing from './components/Routing/Routing';
+import TestFormCreatePost from './components/TestFormCreatePost';
 import TestLogin from './components/TestLogin';
-import { AuthContext } from './context/authContext';
-import useWithAuth from './hooks/useWithAuth';
-import { doAsyncFunc } from './utils/doAsyncFunc';
+import TestPosts from './components/TestPosts';
 
 const App: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -56,7 +55,10 @@ const App: FC = () => {
             {/* <button onClick={onLogin}>LOGIN</button> */}
             {/* <button onClick={onLogout}>LOGOUT</button> */}
             {/* <button onClick={onPrivatePage}>PRIVATE</button> */}
+            {/* eslint-disable-next-line react/jsx-no-undef */}
             <TestLogin />
+            <TestFormCreatePost />
+            <TestPosts />
             <Routing />
         </>
     );

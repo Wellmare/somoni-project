@@ -10,6 +10,6 @@ router.register(r'create', views.CreatePostViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('post/', views.get_create_post.as_view()),
+    path('posts/', views.get_create_post.as_view()),
     path('post/<int:pk>', views.post_detail_view.as_view())
 ]

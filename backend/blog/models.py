@@ -16,7 +16,7 @@ class Post(models.Model):
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
     image = models.ImageField(upload_to='post_images', null=True)
-    date = models.DateTimeField(default=timezone.now())
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title

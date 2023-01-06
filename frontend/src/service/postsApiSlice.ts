@@ -1,4 +1,4 @@
-import { apiSlice } from './apiSlice';
+import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { IDataToDelete, IDataToEditPost, IDataToGetPosts, IPost, IPosts } from '../types/redux/postsSlice.types';

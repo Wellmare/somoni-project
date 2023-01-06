@@ -1,4 +1,4 @@
-import { apiSlice } from './apiSlice';
+import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { IDataToLogin, IDataToRegister, ILoginResponse, IRegisterResponse } from '../types/login.types';

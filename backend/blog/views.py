@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets
+from rest_framework.settings import api_settings
 from rest_framework.views import APIView
 
 from .serializers import PostSerializer, CreatePostSerializer, CommentSerializer
@@ -32,6 +33,24 @@ class get_create_post(generics.ListCreateAPIView):
                 isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
                 '-date')
         return Post.objects.all().order_by('-date')
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response({'зарегистрируйся'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
 
 
 class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
@@ -132,5 +151,65 @@ class get_create_comments(generics.ListCreateAPIView):
 
     def get_queryset(self):
         post = get_object_or_404(Post, id=self.kwargs['pk'])
-        return Comments.objects.filter(post=post)
+        return Comments.objects.filter(post=post).order_by('-date')
 
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response({'зарегистрируйся'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
+
+
+class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comments.objects.all().order_by('-date')
+    serializer_class = CommentSerializer
+
+    # def get_queryset(self):
+    #     post = get_object_or_404(Post, id=self.kwargs['pk'])
+    #     return Comments.objects.filter(post=post).order_by('-date')
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        if request.user == instance.author or request.user.is_superuser:
+
+            serializer = self.get_serializer(instance, data=request.data, partial=partial)
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
+
+            if getattr(instance, '_prefetched_objects_cache', None):
+                # If 'prefetch_related' has been applied to a queryset, we need to
+                # forcibly invalidate the prefetch cache on the instance.
+                instance._prefetched_objects_cache = {}
+
+            return Response(serializer.data)
+        return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if request.user == instance.author or request.user.is_superuser:
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
+
+    def perform_destroy(self, instance):
+        instance.delete()

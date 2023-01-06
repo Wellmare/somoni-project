@@ -58,3 +58,7 @@ class CommentSerializer(serializers.ModelSerializer):
         comment.post = get_object_or_404(Post, id=self.context['view'].kwargs['pk'])
         comment.save()
         return comment
+    def update(self, instance, validated_data):
+        instance.content = validated_data.get("content", instance.content)
+        instance.save()
+        return instance

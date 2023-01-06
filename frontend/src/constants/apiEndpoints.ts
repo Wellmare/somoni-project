@@ -4,4 +4,5 @@ export const apiEndpoints = {
     refreshToken: 'token/refresh/',
     posts: 'posts/',
     post: 'post/',
+    comment: 'comment/',
 };

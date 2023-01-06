@@ -1,4 +1,4 @@
-type Link = string | null;
+import { IPaginatedResponse, Link } from '../IPaginatedResponse';
 
 export interface IDataToGetPosts {
     page: number;
@@ -21,11 +21,8 @@ export interface IPost {
     author: number;
     date: string;
     isLiked: boolean;
+    username: string;
+    photo: Link;
 }
 
-export interface IPosts {
-    count: number;
-    next: Link;
-    previous: Link;
-    results: IPost[];
-}
+export type IPosts = IPaginatedResponse<IPost[]>;

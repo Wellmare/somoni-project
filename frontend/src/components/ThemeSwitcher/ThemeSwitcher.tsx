@@ -1,11 +1,9 @@
 import React, { FC, useContext } from 'react';
 
-import s from './Test.module.css';
-
 import { ThemeContext } from '../../context/ThemeContext';
 import { Theme } from '../../types/Theme';
 
-const Test: FC = () => {
+const ThemeSwitcher: FC = () => {
     const themeContext = useContext(ThemeContext);
 
     const switchTheme = (): void => {
@@ -16,9 +14,8 @@ const Test: FC = () => {
     return (
         <div>
             <button onClick={switchTheme}>Change theme</button>
-            <h1 className={s.h1}>text</h1>
         </div>
     );
 };
 
-export default Test;
+export default ThemeSwitcher;

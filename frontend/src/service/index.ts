@@ -5,7 +5,7 @@ import { url } from '../constants/api';
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { logout, setAuthTokens } from '../redux/slices/authSlice';
 import { RootState } from '../redux/store';
-import { ITokens } from '../types/login.types';
+import { ITokens } from '../types/redux/auth/ITokens';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: url,

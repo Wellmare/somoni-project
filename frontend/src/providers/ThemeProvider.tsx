@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { ThemeContext } from '../context/ThemeContext';
-import { Theme } from '../types/ITheme';
 import { localStorageKeys } from '../types/localStorageKeys';
+import { Theme } from '../types/Theme';
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../utils/localStorage';
 
 const getTheme = (): Theme => {

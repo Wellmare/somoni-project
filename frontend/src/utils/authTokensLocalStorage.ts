@@ -1,7 +1,7 @@
 import { getDataFromLocalStorage, removeDataFromLocalStorage, setDataToLocalStorage } from './localStorage';
 
 import { localStorageKeys } from '../types/localStorageKeys';
-import { ITokens } from '../types/login.types';
+import { ITokens } from '../types/redux/auth/ITokens';
 
 export const getAuthTokensFromLocalStorage = (): ITokens | null => {
     const accessToken = getDataFromLocalStorage<string>(localStorageKeys.ACCESS_TOKEN);

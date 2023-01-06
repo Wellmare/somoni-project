@@ -1,7 +1,9 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToLogin, IDataToRegister, ILoginResponse, IRegisterResponse } from '../types/login.types';
+import { IDataToLogin, IDataToRegister } from '../types/redux/auth/IDataTo';
+import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
+import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,9 +24,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { username, password, password2, email },
             }),
         }),
-        // test: builder.query<unknown, undefined>({
-        //     query: () => 'test/',
-        // }),
     }),
 });
 

@@ -8,8 +8,8 @@ import {
     RestorePasswordPage,
     WelcomePage,
 } from '../pages';
+import { IRouteData } from '../types/IRouteData';
 import { Paths } from '../types/Paths';
-import { IRouteData } from '../types/routingType';
 
 export const routingData: IRouteData[] = [
     {

@@ -1,4 +1,4 @@
-export type Link = string | null;
+import { Link } from './Link';
 
 export interface IPaginatedResponse<ResultType> {
     count: number;

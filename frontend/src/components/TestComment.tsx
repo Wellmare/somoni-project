@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { IComment } from '../types/redux/commentsSlice.types';
+import { IComment } from '../types/redux/comments/IComment';
 
 interface ITestCommentProps {
     comment: IComment;

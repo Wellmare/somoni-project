@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react';
 import s from './Test.module.css';
 
 import { ThemeContext } from '../../context/ThemeContext';
-import { Theme } from '../../types/ITheme';
+import { Theme } from '../../types/Theme';
 
 const Test: FC = () => {
     const themeContext = useContext(ThemeContext);

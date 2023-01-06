@@ -7,7 +7,7 @@ import {
     useDeleteCommentMutation,
     useEditCommentMutation,
 } from '../service/commentsApiSlice';
-import { IComment } from '../types/redux/commentsSlice.types';
+import { IComment } from '../types/redux/comments/IComment';
 import { doAsyncFunc } from '../utils/doAsyncFunc';
 
 interface ITestCommentsProps {

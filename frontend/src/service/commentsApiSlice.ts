@@ -1,14 +1,14 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
+import { IComment } from '../types/redux/comments/IComment';
+import { IComments } from '../types/redux/comments/IComments';
 import {
-    IComment,
-    IComments,
     IDataToCreateComment,
     IDataToDeleteComment,
     IDataToEditComment,
     IDataToGetComments,
-} from '../types/redux/commentsSlice.types';
+} from '../types/redux/comments/IDataTo';
 
 export const commentsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

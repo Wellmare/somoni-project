@@ -1,8 +1,8 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToGetPost, IDataToLikePost } from '../types/redux/postSlice.types';
-import { IPost } from '../types/redux/postsSlice.types';
+import { IDataToGetPost, IDataToLikePost } from '../types/redux/post/IDataTo';
+import { IPost } from '../types/redux/posts/IPost';
 
 export const postApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

@@ -1,4 +1,5 @@
-import { ITokens, IUserJWTDecodeResponse } from '../login.types';
+import { ITokens } from './ITokens';
+import { IUserJWTDecodeResponse } from './IUserJWTDecodeResponse';
 
 export interface IAuthSlice {
     isAuth: boolean;

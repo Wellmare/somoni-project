@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import jwtDecode from 'jwt-decode';
 
-import { ITokens } from '../../types/login.types';
-import { IAuthSlice } from '../../types/redux/authSlice.types';
+import { IAuthSlice } from '../../types/redux/auth/IAuthSlice';
+import { ITokens } from '../../types/redux/auth/ITokens';
 import {
     getAuthTokensFromLocalStorage,
     removeAuthTokensFromLocalStorage,

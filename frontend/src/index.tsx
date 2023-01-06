@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import { AuthProvider } from './providers/authProvider';
 import ThemeProvider from './providers/ThemeProvider';
 
 import './styles/global.css';
@@ -16,9 +15,7 @@ root.render(
     <Provider store={store}>
         <BrowserRouter>
             <ThemeProvider>
-                <AuthProvider>
-                    <App />
-                </AuthProvider>
+                <App />
             </ThemeProvider>
         </BrowserRouter>
     </Provider>,

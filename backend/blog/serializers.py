@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class PostSerializer(serializers.ModelSerializer):
     isLiked = serializers.BooleanField(read_only=True, default=False)
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image')
+    photo = serializers.ImageField(source='author.profile.image', read_only=True)
 
     class Meta:
         model = Post
@@ -17,7 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
 class CreatePostSerializer(serializers.ModelSerializer):
     isLiked = serializers.BooleanField(read_only=True, default=False)
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image')
+    photo = serializers.ImageField(source='author.profile.image', read_only=True)
 
     class Meta:
         model = Post
@@ -48,7 +48,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image')
+    photo = serializers.ImageField(source='author.profile.image', read_only=True)
     class Meta:
         model = Comments
         fields = '__all__'

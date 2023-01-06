@@ -41,7 +41,7 @@ export const routingData: IRouteData[] = [
         Element: MainPage,
     },
     {
-        path: Paths.POST,
+        path: `${Paths.POST}/:id`,
         Element: PostPage,
     },
     {

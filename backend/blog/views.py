@@ -13,12 +13,32 @@ from rest_framework.views import APIView
 from .serializers import PostSerializer, CreatePostSerializer, CommentSerializer
 from .models import Post, PostLike, Comments
 from django.db.models import Prefetch, Exists, OuterRef
+from collections import OrderedDict
 
 
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 10
+
+
+class userResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 10
+
+    def get_paginated_response(self, data):
+        pk = self.request.parser_context['kwargs']['pk']
+        user = get_object_or_404(User, id=pk)
+        return Response(OrderedDict([
+            ('count', self.page.paginator.count),
+            ('next', self.get_next_link()),
+            ('previous', self.get_previous_link()),
+            ('username', user.username),
+            ('photo', self.request.build_absolute_uri(user.profile.image.url)),
+            ('bio', user.profile.bio),
+            ('results', data)
+        ]))
 
 
 class get_create_post(generics.ListCreateAPIView):
@@ -212,3 +232,35 @@ class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.delete()
+
+
+class get_post_for_user(generics.ListCreateAPIView):
+    pagination_class = userResultsSetPagination
+    permission_classes = (AllowAny,)
+    serializer_class = CreatePostSerializer
+    queryset = Post.objects.none()
+
+    def get_queryset(self):
+        user = get_object_or_404(User, id=self.kwargs['pk'])
+        if self.request.user.is_authenticated:
+            return Post.objects.filter(author=user).annotate(
+                isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                '-date')
+        return Post.objects.filter(author=user).order_by('-date')
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({'user': 'тут данные'}, serializer.data)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        return Response({'detail': 'method POST not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

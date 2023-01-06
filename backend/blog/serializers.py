@@ -9,6 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.profile.image', read_only=True)
 
+
     class Meta:
         model = Post
         fields = '__all__'
@@ -49,6 +50,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.profile.image', read_only=True)
+
     class Meta:
         model = Comments
         fields = '__all__'

@@ -144,7 +144,6 @@ def like_post(request, pk):
 
 
 class get_create_comments(generics.ListCreateAPIView):
-    pagination_class = StandardResultsSetPagination
     permission_classes = (AllowAny,)
     serializer_class = CommentSerializer
     queryset = Comments.objects.none()

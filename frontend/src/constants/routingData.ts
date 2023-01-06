@@ -2,7 +2,6 @@ import {
     ChangePasswordPage,
     LoginPage,
     MainPage,
-    PageNotFound,
     PostPage,
     ProfilePage,
     RegisterPage,
@@ -54,9 +53,5 @@ export const routingData: IRouteData[] = [
         path: Paths.CHANGE_PASSWORD,
         Element: ChangePasswordPage,
         withAuth: true,
-    },
-    {
-        path: '*',
-        Element: PageNotFound,
     },
 ];

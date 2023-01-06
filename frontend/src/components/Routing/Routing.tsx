@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { routingData } from '../../constants/routingData';
+import { PageNotFound } from '../../pages';
 import { Paths } from '../../types/Paths';
 import Layout from '../Layout/Layout';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -32,6 +33,7 @@ const Routing: FC = () => {
             <Route path={'/'} element={<Layout />}>
                 {routes}
             </Route>
+            <Route path={'*'} element={<PageNotFound />} />
         </Routes>
     );
 };

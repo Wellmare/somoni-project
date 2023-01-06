@@ -24,14 +24,6 @@ export interface ITokens {
     refresh: string;
 }
 
-export interface IAuthContext {
-    registerUser: ({ username, password, password2, email }: IDataToRegister) => Promise<void>;
-    loginUser: ({ username, password }: IDataToLogin) => Promise<void>;
-    logoutUser: () => void;
-    isLoading: boolean;
-    error: IError;
-}
-
 export interface IUserJWTDecodeResponse {
     email: string;
     exp: number;
@@ -40,12 +32,4 @@ export interface IUserJWTDecodeResponse {
     token_type: string;
     user_id: number;
     username: string;
-}
-
-// export interface IErrorResponse {
-//     code: number;
-// }
-export interface IError {
-    errorCode: number | null;
-    errorMessage: string | null;
 }

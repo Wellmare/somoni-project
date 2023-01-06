@@ -45,6 +45,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='author.username', read_only=True)
     class Meta:
         model = Comments
         fields = '__all__'

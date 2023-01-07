@@ -60,3 +60,15 @@ class RegisterSerializer(serializers.ModelSerializer):
                     {"detail": "some field is missing"})
 
         return user
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+    password2 = serializers.CharField(required=True)
+    refresh = serializers.CharField(required=True)

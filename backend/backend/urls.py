@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('blog.urls')),
     path('api/', include('myapi.urls')),
-
+    path('api/', include('userprofile.urls')),
 ]
 
 if settings.DEBUG:

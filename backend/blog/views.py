@@ -257,7 +257,7 @@ class get_post_for_user(generics.ListCreateAPIView):
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response({'user': 'тут данные'}, serializer.data)
+        return Response(serializer.data)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

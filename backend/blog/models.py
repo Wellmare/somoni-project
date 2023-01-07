@@ -15,7 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='post_images', null=True)
+    image = models.ImageField(upload_to='post_images', null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

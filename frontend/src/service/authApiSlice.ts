@@ -1,7 +1,7 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToLogin, IDataToRegister } from '../types/redux/auth/IDataTo';
+import { IDataToLogin } from '../types/redux/auth/IDataTo';
 import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
 import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
 
@@ -17,11 +17,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 },
             }),
         }),
-        register: builder.mutation<IRegisterResponse, IDataToRegister>({
-            query: ({ username, password, password2, email }) => ({
+        register: builder.mutation<IRegisterResponse, FormData>({
+            query: (formData) => ({
                 url: apiEndpoints.register,
                 method: 'POST',
-                body: { username, password, password2, email },
+                body: formData,
             }),
         }),
     }),

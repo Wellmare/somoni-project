@@ -7,9 +7,6 @@ from rest_framework.validators import UniqueValidator
 from userprofile.models import Profile
 
 
-
-
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -41,16 +38,25 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data['username'],
-            email=validated_data['email']
-        )
+        try:
+            if validated_data['email'] == '':
+                raise serializers.ValidationError(
+                    {"email": "this field is required"})
+            else:
+                user = User.objects.create(
+                    username=validated_data['username'],
+                    email=validated_data['email']
+                )
 
-        user.set_password(validated_data['password'])
-        user.save()
+                user.set_password(validated_data['password'])
+                user.save()
 
-        profile = Profile()
-        profile.user = user
-        profile.image = validated_data['photo']
-        profile.save()
+                profile = Profile()
+                profile.user = user
+                profile.image = validated_data['photo']
+                profile.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                    {"detail": "some field is missing"})
+
         return user

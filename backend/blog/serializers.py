@@ -9,7 +9,6 @@ class PostSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.profile.image', read_only=True)
 
-
     class Meta:
         model = Post
         fields = '__all__'
@@ -26,24 +25,32 @@ class CreatePostSerializer(serializers.ModelSerializer):
         read_only_fields = ('author', 'likes', 'comments', 'date')
 
     def create(self, validated_data):
-        post = Post()
-        post.title = validated_data['title']
-        post.content = validated_data['content']
-
-        # post.author = validated_data['author']
         try:
-            post.image = validated_data['image']
+            post = Post()
+            post.title = validated_data['title']
+            post.content = validated_data['content']
+
+            # post.author = validated_data['author']
+            try:
+                post.image = validated_data['image']
+            except KeyError:
+                pass
+            post.author = self.context['request'].user
+            post.save()
         except KeyError:
-            pass
-        post.author = self.context['request'].user
-        post.save()
+            raise serializers.ValidationError(
+                {"detail": "some field is missing"})
         return post
 
     def update(self, instance, validated_data):
-        instance.title = validated_data.get("title", instance.title)
-        instance.content = validated_data.get("content", instance.content)
-        instance.image = validated_data.get("image", instance.image)
-        instance.save()
+        try:
+            instance.title = validated_data.get("title", instance.title)
+            instance.content = validated_data.get("content", instance.content)
+            instance.image = validated_data.get("image", instance.image)
+            instance.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                {"detail": "some field is missing"})
         return instance
 
 
@@ -57,18 +64,27 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('author', 'post', 'date')
 
     def create(self, validated_data):
-        comment = Comments()
-        comment.content = validated_data['content']
-        #comment.author = get_object_or_404(User, id=1)
-        comment.author = self.context['request'].user
-        comment.post = get_object_or_404(Post, id=self.context['view'].kwargs['pk'])
-        comment.save()
-        post = get_object_or_404(Post, id=self.context['view'].kwargs['pk'])
+        try:
+            comment = Comments()
+            comment.content = validated_data['content']
+            # comment.author = get_object_or_404(User, id=1)
+            comment.author = self.context['request'].user
+            comment.post = get_object_or_404(Post, id=self.context['view'].kwargs['pk'])
+            comment.save()
+            post = get_object_or_404(Post, id=self.context['view'].kwargs['pk'])
 
-        post.comments += 1
-        post.save()
+            post.comments += 1
+            post.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                {"detail": "some field is missing"})
         return comment
+
     def update(self, instance, validated_data):
-        instance.content = validated_data.get("content", instance.content)
-        instance.save()
+        try:
+            instance.content = validated_data.get("content", instance.content)
+            instance.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                {"detail": "some field is missing"})
         return instance

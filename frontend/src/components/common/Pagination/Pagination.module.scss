@@ -1,0 +1,38 @@
+.pageItem {
+  background: #646464;
+  padding: 1.5rem;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  transition: .2s;
+  &:hover {
+    background: #a4a4a4;
+  }
+}
+.pageLink {
+  color: #dcdcdc;
+  font-weight: 500;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+.active {
+  background: #3d3d3d;
+  &:hover {
+    background: #4b4b4b;
+  }
+}
+
+.buttons {
+  background: #306b35;
+}

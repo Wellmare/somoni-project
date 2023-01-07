@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import Layout from './Layout';
+
+import PrivateRoute from './PrivateRoute';
+
 import { routingData } from '../../constants/routingData';
 import { PageNotFound } from '../../pages';
 import { Paths } from '../../types/Paths';
-import Layout from '../Layout/Layout';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const Routing: FC = () => {
     const routes = routingData.map(({ path, Element, withAuth }, i) => {

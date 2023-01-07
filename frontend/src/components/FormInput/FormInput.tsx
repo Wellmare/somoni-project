@@ -8,7 +8,7 @@ interface IInputProps {
     label: string;
 }
 
-const Input: FC<IInputProps> = ({ id, error, register, label, ...props }) => {
+const FormInput: FC<IInputProps> = ({ id, error, register, label, ...props }) => {
     useEffect(() => {
         console.log(error);
     }, [error]);
@@ -32,4 +32,4 @@ const Input: FC<IInputProps> = ({ id, error, register, label, ...props }) => {
     );
 };
 
-export default Input;
+export default FormInput;

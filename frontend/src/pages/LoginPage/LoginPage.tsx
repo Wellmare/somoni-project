@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Input from '../../components/Input/Input';
+import FormInput from '../../components/FormInput/FormInput';
 
 export interface LoginPageInputs {
     username: string;
@@ -12,7 +12,6 @@ const LoginPage: FC = () => {
     const {
         register,
         handleSubmit,
-
         formState: { errors },
     } = useForm<LoginPageInputs>({ mode: 'onBlur' });
 
@@ -24,32 +23,22 @@ const LoginPage: FC = () => {
 
     return (
         <>
-            {/* <input type='submit' /> */}
-            {/*     control={control} */}
-            {/*     render={({ field, fieldState: { invalid, isTouched, isDirty, error } }) => ( */}
-            {/*         <Input invalid={invalid} {...field} /> */}
-            {/*     )} */}
-            {/*     name={'ui'} */}
-            {/*     rules={{ */}
-            {/*         required: true, */}
-            {/*         minLength: 5, */}
-            {/*     }} */}
-            {/* /> */}
-            {/* <input type='text' {...register('username', { required: true })} /> */}
-            {/* {errors.username?.type === 'required' && 'Required'} */}
-            {/* <input type='text' {...register('password', { required: true, minLength: 6 })} /> */}
-            {/* {errors.password?.type === 'minLength' && 'Min lenght 6 symbols'} */}
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
+                <FormInput
                     id={'username'}
                     error={errors.username}
                     register={() => register('username', { required: { value: true, message: 'Поле обязательно' } })}
                     label={'Username'}
                 />
-                <Input
+                <FormInput
                     id={'password'}
                     error={errors.password}
-                    register={() => register('password', { required: { value: true, message: 'Поле обязательно' } })}
+                    register={() =>
+                        register('password', {
+                            required: { value: true, message: 'Поле обязательно' },
+                            maxLength: { value: 255, message: 'Длина пароля должна быть меньше 255 символов' },
+                        })
+                    }
                     label={'Password'}
                 />
                 <input style={{ display: 'block' }} type='submit' />

@@ -12,7 +12,7 @@ from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from myapi.serializers import MyTokenObtainPairSerializer, RegisterSerializer, ChangePasswordSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
-from django.contrib.auth.models import User
+from myapi.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404

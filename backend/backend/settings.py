@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'userprofile.apps.UserprofileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
-    'myapi.apps.MyapiConfig',
+    'myapi',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+
     'corsheaders',
+
 
 ]
 
@@ -179,3 +182,5 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'http://localhost:3000']
+
+AUTH_USER_MODEL = 'myapi.User'

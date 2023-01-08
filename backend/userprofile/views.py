@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from myapi.models import User
 from django.shortcuts import get_object_or_404
 
 # Create your views here.

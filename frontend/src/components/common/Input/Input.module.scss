@@ -1,0 +1,23 @@
+.input {
+  padding: var(--input-padding);
+  font-size: var(--input-font-size);
+  border-radius: var(--input-border-radius);
+  outline: none;
+
+  &.filled {
+    background-color: var(--input-filled-background);
+    border: var(--input-filled-border);
+    color: var(--input-filled-text);
+    &::placeholder {
+      color: var(--input-filled-placeholder)
+    }
+  }
+  &.outline {
+    background-color: var(--input-outline-background);
+    border: var(--input-outline-border);
+    color: var(--input-outline-text);
+    &::placeholder {
+      color: var(--input-outline-placeholder)
+    }
+  }
+}

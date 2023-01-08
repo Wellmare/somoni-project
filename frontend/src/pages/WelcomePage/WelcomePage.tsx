@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 const WelcomePage: FC = () => {
-    return <div></div>;
+    return <>Welcome!</>;
 };
 
 export default WelcomePage;

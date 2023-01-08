@@ -1,0 +1,37 @@
+:root {
+  --input-font-size: 1.2rem;
+  --input-padding: .5rem .8rem;
+  --input-border-radius: .5rem;
+}
+
+:root[data-theme="dark"] {
+  --input-error-border: 3px solid #851414;
+
+  // outline
+  --input-outline-background: rgba(0, 0, 0, 0);
+  --input-outline-border: 2px solid #737373;
+  --input-outline-placeholder: #6A6A6A;
+  --input-outline-text: #6F6F6F;
+
+  // filled
+  --input-filled-background: #31363A;
+  --input-filled-border: 3px solid #292C2F;
+  --input-filled-placeholder: #D4D4D4;
+  --input-filled-text: #FFFFFF;
+}
+
+:root[data-theme="light"] {
+  --input-error-border: 3px solid #881212;
+
+  // outline
+  --input-outline-background: rgba(0, 0, 0, 0);
+  --input-outline-border: 3px solid #BBBBBB;
+  --input-outline-placeholder: #9F9F9F;
+  --input-outline-text: #C1C1C1;
+
+  // filled
+  --input-filled-background: #F2F2F2;
+  --input-filled-border: 2px solid #DCDCDC;
+  --input-filled-placeholder: #707070;
+  --input-filled-text: #4D4D4D;
+}

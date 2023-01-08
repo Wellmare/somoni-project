@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useLogin } from '../../../hooks/useLogin';
 import Error from '../Error/Error';
@@ -12,37 +12,58 @@ interface LoginFormInputs {
 }
 
 const LoginForm: FC = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<LoginFormInputs>({ mode: 'onBlur' });
+    const { handleSubmit, control } = useForm<LoginFormInputs>({ mode: 'onBlur' });
 
-    const { isLoading, loginUser, isError, error } = useLogin();
+    const { isLoading, loginUser, error } = useLogin();
 
     const onSubmit: SubmitHandler<LoginFormInputs> = (data): void => {
-        console.log('login');
         loginUser({ username: data.username, password: data.password });
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-                id={'username'}
-                error={errors.username}
-                register={() => register('username', { required: { value: true, message: 'Поле обязательно' } })}
-                label={'Username'}
+            <Controller
+                render={({ field, fieldState, formState }) => (
+                    <FormInput
+                        id={'username'}
+                        error={fieldState.error}
+                        label={'Никнейм'}
+                        placeholder={'username'}
+                        {...field}
+                    />
+                )}
+                control={control}
+                name={'username'}
+                rules={{
+                    required: {
+                        value: true,
+                        message: 'Поле обязательно',
+                    },
+                }}
             />
-            <FormInput
-                id={'password'}
-                error={errors.password}
-                register={() =>
-                    register('password', {
-                        required: { value: true, message: 'Поле обязательно' },
-                        maxLength: { value: 150, message: 'Длина пароля должна быть меньше 150 символов' },
-                    })
-                }
-                label={'Password'}
+
+            <Controller
+                render={({ field, fieldState, formState }) => (
+                    <FormInput
+                        id={'password'}
+                        error={fieldState.error}
+                        label={'Пароль'}
+                        placeholder={'password'}
+                        {...field}
+                    />
+                )}
+                control={control}
+                name={'password'}
+                rules={{
+                    required: {
+                        value: true,
+                        message: 'Поле обязательно',
+                    },
+                    minLength: {
+                        value: 8,
+                        message: 'Минимальная длинна пароля 8 символов',
+                    },
+                }}
             />
 
             <p>{isLoading && 'Загрузка...'}</p>

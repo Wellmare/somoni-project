@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useFilePicker } from 'use-file-picker';
 
 import { useRegister } from '../../../hooks/useRegister';
 import { emailRegExp } from '../../../other/emailRegExp';
+import { IFormDataItem } from '../../../types/IFormDataItem';
 import { composeFormData } from '../../../utils/composeFormData';
 import Error from '../Error/Error';
 import FormInput from '../FormInput/FormInput';
@@ -24,6 +25,7 @@ const RegisterForm: FC = () => {
         handleSubmit,
         watch,
         formState: { errors },
+        control,
     } = useForm<RegisterPageInputs>({
         mode: 'onChange',
     });
@@ -37,7 +39,7 @@ const RegisterForm: FC = () => {
     });
 
     const onSubmit: SubmitHandler<RegisterPageInputs> = (data) => {
-        const formData = composeFormData([
+        const dataToForm: IFormDataItem[] = [
             {
                 name: 'username',
                 value: data.username,
@@ -54,100 +56,113 @@ const RegisterForm: FC = () => {
                 name: 'email',
                 value: data.email,
             },
-            {
-                name: 'photo',
-                value: plainFiles[0],
-            },
-        ]);
+        ];
+        if (plainFiles[0] !== undefined) {
+            dataToForm.push({ name: 'photo', value: plainFiles[0] });
+        }
+        const formData = composeFormData(dataToForm);
+
         registerUser(formData);
     };
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormInput
-                    id={'username'}
-                    error={errors.username}
-                    register={() =>
-                        registerInput('username', {
-                            required: {
-                                value: true,
-                                message: 'Поле обязательно',
-                            },
-                        })
-                    }
-                    label={'Ник'}
+                <Controller
+                    render={({ field, fieldState, formState }) => (
+                        <FormInput
+                            id={'username'}
+                            error={fieldState.error}
+                            label={'Никнейм'}
+                            placeholder={'username'}
+                            {...field}
+                        />
+                    )}
+                    control={control}
+                    name={'username'}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Поле обязательно',
+                        },
+                    }}
+                />
+                <Controller
+                    render={({ field, fieldState, formState }) => (
+                        <FormInput
+                            id={'password'}
+                            error={fieldState.error}
+                            label={'Пароль'}
+                            placeholder={'password'}
+                            {...field}
+                        />
+                    )}
+                    control={control}
+                    name={'password'}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Поле обязательно',
+                        },
+                        minLength: {
+                            value: 8,
+                            message: 'Минимальная длинна пароля 8 символов',
+                        },
+                    }}
+                />
+                <Controller
+                    render={({ field, fieldState, formState }) => (
+                        <FormInput
+                            id={'password2'}
+                            error={fieldState.error}
+                            label={'Повтор пароля'}
+                            placeholder={'password'}
+                            {...field}
+                        />
+                    )}
+                    name={'password2'}
+                    control={control}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Поле обязательно',
+                        },
+                        minLength: {
+                            value: 8,
+                            message: 'Минимальная длинна пароля 8 символов',
+                        },
+                        validate: (value) => {
+                            if (value !== watch('password')) {
+                                return 'Пароли не совпадают';
+                            }
+                        },
+                    }}
+                />
+                <Controller
+                    name={'email'}
+                    render={({ field, fieldState, formState }) => (
+                        <FormInput
+                            id={'email'}
+                            error={fieldState.error}
+                            label={'Email'}
+                            placeholder={'example@example.com'}
+                            {...field}
+                        />
+                    )}
+                    control={control}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Поле обязательно',
+                        },
+                        pattern: {
+                            value: emailRegExp,
+                            message: 'Некоректный email',
+                        },
+                    }}
                 />
 
-                <FormInput
-                    id={'password'}
-                    error={errors.password}
-                    register={() =>
-                        registerInput('password', {
-                            required: {
-                                value: true,
-                                message: 'Поле обязательно',
-                            },
-                            minLength: {
-                                value: 8,
-                                message: 'Минимальная длинна пароля 8 символов',
-                            },
-                        })
-                    }
-                    label={'Пароль'}
-                />
-
-                <FormInput
-                    id={'password2'}
-                    error={errors.password2}
-                    register={() =>
-                        registerInput('password2', {
-                            required: {
-                                value: true,
-                                message: 'Поле обязательно',
-                            },
-                            minLength: {
-                                value: 8,
-                                message: 'Минимальная длинна пароля 8 символов',
-                            },
-                            validate: (value) => {
-                                if (watch('password') !== value) {
-                                    return 'Пароли не совпадают';
-                                }
-                            },
-                        })
-                    }
-                    label={'Повтор пароля'}
-                />
-                <FormInput
-                    id={'email'}
-                    error={errors.email}
-                    register={() =>
-                        registerInput('email', {
-                            required: {
-                                value: true,
-                                message: 'Поле обязательно',
-                            },
-                            pattern: {
-                                value: emailRegExp,
-                                message: 'Некорректный email',
-                            },
-                        })
-                    }
-                    label={'Email'}
-                />
-
-                <PhotoInput
-                    // id={'avatar'}
-                    // error={errors.avatar}
-                    // register={() =>
-                    //     registerInput('avatar', {
-                    //         required: false,
-                    //     })
-                    // }
-                    image={filesContent?.[0]?.content}
-                    openFilePicker={openFilePicker}
-                />
+                <PhotoInput image={filesContent?.[0]?.content} openFilePicker={openFilePicker} />
                 {error?.status === 401 && <Error>Неверные данные</Error>}
                 {error?.status === 400 && <Error>Не хватает полей</Error>}
                 {error?.status === 'FETCH_ERROR' && <Error>Не удалось получить ответ от сервера</Error>}

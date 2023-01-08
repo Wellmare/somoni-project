@@ -12,6 +12,8 @@ from django.db.models import Exists, OuterRef
 from rest_framework.pagination import PageNumberPagination
 from collections import OrderedDict
 
+from userprofile.serializer import profile_serializer
+
 
 class userResultsSetPagination(PageNumberPagination):
     page_size = 10
@@ -65,13 +67,14 @@ class profile(generics.ListCreateAPIView):
 
 class edit_profile(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.none()
-    serializer_class = None
+    serializer_class = profile_serializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user
 
     def get_object(self):
-        obj = get_object_or_404(User, id=self.request.user)
+        obj = get_object_or_404(User, id=self.request.user.id)
         return obj
 
     def update(self, request, *args, **kwargs):
@@ -97,10 +100,8 @@ class edit_profile(generics.RetrieveUpdateDestroyAPIView):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        if request.user == instance.author or request.user.is_superuser:
-            self.perform_destroy(instance)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_destroy(self, instance):
         instance.delete()

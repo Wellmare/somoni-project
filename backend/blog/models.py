@@ -1,4 +1,6 @@
 from PIL import Image
+from taggit.managers import TaggableManager
+
 from myapi.models import User
 from django.db import models
 from django.utils import timezone
@@ -16,6 +18,7 @@ class Post(models.Model):
     comments = models.IntegerField(default=0)
     image = models.ImageField(upload_to='post_images', null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title

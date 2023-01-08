@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'myapi',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-
+    'taggit',
     'corsheaders',
 
 

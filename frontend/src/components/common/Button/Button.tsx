@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react';
 
 import s from './Button.module.scss';
 
-import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 
 interface ButtonProps {
     color: ButtonColors;

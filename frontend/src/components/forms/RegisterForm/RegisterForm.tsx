@@ -20,17 +20,11 @@ interface RegisterPageInputs {
 }
 
 const RegisterForm: FC = () => {
-    const {
-        register: registerInput,
-        handleSubmit,
-        watch,
-        formState: { errors },
-        control,
-    } = useForm<RegisterPageInputs>({
+    const { handleSubmit, watch, control } = useForm<RegisterPageInputs>({
         mode: 'onChange',
     });
 
-    const { error, registerUser, isLoading, isSuccess } = useRegister();
+    const { error, registerUser, isSuccess } = useRegister();
 
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',
@@ -62,7 +56,7 @@ const RegisterForm: FC = () => {
         }
         const formData = composeFormData(dataToForm);
 
-        registerUser(formData);
+        registerUser(formData, { username: data.username, password: data.password });
     };
 
     return (

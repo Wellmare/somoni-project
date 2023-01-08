@@ -1,7 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { useGetPostsQuery } from '../../../service/postsApiSlice';
+import Loader from '../../common/Loader/Loader';
 import Pagination from '../../common/Pagination/Pagination';
+import Error from '../../forms/Error/Error';
 import Post from '../Post/Post';
 
 interface IPostsByPageProps {
@@ -10,7 +12,9 @@ interface IPostsByPageProps {
 }
 
 const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage }) => {
-    const { data: posts, isError, isLoading } = useGetPostsQuery({ page });
+    const [content, setContent] = useState<JSX.Element | JSX.Element[]>(<Loader />);
+    const { data: posts, isError, isLoading, isSuccess } = useGetPostsQuery({ page });
+
     const countPages = posts?.count != null ? posts.count / 10 : 0;
 
     const handlePageChange = ({ selected }: { selected: number }): void => {
@@ -18,15 +22,25 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage }) => {
         setPage(page);
     };
 
-    return (
-        <>
-            <Pagination countPages={countPages} handlePageChange={handlePageChange} />
-            {isLoading && 'Loading...'}
-            {isError && 'Failed to fetch'}
-            {posts?.results != null && posts.results.map((post) => <Post post={post} key={post.id} />)}
-            <Pagination countPages={countPages} handlePageChange={handlePageChange} />
-        </>
-    );
+    useEffect(() => {
+        if (isError) {
+            setContent(<Error>Failed to fetch</Error>);
+        } else if (isLoading) {
+            setContent(<Loader />);
+        } else if (isSuccess && posts.results.length > 0) {
+            setContent(
+                <>
+                    <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+                    {posts.results.map((post) => (
+                        <Post post={post} key={post.id} />
+                    ))}
+                    <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+                </>,
+            );
+        }
+    }, [posts, isError, isLoading, isSuccess]);
+
+    return <>{content}</>;
 };
 
 export default PostsByPage;

@@ -4,14 +4,18 @@ import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 import s from './FormInput.module.scss';
 
+import { InputType } from '../../../types/UI/Input.types';
+import Input from '../../common/Input/Input';
+
 interface IInputProps {
     id: string;
     error: FieldError | undefined;
-    register: () => UseFormRegisterReturn;
+    register?: () => UseFormRegisterReturn;
     label: string;
+    placeholder: string;
 }
 
-const FormInput: FC<IInputProps> = ({ id, error, register, label, ...props }) => {
+const FormInput: FC<IInputProps> = ({ id, error, register, label, placeholder, ...props }) => {
     const [isError, setIsError] = useState<boolean>(false);
     useEffect(() => {
         setIsError(error?.message !== undefined);
@@ -22,13 +26,7 @@ const FormInput: FC<IInputProps> = ({ id, error, register, label, ...props }) =>
             <label htmlFor={id} className={classNames('block')}>
                 {label}
             </label>
-            <input
-                type='text'
-                id={id}
-                {...register()}
-                {...props}
-                className={classNames('py-1', 'px-3', 'mt-1', 'rounded-md', isError ? s.invalid : '')}
-            />
+            <Input type={InputType.filled} placeholder={placeholder} id={id} isError={isError} {...props} />
             {isError && <p className={classNames(s.error)}>{error?.message}</p>}
         </div>
     );

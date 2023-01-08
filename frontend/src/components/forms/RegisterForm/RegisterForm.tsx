@@ -6,9 +6,9 @@ import { useFilePicker } from 'use-file-picker';
 import { useRegister } from '../../../hooks/useRegister';
 import { emailRegExp } from '../../../other/emailRegExp';
 import { composeFormData } from '../../../utils/composeFormData';
-import PhotoInput from '../../PhotoInput/PhotoInput';
 import Error from '../Error/Error';
 import FormInput from '../FormInput/FormInput';
+import PhotoInput from '../PhotoInput/PhotoInput';
 
 interface RegisterPageInputs {
     avatar: string;

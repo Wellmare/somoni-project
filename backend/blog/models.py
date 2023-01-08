@@ -1,7 +1,6 @@
 from PIL import Image
 from myapi.models import User
 from django.db import models
-
 from django.utils import timezone
 
 from django.urls import reverse
@@ -35,5 +34,6 @@ class Comments(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='link')
+
     def __str__(self):
         return self.content

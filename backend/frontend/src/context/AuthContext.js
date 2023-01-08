@@ -68,7 +68,8 @@ export const AuthProvider = ({children}) => {
         const response = await fetch("http://127.0.0.1:8000/api/logout/", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authTokens?.access}`
             },
             body: JSON.stringify({
                 refresh: authTokens.refresh,

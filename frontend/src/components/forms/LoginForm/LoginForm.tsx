@@ -59,10 +59,6 @@ const LoginForm: FC = () => {
                         value: true,
                         message: 'Поле обязательно',
                     },
-                    minLength: {
-                        value: 8,
-                        message: 'Минимальная длинна пароля 8 символов',
-                    },
                 }}
             />
 

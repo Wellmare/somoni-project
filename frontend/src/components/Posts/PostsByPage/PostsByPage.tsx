@@ -15,7 +15,7 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage }) => {
     const [content, setContent] = useState<JSX.Element | JSX.Element[]>(<Loader />);
     const { data: posts, isError, isLoading, isSuccess } = useGetPostsQuery({ page });
 
-    const countPages = posts?.count != null ? posts.count / 10 : 0;
+    const countPages = posts?.count != null ? Math.ceil(posts.count / 10) : 0;
 
     const handlePageChange = ({ selected }: { selected: number }): void => {
         const page = selected + 1;

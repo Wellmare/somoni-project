@@ -5,6 +5,7 @@ export const enum Paths {
     REGISTER = 'register',
     POST = 'post',
     PROFILE = 'profile',
+    USER = 'user',
     CHANGE_PASSWORD = 'change-password',
     RESTORE_PASSWORD = 'restore-password',
 }
@@ -16,6 +17,7 @@ export const enum PathsToNavigate {
     REGISTER = '/register',
     POST = '/post',
     PROFILE = '/profile',
+    USER = '/user',
     CHANGE_PASSWORD = '/change-password',
     RESTORE_PASSWORD = '/restore-password',
 }

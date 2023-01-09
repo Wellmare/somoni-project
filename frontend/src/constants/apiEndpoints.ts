@@ -5,4 +5,5 @@ export const apiEndpoints = {
     posts: 'posts/',
     post: 'post/',
     comment: 'comment/',
+    logout: 'logout/',
 };

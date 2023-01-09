@@ -1,7 +1,7 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToLogin } from '../types/redux/auth/IDataTo';
+import { IDataToLogin, IDataToLogout } from '../types/redux/auth/IDataTo';
 import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
 import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
 
@@ -24,7 +24,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: formData,
             }),
         }),
+        logout: builder.mutation<undefined, IDataToLogout>({
+            query: ({ refresh }) => ({
+                url: apiEndpoints.logout,
+                method: 'POST',
+                body: { refresh },
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;

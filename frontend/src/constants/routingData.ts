@@ -8,6 +8,7 @@ import {
     RestorePasswordPage,
     WelcomePage,
 } from '../pages';
+import UserPage from '../pages/UserPage/UserPage';
 import { IRouteData } from '../types/IRouteData';
 import { Paths } from '../types/Paths';
 
@@ -33,8 +34,8 @@ export const routingData: IRouteData[] = [
         withAuth: true,
     },
     {
-        path: `${Paths.PROFILE}/:id`,
-        Element: ProfilePage,
+        path: `${Paths.USER}/:id`,
+        Element: UserPage,
     },
     {
         path: Paths.MAIN,

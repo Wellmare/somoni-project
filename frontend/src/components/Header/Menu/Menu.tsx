@@ -9,6 +9,7 @@ import s from './Menu.module.scss';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
 import { ThemeContext } from '../../../context/ThemeContext';
+import { useLogout } from '../../../hooks/useLogout';
 import { PathsToNavigate } from '../../../types/Paths';
 import { Theme } from '../../../types/Theme';
 
@@ -25,6 +26,7 @@ const Menu: FC = () => {
     const onChangeTheme = (): void => {
         themeContext?.setTheme(themeContext?.theme === Theme.DARK ? Theme.LIGHT : Theme.DARK);
     };
+    const { logoutUser } = useLogout();
 
     return (
         <ReactMenu
@@ -34,14 +36,28 @@ const Menu: FC = () => {
             transition
             menuClassName={menuClassName}
         >
-            <Link to={PathsToNavigate.PROFILE} className={classNames('block', 'sm:hidden')}>
-                <MenuItem>Profile</MenuItem>
-            </Link>
-            <Link to={PathsToNavigate.PROFILE} className={classNames('hidden', 'sm:block')}>
-                <MenuItem>Profile</MenuItem>
-            </Link>
-            <div className={s.menuDivider} />
-            <MenuItem onClick={onChangeTheme}>Change theme</MenuItem>
+            {/* Для пк */}
+            <div className={classNames('hidden', 'sm:block')}>
+                <Link to={PathsToNavigate.PROFILE}>
+                    <MenuItem>Профиль</MenuItem>
+                </Link>
+                <div className={s.menuDivider} />
+                <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
+                <div className={s.menuDivider} />
+                <MenuItem onClick={() => logoutUser()}>Выйти</MenuItem>
+            </div>
+
+            {/* Для мобилы */}
+            <div className={classNames('block', 'sm:hidden')}>
+                <Link to={PathsToNavigate.PROFILE}>
+                    <MenuItem>Профиль</MenuItem>
+                </Link>
+
+                <div className={s.menuDivider} />
+                <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
+                <div className={s.menuDivider} />
+                <MenuItem onClick={() => logoutUser()}>Выйти</MenuItem>
+            </div>
         </ReactMenu>
     );
 };

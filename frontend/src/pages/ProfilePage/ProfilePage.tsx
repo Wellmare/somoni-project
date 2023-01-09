@@ -1,13 +1,17 @@
 import React, { FC } from 'react';
-import { useParams } from 'react-router-dom';
+
+import Error from '../../components/forms/Error/Error';
+import ProfileWithQuery from '../../components/profile/ProfileWithQuery/ProfileWithQuery';
+import { useAppSelector } from '../../hooks/reduxHooks';
 
 const ProfilePage: FC = () => {
-    const params = useParams();
-    console.log(params);
+    const id = useAppSelector((state) => state.auth?.user?.user_id);
 
-    console.log(params.id);
+    if (id === undefined) {
+        return <Error>Что то пошло не так(</Error>;
+    }
 
-    return <div>{params.id !== undefined ? +params.id : 'My profile'}</div>;
+    return <ProfileWithQuery id={id.toString()} />;
 };
 
 export default ProfilePage;

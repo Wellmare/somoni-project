@@ -9,3 +9,7 @@ export interface IDataToRegister {
     password: string;
     password2: string;
 }
+
+export interface IDataToLogout {
+    refresh: string;
+}

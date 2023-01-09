@@ -1,13 +1,14 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from .models import Post, Comments
-from django.contrib.auth.models import User
+from taggit.serializers import (TagListSerializerField,
+                                TaggitSerializer)
 
 
 class PostSerializer(serializers.ModelSerializer):
     isLiked = serializers.BooleanField(read_only=True, default=False)
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image', read_only=True)
+    photo = serializers.ImageField(source='author.photo', read_only=True)
 
     class Meta:
         model = Post
@@ -17,7 +18,8 @@ class PostSerializer(serializers.ModelSerializer):
 class CreatePostSerializer(serializers.ModelSerializer):
     isLiked = serializers.BooleanField(read_only=True, default=False)
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image', read_only=True)
+    photo = serializers.ImageField(source='author.photo', read_only=True)
+    tags = TagListSerializerField()
 
     class Meta:
         model = Post
@@ -56,7 +58,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
-    photo = serializers.ImageField(source='author.profile.image', read_only=True)
+    photo = serializers.ImageField(source='author.photo', read_only=True)
 
     class Meta:
         model = Comments

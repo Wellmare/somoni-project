@@ -35,8 +35,8 @@ class userResultsSetPagination(PageNumberPagination):
             ('next', self.get_next_link()),
             ('previous', self.get_previous_link()),
             ('username', user.username),
-            ('photo', self.request.build_absolute_uri(user.profile.image.url)),
-            ('bio', user.profile.bio),
+            ('photo', self.request.build_absolute_uri(user.photo.url)),
+            ('bio', user.bio),
             ('results', data)
         ]))
 

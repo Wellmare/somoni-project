@@ -7,4 +7,5 @@ export interface IComment {
     author: number;
     post: number;
     photo: Link;
+    username: string;
 }

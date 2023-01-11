@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -10,6 +11,8 @@ import { composeFormData } from '../../../utils/composeFormData';
 import Error from '../Error/Error';
 import FormInput from '../FormInput/FormInput';
 import PhotoInput from '../PhotoInput/PhotoInput';
+
+import s from '../PhotoInput/PhotoInput.module.scss';
 
 interface RegisterPageInputs {
     avatar: string;
@@ -156,7 +159,11 @@ const RegisterForm: FC = () => {
                     }}
                 />
 
-                <PhotoInput image={filesContent?.[0]?.content} openFilePicker={openFilePicker} />
+                <PhotoInput
+                    image={filesContent?.[0]?.content}
+                    openFilePicker={openFilePicker}
+                    className={classNames(s.avatar)}
+                />
                 {error?.status === 401 && <Error>Неверные данные</Error>}
                 {error?.status === 400 && <Error>Не хватает полей</Error>}
                 {error?.status === 'FETCH_ERROR' && <Error>Не удалось получить ответ от сервера</Error>}

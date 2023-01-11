@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets
 from rest_framework.settings import api_settings
 from rest_framework.views import APIView
-
+from taggit.models import Tag
 from .serializers import PostSerializer, CreatePostSerializer, CommentSerializer
 from .models import Post, PostLike, Comments
 from django.db.models import Prefetch, Exists, OuterRef
@@ -48,10 +48,20 @@ class get_create_post(generics.ListCreateAPIView):
     queryset = Post.objects.none()
 
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return Post.objects.annotate(
-                isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
-                '-date')
+        try:
+            tag = get_object_or_404(Tag, slug=self.kwargs['tag_slug'])
+            object_list = Post.objects.filter(tags__in=[tag])
+            if self.request.user.is_authenticated:
+                return object_list.annotate(
+                        isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                        '-date')
+            else:  return object_list
+
+        except KeyError:
+            if self.request.user.is_authenticated:
+                return Post.objects.annotate(
+                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                    '-date')
         return Post.objects.all().order_by('-date')
 
     def create(self, request, *args, **kwargs):
@@ -264,3 +274,14 @@ class get_post_for_user(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         return Response({'detail': 'method POST not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+
+def post_list(request, tag_slug=None):
+    object_list = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+

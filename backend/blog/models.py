@@ -19,7 +19,7 @@ class Post(models.Model):
     comments = models.IntegerField(default=0)
     image = models.ImageField(upload_to='post_images', null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return self.title

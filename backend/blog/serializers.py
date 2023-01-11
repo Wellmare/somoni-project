@@ -19,7 +19,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     isLiked = serializers.BooleanField(read_only=True, default=False)
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.photo', read_only=True)
-    tags = TagListSerializerField()
+    tags = TagListSerializerField(required=False)
 
     class Meta:
         model = Post
@@ -38,7 +38,16 @@ class CreatePostSerializer(serializers.ModelSerializer):
             except KeyError:
                 pass
             post.author = self.context['request'].user
+
             post.save()
+            try:
+                tags = validated_data['tags'][0]
+                tags = tags.split()
+                for tag in tags:
+                    post.tags.add(tag)
+            except KeyError:
+                pass
+
         except KeyError:
             raise serializers.ValidationError(
                 {"detail": "some field is missing"})

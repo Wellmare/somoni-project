@@ -4,5 +4,11 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  margin: 1rem;
+  width: 40vw;
+  margin: 1rem auto;
+
+  .image {
+    max-height: 10rem;
+    object-fit: cover;
+  }
 }

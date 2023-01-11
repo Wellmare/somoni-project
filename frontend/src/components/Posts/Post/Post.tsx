@@ -15,10 +15,9 @@ interface ITestPostProps {
 
 const Post: FC<ITestPostProps> = ({ post }) => {
     const { content, username, title, likes, id, image } = post;
-    console.log(image);
     return (
         <div className={classNames(s.post)}>
-            {image !== null && <img src={image} alt='image' />}
+            {image !== null && <img src={image} alt='image' className={classNames(s.image)} />}
             <div className={'flex justify-between'}>
                 <p>{username}</p>
                 <Link to={`${PathsToNavigate.POST}/${id}`}>

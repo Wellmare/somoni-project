@@ -1,5 +1,6 @@
 import {
     ChangePasswordPage,
+    CreatePostPage,
     LoginPage,
     MainPage,
     PostPage,
@@ -44,6 +45,11 @@ export const routingData: IRouteData[] = [
     {
         path: `${Paths.POST}/:id`,
         Element: PostPage,
+    },
+    {
+        path: Paths.CREATE_POST,
+        Element: CreatePostPage,
+        withAuth: true,
     },
     {
         path: Paths.RESTORE_PASSWORD,

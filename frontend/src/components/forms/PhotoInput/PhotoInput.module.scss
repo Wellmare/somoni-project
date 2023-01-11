@@ -3,14 +3,23 @@
   height: 0.1px;
   opacity: 0;
 }
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
 .avatar {
   width: 200px;
   height: 200px;
   border: 2px dashed black;
   border-radius: 50%;
 
-  &.img {
+  .img {
     border-radius: 50%;
+    border: none;
   }
 }
 
@@ -20,13 +29,7 @@
   border: 2px dashed black;
   border-radius: 1rem;
 
-  &.img {
+  .img {
     border-radius: 1rem;
   }
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }

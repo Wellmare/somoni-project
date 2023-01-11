@@ -8,11 +8,12 @@ import { useRegister } from '../../../hooks/useRegister';
 import { emailRegExp } from '../../../other/emailRegExp';
 import { IFormDataItem } from '../../../types/IFormDataItem';
 import { composeFormData } from '../../../utils/composeFormData';
-import Error from '../Error/Error';
+import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormInput from '../FormInput/FormInput';
 import PhotoInput from '../PhotoInput/PhotoInput';
 
 import s from '../PhotoInput/PhotoInput.module.scss';
+import Success from '../Success/Success';
 
 interface RegisterPageInputs {
     avatar: string;
@@ -27,7 +28,7 @@ const RegisterForm: FC = () => {
         mode: 'onChange',
     });
 
-    const { error, registerUser, isSuccess } = useRegister();
+    const { error, registerUser, isSuccess, isError, isLoading } = useRegister();
 
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',
@@ -55,11 +56,17 @@ const RegisterForm: FC = () => {
             },
         ];
         if (plainFiles[0] !== undefined) {
-            dataToForm.push({ name: 'photo', value: plainFiles[0] });
+            dataToForm.push({
+                name: 'photo',
+                value: plainFiles[0],
+            });
         }
         const formData = composeFormData(dataToForm);
 
-        registerUser(formData, { username: data.username, password: data.password });
+        registerUser(formData, {
+            username: data.username,
+            password: data.password,
+        });
     };
 
     return (
@@ -164,13 +171,27 @@ const RegisterForm: FC = () => {
                     openFilePicker={openFilePicker}
                     className={classNames(s.avatar)}
                 />
-                {error?.status === 401 && <Error>Неверные данные</Error>}
-                {error?.status === 400 && <Error>Не хватает полей</Error>}
-                {error?.status === 'FETCH_ERROR' && <Error>Не удалось получить ответ от сервера</Error>}
 
-                {isSuccess && <p>Зарегистривано!</p>}
+                <ServerResponse
+                    responseError={error}
+                    isError={isError}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    messages={[
+                        {
+                            statusCode: 401,
+                            message: 'Неверные данные',
+                        },
+                        {
+                            statusCode: 400,
+                            message: 'Не хватает полей',
+                        },
+                    ]}
+                >
+                    <Success>Успешная регистрация!</Success>
+                </ServerResponse>
 
-                <button type={'submit'}>send</button>
+                <button type={'submit'}> send</button>
             </form>
         </>
     );

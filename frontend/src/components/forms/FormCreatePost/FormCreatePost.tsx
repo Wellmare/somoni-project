@@ -11,12 +11,12 @@ import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../common/Button/Button';
-import Loader from '../../common/Loader/Loader';
-import Error from '../Error/Error';
+import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormInput from '../FormInput/FormInput';
 import FormInputDraft from '../FormInputDraft/FormInputDraft';
 import PhotoInput from '../PhotoInput/PhotoInput';
 import s from '../PhotoInput/PhotoInput.module.scss';
+import Success from '../Success/Success';
 
 export interface FormCreatePostInputs {
     title: string;
@@ -35,7 +35,7 @@ const FormCreatePost: FC = () => {
         readAs: 'DataURL',
     });
 
-    const [createPost, { isError, isLoading, data, isSuccess }] = useCreatePostMutation();
+    const [createPost, { isError, isLoading, isSuccess, error }] = useCreatePostMutation();
 
     const onSubmit: SubmitHandler<FormCreatePostInputs> = (data): void => {
         const formDataItems: IFormDataItem[] = [
@@ -109,14 +109,10 @@ const FormCreatePost: FC = () => {
                 name={'tags'}
             />
 
-            {isLoading && <Loader />}
-            {isError && <Error>Что то пошло не так :(</Error>}
-            {isSuccess && 'Пост создан'}
-            {/* <p>{error?.status === 401 && <Error>Неверный логин или пароль</Error>}</p> */}
-            {/* <p>{error?.status === 400 && <Error>Не хватает полей</Error>}</p> */}
-            {/* <p>{error?.status === 'FETCH_ERROR' && <Error>Не удалось получить ответ от сервера</Error>}</p> */}
+            <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                <Success>Пост создан</Success>
+            </ServerResponse>
 
-            {/* {error} */}
             <Button color={ButtonColors.green} size={ButtonSizes.md}>
                 Создать
             </Button>

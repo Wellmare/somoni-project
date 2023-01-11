@@ -3,8 +3,9 @@ import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useLogin } from '../../../hooks/useLogin';
-import Error from '../Error/Error';
+import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormInput from '../FormInput/FormInput';
+import Success from '../Success/Success';
 
 interface LoginFormInputs {
     username: string;
@@ -14,10 +15,13 @@ interface LoginFormInputs {
 const LoginForm: FC = () => {
     const { handleSubmit, control } = useForm<LoginFormInputs>({ mode: 'onBlur' });
 
-    const { isLoading, loginUser, error } = useLogin();
+    const { isLoading, loginUser, error, isError, isSuccess } = useLogin();
 
     const onSubmit: SubmitHandler<LoginFormInputs> = (data): void => {
-        loginUser({ username: data.username, password: data.password });
+        loginUser({
+            username: data.username,
+            password: data.password,
+        });
     };
 
     return (
@@ -61,11 +65,24 @@ const LoginForm: FC = () => {
                     },
                 }}
             />
-
-            <p>{isLoading && 'Загрузка...'}</p>
-            <p>{error?.status === 401 && <Error>Неверный логин или пароль</Error>}</p>
-            <p>{error?.status === 400 && <Error>Не хватает полей</Error>}</p>
-            <p>{error?.status === 'FETCH_ERROR' && <Error>Не удалось получить ответ от сервера</Error>}</p>
+            <ServerResponse
+                responseError={error}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                messages={[
+                    {
+                        message: 'Неверный логин или пароль',
+                        statusCode: 401,
+                    },
+                    {
+                        message: 'Не хватает полей',
+                        statusCode: 400,
+                    },
+                ]}
+            >
+                <Success>Успешный вход!</Success>
+            </ServerResponse>
 
             {/* {error} */}
             <button className={classNames('bg-cyan-700', 'py-1', 'px-4', 'rounded-md')} type='submit'>

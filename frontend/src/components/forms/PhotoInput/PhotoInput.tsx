@@ -6,12 +6,13 @@ import s from './PhotoInput.module.scss';
 interface IPhotoInputProps {
     image: string | null;
     openFilePicker: () => void;
+    [x: string]: any;
 }
 
-const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image }) => {
+const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image, ...props }) => {
     return (
         <div className={classNames('mb-3')}>
-            <div className={s.avatar} onClick={() => openFilePicker()}>
+            <div {...props} onClick={() => openFilePicker()}>
                 {image !== null && <img src={image} alt='' className={s.img} />}
             </div>
         </div>

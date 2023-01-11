@@ -1,9 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 
 import { useGetPostsQuery } from '../../../service/postsApiSlice';
-import Loader from '../../common/Loader/Loader';
 import Pagination from '../../common/Pagination/Pagination';
-import Error from '../../forms/Error/Error';
+import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import Post from '../Post/Post';
 
 interface IPostsByPageProps {
@@ -12,8 +11,7 @@ interface IPostsByPageProps {
 }
 
 const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage }) => {
-    const [content, setContent] = useState<JSX.Element | JSX.Element[]>(<Loader />);
-    const { data: posts, isError, isLoading, isSuccess } = useGetPostsQuery({ page });
+    const { data: posts, isError, isLoading, isSuccess, error } = useGetPostsQuery({ page });
 
     const countPages = posts?.count != null ? Math.ceil(posts.count / 10) : 0;
 
@@ -22,25 +20,17 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage }) => {
         setPage(page);
     };
 
-    useEffect(() => {
-        if (isError) {
-            setContent(<Error>Failed to fetch</Error>);
-        } else if (isLoading) {
-            setContent(<Loader />);
-        } else if (isSuccess && posts.results.length > 0) {
-            setContent(
-                <>
-                    <Pagination countPages={countPages} handlePageChange={handlePageChange} />
-                    {posts.results.map((post) => (
-                        <Post post={post} key={post.id} />
-                    ))}
-                    <Pagination countPages={countPages} handlePageChange={handlePageChange} />
-                </>,
-            );
-        }
-    }, [posts, isError, isLoading, isSuccess]);
-
-    return <>{content}</>;
+    return (
+        <>
+            <ServerResponse responseError={error} isLoading={isLoading} isSuccess={isSuccess} isError={isError}>
+                <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+                {posts?.results?.map((post) => (
+                    <Post post={post} key={post.id} />
+                ))}
+                <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+            </ServerResponse>
+        </>
+    );
 };
 
 export default PostsByPage;

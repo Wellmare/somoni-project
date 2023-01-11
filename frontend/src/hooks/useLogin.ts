@@ -14,6 +14,7 @@ interface IUseLoginResponse {
     loginUser: (data: IDataToLogin) => void;
     isLoading: boolean;
     isError: boolean;
+    isSuccess: boolean;
     error: FetchBaseQueryError | null;
 }
 
@@ -39,5 +40,6 @@ export const useLogin = (): IUseLoginResponse => {
         isLoading,
         isError,
         error: isFetchBaseQueryError(error) ? error : null,
+        isSuccess,
     };
 };

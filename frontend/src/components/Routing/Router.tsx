@@ -9,7 +9,7 @@ import { routingData } from '../../constants/routingData';
 import { PageNotFound } from '../../pages';
 import { Paths } from '../../types/Paths';
 
-const Routing: FC = () => {
+const Router: FC = () => {
     const routes = routingData.map(({ path, Element, withAuth }, i) => {
         if (withAuth === undefined) {
             return <Route path={path} element={<Element />} key={i} />;
@@ -40,4 +40,4 @@ const Routing: FC = () => {
     );
 };
 
-export default Routing;
+export default Router;

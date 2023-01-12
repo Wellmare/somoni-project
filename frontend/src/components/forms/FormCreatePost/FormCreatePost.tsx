@@ -47,10 +47,6 @@ const FormCreatePost: FC = () => {
                 name: 'content',
                 value: data.content as unknown as string,
             },
-            {
-                name: 'tags',
-                value: data.tags,
-            },
         ];
         if (plainFiles[0] !== undefined) {
             formDataItems.push({
@@ -58,6 +54,13 @@ const FormCreatePost: FC = () => {
                 value: plainFiles[0],
             });
         }
+        if (data.tags.trim() !== '') {
+            formDataItems.push({
+                name: 'tags',
+                value: data.tags.trim(),
+            });
+        }
+
         const formData = composeFormData(formDataItems);
 
         doAsyncFunc(async () => {

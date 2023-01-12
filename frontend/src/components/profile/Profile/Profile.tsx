@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
+import { PathsToNavigate } from '../../../types/Paths';
 import { IProfile } from '../../../types/redux/profile/IProfile';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';
@@ -12,6 +15,7 @@ interface IProfileProps {
 
 const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
     const { bio, username, photo, results: posts } = profile;
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -19,7 +23,12 @@ const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
             {username}
             {bio}
             {withEdit && (
-                <Button color={ButtonColors.green} size={ButtonSizes.md} width={'100%'}>
+                <Button
+                    color={ButtonColors.green}
+                    size={ButtonSizes.md}
+                    width={'100%'}
+                    onClick={() => navigate(PathsToNavigate.EDIT_PROFILE)}
+                >
                     Edit profile
                 </Button>
             )}

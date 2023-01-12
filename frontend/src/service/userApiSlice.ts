@@ -16,6 +16,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
             providesTags: (result, error, arg) => [{ type: 'Profile', id: arg.userId }],
         }),
 
+        editUser: builder.mutation<IProfile, FormData>({
+            query: (formData) => ({
+                url: apiEndpoints.editProfile,
+                method: 'PUT',
+                body: formData,
+            }),
+        }),
+
         // editPost: builder.mutation<IPost, IDataToEditPost>({
         //     query: ({ formData, id }) => ({
         //         url: `${apiEndpoints.post}${id}`,
@@ -34,4 +42,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetUserQuery } = userApiSlice;
+export const { useGetUserQuery, useEditUserMutation, useLazyGetUserQuery } = userApiSlice;

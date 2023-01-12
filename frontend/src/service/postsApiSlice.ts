@@ -8,8 +8,8 @@ import { IPosts } from '../types/redux/posts/IPosts';
 export const postsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getPosts: builder.query<IPosts, IDataToGetPosts>({
-            query: ({ page }) => ({
-                url: apiEndpoints.posts,
+            query: ({ page, tag }) => ({
+                url: tag !== undefined && tag !== '' ? `${apiEndpoints.posts}${tag}` : apiEndpoints.posts,
                 params: {
                     page,
                 },

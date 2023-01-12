@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import Routing from './components/Routing/Routing';
+import Router from './components/Routing/Router';
 
 const App: FC = () => {
     return (
         <>
-            <Routing />
+            <Router />
         </>
     );
 };

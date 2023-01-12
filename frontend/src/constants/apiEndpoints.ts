@@ -7,4 +7,5 @@ export const apiEndpoints = {
     comment: 'comment/',
     logout: 'logout/',
     user: 'user/',
+    editProfile: 'edit-profile/',
 };

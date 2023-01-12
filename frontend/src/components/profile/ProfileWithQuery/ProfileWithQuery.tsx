@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 
+import { useAppSelector } from '../../../hooks/reduxHooks';
 import { useGetUserQuery } from '../../../service/userApiSlice';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
@@ -12,10 +13,13 @@ interface IProfileWithQueryProps {
 const ProfileWithQuery: FC<IProfileWithQueryProps> = ({ id }) => {
     const [page, setPage] = useState<number>(1);
     const { data, isSuccess, isLoading, isError, error } = useGetUserQuery({ userId: id, postsPage: page });
+    const myId = useAppSelector((state) => state?.auth?.user?.user_id);
 
     const handlePageChange = ({ selected }: { selected: number }): void => {
         setPage(selected + 1);
     };
+
+    const isMyProfile = myId !== undefined && myId.toString() === id;
 
     return (
         <div>
@@ -28,7 +32,7 @@ const ProfileWithQuery: FC<IProfileWithQueryProps> = ({ id }) => {
             >
                 {data != null && (
                     <>
-                        <Profile profile={data} />
+                        <Profile profile={data} withEdit={isMyProfile} />
                         <Pagination countPages={Math.ceil(data.count / 10)} handlePageChange={handlePageChange} />
                     </>
                 )}

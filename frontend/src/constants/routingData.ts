@@ -9,6 +9,7 @@ import {
     RestorePasswordPage,
     WelcomePage,
 } from '../pages';
+import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
 import UserPage from '../pages/UserPage/UserPage';
 import { IRouteData } from '../types/IRouteData';
 import { Paths } from '../types/Paths';
@@ -41,6 +42,10 @@ export const routingData: IRouteData[] = [
     {
         path: Paths.MAIN,
         Element: MainPage,
+    },
+    {
+        path: `${Paths.TAG}/:tag`,
+        Element: PostsByTagPage,
     },
     {
         path: `${Paths.POST}/:id`,

@@ -8,11 +8,11 @@ import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 interface ButtonProps {
     color: ButtonColors;
     size: ButtonSizes;
-    width?: string;
     children: ReactNode;
+    [x: string]: any;
 }
 
-const Button: FC<ButtonProps> = ({ size, color, width, children }) => {
+const Button: FC<ButtonProps> = ({ size, color, children, ...props }) => {
     let sizeClass: string;
     switch (size) {
         case ButtonSizes.sm:
@@ -37,7 +37,7 @@ const Button: FC<ButtonProps> = ({ size, color, width, children }) => {
     }
 
     return (
-        <button className={classNames(s.button, sizeClass, colorClass)} style={{ width }}>
+        <button className={classNames(s.button, sizeClass, colorClass)} {...props}>
             {children}
         </button>
     );

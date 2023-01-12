@@ -9,6 +9,7 @@ import {
     RestorePasswordPage,
     WelcomePage,
 } from '../pages';
+import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
 import UserPage from '../pages/UserPage/UserPage';
 import { IRouteData } from '../types/IRouteData';
@@ -50,6 +51,11 @@ export const routingData: IRouteData[] = [
     {
         path: `${Paths.POST}/:id`,
         Element: PostPage,
+    },
+    {
+        path: `${Paths.EDIT_PROFILE}`,
+        Element: EditProfilePage,
+        withAuth: true,
     },
     {
         path: Paths.CREATE_POST,

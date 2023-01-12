@@ -1,5 +1,7 @@
 import { Link } from '../Link';
 
+type Tag = string;
+
 export interface IPost {
     id: number;
     title: string;
@@ -12,4 +14,5 @@ export interface IPost {
     isLiked: boolean;
     username: string;
     photo: Link;
+    tags: Tag[];
 }

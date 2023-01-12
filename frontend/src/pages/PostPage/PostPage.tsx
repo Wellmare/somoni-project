@@ -10,11 +10,10 @@ const PostPage: FC = () => {
     const params = useParams();
     const postId = params.id;
     if (postId === undefined) {
-        return <>Post not found</>;
+        return <>Нет id поста</>;
     }
 
     const { isLoading, data: post, error, isError, isSuccess } = useGetPostQuery({ id: postId });
-    // const { data: comments, isLoading: commentsIsLoading } = useGetCommentsQuery({ postId: params.id });
 
     return (
         <>

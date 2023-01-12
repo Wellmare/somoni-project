@@ -10,6 +10,7 @@ export const enum Paths {
     RESTORE_PASSWORD = 'restore-password',
     CREATE_POST = 'create-post',
     TAG = `main`,
+    EDIT_PROFILE = 'edit-profile',
 }
 
 export const enum PathsToNavigate {
@@ -24,4 +25,5 @@ export const enum PathsToNavigate {
     RESTORE_PASSWORD = '/restore-password',
     CREATE_POST = '/create-post',
     TAG = '/main',
+    EDIT_PROFILE = '/edit-profile',
 }

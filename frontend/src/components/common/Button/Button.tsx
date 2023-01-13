@@ -5,14 +5,14 @@ import s from './Button.module.scss';
 
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 
-interface ButtonProps {
+interface IButtonProps {
     color: ButtonColors;
     size: ButtonSizes;
     children: ReactNode;
     [x: string]: any;
 }
 
-const Button: FC<ButtonProps> = ({ size, color, children, ...props }) => {
+const Button: FC<IButtonProps> = ({ size, color, children, ...props }) => {
     let sizeClass: string;
     switch (size) {
         case ButtonSizes.sm:

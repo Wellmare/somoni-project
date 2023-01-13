@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useGetPostsQuery } from '../../../service/postsApiSlice';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import PostsSkeletons from '../../skeletons/PostsSkeletons';
 import Post from '../Post/Post';
 
 interface IPostsByPageProps {
@@ -29,6 +30,7 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage, tag }) => {
                 isSuccess={isSuccess}
                 isError={isError}
                 messages={[{ statusCode: 404, message: 'Посты не найдены' }]}
+                loader={<PostsSkeletons />}
             >
                 <Pagination countPages={countPages} handlePageChange={handlePageChange} />
                 {posts?.results?.map((post) => (

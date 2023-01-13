@@ -11,6 +11,7 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
 import { PathsToNavigate } from '../../../types/Paths';
+import { Link as LinkType } from '../../../types/redux/Link';
 import { Theme } from '../../../types/Theme';
 
 const menuClassName = ({ state }: { state: string }): string =>
@@ -21,7 +22,11 @@ const menuItemClassName = ({ hover, disabled }: { hover: boolean; disabled: bool
 
 const MenuItem = (props?: MenuItemProps): JSX.Element => <MenuItemInner {...props} className={menuItemClassName} />;
 
-const Menu: FC = () => {
+interface IMenuProps {
+    photo: LinkType;
+}
+
+const Menu: FC<IMenuProps> = ({ photo }) => {
     const themeContext = useContext(ThemeContext);
     const onChangeTheme = (): void => {
         themeContext?.setTheme(themeContext?.theme === Theme.DARK ? Theme.LIGHT : Theme.DARK);
@@ -31,7 +36,9 @@ const Menu: FC = () => {
     return (
         <ReactMenu
             menuButton={
-                <div className={classNames('px-3', 'py-2', 'bg-blue-400', 'cursor-pointer', 'rounded-xl')}>Test</div>
+                <div className={classNames('cursor-pointer', s.profile)}>
+                    {photo !== null ? <img src={photo} alt='profile photo' /> : 'Menu'}
+                </div>
             }
             transition
             menuClassName={menuClassName}

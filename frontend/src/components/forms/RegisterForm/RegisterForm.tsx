@@ -7,7 +7,9 @@ import { useFilePicker } from 'use-file-picker';
 import { useRegister } from '../../../hooks/useRegister';
 import { emailRegExp } from '../../../other/emailRegExp';
 import { IFormDataItem } from '../../../types/IFormDataItem';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
+import Button from '../../common/Button/Button';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormInput from '../FormInput/FormInput';
 import PhotoInput from '../PhotoInput/PhotoInput';
@@ -191,7 +193,9 @@ const RegisterForm: FC = () => {
                     <Success>Успешная регистрация!</Success>
                 </ServerResponse>
 
-                <button type={'submit'}> send</button>
+                <Button color={ButtonColors.green} size={ButtonSizes.sm}>
+                    Зарегистрироваться
+                </Button>
             </form>
         </>
     );

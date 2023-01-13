@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { EditorState } from 'draft-js';
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -20,14 +19,13 @@ import Success from '../Success/Success';
 
 export interface FormCreatePostInputs {
     title: string;
-    content: EditorState;
+    content: string;
     tags: string;
 }
 
 const FormCreatePost: FC = () => {
     const { handleSubmit, control, setValue, watch } = useForm<FormCreatePostInputs>({
         mode: 'onBlur',
-        defaultValues: { content: EditorState.createEmpty() },
     });
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',

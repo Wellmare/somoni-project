@@ -31,29 +31,54 @@ class userResultsSetPagination(PageNumberPagination):
         pk = self.request.parser_context['kwargs']['pk']
         user = get_object_or_404(User, id=pk)
         isMyProfile = self.request.user.id == pk
-        if isMyProfile:
-            return Response(OrderedDict([
-                ('count', self.page.paginator.count),
-                ('next', self.get_next_link()),
-                ('previous', self.get_previous_link()),
-                ('username', user.username),
-                ('photo', self.request.build_absolute_uri(user.photo.url)),
-                ('bio', user.bio),
-                ('email', user.email),
-                ('isMyProfile', isMyProfile),
-                ('results', data)
-            ]))
-        else:
-            return Response(OrderedDict([
-                ('count', self.page.paginator.count),
-                ('next', self.get_next_link()),
-                ('previous', self.get_previous_link()),
-                ('username', user.username),
-                ('photo', self.request.build_absolute_uri(user.photo.url)),
-                ('bio', user.bio),
-                ('isMyProfile', isMyProfile),
-                ('results', data)
-            ]))
+        try:
+            if isMyProfile:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri(user.photo.url)),
+                    ('bio', user.bio),
+                    ('email', user.email),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+            else:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri(user.photo.url)),
+                    ('bio', user.bio),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+        except ValueError:
+            if isMyProfile:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri('/media/default.png')),
+                    ('bio', user.bio),
+                    ('email', user.email),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+            else:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri('/media/default.png')),
+                    ('bio', user.bio),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
 
 
 class get_create_post(generics.ListCreateAPIView):
@@ -68,9 +93,10 @@ class get_create_post(generics.ListCreateAPIView):
             object_list = Post.objects.filter(tags__in=[tag])
             if self.request.user.is_authenticated:
                 return object_list.annotate(
-                        isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
-                        '-date')
-            else:  return object_list
+                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                    '-date')
+            else:
+                return object_list
 
         except KeyError:
             if self.request.user.is_authenticated:
@@ -291,7 +317,6 @@ class get_post_for_user(generics.ListCreateAPIView):
         return Response({'detail': 'method POST not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-
 def post_list(request, tag_slug=None):
     object_list = Post.published.all()
     tag = None
@@ -299,4 +324,3 @@ def post_list(request, tag_slug=None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-

@@ -14,6 +14,7 @@ interface IServerResponseProps {
     isError: boolean;
     isLoading: boolean;
     isSuccess: boolean;
+    loader?: ReactNode;
 }
 
 const ServerResponse: FC<IServerResponseProps> = ({
@@ -23,8 +24,11 @@ const ServerResponse: FC<IServerResponseProps> = ({
     messages,
     isSuccess,
     isLoading,
+    loader,
 }) => {
     const messagesErrors = messages !== undefined ? messages : [];
+
+    const loaderOnLoading = loader !== undefined ? loader : <Loader />;
 
     return (
         <>
@@ -33,7 +37,7 @@ const ServerResponse: FC<IServerResponseProps> = ({
                 messages={[...baseErrorsMessages, ...messagesErrors]}
                 isError={isError}
             />
-            {isLoading && <Loader />}
+            {isLoading && loaderOnLoading}
             {isSuccess && <>{children}</>}
         </>
     );

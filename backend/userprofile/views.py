@@ -1,3 +1,5 @@
+from rest_framework.decorators import api_view
+
 from myapi.models import User
 from django.shortcuts import get_object_or_404
 
@@ -105,3 +107,28 @@ class edit_profile(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.delete()
+
+
+@api_view(['GET'])
+def getprofile(request, pk):
+    if request.user.id == pk:
+
+        user = get_object_or_404(User, id=pk)
+
+        return Response({
+            "username": user.username,
+            "photo": request.build_absolute_uri(user.photo.url),
+            "bio": user.bio,
+            "id": user.id,
+            "email": user.email,
+            "isMyProfile": True
+        })
+    else:
+        user = get_object_or_404(User, id=pk)
+        return Response({
+            "username": user.username,
+            "photo": request.build_absolute_uri(user.photo.url),
+            "bio": user.bio,
+            "id": user.id,
+            "isMyProfile": False
+        })

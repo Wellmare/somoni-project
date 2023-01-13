@@ -31,16 +31,29 @@ class userResultsSetPagination(PageNumberPagination):
         pk = self.request.parser_context['kwargs']['pk']
         user = get_object_or_404(User, id=pk)
         isMyProfile = self.request.user.id == pk
-        return Response(OrderedDict([
-            ('count', self.page.paginator.count),
-            ('next', self.get_next_link()),
-            ('previous', self.get_previous_link()),
-            ('username', user.username),
-            ('photo', self.request.build_absolute_uri(user.photo.url)),
-            ('bio', user.bio),
-            ('isMyProfile', isMyProfile),
-            ('results', data)
-        ]))
+        if isMyProfile:
+            return Response(OrderedDict([
+                ('count', self.page.paginator.count),
+                ('next', self.get_next_link()),
+                ('previous', self.get_previous_link()),
+                ('username', user.username),
+                ('photo', self.request.build_absolute_uri(user.photo.url)),
+                ('bio', user.bio),
+                ('email', user.email),
+                ('isMyProfile', isMyProfile),
+                ('results', data)
+            ]))
+        else:
+            return Response(OrderedDict([
+                ('count', self.page.paginator.count),
+                ('next', self.get_next_link()),
+                ('previous', self.get_previous_link()),
+                ('username', user.username),
+                ('photo', self.request.build_absolute_uri(user.photo.url)),
+                ('bio', user.bio),
+                ('isMyProfile', isMyProfile),
+                ('results', data)
+            ]))
 
 
 class get_create_post(generics.ListCreateAPIView):

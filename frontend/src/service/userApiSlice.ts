@@ -1,8 +1,10 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToGetProfile } from '../types/redux/profile/IDataTo';
+import { IDataToGetProfile, IDataToGetProfileInfo } from '../types/redux/profile/IDataTo';
+import { IDataToEditProfile } from '../types/redux/profile/IDataToEditProfile';
 import { IProfile } from '../types/redux/profile/IProfile';
+import { IProfileInfo } from '../types/redux/profile/IProfileInfo';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -23,6 +25,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: formData,
             }),
         }),
+        getDataToEditUser: builder.query<IDataToEditProfile, undefined>({
+            query: () => ({
+                url: apiEndpoints.editProfile,
+            }),
+        }),
+        getUserInfo: builder.query<IProfileInfo, IDataToGetProfileInfo>({
+            query: ({ userId }) => ({
+                url: `${apiEndpoints.userInfo}${userId}`,
+            }),
+            providesTags: (result, error, arg) => [{ type: 'Profile', id: arg.userId }],
+        }),
 
         // editPost: builder.mutation<IPost, IDataToEditPost>({
         //     query: ({ formData, id }) => ({
@@ -42,4 +55,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetUserQuery, useEditUserMutation, useLazyGetUserQuery } = userApiSlice;
+export const {
+    useGetUserQuery,
+    useEditUserMutation,
+    useLazyGetUserQuery,
+    useGetUserInfoQuery,
+    useLazyGetUserInfoQuery,
+    useGetDataToEditUserQuery,
+} = userApiSlice;

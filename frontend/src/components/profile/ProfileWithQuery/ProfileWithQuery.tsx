@@ -4,6 +4,7 @@ import { useAppSelector } from '../../../hooks/reduxHooks';
 import { useGetUserQuery } from '../../../service/userApiSlice';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import ProfileSkeleton from '../../skeletons/ProfileSkeleton';
 import Profile from '../Profile/Profile';
 
 interface IProfileWithQueryProps {
@@ -29,6 +30,7 @@ const ProfileWithQuery: FC<IProfileWithQueryProps> = ({ id }) => {
                 isLoading={isLoading}
                 isSuccess={isSuccess}
                 messages={[{ statusCode: 404, message: 'Профиль не найден' }]}
+                loader={<ProfileSkeleton />}
             >
                 {data != null && (
                     <>

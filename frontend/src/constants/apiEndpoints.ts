@@ -8,4 +8,5 @@ export const apiEndpoints = {
     logout: 'logout/',
     user: 'user/',
     editProfile: 'edit-profile/',
+    userInfo: 'user-info/',
 };

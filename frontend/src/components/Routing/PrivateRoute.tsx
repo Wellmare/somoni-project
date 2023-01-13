@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/reduxHooks';
+import { selectIsAuth } from '../../redux/slices/authSlice';
 import { Paths } from '../../types/Paths';
 
 interface IPrivateRouteProps {
@@ -11,7 +12,7 @@ interface IPrivateRouteProps {
 }
 
 const PrivateRoute: FC<IPrivateRouteProps> = ({ children, renderTerm, pathWhenIncorrect }) => {
-    const isAuth = useAppSelector((state) => state.auth.isAuth);
+    const isAuth = useAppSelector(selectIsAuth);
 
     const isCorrect = renderTerm(isAuth);
 

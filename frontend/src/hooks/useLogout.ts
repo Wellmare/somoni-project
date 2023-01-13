@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from './reduxHooks';
 
-import { logout as logoutState } from '../redux/slices/authSlice';
+import { logout as logoutState, selectTokens } from '../redux/slices/authSlice';
 import { useLogoutMutation } from '../service/authApiSlice';
 import { doAsyncFunc } from '../utils/doAsyncFunc';
 
@@ -11,7 +11,7 @@ interface IUseLogoutResponse {
 }
 
 export const useLogout = (): IUseLogoutResponse => {
-    const refreshTokenFromState = useAppSelector((state) => state.auth.authTokens?.refresh);
+    const refreshTokenFromState = useAppSelector(selectTokens)?.refresh;
     const dispatch = useAppDispatch();
     const [logout, { error, data, isError, isSuccess }] = useLogoutMutation();
 

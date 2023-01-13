@@ -6,10 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
 import { PathsToNavigate } from '../../../types/Paths';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import { ButtonColors } from '../../../types/UI/Button.types';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import Button from '../../common/Button/Button';
+import ButtonLink from '../../common/ButtonLink/ButtonLink';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import HeaderProfileSkeleton from '../../skeletons/HeaderProfileSkeleton';
 import HeaderProfile from '../HeaderProfile/HeaderProfile';
 
 const Header: FC = () => {
@@ -29,16 +30,22 @@ const Header: FC = () => {
         <header className={classNames('p-5', 'flex', 'justify-between', 'bg-green-700', 'mb-3')}>
             <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
             {!isAuth && (
-                <Button
+                <ButtonLink
                     color={ButtonColors.green}
-                    size={ButtonSizes.md}
+                    linkTo={PathsToNavigate.LOGIN}
                     onClick={() => navigate(PathsToNavigate.LOGIN)}
                 >
-                    Login
-                </Button>
+                    Вход
+                </ButtonLink>
             )}
             {isAuth && (
-                <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                <ServerResponse
+                    responseError={error}
+                    isError={isError}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    loader={<HeaderProfileSkeleton />}
+                >
                     {data != null && <HeaderProfile username={data.username} photo={data.photo} />}
                 </ServerResponse>
             )}

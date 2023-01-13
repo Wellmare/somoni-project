@@ -6,6 +6,7 @@ import { PathsToNavigate } from '../../../types/Paths';
 import { IProfile } from '../../../types/redux/profile/IProfile';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';
+import Info from '../../common/Info/Info';
 import Post from '../../Posts/Post/Post';
 
 interface IProfileProps {
@@ -32,9 +33,11 @@ const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
                     Edit profile
                 </Button>
             )}
-            {posts?.map((post) => (
-                <Post post={post} key={post.id} />
-            ))}
+            {posts !== null && posts.length > 0 ? (
+                posts.map((post) => <Post post={post} key={post.id} />) != null
+            ) : (
+                <Info>Постов пока нет</Info>
+            )}
         </div>
     );
 };

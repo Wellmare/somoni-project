@@ -30,6 +30,7 @@ class userResultsSetPagination(PageNumberPagination):
     def get_paginated_response(self, data):
         pk = self.request.parser_context['kwargs']['pk']
         user = get_object_or_404(User, id=pk)
+        isMyProfile = self.request.user.id == pk
         return Response(OrderedDict([
             ('count', self.page.paginator.count),
             ('next', self.get_next_link()),
@@ -37,6 +38,7 @@ class userResultsSetPagination(PageNumberPagination):
             ('username', user.username),
             ('photo', self.request.build_absolute_uri(user.photo.url)),
             ('bio', user.bio),
+            ('isMyProfile', isMyProfile),
             ('results', data)
         ]))
 

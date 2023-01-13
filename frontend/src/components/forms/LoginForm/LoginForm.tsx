@@ -3,6 +3,10 @@ import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useLogin } from '../../../hooks/useLogin';
+import { PathsToNavigate } from '../../../types/Paths';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import Button from '../../common/Button/Button';
+import ButtonLink from '../../common/ButtonLink/ButtonLink';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormInput from '../FormInput/FormInput';
 import Success from '../Success/Success';
@@ -85,9 +89,19 @@ const LoginForm: FC = () => {
             </ServerResponse>
 
             {/* {error} */}
-            <button className={classNames('bg-cyan-700', 'py-1', 'px-4', 'rounded-md')} type='submit'>
-                Submit
-            </button>
+            <div className={classNames('flex', 'items-center', 'justify-between')}>
+                <Button
+                    color={ButtonColors.green}
+                    size={ButtonSizes.sm}
+                    // className={classNames('bg-cyan-700', 'py-1', 'px-4', 'rounded-md')}
+                    type='submit'
+                >
+                    Войти
+                </Button>
+                <ButtonLink color={ButtonColors.blue} linkTo={PathsToNavigate.REGISTER}>
+                    Еще не зарегистрирован?
+                </ButtonLink>
+            </div>
         </form>
     );
 };

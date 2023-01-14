@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
+import { PathsToNavigate } from '../../../constants/Paths';
 import { useCreatePostMutation } from '../../../service/postsApiSlice';
 import { IFormDataItem } from '../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
@@ -34,6 +36,7 @@ const FormCreatePost: FC = () => {
     });
 
     const [createPost, { isError, isLoading, isSuccess, error }] = useCreatePostMutation();
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FormCreatePostInputs> = (data): void => {
         const formDataItems: IFormDataItem[] = [
@@ -52,7 +55,7 @@ const FormCreatePost: FC = () => {
                 value: plainFiles[0],
             });
         }
-        if (data.tags.trim() !== '') {
+        if (data.tags !== undefined && data.tags.trim() !== '') {
             formDataItems.push({
                 name: 'tags',
                 value: data.tags.trim(),
@@ -62,7 +65,12 @@ const FormCreatePost: FC = () => {
         const formData = composeFormData(formDataItems);
 
         doAsyncFunc(async () => {
-            await createPost(formData);
+            try {
+                const response = await createPost(formData).unwrap();
+                navigate(`${PathsToNavigate.POST}/${response.id}`);
+            } catch (e) {
+                console.log(e);
+            }
         });
     };
 

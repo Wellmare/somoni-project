@@ -23,7 +23,11 @@ const Header: FC = () => {
     useEffect(() => {
         if (isAuth && userId != null) {
             doAsyncFunc(async () => {
-                await getUserInfo({ userId });
+                try {
+                    await getUserInfo({ userId });
+                } catch (e) {
+                    console.log(e);
+                }
             });
         }
     }, [isAuth]);
@@ -56,6 +60,15 @@ const Header: FC = () => {
                             statusCode: 401,
                             message: 'Профиль не найден',
                             customFunc: (errorResponse) => {
+                                logoutUser();
+                                return null;
+                            },
+                        },
+                        {
+                            statusCode: 500,
+                            message: 'Ошибка сервера!',
+                            customFunc: (errorResponse) => {
+                                console.log('500');
                                 logoutUser();
                                 return null;
                             },

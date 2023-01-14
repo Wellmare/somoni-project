@@ -65,6 +65,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('photo', self.request.build_absolute_uri('/media/default.png')),
                     ('bio', user.bio),
                     ('email', user.email),
+                    ('id', user.id),
                     ('isMyProfile', isMyProfile),
                     ('results', data)
                 ]))
@@ -76,6 +77,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('username', user.username),
                     ('photo', self.request.build_absolute_uri('/media/default.png')),
                     ('bio', user.bio),
+                    ('id', user.id),
                     ('isMyProfile', isMyProfile),
                     ('results', data)
                 ]))
@@ -96,7 +98,7 @@ class get_create_post(generics.ListCreateAPIView):
                     isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
                     '-date')
             else:
-                return object_list
+                return object_list.order_by('-date')
 
         except KeyError:
             if self.request.user.is_authenticated:

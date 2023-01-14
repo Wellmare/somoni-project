@@ -36,7 +36,7 @@ const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
                 </Button>
             )}
             {posts !== null && posts.length > 0 ? (
-                posts.map((post) => <Post post={post} key={post.id} />) != null
+                posts.map((post) => <Post post={post} key={post.id} />)
             ) : (
                 <Info>Постов пока нет</Info>
             )}

@@ -8,9 +8,11 @@ import { useRegister } from '../../../hooks/useRegister';
 import { emailRegExp } from '../../../other/emailRegExp';
 import { IFormDataItem } from '../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
 import { composeFormData } from '../../../utils/composeFormData';
 import Button from '../../common/Button/Button';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import Error from '../Error/Error';
 import FormInput from '../FormInput/FormInput';
 import PhotoInput from '../PhotoInput/PhotoInput';
 
@@ -187,6 +189,17 @@ const RegisterForm: FC = () => {
                         {
                             statusCode: 400,
                             message: 'Не хватает полей',
+                            customFunc: (errorResponse) => {
+                                // console.log(errorResponse);
+                                interface IErrors {
+                                    [x: string]: string[];
+                                }
+                                const errors = Object.entries(errorResponse.data as IErrors);
+                                const content = errors.map(([key, value]) => (
+                                    <Error key={key}>{capitalizeFirstLetter(value[0])}</Error>
+                                ));
+                                return <>{content}</>;
+                            },
                         },
                     ]}
                 >

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import { PathsToNavigate } from '../../../constants/Paths';
 import { useLogin } from '../../../hooks/useLogin';
-import { PathsToNavigate } from '../../../types/Paths';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';
 import ButtonLink from '../../common/ButtonLink/ButtonLink';

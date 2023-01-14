@@ -1,10 +1,11 @@
+import { Paths } from './Paths';
+
 import {
     ChangePasswordPage,
     CreatePostPage,
     LoginPage,
     MainPage,
     PostPage,
-    ProfilePage,
     RegisterPage,
     RestorePasswordPage,
     WelcomePage,
@@ -13,7 +14,6 @@ import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
 import UserPage from '../pages/UserPage/UserPage';
 import { IRouteData } from '../types/IRouteData';
-import { Paths } from '../types/Paths';
 
 export const routingData: IRouteData[] = [
     {
@@ -31,11 +31,11 @@ export const routingData: IRouteData[] = [
         Element: RegisterPage,
         withAuth: false,
     },
-    {
-        path: Paths.PROFILE,
-        Element: ProfilePage,
-        withAuth: true,
-    },
+    // {
+    //     path: Paths.PROFILE,
+    //     Element: ProfilePage,
+    //     withAuth: true,
+    // },
     {
         path: `${Paths.USER}/:id`,
         Element: UserPage,

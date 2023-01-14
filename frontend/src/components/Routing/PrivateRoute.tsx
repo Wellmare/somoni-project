@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { Paths } from '../../constants/Paths';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { selectIsAuth } from '../../redux/slices/authSlice';
-import { Paths } from '../../types/Paths';
 
 interface IPrivateRouteProps {
     children: ReactNode;

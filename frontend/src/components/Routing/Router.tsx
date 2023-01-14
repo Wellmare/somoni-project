@@ -5,9 +5,9 @@ import Layout from './Layout';
 
 import PrivateRoute from './PrivateRoute';
 
+import { Paths } from '../../constants/Paths';
 import { routingData } from '../../constants/routingData';
 import { PageNotFound } from '../../pages';
-import { Paths } from '../../types/Paths';
 
 const Router: FC = () => {
     const routes = routingData.map(({ path, Element, withAuth }, i) => {

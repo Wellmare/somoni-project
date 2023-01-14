@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import s from './Post.module.scss';
 
-import { PathsToNavigate } from '../../../types/Paths';
+import { PathsToNavigate } from '../../../constants/Paths';
 import { IPost } from '../../../types/redux/posts/IPost';
 import Content from '../Content/Content';
 import Tag from '../Tag/Tag';

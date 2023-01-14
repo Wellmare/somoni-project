@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from './reduxHooks';
 
+import { PathsToNavigate } from '../constants/Paths';
 import { setAuthTokens } from '../redux/slices/authSlice';
 import { useLoginMutation } from '../service/authApiSlice';
-import { PathsToNavigate } from '../types/Paths';
 import { IDataToLogin } from '../types/redux/auth/IDataTo';
 import { doAsyncFunc } from '../utils/doAsyncFunc';
 import { isFetchBaseQueryError } from '../utils/isFetchBaseQueryError';

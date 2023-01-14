@@ -8,9 +8,9 @@ import s from './Menu.module.scss';
 
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
+import { PathsToNavigate } from '../../../constants/Paths';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
-import { PathsToNavigate } from '../../../types/Paths';
 import { Link as LinkType } from '../../../types/redux/Link';
 import { Theme } from '../../../types/Theme';
 
@@ -24,14 +24,17 @@ const MenuItem = (props?: MenuItemProps): JSX.Element => <MenuItemInner {...prop
 
 interface IMenuProps {
     photo: LinkType;
+    id: string;
 }
 
-const Menu: FC<IMenuProps> = ({ photo }) => {
+const Menu: FC<IMenuProps> = ({ photo, id }) => {
     const themeContext = useContext(ThemeContext);
     const onChangeTheme = (): void => {
         themeContext?.setTheme(themeContext?.theme === Theme.DARK ? Theme.LIGHT : Theme.DARK);
     };
     const { logoutUser } = useLogout();
+
+    const pathToProfile = `${PathsToNavigate.USER}/${id}`;
 
     return (
         <ReactMenu
@@ -45,7 +48,7 @@ const Menu: FC<IMenuProps> = ({ photo }) => {
         >
             {/* Для пк */}
             <div className={classNames('hidden', 'sm:block')}>
-                <Link to={PathsToNavigate.PROFILE}>
+                <Link to={pathToProfile}>
                     <MenuItem>Профиль</MenuItem>
                 </Link>
                 <div className={s.menuDivider} />
@@ -56,7 +59,7 @@ const Menu: FC<IMenuProps> = ({ photo }) => {
 
             {/* Для мобилы */}
             <div className={classNames('block', 'sm:hidden')}>
-                <Link to={PathsToNavigate.PROFILE}>
+                <Link to={pathToProfile}>
                     <MenuItem>Профиль</MenuItem>
                 </Link>
 

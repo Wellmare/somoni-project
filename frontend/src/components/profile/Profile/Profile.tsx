@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { PathsToNavigate } from '../../../types/Paths';
+import { PathsToNavigate } from '../../../constants/Paths';
 import { IProfile } from '../../../types/redux/profile/IProfile';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';

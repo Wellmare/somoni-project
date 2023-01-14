@@ -1,0 +1,15 @@
+@import "src/styles/Profile";
+
+.avatar {
+  @include avatar($size: min(4rem, 100px))
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content {
+  margin-left: 1rem;
+  width: 100%;
+}

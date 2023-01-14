@@ -1,4 +1,7 @@
-import React, { FC } from 'react';
+import classNames from 'classnames';
+import React, { FC, useState } from 'react';
+
+import s from './Comment.module.scss';
 
 import { useDeleteCommentMutation } from '../../../service/commentsApiSlice';
 import { IComment } from '../../../types/redux/comments/IComment';
@@ -21,10 +24,12 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
     };
 
     return (
-        <>
-            {avatar != null && <img src={avatar} alt='avatar' />}
-            <p>{username}</p>
-            <p>{content}</p>
+        <div className={s.comment}>
+            <div>
+                <div className={classNames(s.avatar)}>{avatar != null && <img src={avatar} alt='avatar' />}</div>
+                <p>{username}</p>
+            </div>
+            <div className={s.content}>{content}</div>
             {isMyComment && (
                 <div className={'text-red-600'} onClick={onDelete}>
                     Delete

@@ -54,6 +54,10 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
                 value: data.email,
             },
             {
+                name: 'bio',
+                value: data.bio,
+            },
+            {
                 name: 'photo',
                 value: plainFiles.length > 0 ? plainFiles[0] : '',
             },

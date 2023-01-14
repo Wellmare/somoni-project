@@ -13,6 +13,7 @@ import { composeFormData } from '../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../common/Button/Button';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import { ErrorsFromData } from '../ErrorsFromData/ErrorsFromData';
 import FormInput from '../FormInput/FormInput';
 import PhotoInput from '../PhotoInput/PhotoInput';
 import s from '../PhotoInput/PhotoInput.module.scss';
@@ -148,6 +149,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
                         {
                             statusCode: 400,
                             message: 'Не хватает полей',
+                            customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
                         },
                     ]}
                 >

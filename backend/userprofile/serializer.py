@@ -12,7 +12,8 @@ class profile_serializer(serializers.ModelSerializer):
         try:
             instance.username = validated_data.get("username", instance.username)
             instance.bio = validated_data.get("bio", instance.bio)
-            instance.photo = validated_data.get("photo", instance.photo)
+            if validated_data['photo']:
+                instance.photo = validated_data.get("photo", instance.photo)
             instance.email = validated_data.get("email", instance.email)
             instance.save()
         except KeyError:

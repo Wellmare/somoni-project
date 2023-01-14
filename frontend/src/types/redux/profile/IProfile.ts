@@ -11,6 +11,7 @@ export interface IProfile {
     bio: string | null;
     email?: string;
     isMyProfile: boolean;
+    id: string;
 
     results: IPost[] | null;
 }

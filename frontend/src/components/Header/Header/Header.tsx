@@ -53,7 +53,7 @@ const Header: FC = () => {
                     loader={<HeaderProfileSkeleton />}
                     messages={[
                         {
-                            statusCode: 404,
+                            statusCode: 401,
                             message: 'Профиль не найден',
                             customFunc: (errorResponse) => {
                                 logoutUser();

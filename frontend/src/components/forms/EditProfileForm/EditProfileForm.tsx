@@ -129,12 +129,6 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
                     )}
                     control={control}
                     name={'bio'}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Поле обязательно',
-                        },
-                    }}
                 />
 
                 <ServerResponse

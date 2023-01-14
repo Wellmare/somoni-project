@@ -29,8 +29,12 @@ const Header: FC = () => {
     }, [isAuth]);
 
     return (
-        <header className={classNames('p-5', 'flex', 'justify-between', 'bg-green-700', 'mb-3')}>
+        <header className={classNames('p-5', 'flex', 'justify-between', 'bg-green-700', 'mb-3', 'items-center')}>
             <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
+            <div className={classNames('flex', 'justify-center', 'items-center')}>
+                <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
+            </div>
+
             {!isAuth && (
                 <ButtonLink
                     color={ButtonColors.green}
@@ -47,7 +51,16 @@ const Header: FC = () => {
                     isLoading={isLoading}
                     isSuccess={isSuccess}
                     loader={<HeaderProfileSkeleton />}
-                    messages={[{ statusCode: 404, message: 'Профиль не найден', customFunc: () => logoutUser() }]}
+                    messages={[
+                        {
+                            statusCode: 404,
+                            message: 'Профиль не найден',
+                            customFunc: (errorResponse) => {
+                                logoutUser();
+                                return null;
+                            },
+                        },
+                    ]}
                 >
                     {data != null && <HeaderProfile username={data.username} photo={data.photo} id={data.id} />}
                 </ServerResponse>

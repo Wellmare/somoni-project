@@ -58,7 +58,8 @@ class CreatePostSerializer(serializers.ModelSerializer):
         try:
             instance.title = validated_data.get("title", instance.title)
             instance.content = validated_data.get("content", instance.content)
-            instance.image = validated_data.get("image", instance.image)
+            if validated_data['image']:
+                instance.image = validated_data.get("image", instance.image)
             instance.save()
         except KeyError:
             raise serializers.ValidationError(

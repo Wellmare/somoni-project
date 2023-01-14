@@ -8,4 +8,5 @@ export interface IComment {
     post: number;
     photo: Link;
     username: string;
+    isMyComment: boolean;
 }

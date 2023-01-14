@@ -15,4 +15,5 @@ export interface IPost {
     username: string;
     photo: Link;
     tags: Tag[];
+    isMyPost: boolean;
 }

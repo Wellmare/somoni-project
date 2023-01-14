@@ -1,0 +1,5 @@
+@import "src/styles/Profile";
+
+.avatar {
+  @include avatar($size: min(10rem, 300px))
+}

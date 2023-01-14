@@ -39,7 +39,7 @@ const Menu: FC<IMenuProps> = ({ photo, id }) => {
     return (
         <ReactMenu
             menuButton={
-                <div className={classNames('cursor-pointer', s.profile)}>
+                <div className={classNames('cursor-pointer', s.avatar)}>
                     {photo !== null ? <img src={photo} alt='profile photo' /> : 'Menu'}
                 </div>
             }

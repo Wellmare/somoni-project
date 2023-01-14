@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import s from './Profile.module.scss';
+
 import { PathsToNavigate } from '../../../constants/Paths';
 import { IProfile } from '../../../types/redux/profile/IProfile';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
@@ -20,7 +22,7 @@ const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
 
     return (
         <div>
-            {photo !== null && <img src={photo} alt='profile photo' />}
+            <div className={s.avatar}>{photo !== null && <img src={photo} alt='profile photo' />}</div>
             {username}
             {bio}
             {withEdit && (

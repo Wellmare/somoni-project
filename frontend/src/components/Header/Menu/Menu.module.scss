@@ -1,3 +1,5 @@
+@import "src/styles/Profile";
+
 @keyframes menuShow {
   from {
     opacity: 0;
@@ -66,9 +68,6 @@
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-
-.profile {
-  max-width: min(4vw, 100px);
-  min-width: 50px;
-  border-radius: 50%;
+.avatar {
+  @include avatar($size: min(2rem, 100px))
 }

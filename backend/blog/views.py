@@ -228,7 +228,7 @@ class get_create_comments(generics.ListCreateAPIView):
         comments = Comments.objects.filter(post=post).order_by('-date')
         if self.request.user.is_authenticated:
             return comments \
-                .annotate(isMyComment=Exists(Post.objects.filter(
+                .annotate(isMyComment=Exists(Comments.objects.filter(
                     author=self.request.user, id=OuterRef('pk')))) \
                 .order_by('-date')
         return comments
@@ -253,12 +253,17 @@ class get_create_comments(generics.ListCreateAPIView):
 
 
 class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comments.objects.all().order_by('-date')
+    queryset = Comments.objects.none()
     serializer_class = CommentSerializer
 
-    # def get_queryset(self):
-    #     post = get_object_or_404(Post, id=self.kwargs['pk'])
-    #     return Comments.objects.filter(post=post).order_by('-date')
+    def get_queryset(self):
+        comments = Comments.objects.all().order_by('-date')
+        if self.request.user.is_authenticated:
+            return comments \
+                .annotate(isMyComment=Exists(Comments.objects.filter(
+                author=self.request.user, id=OuterRef('pk')))) \
+                .order_by('-date')
+        return comments
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)

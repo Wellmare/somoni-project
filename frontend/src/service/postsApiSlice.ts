@@ -9,10 +9,10 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getPosts: builder.query<IPosts, IDataToGetPosts>({
             query: ({ page, tag }) => ({
-                url: tag !== undefined && tag !== '' ? `${apiEndpoints.posts}${tag}` : apiEndpoints.posts,
                 params: {
                     page,
                 },
+                url: tag !== undefined && tag !== '' ? `${apiEndpoints.posts}${tag}` : apiEndpoints.posts,
             }),
             providesTags: (result) =>
                 result != null

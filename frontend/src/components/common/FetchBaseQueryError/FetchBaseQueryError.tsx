@@ -22,6 +22,9 @@ const FetchBaseQueryError: FC<IFetchBaseQueryErrorProps> = ({ responseError, mes
         messages.forEach((messageToStatus) => {
             if (messageToStatus.statusCode === responseError.status) {
                 message = messageToStatus.message;
+                if (messageToStatus.customFunc !== undefined) {
+                    messageToStatus.customFunc();
+                }
             }
         });
 

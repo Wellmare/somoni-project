@@ -3,9 +3,10 @@ import React, { FC, useEffect } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
+import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
+import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
-import { PathsToNavigate } from '../../../types/Paths';
 import { ButtonColors } from '../../../types/UI/Button.types';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import ButtonLink from '../../common/ButtonLink/ButtonLink';
@@ -17,6 +18,7 @@ const Header: FC = () => {
     const { isAuth, user, userId } = useAuth();
     const navigate = useNavigate();
     const [getUserInfo, { isError, error, data, isSuccess, isLoading }] = useLazyGetUserInfoQuery();
+    const { logoutUser } = useLogout();
 
     useEffect(() => {
         if (isAuth && userId != null) {
@@ -45,8 +47,9 @@ const Header: FC = () => {
                     isLoading={isLoading}
                     isSuccess={isSuccess}
                     loader={<HeaderProfileSkeleton />}
+                    messages={[{ statusCode: 404, message: 'Профиль не найден', customFunc: () => logoutUser() }]}
                 >
-                    {data != null && <HeaderProfile username={data.username} photo={data.photo} />}
+                    {data != null && <HeaderProfile username={data.username} photo={data.photo} id={data.id} />}
                 </ServerResponse>
             )}
         </header>

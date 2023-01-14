@@ -19,14 +19,21 @@ const FetchBaseQueryError: FC<IFetchBaseQueryErrorProps> = ({ responseError, mes
 
     if (isFetchBaseQueryError(responseError)) {
         let message = '';
+        let resultComponent: null | JSX.Element = null;
+
         messages.forEach((messageToStatus) => {
             if (messageToStatus.statusCode === responseError.status) {
                 message = messageToStatus.message;
-                if (messageToStatus.customFunc !== undefined) {
-                    messageToStatus.customFunc();
+
+                if (messageToStatus?.customFunc != null && messageToStatus.customFunc(responseError) !== null) {
+                    resultComponent = messageToStatus.customFunc(responseError);
                 }
             }
         });
+
+        if (resultComponent !== null) {
+            return resultComponent;
+        }
 
         if (message !== '') {
             return <Error>{message}</Error>;

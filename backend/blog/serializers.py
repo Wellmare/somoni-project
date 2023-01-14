@@ -20,6 +20,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.photo', read_only=True)
     tags = TagListSerializerField(required=False)
+    isMyPost = serializers.BooleanField(read_only=True, default=False)
 
     class Meta:
         model = Post
@@ -68,6 +69,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     photo = serializers.ImageField(source='author.photo', read_only=True)
+    isMyComment = serializers.BooleanField(read_only=True, default=False)
 
     class Meta:
         model = Comments

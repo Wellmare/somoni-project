@@ -134,7 +134,9 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
         if self.request.user.is_authenticated:
             return Post.objects \
                 .annotate(isLiked=Exists(PostLike.objects.filter(
-                user=self.request.user, post_id=OuterRef('pk')))) \
+                user=self.request.user, post_id=OuterRef('pk'))),
+                isMyPost=Exists(Post.objects.filter(
+                    author=self.request.user, id=OuterRef('pk')))) \
                 .order_by('title')
         return Post.objects.all()
 
@@ -223,7 +225,13 @@ class get_create_comments(generics.ListCreateAPIView):
 
     def get_queryset(self):
         post = get_object_or_404(Post, id=self.kwargs['pk'])
-        return Comments.objects.filter(post=post).order_by('-date')
+        comments = Comments.objects.filter(post=post).order_by('-date')
+        if self.request.user.is_authenticated:
+            return comments \
+                .annotate(isMyComment=Exists(Post.objects.filter(
+                    author=self.request.user, id=OuterRef('pk')))) \
+                .order_by('-date')
+        return comments
 
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated:

@@ -1,4 +1,4 @@
-@import "src/styles/Profile";
+@import "../../../styles/Avatar";
 
 .avatar {
   @include avatar($size: min(10rem, 300px))

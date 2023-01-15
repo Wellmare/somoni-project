@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 import { IMessageToStatusCode } from '../../../types/IMessageToStatusCode';
 import { isFetchBaseQueryError } from '../../../utils/isFetchBaseQueryError';
-import Error from '../../forms/Error/Error';
+import Error from '../Error/Error';
 
 interface IFetchBaseQueryErrorProps {
     responseError: (TypeFetchBaseQueryError | SerializedError | undefined) | null;

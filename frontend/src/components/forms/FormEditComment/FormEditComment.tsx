@@ -9,7 +9,7 @@ import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import Success from '../Success/Success';
+import Success from '../../common/Success/Success';
 
 interface EditCommentInputs {
     content: string;

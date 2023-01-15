@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Router from './components/Routing/Router';
+import Router from './components/routing/Router';
 
 const App: FC = () => {
     return (

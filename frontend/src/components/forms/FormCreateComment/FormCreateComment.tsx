@@ -5,9 +5,9 @@ import { useCreateCommentMutation } from '../../../service/commentsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../common/Button/Button';
+import FormInput from '../../common/FormInput/FormInput';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import FormInput from '../FormInput/FormInput';
-import Success from '../Success/Success';
+import Success from '../../common/Success/Success';
 
 interface CreatePostInputs {
     content: string;
@@ -18,7 +18,9 @@ interface IFormCreateCommentProps {
 }
 
 const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
-    const { control, handleSubmit, setValue } = useForm<CreatePostInputs>({ mode: 'onSubmit' });
+    const { control, handleSubmit, setValue } = useForm<CreatePostInputs>({
+        mode: 'onSubmit',
+    });
     const [createComment, { data, error, isError, isLoading, isSuccess }] = useCreateCommentMutation();
 
     const onSubmit: SubmitHandler<CreatePostInputs> = ({ content }) => {
@@ -34,7 +36,7 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
             <Controller
                 control={control}
                 name={'content'}
-                render={({ fieldState, field }) => (
+                render={({ fieldState, field, formState }) => (
                     <FormInput
                         id={'content'}
                         error={fieldState.error}

@@ -5,7 +5,7 @@ import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import s from './FormInput.module.scss';
 
 import { InputType } from '../../../types/UI/Input.types';
-import Input from '../../common/Input/Input';
+import Input from '../Input/Input';
 
 interface IInputProps {
     id: string;
@@ -32,3 +32,25 @@ const FormInput: FC<IInputProps> = ({ id, error, register, label, placeholder, .
     );
 };
 export default FormInput;
+
+// const FormInput: React.ForwardRefRenderFunction<HTMLButtonElement, IInputProps> = (
+//     { id, error, register, label, placeholder, ...props },
+//     ref,
+// ) => {
+//     const [isError, setIsError] = useState<boolean>(false);
+//     useEffect(() => {
+//         setIsError(error?.message !== undefined);
+//     }, [error]);
+//
+//     return (
+//         <div className={classNames('mb-3')}>
+//             <label htmlFor={id} className={classNames('block')}>
+//                 {label}
+//             </label>
+//             <Input type={InputType.filled} placeholder={placeholder} id={id} isError={isError} {...props} ref={ref} />
+//             {isError && <p className={classNames(s.error)}>{error?.message}</p>}
+//         </div>
+//     );
+// };
+//
+// export default React.forwardRef(FormInput);

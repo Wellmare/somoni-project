@@ -9,7 +9,7 @@ import { IProfile } from '../../../types/redux/profile/IProfile';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';
 import Info from '../../common/Info/Info';
-import Post from '../../Posts/Post/Post';
+import Post from '../../posts/Post/Post';
 
 interface IProfileProps {
     profile: IProfile;

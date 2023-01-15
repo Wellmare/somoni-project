@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Posts from '../../components/Posts/Posts/Posts';
+import Posts from '../../components/posts/Posts/Posts';
 
 const PostsByTagPage: FC = () => {
     const params = useParams();

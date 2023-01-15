@@ -9,7 +9,7 @@ import { ButtonColors } from '../../../types/UI/Button.types';
 
 interface IButtonLinkProps {
     color: ButtonColors;
-    linkTo: string;
+    linkTo?: string;
     children: ReactNode;
     [x: string]: any;
 }
@@ -26,9 +26,17 @@ const ButtonLink: FC<IButtonLinkProps> = ({ color, linkTo, children, ...props })
     }
 
     return (
-        <Link to={linkTo} className={classNames(s.link, colorClass)} {...props}>
-            {children}
-        </Link>
+        <>
+            {linkTo !== undefined ? (
+                <Link to={linkTo} className={classNames(s.link, colorClass)} {...props}>
+                    {children}
+                </Link>
+            ) : (
+                <a className={classNames(s.link, colorClass)} {...props}>
+                    {children}
+                </a>
+            )}
+        </>
     );
 };
 

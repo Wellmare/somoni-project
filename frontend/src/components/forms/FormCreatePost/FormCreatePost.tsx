@@ -12,12 +12,12 @@ import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../common/Button/Button';
+import FormInput from '../../common/FormInput/FormInput';
+import FormInputDraft from '../../common/FormInputDraft/FormInputDraft';
+import PhotoInput from '../../common/PhotoInput/PhotoInput';
+import s from '../../common/PhotoInput/PhotoInput.module.scss';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import FormInput from '../FormInput/FormInput';
-import FormInputDraft from '../FormInputDraft/FormInputDraft';
-import PhotoInput from '../PhotoInput/PhotoInput';
-import s from '../PhotoInput/PhotoInput.module.scss';
-import Success from '../Success/Success';
+import Success from '../../common/Success/Success';
 
 export interface FormCreatePostInputs {
     title: string;

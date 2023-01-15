@@ -8,7 +8,7 @@ import { SetFieldValue, UseFormWatch } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
 
-import { FormCreatePostInputs } from '../FormCreatePost/FormCreatePost';
+import { FormCreatePostInputs } from '../../forms/FormCreatePost/FormCreatePost';
 
 interface IFormInputDraftProps {
     control: any;

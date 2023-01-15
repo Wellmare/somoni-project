@@ -10,13 +10,13 @@ import { IFormDataItem } from '../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
 import Button from '../../common/Button/Button';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import { ErrorsFromData } from '../ErrorsFromData/ErrorsFromData';
-import FormInput from '../FormInput/FormInput';
-import PhotoInput from '../PhotoInput/PhotoInput';
+import { ErrorsFromData } from '../../common/ErrorsFromData/ErrorsFromData';
+import FormInput from '../../common/FormInput/FormInput';
+import PhotoInput from '../../common/PhotoInput/PhotoInput';
 
-import s from '../PhotoInput/PhotoInput.module.scss';
-import Success from '../Success/Success';
+import s from '../../common/PhotoInput/PhotoInput.module.scss';
+import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import Success from '../../common/Success/Success';
 
 interface RegisterPageInputs {
     avatar: string;

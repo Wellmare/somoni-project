@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Comments from '../../components/Comments/Comments/Comments';
+import Error from '../../components/common/Error/Error';
 import ServerResponse from '../../components/common/ServerResponse/ServerResponse';
-import Post from '../../components/Posts/Post/Post';
+import Post from '../../components/posts/Post/Post';
+import Comments from '../../components/сomments/Comments/Comments';
 import { useGetPostQuery } from '../../service/postApiSlice';
 
 const PostPage: FC = () => {
     const params = useParams();
     const postId = params.id;
     if (postId === undefined) {
-        return <>Нет id поста</>;
+        return <Error>Нет id поста</Error>;
     }
 
     const { isLoading, data: post, error, isError, isSuccess } = useGetPostQuery({ id: postId });

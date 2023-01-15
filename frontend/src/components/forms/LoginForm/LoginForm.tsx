@@ -7,9 +7,9 @@ import { useLogin } from '../../../hooks/useLogin';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../common/Button/Button';
 import ButtonLink from '../../common/ButtonLink/ButtonLink';
+import FormInput from '../../common/FormInput/FormInput';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import FormInput from '../FormInput/FormInput';
-import Success from '../Success/Success';
+import Success from '../../common/Success/Success';
 
 interface LoginFormInputs {
     username: string;

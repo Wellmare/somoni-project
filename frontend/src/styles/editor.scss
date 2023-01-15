@@ -1,13 +1,20 @@
 .ql-editor {
-  min-height: 10rem !important;
-  max-height: 15rem;
+  //min-height: 10rem !important;
+  max-height: 50vh;
   overflow: hidden;
+  height: max-content;
+  padding: 0;
   overflow-y: auto;
-  overflow-x: auto;
 }
 
 .ql-container {
-  min-height: 10rem !important;
-  max-height: 15rem;
+  //min-height: 10rem !important;
+  //max-height: 15rem;
   overflow: hidden;
+  height: max-content;
+}
+
+.ql-hidden {
+  height: 0;
+  display: none;
 }

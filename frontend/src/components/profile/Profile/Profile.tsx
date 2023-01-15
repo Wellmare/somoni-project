@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import s from './Profile.module.scss';
-
 import { PathsToNavigate } from '../../../constants/Paths';
 import { IProfile } from '../../../types/redux/profile/IProfile';
+import { AvatarSize } from '../../../types/UI/Avatar.types';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import Avatar from '../../common/Avatar/Avatar';
 import Button from '../../common/Button/Button';
 import Info from '../../common/Info/Info';
-import Post from '../../posts/Post/Post';
+import Post from '../../posts/post/Post/Post';
 
 interface IProfileProps {
     profile: IProfile;
@@ -22,7 +22,10 @@ const Profile: FC<IProfileProps> = ({ profile, withEdit = false }) => {
 
     return (
         <div>
-            <div className={s.avatar}>{photo !== null && <img src={photo} alt='profile photo' />}</div>
+            {/* <div className={s.avatar}>{photo !== null && <img src={photo} alt='profile photo' />}</div> */}
+            <Avatar size={AvatarSize.large}>
+                <img src={photo} alt={username} />
+            </Avatar>
             {username}
             {bio}
             {withEdit && (

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { PathsToNavigate } from '../../../constants/Paths';
+import { PathsToNavigate } from '../../../../constants/Paths';
 
 interface ITagProps {
     tag: string;

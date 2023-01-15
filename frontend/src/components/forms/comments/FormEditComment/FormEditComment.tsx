@@ -2,14 +2,14 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useEditCommentMutation } from '../../../service/commentsApiSlice';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
-import { InputType } from '../../../types/UI/Input.types';
-import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import Button from '../../common/Button/Button';
-import Input from '../../common/Input/Input';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import Success from '../../common/Success/Success';
+import { useEditCommentMutation } from '../../../../service/commentsApiSlice';
+import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { InputType } from '../../../../types/UI/Input.types';
+import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import Button from '../../../common/Button/Button';
+import Input from '../../../common/Input/Input';
+import ServerResponse from '../../../common/ServerResponse/ServerResponse';
+import Success from '../../../common/Success/Success';
 
 interface EditCommentInputs {
     content: string;

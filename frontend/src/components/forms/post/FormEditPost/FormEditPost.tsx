@@ -1,33 +1,40 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
+import { Controller, DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
-import { useCreatePostMutation } from '../../../service/postsApiSlice';
-import { IFormDataItem } from '../../../types/IFormDataItem';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
-import { composeFormData } from '../../../utils/composeFormData';
-import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import { pathsToNavigate } from '../../../utils/pathsToNavigate';
-import Button from '../../common/Button/Button';
-import FormInput from '../../common/FormInput/FormInput';
-import FormInputDraft from '../../common/FormInputDraft/FormInputDraft';
-import PhotoInput from '../../common/PhotoInput/PhotoInput';
-import s from '../../common/PhotoInput/PhotoInput.module.scss';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import Success from '../../common/Success/Success';
+import { useEditPostMutation } from '../../../../service/postsApiSlice';
+import { IFormDataItem } from '../../../../types/IFormDataItem';
+import { LinkType } from '../../../../types/redux/LinkType';
+import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { composeFormData } from '../../../../utils/composeFormData';
+import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
+import Button from '../../../common/Button/Button';
+import FormInput from '../../../common/FormInput/FormInput';
+import FormInputDraft from '../../../common/FormInputDraft/FormInputDraft';
+import PhotoInput from '../../../common/PhotoInput/PhotoInput';
+import s from '../../../common/PhotoInput/PhotoInput.module.scss';
+import ServerResponse from '../../../common/ServerResponse/ServerResponse';
+import Success from '../../../common/Success/Success';
 
-export interface FormCreatePostInputs {
+interface EditPostInputs {
     title: string;
     content: string;
     tags: string;
 }
 
-const FormCreatePost: FC = () => {
-    const { handleSubmit, control, setValue, watch } = useForm<FormCreatePostInputs>({
+interface IFormEditPostProps {
+    defaultValues: DefaultValues<EditPostInputs>;
+    image: LinkType;
+    postId: string;
+}
+
+const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) => {
+    const { handleSubmit, control, setValue, watch } = useForm<EditPostInputs>({
         mode: 'onBlur',
+        defaultValues,
     });
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',
@@ -35,10 +42,10 @@ const FormCreatePost: FC = () => {
         readAs: 'DataURL',
     });
 
-    const [createPost, { isError, isLoading, isSuccess, error }] = useCreatePostMutation();
+    const [editPost, { isError, isLoading, isSuccess, error }] = useEditPostMutation();
     const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<FormCreatePostInputs> = (data): void => {
+    const onSubmit: SubmitHandler<EditPostInputs> = (data): void => {
         const formDataItems: IFormDataItem[] = [
             {
                 name: 'title',
@@ -48,13 +55,12 @@ const FormCreatePost: FC = () => {
                 name: 'content',
                 value: data.content as unknown as string,
             },
-        ];
-        if (plainFiles[0] !== undefined) {
-            formDataItems.push({
+            {
                 name: 'image',
-                value: plainFiles[0],
-            });
-        }
+                value: plainFiles[0] !== undefined ? plainFiles[0] : '',
+            },
+        ];
+
         if (data.tags !== undefined && data.tags.trim() !== '') {
             formDataItems.push({
                 name: 'tags',
@@ -66,7 +72,7 @@ const FormCreatePost: FC = () => {
 
         doAsyncFunc(async () => {
             try {
-                const response = await createPost(formData).unwrap();
+                const response = await editPost({ formData, id: postId }).unwrap();
                 navigate(pathsToNavigate.post(response.id.toString()));
             } catch (e) {
                 console.log(e);
@@ -97,7 +103,7 @@ const FormCreatePost: FC = () => {
             />
 
             <PhotoInput
-                image={filesContent?.[0]?.content}
+                image={filesContent?.[0]?.content == null ? image : filesContent[0].content}
                 openFilePicker={openFilePicker}
                 className={classNames(s.image)}
             />
@@ -119,14 +125,13 @@ const FormCreatePost: FC = () => {
             />
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
-                <Success>Пост создан</Success>
+                <Success>Пост изменен</Success>
             </ServerResponse>
-
             <Button color={ButtonColors.green} size={ButtonSizes.md}>
-                Создать
+                Изменить
             </Button>
         </form>
     );
 };
 
-export default FormCreatePost;
+export default FormEditPost;

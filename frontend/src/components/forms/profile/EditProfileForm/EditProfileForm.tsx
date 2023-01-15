@@ -4,20 +4,20 @@ import { Controller, DefaultValues, SubmitHandler, useForm } from 'react-hook-fo
 
 import { useFilePicker } from 'use-file-picker';
 
-import { emailRegExp } from '../../../other/emailRegExp';
-import { useEditUserMutation } from '../../../service/userApiSlice';
-import { IFormDataItem } from '../../../types/IFormDataItem';
-import { LinkType } from '../../../types/redux/LinkType';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
-import { composeFormData } from '../../../utils/composeFormData';
-import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import Button from '../../common/Button/Button';
-import { ErrorsFromData } from '../../common/ErrorsFromData/ErrorsFromData';
-import FormInput from '../../common/FormInput/FormInput';
-import PhotoInput from '../../common/PhotoInput/PhotoInput';
-import s from '../../common/PhotoInput/PhotoInput.module.scss';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import Success from '../../common/Success/Success';
+import { emailRegExp } from '../../../../other/emailRegExp';
+import { useEditUserMutation } from '../../../../service/userApiSlice';
+import { IFormDataItem } from '../../../../types/IFormDataItem';
+import { LinkType } from '../../../../types/redux/LinkType';
+import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { composeFormData } from '../../../../utils/composeFormData';
+import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import Button from '../../../common/Button/Button';
+import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
+import FormInput from '../../../common/FormInput/FormInput';
+import PhotoInput from '../../../common/PhotoInput/PhotoInput';
+import s from '../../../common/PhotoInput/PhotoInput.module.scss';
+import ServerResponse from '../../../common/ServerResponse/ServerResponse';
+import Success from '../../../common/Success/Success';
 
 interface EditProfileInputs {
     username: string;

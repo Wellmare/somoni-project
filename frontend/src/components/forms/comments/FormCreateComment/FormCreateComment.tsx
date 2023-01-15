@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useCreateCommentMutation } from '../../../service/commentsApiSlice';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
-import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import Button from '../../common/Button/Button';
-import FormInput from '../../common/FormInput/FormInput';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import Success from '../../common/Success/Success';
+import { useCreateCommentMutation } from '../../../../service/commentsApiSlice';
+import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import Button from '../../../common/Button/Button';
+import FormInput from '../../../common/FormInput/FormInput';
+import ServerResponse from '../../../common/ServerResponse/ServerResponse';
+import Success from '../../../common/Success/Success';
 
 interface CreatePostInputs {
     content: string;

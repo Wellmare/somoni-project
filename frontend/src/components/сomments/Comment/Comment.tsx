@@ -11,7 +11,7 @@ import { AvatarSize } from '../../../types/UI/Avatar.types';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../utils/pathsToNavigate';
 import Avatar from '../../common/Avatar/Avatar';
-import FormEditComment from '../../forms/FormEditComment/FormEditComment';
+import FormEditComment from '../../forms/comments/FormEditComment/FormEditComment';
 
 interface ICommentProps {
     comment: IComment;

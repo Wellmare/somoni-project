@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../hooks/reduxHooks';
 import { selectIsAuth } from '../../../redux/slices/authSlice';
 import { useGetCommentsQuery } from '../../../service/commentsApiSlice';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
-import FormCreateComment from '../../forms/FormCreateComment/FormCreateComment';
+import FormCreateComment from '../../forms/comments/FormCreateComment/FormCreateComment';
 import Comment from '../Comment/Comment';
 
 interface ICommentsProps {

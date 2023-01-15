@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Error from '../../components/common/Error/Error';
 import ServerResponse from '../../components/common/ServerResponse/ServerResponse';
-import Post from '../../components/posts/Post/Post';
+import Post from '../../components/posts/post/Post/Post';
 import Comments from '../../components/сomments/Comments/Comments';
 import { useGetPostQuery } from '../../service/postApiSlice';
 

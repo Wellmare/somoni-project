@@ -10,6 +10,7 @@ export const enum Paths {
     CREATE_POST = 'create-post',
     TAG = `main`,
     EDIT_PROFILE = 'edit-profile',
+    EDIT_POST = 'edit-post',
 }
 
 export const enum PathsToNavigate {
@@ -24,4 +25,5 @@ export const enum PathsToNavigate {
     CREATE_POST = '/create-post',
     TAG = '/main',
     EDIT_PROFILE = '/edit-profile',
+    EDIT_POST = '/edit-post',
 }

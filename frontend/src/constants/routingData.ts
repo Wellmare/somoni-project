@@ -3,6 +3,7 @@ import { Paths } from './Paths';
 import {
     ChangePasswordPage,
     CreatePostPage,
+    EditPostPage,
     LoginPage,
     MainPage,
     PostPage,
@@ -39,6 +40,10 @@ export const routingData: IRouteData[] = [
     {
         path: `${Paths.USER}/:id`,
         Element: UserPage,
+    },
+    {
+        path: `${Paths.EDIT_POST}/:id`,
+        Element: EditPostPage,
     },
     {
         path: Paths.MAIN,

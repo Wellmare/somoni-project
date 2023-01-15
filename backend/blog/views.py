@@ -293,6 +293,9 @@ class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
             self.perform_destroy(instance)
+            post = instance.post
+            post.comments -= 1
+            post.save()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
 

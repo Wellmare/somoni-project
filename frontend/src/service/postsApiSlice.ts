@@ -30,7 +30,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
 
         editPost: builder.mutation<IPost, IDataToEditPost>({
             query: ({ formData, id }) => ({
-                url: `${apiEndpoints.post}${id}`,
+                url: `${apiEndpoints.post}${id}/`,
                 method: 'PUT',
                 body: formData,
             }),
@@ -38,7 +38,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         }),
         deletePost: builder.mutation<IPost, IDataToDelete>({
             query: ({ id }) => ({
-                url: `${apiEndpoints.post}${id}`,
+                url: `${apiEndpoints.post}${id}/`,
                 method: 'DELETE',
             }),
             invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],

@@ -10,7 +10,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getUser: builder.query<IProfile, IDataToGetProfile>({
             query: ({ userId, postsPage = 1 }) => ({
-                url: `${apiEndpoints.user}${userId}`,
+                url: `${apiEndpoints.user}${userId}/`,
                 params: {
                     page: postsPage,
                 },

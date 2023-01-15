@@ -24,7 +24,7 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
         }),
         createComment: builder.mutation<IComment, IDataToCreateComment>({
             query: ({ content, postId }) => ({
-                url: `${apiEndpoints.post}${postId}/comments`,
+                url: `${apiEndpoints.post}${postId}/comments/`,
                 method: 'POST',
                 body: {
                     content,
@@ -35,14 +35,14 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
         }),
         deleteComment: builder.mutation<undefined, IDataToDeleteComment>({
             query: ({ commentId }) => ({
-                url: `${apiEndpoints.comment}${commentId}`,
+                url: `${apiEndpoints.comment}${commentId}/`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Comments'],
         }),
         editComment: builder.mutation<IComment, IDataToEditComment>({
             query: ({ commentId, content }) => ({
-                url: `${apiEndpoints.comment}${commentId}`,
+                url: `${apiEndpoints.comment}${commentId}/`,
                 method: 'PUT',
                 body: {
                     content,

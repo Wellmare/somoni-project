@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import FormCreatePost from '../../components/forms/FormCreatePost/FormCreatePost';
+import FormCreatePost from '../../components/forms/post/FormCreatePost/FormCreatePost';
 
 const CreatePostPage: FC = () => {
     return (

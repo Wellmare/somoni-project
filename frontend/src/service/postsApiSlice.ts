@@ -34,14 +34,20 @@ export const postsApiSlice = apiSlice.injectEndpoints({
                 method: 'PUT',
                 body: formData,
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Post', id: arg.id },
+                { type: 'Single Post', id: arg.id },
+            ],
         }),
         deletePost: builder.mutation<IPost, IDataToDelete>({
             query: ({ id }) => ({
                 url: `${apiEndpoints.post}${id}/`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Post', id: arg.id },
+                { type: 'Single Post', id: arg.id },
+            ],
         }),
     }),
 });

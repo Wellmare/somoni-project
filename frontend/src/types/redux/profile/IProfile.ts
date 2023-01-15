@@ -1,13 +1,13 @@
-import { Link } from '../Link';
+import { LinkType } from '../LinkType';
 import { IPost } from '../posts/IPost';
 
 export interface IProfile {
-    next: Link;
-    previous: Link;
+    next: LinkType;
+    previous: LinkType;
 
     count: number;
     username: string;
-    photo: string | null;
+    photo: string;
     bio: string | null;
     email?: string;
     isMyProfile: boolean;

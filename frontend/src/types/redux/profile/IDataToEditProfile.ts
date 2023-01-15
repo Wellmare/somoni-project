@@ -1,8 +1,8 @@
-import { Link } from '../Link';
+import { LinkType } from '../LinkType';
 
 export interface IDataToEditProfile {
     email: string;
     username: string;
-    photo: Link;
+    photo: LinkType;
     bio: string;
 }

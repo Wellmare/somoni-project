@@ -1,4 +1,4 @@
-import { Link } from '../Link';
+import { LinkType } from '../LinkType';
 
 export interface IComment {
     id: number;
@@ -6,7 +6,7 @@ export interface IComment {
     date: string;
     author: number;
     post: number;
-    photo: Link;
+    photo: LinkType;
     username: string;
     isMyComment: boolean;
 }

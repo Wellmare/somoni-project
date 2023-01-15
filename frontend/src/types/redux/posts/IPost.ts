@@ -1,4 +1,4 @@
-import { Link } from '../Link';
+import { LinkType } from '../LinkType';
 
 type Tag = string;
 
@@ -8,12 +8,12 @@ export interface IPost {
     content: string;
     likes: number;
     comments: number;
-    image: Link;
+    image: LinkType;
     author: number;
     date: string;
     isLiked: boolean;
     username: string;
-    photo: Link;
+    photo: string;
     tags: Tag[];
     isMyPost: boolean;
 }

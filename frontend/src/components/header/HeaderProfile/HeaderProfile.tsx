@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
 
-import { Link } from '../../../types/redux/Link';
+import { LinkType } from '../../../types/redux/LinkType';
 import Menu from '../Menu/Menu';
 
 interface IProfileProps {
     username: string;
-    photo: Link;
+    photo: LinkType;
     id: string;
 }
 

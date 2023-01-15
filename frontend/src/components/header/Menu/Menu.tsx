@@ -11,7 +11,7 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import { PathsToNavigate } from '../../../constants/Paths';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
-import { Link as LinkType } from '../../../types/redux/Link';
+import { LinkType } from '../../../types/redux/LinkType';
 import { Theme } from '../../../types/Theme';
 
 const menuClassName = ({ state }: { state: string }): string =>

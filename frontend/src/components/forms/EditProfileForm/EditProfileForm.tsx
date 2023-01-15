@@ -7,7 +7,7 @@ import { useFilePicker } from 'use-file-picker';
 import { emailRegExp } from '../../../other/emailRegExp';
 import { useEditUserMutation } from '../../../service/userApiSlice';
 import { IFormDataItem } from '../../../types/IFormDataItem';
-import { Link } from '../../../types/redux/Link';
+import { LinkType } from '../../../types/redux/LinkType';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
@@ -27,7 +27,7 @@ interface EditProfileInputs {
 
 interface IEditProfileFormProps {
     defaultValues: DefaultValues<EditProfileInputs>;
-    photo: Link;
+    photo: LinkType;
 }
 
 const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) => {

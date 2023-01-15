@@ -1,11 +1,16 @@
 import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import s from './Comment.module.scss';
 
 import { useDeleteCommentMutation } from '../../../service/commentsApiSlice';
 import { IComment } from '../../../types/redux/comments/IComment';
+import { AvatarSize } from '../../../types/UI/Avatar.types';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
+import { pathsToNavigate } from '../../../utils/pathsToNavigate';
+import Avatar from '../../common/Avatar/Avatar';
 import FormEditComment from '../../forms/FormEditComment/FormEditComment';
 
 interface ICommentProps {
@@ -26,10 +31,12 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
 
     return (
         <div className={s.comment}>
-            <div>
-                <div className={classNames(s.avatar)}>{avatar != null && <img src={avatar} alt='avatar' />}</div>
+            <Link to={pathsToNavigate.user(author.toString())}>
+                <Avatar size={AvatarSize.small}>
+                    <img src={avatar} alt={username} />
+                </Avatar>
                 <p>{username}</p>
-            </div>
+            </Link>
             {isEdit ? (
                 <FormEditComment commentId={id.toString()} setIsEdit={setIsEdit} />
             ) : (

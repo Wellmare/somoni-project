@@ -5,12 +5,12 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
-import { PathsToNavigate } from '../../../constants/Paths';
 import { useCreatePostMutation } from '../../../service/postsApiSlice';
 import { IFormDataItem } from '../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import { composeFormData } from '../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
+import { pathsToNavigate } from '../../../utils/pathsToNavigate';
 import Button from '../../common/Button/Button';
 import FormInput from '../../common/FormInput/FormInput';
 import FormInputDraft from '../../common/FormInputDraft/FormInputDraft';
@@ -67,7 +67,7 @@ const FormCreatePost: FC = () => {
         doAsyncFunc(async () => {
             try {
                 const response = await createPost(formData).unwrap();
-                navigate(`${PathsToNavigate.POST}/${response.id}`);
+                navigate(pathsToNavigate.post(response.id.toString()));
             } catch (e) {
                 console.log(e);
             }

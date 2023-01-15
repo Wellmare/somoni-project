@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import s from './PostAuthor.module.scss';
 
-import { PathsToNavigate } from '../../../../constants/Paths';
 import { AvatarSize } from '../../../../types/UI/Avatar.types';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import Avatar from '../../../common/Avatar/Avatar';
 
 interface IPostAuthorProps {
@@ -17,7 +17,7 @@ interface IPostAuthorProps {
 
 const PostAuthor: FC<IPostAuthorProps> = ({ photo, username, userId }) => {
     return (
-        <Link to={`${PathsToNavigate.USER}/${userId}`} className={s.link}>
+        <Link to={pathsToNavigate.user(userId)} className={s.link}>
             <div className={classNames('flex', 'justify-start', 'items-center')}>
                 <div>
                     <Avatar size={AvatarSize.small}>

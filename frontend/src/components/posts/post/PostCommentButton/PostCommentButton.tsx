@@ -3,8 +3,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import comment from '../../../../assets/comment.svg';
-
-import { PathsToNavigate } from '../../../../constants/Paths';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import PostButton from '../PostButton/PostButton';
 
 interface IPostCommentButtonProps {
@@ -14,7 +13,7 @@ interface IPostCommentButtonProps {
 
 const PostCommentButton: FC<IPostCommentButtonProps> = ({ comments, postId }) => {
     return (
-        <Link to={`${PathsToNavigate.POST}/${postId}`}>
+        <Link to={pathsToNavigate.post(postId)}>
             <PostButton count={comments}>
                 <img src={comment} alt='comment' />
             </PostButton>

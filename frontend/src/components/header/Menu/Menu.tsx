@@ -7,12 +7,11 @@ import { Link } from 'react-router-dom';
 import s from './Menu.module.scss';
 
 import '@szhsin/react-menu/dist/transitions/slide.css';
-
-import { PathsToNavigate } from '../../../constants/Paths';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
 import { LinkType } from '../../../types/redux/LinkType';
 import { Theme } from '../../../types/Theme';
+import { pathsToNavigate } from '../../../utils/pathsToNavigate';
 
 const menuClassName = ({ state }: { state: string }): string =>
     state === 'opening' ? s.menuOpening : state === 'opening' ? s.menuClosing : s.menu;
@@ -34,7 +33,7 @@ const Menu: FC<IMenuProps> = ({ photo, id }) => {
     };
     const { logoutUser } = useLogout();
 
-    const pathToProfile = `${PathsToNavigate.USER}/${id}`;
+    const pathToProfile = pathsToNavigate.user(id);
 
     return (
         <ReactMenu

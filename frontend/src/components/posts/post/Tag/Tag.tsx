@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { PathsToNavigate } from '../../../../constants/Paths';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 
 interface ITagProps {
     tag: string;
@@ -11,7 +11,7 @@ interface ITagProps {
 const Tag: FC<ITagProps> = ({ tag }) => {
     const navigate = useNavigate();
     const onClickTag = (): void => {
-        navigate(`${PathsToNavigate.TAG}/${tag}`);
+        navigate(pathsToNavigate.tag(tag));
     };
 
     return (

@@ -61,6 +61,14 @@ class CreatePostSerializer(serializers.ModelSerializer):
             if validated_data['image']:
                 instance.image = validated_data.get("image", instance.image)
             instance.save()
+            try:
+                tags = validated_data['tags'][0]
+                instance.tags.clear()
+                tags = tags.split()
+                for tag in tags:
+                    instance.tags.add(tag)
+            except KeyError:
+                pass
         except KeyError:
             raise serializers.ValidationError(
                 {"detail": "some field is missing"})

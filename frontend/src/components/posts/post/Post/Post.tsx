@@ -4,10 +4,11 @@ import React, { FC } from 'react';
 import s from './Post.module.scss';
 
 import { IPost } from '../../../../types/redux/posts/IPost';
-import PostAuthor from '../PostAuthor/PostAuthor';
 import PostButtons from '../PostButtons/PostButtons';
 import PostContent from '../PostContent/PostContent';
+import PostHeader from '../PostHeader/PostHeader';
 import PostImage from '../PostImage/PostImage';
+import PostTitle from '../PostTitle/PostTitle';
 
 interface ITestPostProps {
     post: IPost;
@@ -32,7 +33,14 @@ const Post: FC<ITestPostProps> = ({ post }) => {
     return (
         <div className={classNames(s.post)}>
             {/* {image !== null && <img src={image} alt='image' className={classNames(s.image)} />} */}
-            <PostAuthor username={authorUsername} photo={authorPhoto} userId={authorId.toString()} />
+            <PostHeader
+                username={authorUsername}
+                photo={authorPhoto}
+                userId={authorId.toString()}
+                isMyPost={isMyPost}
+                postId={postId.toString()}
+            />
+            <PostTitle title={title} />
             <PostImage image={postImage} />
             <PostContent value={content} className={classNames('mt-4')} />
             <PostButtons

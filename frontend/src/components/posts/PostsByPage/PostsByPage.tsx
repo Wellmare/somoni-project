@@ -4,7 +4,7 @@ import { useGetPostsQuery } from '../../../service/postsApiSlice';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import PostsSkeletons from '../../skeletons/PostsSkeletons';
-import Post from '../Post/Post';
+import Post from '../post/Post/Post';
 
 interface IPostsByPageProps {
     page: number;

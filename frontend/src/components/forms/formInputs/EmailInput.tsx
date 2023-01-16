@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { emailRegExp } from '../../../other/emailRegExp';
-import { IPartialInputProps } from '../../../types/IPartialInputProps';
+import { ICustomInputProps } from '../../../types/ICustomInputProps';
 import FormInput from '../../common/FormInput/FormInput';
 
-const EmailInput: FC<IPartialInputProps> = ({ control, ...props }) => {
+const EmailInput: FC<ICustomInputProps> = ({ control, ...props }) => {
     return (
         <Controller
             name={'email'}

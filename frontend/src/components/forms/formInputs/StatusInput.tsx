@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 
 import { Controller } from 'react-hook-form';
 
-import { IPartialInputProps } from '../../../types/IPartialInputProps';
+import { ICustomInputProps } from '../../../types/ICustomInputProps';
 import FormInput from '../../common/FormInput/FormInput';
 
-const StatusInput: FC<IPartialInputProps> = ({ control, ...props }) => {
+const StatusInput: FC<ICustomInputProps> = ({ control, ...props }) => {
     return (
         <Controller
             render={({ field, fieldState, formState }) => (

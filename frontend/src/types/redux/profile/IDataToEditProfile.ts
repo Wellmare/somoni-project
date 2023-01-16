@@ -5,4 +5,5 @@ export interface IDataToEditProfile {
     username: string;
     photo: LinkType;
     bio: string;
+    id?: string;
 }

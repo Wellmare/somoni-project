@@ -6,7 +6,6 @@ import { useGetDataToEditUserQuery } from '../../service/userApiSlice';
 
 const EditProfilePage: FC = () => {
     const { data, error, isError, isLoading, isSuccess } = useGetDataToEditUserQuery(undefined);
-
     return (
         <>
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
@@ -18,6 +17,7 @@ const EditProfilePage: FC = () => {
                             email: data.email,
                         }}
                         photo={data.photo}
+                        id={data.id != null ? data.id : '1'}
                     />
                 )}
             </ServerResponse>

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useCreateCommentMutation } from '../../../../service/commentsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import Button from '../../../common/Button/Button';
-import FormInput from '../../../common/FormInput/FormInput';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
+import CommentContentInput from '../../formInputs/CommentContentInput';
 
 interface CreatePostInputs {
     content: string;
@@ -33,25 +33,7 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-                control={control}
-                name={'content'}
-                render={({ fieldState, field, formState }) => (
-                    <FormInput
-                        id={'content'}
-                        error={fieldState.error}
-                        label={'Комментарий'}
-                        placeholder={'Вааау!'}
-                        {...field}
-                    />
-                )}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'Поле обязательно',
-                    },
-                }}
-            />
+            <CommentContentInput control={control} />
 
             <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
                 Создать

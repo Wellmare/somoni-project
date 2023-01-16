@@ -1,23 +1,26 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { Controller, DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
+import { DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
-import { emailRegExp } from '../../../../other/emailRegExp';
 import { useEditUserMutation } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import Button from '../../../common/Button/Button';
 import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
-import FormInput from '../../../common/FormInput/FormInput';
 import PhotoInput from '../../../common/PhotoInput/PhotoInput';
 import s from '../../../common/PhotoInput/PhotoInput.module.scss';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
+import EmailInput from '../../formInputs/EmailInput';
+import StatusInput from '../../formInputs/StatusInput';
+import UsernameInput from '../../formInputs/UsernameInput';
 
 interface EditProfileInputs {
     username: string;
@@ -28,9 +31,10 @@ interface EditProfileInputs {
 interface IEditProfileFormProps {
     defaultValues: DefaultValues<EditProfileInputs>;
     photo: LinkType;
+    id: string;
 }
 
-const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) => {
+const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }) => {
     const { handleSubmit, control } = useForm<EditProfileInputs>({
         mode: 'onChange',
         defaultValues,
@@ -42,7 +46,8 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
         readAs: 'DataURL',
     });
 
-    const [editProfile, { error, isError, isLoading, isSuccess }] = useEditUserMutation();
+    const [editProfile, { error, isError, isLoading, isSuccess, data }] = useEditUserMutation();
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<EditProfileInputs> = (data) => {
         const dataToForm: IFormDataItem[] = [
@@ -66,7 +71,12 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
         const formData = composeFormData(dataToForm);
 
         doAsyncFunc(async () => {
-            await editProfile(formData);
+            try {
+                await editProfile(formData);
+                navigate(pathsToNavigate.user(id));
+            } catch (e) {
+                console.log(e);
+            }
         });
     };
 
@@ -79,62 +89,10 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo }) =>
                     className={classNames(s.avatar)}
                 />
 
-                <Controller
-                    render={({ field, fieldState, formState }) => (
-                        <FormInput
-                            id={'username'}
-                            error={fieldState.error}
-                            label={'Никнейм'}
-                            placeholder={'username'}
-                            {...field}
-                        />
-                    )}
-                    control={control}
-                    name={'username'}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Поле обязательно',
-                        },
-                    }}
-                />
+                <UsernameInput control={control} />
+                <EmailInput control={control} />
 
-                <Controller
-                    name={'email'}
-                    render={({ field, fieldState, formState }) => (
-                        <FormInput
-                            id={'email'}
-                            error={fieldState.error}
-                            label={'Email'}
-                            placeholder={'example@example.com'}
-                            {...field}
-                        />
-                    )}
-                    control={control}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Поле обязательно',
-                        },
-                        pattern: {
-                            value: emailRegExp,
-                            message: 'Некоректный email',
-                        },
-                    }}
-                />
-                <Controller
-                    render={({ field, fieldState, formState }) => (
-                        <FormInput
-                            id={'bio'}
-                            error={fieldState.error}
-                            label={'Статус'}
-                            placeholder={'Кто я?'}
-                            {...field}
-                        />
-                    )}
-                    control={control}
-                    name={'bio'}
-                />
+                <StatusInput control={control} />
 
                 <ServerResponse
                     responseError={error}

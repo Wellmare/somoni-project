@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
@@ -12,12 +12,13 @@ import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import Button from '../../../common/Button/Button';
-import FormInput from '../../../common/FormInput/FormInput';
 import FormInputDraft from '../../../common/FormInputDraft/FormInputDraft';
 import PhotoInput from '../../../common/PhotoInput/PhotoInput';
 import s from '../../../common/PhotoInput/PhotoInput.module.scss';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
+import TagsInput from '../../formInputs/TagsInput';
+import TitleInput from '../../formInputs/TitleInput';
 
 export interface FormCreatePostInputs {
     title: string;
@@ -76,26 +77,7 @@ const FormCreatePost: FC = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-                render={({ field, fieldState, formState }) => (
-                    <FormInput
-                        id={'title'}
-                        error={fieldState.error}
-                        label={'Заголовок'}
-                        placeholder={'Title'}
-                        {...field}
-                    />
-                )}
-                control={control}
-                name={'title'}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'Поле обязательно',
-                    },
-                }}
-            />
-
+            <TitleInput control={control} />
             <PhotoInput
                 image={filesContent?.[0]?.content}
                 openFilePicker={openFilePicker}
@@ -104,19 +86,7 @@ const FormCreatePost: FC = () => {
 
             <FormInputDraft control={control} name={'content'} watch={watch} setValue={setValue} />
 
-            <Controller
-                render={({ field, fieldState, formState }) => (
-                    <FormInput
-                        id={'tags'}
-                        error={fieldState.error}
-                        label={'Тэги'}
-                        placeholder={'Tag tag tag...'}
-                        {...field}
-                    />
-                )}
-                control={control}
-                name={'tags'}
-            />
+            <TagsInput control={control} />
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 <Success>Пост создан</Success>

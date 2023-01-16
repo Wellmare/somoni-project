@@ -1,15 +1,14 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useEditCommentMutation } from '../../../../service/commentsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
-import { InputType } from '../../../../types/UI/Input.types';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import Button from '../../../common/Button/Button';
-import Input from '../../../common/Input/Input';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
+import CommentContentInput from '../../formInputs/CommentContentInput';
 
 interface EditCommentInputs {
     content: string;
@@ -34,24 +33,7 @@ const FormEditComment: FC<IFormEditCommentProps> = ({ commentId, setIsEdit }) =>
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classNames('w-full', 'pl-5')}>
-            <Controller
-                control={control}
-                name={'content'}
-                render={({ fieldState, field }) => (
-                    <Input
-                        type={InputType.filled}
-                        placeholder={'Вот это да!'}
-                        isError={fieldState.error !== undefined}
-                        {...field}
-                    />
-                )}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'Поле обязательно',
-                    },
-                }}
-            />
+            <CommentContentInput control={control} />
 
             <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
                 Редактировать

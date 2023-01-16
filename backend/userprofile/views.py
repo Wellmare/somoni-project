@@ -23,17 +23,59 @@ class userResultsSetPagination(PageNumberPagination):
     max_page_size = 10
 
     def get_paginated_response(self, data):
-        user = self.request.user
-        return Response(OrderedDict([
-            ('count', self.page.paginator.count),
-            ('next', self.get_next_link()),
-            ('previous', self.get_previous_link()),
-            ('username', user.username),
-            ('photo', self.request.build_absolute_uri(user.photo.url)),
-            ('bio', user.bio),
-            ('results', data)
-        ]))
-
+        pk = self.request.parser_context['kwargs']['pk']
+        user = get_object_or_404(User, id=pk)
+        isMyProfile = self.request.user.id == pk
+        try:
+            if isMyProfile:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri(user.photo.url)),
+                    ('bio', user.bio),
+                    ('email', user.email),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+            else:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri(user.photo.url)),
+                    ('bio', user.bio),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+        except ValueError:
+            if isMyProfile:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri('/media/default.png')),
+                    ('bio', user.bio),
+                    ('email', user.email),
+                    ('id', user.id),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
+            else:
+                return Response(OrderedDict([
+                    ('count', self.page.paginator.count),
+                    ('next', self.get_next_link()),
+                    ('previous', self.get_previous_link()),
+                    ('username', user.username),
+                    ('photo', self.request.build_absolute_uri('/media/default.png')),
+                    ('bio', user.bio),
+                    ('id', user.id),
+                    ('isMyProfile', isMyProfile),
+                    ('results', data)
+                ]))
 
 class profile(generics.ListCreateAPIView):
     pagination_class = userResultsSetPagination

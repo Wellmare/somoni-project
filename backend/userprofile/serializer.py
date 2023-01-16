@@ -6,7 +6,8 @@ from myapi.models import User
 class profile_serializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'bio', 'photo', )
+        fields = ('username', 'email', 'bio', 'photo', 'id')
+        read_only_fields = ('id', )
 
     def update(self, instance, validated_data):
         try:

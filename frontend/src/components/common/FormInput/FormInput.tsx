@@ -1,21 +1,20 @@
 import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
-import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import { FieldError } from 'react-hook-form';
 
 import s from './FormInput.module.scss';
 
 import { InputType } from '../../../types/UI/Input.types';
 import Input from '../Input/Input';
 
-interface IInputProps {
+export interface IInputProps {
     id: string;
     error: FieldError | undefined;
-    register?: () => UseFormRegisterReturn;
     label: string;
     placeholder: string;
 }
 
-const FormInput: FC<IInputProps> = ({ id, error, register, label, placeholder, ...props }) => {
+const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, ...props }) => {
     const [isError, setIsError] = useState<boolean>(false);
     useEffect(() => {
         setIsError(error?.message !== undefined);

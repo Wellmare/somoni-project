@@ -95,7 +95,10 @@ class get_create_post(generics.ListCreateAPIView):
             object_list = Post.objects.filter(tags__in=[tag])
             if self.request.user.is_authenticated:
                 return object_list.annotate(
-                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                    isMyPost=Exists(Post.objects.filter(
+                        author=self.request.user, id=OuterRef('pk')))
+                ).order_by(
                     '-date')
             else:
                 return object_list.order_by('-date')
@@ -103,7 +106,10 @@ class get_create_post(generics.ListCreateAPIView):
         except KeyError:
             if self.request.user.is_authenticated:
                 return Post.objects.annotate(
-                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                    isMyPost=Exists(Post.objects.filter(
+                        author=self.request.user, id=OuterRef('pk')))
+                ).order_by(
                     '-date')
         return Post.objects.all().order_by('-date')
 
@@ -229,7 +235,7 @@ class get_create_comments(generics.ListCreateAPIView):
         if self.request.user.is_authenticated:
             return comments \
                 .annotate(isMyComment=Exists(Comments.objects.filter(
-                    author=self.request.user, id=OuterRef('pk')))) \
+                author=self.request.user, id=OuterRef('pk')))) \
                 .order_by('-date')
         return comments
 
@@ -313,7 +319,10 @@ class get_post_for_user(generics.ListCreateAPIView):
         user = get_object_or_404(User, id=self.kwargs['pk'])
         if self.request.user.is_authenticated:
             return Post.objects.filter(author=user).annotate(
-                isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk')))).order_by(
+                isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                isMyPost=Exists(Post.objects.filter(
+                    author=self.request.user, id=OuterRef('pk')))
+            ).order_by(
                 '-date')
         return Post.objects.filter(author=user).order_by('-date')
 

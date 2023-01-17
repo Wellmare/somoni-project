@@ -15,16 +15,19 @@ interface EditCommentInputs {
 }
 
 interface IFormEditCommentProps {
+    content: string;
     commentId: string;
     setIsEdit: (isEdit: boolean) => void;
 }
 
-const FormEditComment: FC<IFormEditCommentProps> = ({ commentId, setIsEdit }) => {
-    const { control, handleSubmit, setValue } = useForm<EditCommentInputs>({ mode: 'onSubmit' });
+const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsEdit }) => {
+    const { control, handleSubmit, setValue } = useForm<EditCommentInputs>({
+        mode: 'onSubmit',
+        defaultValues: { content },
+    });
     const [editComment, { data, error, isError, isLoading, isSuccess }] = useEditCommentMutation();
 
     const onSubmit: SubmitHandler<EditCommentInputs> = ({ content }) => {
-        console.log(content);
         doAsyncFunc(async () => {
             await editComment({ content, commentId });
             setIsEdit(false);

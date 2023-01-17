@@ -38,7 +38,7 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
                 <p>{username}</p>
             </Link>
             {isEdit ? (
-                <FormEditComment commentId={id.toString()} setIsEdit={setIsEdit} />
+                <FormEditComment content={content} commentId={id.toString()} setIsEdit={setIsEdit} />
             ) : (
                 <div className={s.content}>{content}</div>
             )}

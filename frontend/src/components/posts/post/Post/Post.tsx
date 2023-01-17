@@ -8,6 +8,7 @@ import PostButtons from '../PostButtons/PostButtons';
 import PostContent from '../PostContent/PostContent';
 import PostHeader from '../PostHeader/PostHeader';
 import PostImage from '../PostImage/PostImage';
+import PostTags from '../PostTags/PostTags';
 import PostTitle from '../PostTitle/PostTitle';
 
 interface ITestPostProps {
@@ -34,9 +35,10 @@ const Post: FC<ITestPostProps> = ({ post }) => {
         <div className={classNames(s.post)}>
             {/* {image !== null && <img src={image} alt='image' className={classNames(s.image)} />} */}
             <PostHeader post={post} />
-            <PostTitle title={title} />
+            <PostTitle title={title} postId={postId.toString()} />
             <PostImage image={postImage} />
             <PostContent value={content} className={classNames('mt-4')} />
+            <PostTags tags={tags} />
             <PostButtons
                 isLiked={isLiked}
                 countLikes={countLikes}

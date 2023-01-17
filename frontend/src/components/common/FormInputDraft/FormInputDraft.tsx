@@ -11,7 +11,6 @@ import 'quill/dist/quill.snow.css';
 import { FormCreatePostInputs } from '../../forms/post/FormCreatePost/FormCreatePost';
 
 interface IFormInputDraftProps {
-    control: any;
     name: string;
     setValue: SetFieldValue<FormCreatePostInputs>;
     watch: UseFormWatch<FormCreatePostInputs>;
@@ -19,7 +18,7 @@ interface IFormInputDraftProps {
     [x: string]: any;
 }
 
-const FormInputDraft: FC<IFormInputDraftProps> = ({ control, name, watch, setValue, ...props }) => {
+const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, ...props }) => {
     const onEditorStateChange = (editorState: EditorState): void => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
@@ -30,7 +29,12 @@ const FormInputDraft: FC<IFormInputDraftProps> = ({ control, name, watch, setVal
 
     return (
         <>
-            <ReactQuill theme='snow' value={editorContent} onChange={onEditorStateChange} />
+            <ReactQuill
+                theme='snow'
+                value={editorContent}
+                onChange={onEditorStateChange}
+                className={'editor-padding'}
+            />
         </>
     );
 };

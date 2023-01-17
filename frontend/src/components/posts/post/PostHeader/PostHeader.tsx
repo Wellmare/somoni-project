@@ -24,17 +24,13 @@ const PostHeader: FC<IPostHeaderProps> = ({ post }) => {
 
     return (
         <div className={classNames('flex', 'justify-between', 'items-center')}>
-            <div>
-                <PostAuthor username={username} photo={photo} userId={userId} date={date} />
-            </div>
-            <div>
-                {isMyPost && (
-                    <div className={classNames('flex', 'items-center')}>
-                        <PostEditButton postId={postId} />
-                        <PostDeleteButton postId={postId} />
-                    </div>
-                )}
-            </div>
+            <PostAuthor username={username} photo={photo} userId={userId} date={date} />
+            {isMyPost && (
+                <div className={classNames('flex', 'items-center')}>
+                    <PostEditButton postId={postId} />
+                    <PostDeleteButton postId={postId} />
+                </div>
+            )}
         </div>
     );
 };

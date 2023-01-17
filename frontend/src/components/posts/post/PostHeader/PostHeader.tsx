@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 
 import { IPost } from '../../../../types/redux/posts/IPost';
 import PostAuthor from '../PostAuthor/PostAuthor';
-import PostDate from '../PostDate/PostDate';
 import PostDeleteButton from '../PostDeleteButton/PostDeleteButton';
 import PostEditButton from '../PostEditButton/PostEditButton';
 
@@ -25,7 +24,9 @@ const PostHeader: FC<IPostHeaderProps> = ({ post }) => {
 
     return (
         <div className={classNames('flex', 'justify-between', 'items-center')}>
-            <PostAuthor username={username} photo={photo} userId={userId} />
+            <div>
+                <PostAuthor username={username} photo={photo} userId={userId} date={date} />
+            </div>
             <div>
                 {isMyPost && (
                     <div className={classNames('flex', 'items-center')}>
@@ -33,7 +34,6 @@ const PostHeader: FC<IPostHeaderProps> = ({ post }) => {
                         <PostDeleteButton postId={postId} />
                     </div>
                 )}
-                <PostDate date={date} />
             </div>
         </div>
     );

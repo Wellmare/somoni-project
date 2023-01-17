@@ -33,13 +33,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
     return (
         <div className={classNames(s.post)}>
             {/* {image !== null && <img src={image} alt='image' className={classNames(s.image)} />} */}
-            <PostHeader
-                username={authorUsername}
-                photo={authorPhoto}
-                userId={authorId.toString()}
-                isMyPost={isMyPost}
-                postId={postId.toString()}
-            />
+            <PostHeader post={post} />
             <PostTitle title={title} />
             <PostImage image={postImage} />
             <PostContent value={content} className={classNames('mt-4')} />

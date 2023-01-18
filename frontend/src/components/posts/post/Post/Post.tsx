@@ -33,7 +33,6 @@ const Post: FC<ITestPostProps> = ({ post }) => {
     } = post;
     return (
         <div className={classNames(s.post)}>
-            {/* {image !== null && <img src={image} alt='image' className={classNames(s.image)} />} */}
             <PostHeader post={post} />
             <PostTitle title={title} postId={postId.toString()} />
             <PostImage image={postImage} />
@@ -45,22 +44,6 @@ const Post: FC<ITestPostProps> = ({ post }) => {
                 postId={postId.toString()}
                 countComments={countComments}
             />
-
-            {/* <div className={'flex justify-between'}> */}
-            {/*     <Link to={`${PathsToNavigate.USER}/${authorId}`}> */}
-            {/*         <p>{username}</p> */}
-            {/*     </Link> */}
-            {/*     <Link to={`${PathsToNavigate.POST}/${id}`}> */}
-            {/*         <p>{title}</p> */}
-            {/*     </Link> */}
-            {/* </div> */}
-            {/* <div className={'flex justify-between'}> */}
-            {/*     <Content value={content} /> */}
-            {/*     <p>{likes}</p> */}
-            {/*     <div className={classNames('mt-auto', 'flex', 'justify-around')}> */}
-            {/*         {tags?.length > 0 && tags.map((tag) => <Tag tag={tag} key={tag} />)} */}
-            {/*     </div> */}
-            {/* </div> */}
         </div>
     );
 };

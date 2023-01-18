@@ -1,0 +1,48 @@
+$modal-border-radius: .8rem;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.53);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  outline: none;
+  border-radius: $modal-border-radius;
+  transform: translateY(-10vh);
+}
+
+.body {
+  //overflow-y: hidden;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.alertHeader {
+  background: #d2d2d2;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+
+  border-top-left-radius: $modal-border-radius;
+  border-top-right-radius: $modal-border-radius;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.text {
+  color: #1a1a1a;
+}

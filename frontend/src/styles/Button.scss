@@ -19,6 +19,19 @@
   --bg-button-blue-hover: #3d769d;
   --bg-button-blue-active: #3A6B87;
   --text-color-button-blue: #fff;
+
+  // button red
+  --bg-button-red: #b21f1f;
+  --bg-button-red-hover: #881d2a;
+  --bg-button-red-active: #b91e1e;
+  --text-color-button-red: #fff;
+
+
+  // button gray
+  --bg-button-gray: #7c7c7c;
+  --bg-button-gray-hover: #6b6b6b;
+  --bg-button-gray-active: #5b5b5b;
+  --text-color-button-gray: #fff;
 }
 
 :root[data-theme="light"] {
@@ -34,4 +47,17 @@
   --bg-button-blue-hover: #3d769d;
   --bg-button-blue-active: #3A6B87;
   --text-color-button-blue: #fff;
+
+  // button red
+  --bg-button-red: #b21f1f;
+  --bg-button-red-hover: #881d2a;
+  --bg-button-red-active: #b91e1e;
+  --text-color-button-red: #fff;
+
+
+  // button gray
+  --bg-button-gray: #7c7c7c;
+  --bg-button-gray-hover: #6b6b6b;
+  --bg-button-gray-active: #5b5b5b;
+  --text-color-button-gray: #fff;
 }

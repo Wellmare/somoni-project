@@ -9,10 +9,11 @@ interface IButtonProps {
     color: ButtonColors;
     size: ButtonSizes;
     children: ReactNode;
+    className?: string;
     [x: string]: any;
 }
 
-const Button: FC<IButtonProps> = ({ size, color, children, ...props }) => {
+const Button: FC<IButtonProps> = ({ size, color, children, className, ...props }) => {
     let sizeClass: string;
     switch (size) {
         case ButtonSizes.sm:
@@ -34,10 +35,16 @@ const Button: FC<IButtonProps> = ({ size, color, children, ...props }) => {
         case ButtonColors.blue:
             colorClass = s.blue;
             break;
+        case ButtonColors.gray:
+            colorClass = s.gray;
+            break;
+        case ButtonColors.red:
+            colorClass = s.red;
+            break;
     }
 
     return (
-        <button className={classNames(s.button, sizeClass, colorClass)} {...props}>
+        <button className={classNames(s.button, sizeClass, colorClass, className)} {...props}>
             {children}
         </button>
     );

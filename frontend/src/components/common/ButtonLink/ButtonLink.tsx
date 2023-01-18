@@ -23,6 +23,12 @@ const ButtonLink: FC<IButtonLinkProps> = ({ color, linkTo, children, ...props })
         case ButtonColors.blue:
             colorClass = s.blue;
             break;
+        case ButtonColors.gray:
+            colorClass = s.gray;
+            break;
+        case ButtonColors.red:
+            colorClass = s.red;
+            break;
     }
 
     return (

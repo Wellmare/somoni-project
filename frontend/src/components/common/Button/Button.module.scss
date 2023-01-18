@@ -40,6 +40,32 @@
     }
   }
 
+  &.red {
+    color: var(--text-color-button-red);
+    background-color: var(--bg-button-red);
+
+    &:hover {
+      background-color: var(--bg-button-red-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-red-active);
+    }
+  }
+
+  &.gray {
+    color: var(--text-color-button-gray);
+    background-color: var(--bg-button-gray);
+
+    &:hover {
+      background-color: var(--bg-button-gray-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-gray-active);
+    }
+  }
+
   &.sm {
     padding: 0.5rem var(--btn-padding-sm);
   }

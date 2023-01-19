@@ -5,7 +5,7 @@ import { selectIsAuth } from '../../../redux/slices/authSlice';
 import { useGetCommentsQuery } from '../../../service/commentsApiSlice';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormCreateComment from '../../forms/comments/FormCreateComment/FormCreateComment';
-import Comment from '../Comment/Comment';
+import Comment from '../comment/Comment/Comment';
 
 interface ICommentsProps {
     postId: string;

@@ -12,8 +12,8 @@ interface IPhotoInputProps {
 const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image, ...props }) => {
     return (
         <div className={classNames('mb-3')}>
-            <div {...props} onClick={() => openFilePicker()}>
-                {image !== null && <img src={image} alt='' className={s.img} />}
+            <div {...props} onClick={() => openFilePicker()} className={s.square}>
+                {image !== null && <img src={image} alt='photo input' />}
             </div>
         </div>
     );

@@ -1,17 +1,18 @@
-import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import s from './Comment.module.scss';
 
-import { useDeleteCommentMutation } from '../../../service/commentsApiSlice';
-import { IComment } from '../../../types/redux/comments/IComment';
-import { AvatarSize } from '../../../types/UI/Avatar.types';
-import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import { pathsToNavigate } from '../../../utils/pathsToNavigate';
-import Avatar from '../../common/Avatar/Avatar';
-import FormEditComment from '../../forms/comments/FormEditComment/FormEditComment';
+import { useDeleteCommentMutation } from '../../../../service/commentsApiSlice';
+import { IComment } from '../../../../types/redux/comments/IComment';
+import { AvatarSize } from '../../../../types/UI/Avatar.types';
+import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
+import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
+import Avatar from '../../../common/Avatar/Avatar';
+import FormEditComment from '../../../forms/comments/FormEditComment/FormEditComment';
+import CommentDeleteButton from '../CommentDeleteButton/CommentDeleteButton';
+import CommentEditButton from '../CommentEditButton/CommentEditButton';
 
 interface ICommentProps {
     comment: IComment;
@@ -43,16 +44,8 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
                 <div className={s.content}>{content}</div>
             )}
 
-            {isMyComment && !isEdit && (
-                <div className={classNames('text-red-600', 'cursor-pointer')} onClick={onDelete}>
-                    Delete
-                </div>
-            )}
-            {isMyComment && (
-                <div className={classNames('cursor-pointer', 'ml-5')} onClick={() => setIsEdit((old) => !old)}>
-                    Edit
-                </div>
-            )}
+            {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />}
+            {isMyComment && <CommentEditButton setIsEdit={setIsEdit} />}
         </div>
     );
 };

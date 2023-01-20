@@ -2,11 +2,11 @@ import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { IDataToGetPost, IDataToLikePost } from '../types/redux/post/IDataTo';
-import { IPost } from '../types/redux/posts/IPost';
+import { IPostServerResponse } from '../types/redux/posts/IPostServerResponse';
 
 export const postApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getPost: builder.query<IPost, IDataToGetPost>({
+        getPost: builder.query<IPostServerResponse, IDataToGetPost>({
             query: ({ id }) => ({
                 url: `${apiEndpoints.post}${id}`,
             }),

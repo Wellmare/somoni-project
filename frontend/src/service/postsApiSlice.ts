@@ -2,12 +2,12 @@ import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { IDataToDelete, IDataToEditPost, IDataToGetPosts } from '../types/redux/posts/IDataTo';
-import { IPost } from '../types/redux/posts/IPost';
-import { IPosts } from '../types/redux/posts/IPosts';
+import { IPostServerResponse } from '../types/redux/posts/IPostServerResponse';
+import { IPostsServerResponse } from '../types/redux/posts/IPostsServerResponse';
 
 export const postsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getPosts: builder.query<IPosts, IDataToGetPosts>({
+        getPosts: builder.query<IPostsServerResponse, IDataToGetPosts>({
             query: ({ page, tag }) => ({
                 params: {
                     page,
@@ -19,7 +19,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
                     ? result.results.map((result) => ({ type: 'Post', id: result.id }))
                     : [{ type: 'Post', id: 'LIST' }],
         }),
-        createPost: builder.mutation<IPost, FormData>({
+        createPost: builder.mutation<IPostServerResponse, FormData>({
             query: (formData) => ({
                 url: apiEndpoints.posts,
                 method: 'POST',
@@ -28,7 +28,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Post'],
         }),
 
-        editPost: builder.mutation<IPost, IDataToEditPost>({
+        editPost: builder.mutation<IPostServerResponse, IDataToEditPost>({
             query: ({ formData, id }) => ({
                 url: `${apiEndpoints.post}${id}/`,
                 method: 'PUT',
@@ -39,7 +39,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
                 { type: 'Single Post', id: arg.id },
             ],
         }),
-        deletePost: builder.mutation<IPost, IDataToDelete>({
+        deletePost: builder.mutation<IPostServerResponse, IDataToDelete>({
             query: ({ id }) => ({
                 url: `${apiEndpoints.post}${id}/`,
                 method: 'DELETE',

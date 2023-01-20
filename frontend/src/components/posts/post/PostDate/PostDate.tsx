@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 
+import { getLocalDateFromString } from '../../../../utils/getLocalDateFromString';
+
 interface IPostDateProps {
     date: string;
 }
 
 const PostDate: FC<IPostDateProps> = ({ date }) => {
-    const parsedDate = new Date(date);
-
-    const localeDate = parsedDate.toLocaleDateString();
-    const time = `${parsedDate.getHours()}:${parsedDate.getMinutes()}`;
-
-    const dateWithTime = `${localeDate}: ${time}`;
+    const dateWithTime = getLocalDateFromString(date);
 
     return <div>{dateWithTime}</div>;
 };

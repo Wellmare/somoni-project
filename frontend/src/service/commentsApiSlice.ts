@@ -1,8 +1,8 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IComment } from '../types/redux/comments/IComment';
-import { IComments } from '../types/redux/comments/IComments';
+import { ICommentServerResponse } from '../types/redux/comments/ICommentServerResponse';
+import { ICommentsServerResponse } from '../types/redux/comments/ICommentsServerResponse';
 import {
     IDataToCreateComment,
     IDataToDeleteComment,
@@ -12,7 +12,7 @@ import {
 
 export const commentsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getComments: builder.query<IComments, IDataToGetComments>({
+        getComments: builder.query<ICommentsServerResponse, IDataToGetComments>({
             query: ({ postId }) => ({
                 url: `${apiEndpoints.post}${postId}/comments`,
             }),
@@ -22,7 +22,7 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
             //     ? [...result.results.map((comment) => ({ type: 'Comments' as const, id: comment.id })), 'Comments']
             //     : ['Comments'],
         }),
-        createComment: builder.mutation<IComment, IDataToCreateComment>({
+        createComment: builder.mutation<ICommentServerResponse, IDataToCreateComment>({
             query: ({ content, postId }) => ({
                 url: `${apiEndpoints.post}${postId}/comments/`,
                 method: 'POST',
@@ -40,7 +40,7 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Comments'],
         }),
-        editComment: builder.mutation<IComment, IDataToEditComment>({
+        editComment: builder.mutation<ICommentServerResponse, IDataToEditComment>({
             query: ({ commentId, content }) => ({
                 url: `${apiEndpoints.comment}${commentId}/`,
                 method: 'PUT',

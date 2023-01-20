@@ -36,11 +36,13 @@ const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsE
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classNames('w-full', 'pl-5')}>
-            <CommentContentInput control={control} />
+            <div className={classNames('flex', 'justify-between', 'items-end')}>
+                <CommentContentInput control={control} />
 
-            <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
-                Редактировать
-            </Button>
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
+                    Редактировать
+                </Button>
+            </div>
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 <Success>Комментарий отредактирован</Success>

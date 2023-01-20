@@ -77,16 +77,22 @@ const FormCreatePost: FC = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <TitleInput control={control} />
+            <div className={'mb-3'}>
+                <TitleInput control={control} />
+            </div>
             <PhotoInput
                 image={filesContent?.[0]?.content}
                 openFilePicker={openFilePicker}
                 className={classNames(s.image)}
             />
 
-            <FormInputDraft control={control} name={'content'} watch={watch} setValue={setValue} />
+            <div className={'mb-3'}>
+                <FormInputDraft control={control} name={'content'} watch={watch} setValue={setValue} />
+            </div>
 
-            <TagsInput control={control} />
+            <div className={'mb-3'}>
+                <TagsInput control={control} />
+            </div>
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 <Success>Пост создан</Success>

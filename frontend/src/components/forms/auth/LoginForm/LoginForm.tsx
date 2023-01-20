@@ -31,8 +31,12 @@ const LoginForm: FC = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <UsernameInput control={control} />
-            <PasswordInput control={control} />
+            <div className={'mb-3'}>
+                <UsernameInput control={control} />
+            </div>
+            <div className={'mb-3'}>
+                <PasswordInput control={control} />
+            </div>
             <ServerResponse
                 responseError={error}
                 isError={isError}

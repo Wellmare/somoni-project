@@ -89,10 +89,15 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                     className={classNames(s.avatar)}
                 />
 
-                <UsernameInput control={control} />
-                <EmailInput control={control} />
-
-                <StatusInput control={control} />
+                <div className={'mb-3'}>
+                    <UsernameInput control={control} />
+                </div>
+                <div className={'mb-3'}>
+                    <EmailInput control={control} />
+                </div>
+                <div className={'mb-3'}>
+                    <StatusInput control={control} />
+                </div>
 
                 <ServerResponse
                     responseError={error}

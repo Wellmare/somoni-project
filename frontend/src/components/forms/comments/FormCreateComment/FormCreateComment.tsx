@@ -33,7 +33,9 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <CommentContentInput control={control} />
+            <div className={'mb-3'}>
+                <CommentContentInput control={control} />
+            </div>
 
             <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
                 Создать

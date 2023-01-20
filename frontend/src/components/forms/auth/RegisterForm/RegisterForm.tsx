@@ -76,11 +76,19 @@ const RegisterForm: FC = () => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <UsernameInput control={control} />
-                <PasswordInput control={control} />
-                <PasswordInput control={control} label={'password2'} id={'password2'} />
+                <div className={'mb-3'}>
+                    <UsernameInput control={control} />
+                </div>
+                <div className={'mb-3'}>
+                    <PasswordInput control={control} />
+                </div>
+                <div className={'mb-3'}>
+                    <PasswordInput control={control} label={'password2'} id={'password2'} />
+                </div>
 
-                <EmailInput control={control} />
+                <div className={'mb-3'}>
+                    <EmailInput control={control} />
+                </div>
 
                 <PhotoInput
                     image={filesContent?.[0]?.content}

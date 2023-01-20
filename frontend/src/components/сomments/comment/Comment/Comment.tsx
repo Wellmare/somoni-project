@@ -1,27 +1,20 @@
 import React, { FC, useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
-import s from './Comment.module.scss';
-
+import { CommentContext } from '../../../../context/CommentContext';
 import { useDeleteCommentMutation } from '../../../../service/commentsApiSlice';
 import { IComment } from '../../../../types/redux/comments/IComment';
-import { AvatarSize } from '../../../../types/UI/Avatar.types';
+import { ICommentServerResponse } from '../../../../types/redux/comments/ICommentServerResponse';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
-import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
-import Avatar from '../../../common/Avatar/Avatar';
-import FormEditComment from '../../../forms/comments/FormEditComment/FormEditComment';
-import CommentDeleteButton from '../CommentDeleteButton/CommentDeleteButton';
-import CommentEditButton from '../CommentEditButton/CommentEditButton';
+import CommentContent from '../CommentContent/CommentContent';
+import CommentHeader from '../CommentHeader/CommentHeader';
 
 interface ICommentProps {
-    comment: IComment;
+    comment: ICommentServerResponse;
 }
 
 const Comment: FC<ICommentProps> = ({ comment }) => {
-    const { content, author, id, date, photo: avatar, username, isMyComment } = comment;
+    const { content, author, id, date, photo, username, isMyComment, post } = comment;
     const [deleteComment] = useDeleteCommentMutation();
-
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const onDelete = (): void => {
@@ -30,23 +23,47 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
         });
     };
 
-    return (
-        <div className={s.comment}>
-            <Link to={pathsToNavigate.user(author.toString())}>
-                <Avatar size={AvatarSize.small}>
-                    <img src={avatar} alt={username} />
-                </Avatar>
-                <p>{username}</p>
-            </Link>
-            {isEdit ? (
-                <FormEditComment content={content} commentId={id.toString()} setIsEdit={setIsEdit} />
-            ) : (
-                <div className={s.content}>{content}</div>
-            )}
+    const enhancedComment: IComment = {
+        isMyComment,
+        commentId: id.toString(),
+        username,
+        date,
+        avatarLink: photo,
+        content,
+        authorId: id.toString(),
+        postId: post,
+    };
+    const editComment = {
+        isEdit,
+        setIsEdit,
+    };
 
-            {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />}
-            {isMyComment && <CommentEditButton setIsEdit={setIsEdit} />}
-        </div>
+    return (
+        <CommentContext.Provider
+            value={{
+                comment: enhancedComment,
+                edit: editComment,
+            }}
+        >
+            <div>
+                {/* <Link to={pathsToNavigate.user(author.toString())}> */}
+                {/*     <Avatar size={AvatarSize.small}> */}
+                {/*         <img src={avatar} alt={username} /> */}
+                {/*     </Avatar> */}
+                {/*     <p>{username}</p> */}
+                {/* </Link> */}
+                {/* {isEdit ? ( */}
+                {/*     <FormEditComment content={content} commentId={id.toString()} setIsEdit={setIsEdit} /> */}
+                {/* ) : ( */}
+                {/*     <div className={s.content}>{content}</div> */}
+                {/* )} */}
+
+                {/* {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />} */}
+                {/* {isMyComment && <CommentEditButton setIsEdit={setIsEdit} />} */}
+                <CommentHeader onDelete={onDelete} />
+                <CommentContent />
+            </div>
+        </CommentContext.Provider>
     );
 };
 

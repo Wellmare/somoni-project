@@ -21,7 +21,7 @@ const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, ...props })
     }, [error]);
 
     return (
-        <div className={classNames('mb-3')}>
+        <div>
             <label htmlFor={id} className={classNames('block')}>
                 {label}
             </label>

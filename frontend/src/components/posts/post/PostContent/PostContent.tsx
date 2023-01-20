@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import classNames from 'classnames';
+import React, { FC, useContext } from 'react';
 import ReactQuill from 'react-quill';
 
-interface IContentProps {
-    value: string;
-    [x: string]: any;
-}
+import { PostContext } from '../../../../context/PostContext';
 
-const PostContent: FC<IContentProps> = ({ value, ...props }) => {
+const PostContent: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
+    const { content } = post;
+
     return (
         <>
-            <ReactQuill value={value} readOnly={true} theme={'bubble'} {...props} />
+            <ReactQuill value={content} readOnly={true} theme={'bubble'} className={classNames('mt-4')} />
         </>
     );
 };

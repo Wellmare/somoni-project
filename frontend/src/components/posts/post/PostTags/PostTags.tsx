@@ -1,13 +1,14 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
+import { PostContext } from '../../../../context/PostContext';
 import PostTag from '../PostTag/PostTag';
 
-interface IPostTagsProps {
-    tags: string[];
-}
+const PostTags: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
+    const { tags } = post;
 
-const PostTags: FC<IPostTagsProps> = ({ tags }) => {
     return (
         <div className={classNames('flex', 'justify-start', 'items-center')}>
             {tags.map((tag) => (

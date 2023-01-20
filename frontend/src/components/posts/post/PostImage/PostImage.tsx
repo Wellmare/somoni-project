@@ -1,22 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import s from './PostImage.module.scss';
 
-import { LinkType } from '../../../../types/redux/LinkType';
+import { PostContext } from '../../../../context/PostContext';
 
-interface IPostImageProps {
-    image: LinkType;
-}
+const PostImage: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
 
-const PostImage: FC<IPostImageProps> = ({ image }) => {
-    if (image === null) {
-        return <></>;
-    }
+    const { postImageLink, title } = post;
+    if (postImageLink === null) return null;
 
     return (
         <div className={s.container}>
-            <a href={image} target={'_blank'} rel='noreferrer'>
-                <img src={image} alt='post image' className={s.image} />
+            <a href={postImageLink} target={'_blank'} rel='noreferrer'>
+                <img src={postImageLink} alt={title} className={s.image} />
             </a>
         </div>
     );

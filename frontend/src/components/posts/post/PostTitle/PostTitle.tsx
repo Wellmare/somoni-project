@@ -1,14 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { PostContext } from '../../../../context/PostContext';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 
-interface IPostTitleProps {
-    title: string;
-    postId: string;
-}
+const PostTitle: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
 
-const PostTitle: FC<IPostTitleProps> = ({ title, postId }) => {
+    const { postId, title } = post;
+
     return (
         <Link to={pathsToNavigate.post(postId)}>
             <h3>{title}</h3>

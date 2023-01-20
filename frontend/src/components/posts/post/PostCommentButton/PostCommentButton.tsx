@@ -1,20 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import comment from '../../../../assets/comment.svg';
+import { PostContext } from '../../../../context/PostContext';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import PostButton from '../PostButton/PostButton';
 
-interface IPostCommentButtonProps {
-    comments: number;
-    postId: string;
-}
+const PostCommentButton: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
+    const { postId, commentsCount } = post;
 
-const PostCommentButton: FC<IPostCommentButtonProps> = ({ comments, postId }) => {
     return (
         <Link to={pathsToNavigate.post(postId)}>
-            <PostButton count={comments}>
+            <PostButton count={commentsCount}>
                 <img src={comment} alt='comment' />
             </PostButton>
         </Link>

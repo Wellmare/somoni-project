@@ -1,22 +1,21 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 
 import s from './PostLikeButton.module.scss';
 
 import liked from '../../../../assets/liked.svg';
 import nonLiked from '../../../../assets/non-liked.svg';
+import { PostContext } from '../../../../context/PostContext';
 import { useLikePostMutation, useUnlikePostMutation } from '../../../../service/postApiSlice';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import PostButton from '../PostButton/PostButton';
 
-interface IPostLikeButtonProps {
-    isLiked: boolean;
-    postId: string;
-    countLikes: number;
-}
+const PostLikeButton: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) return null;
+    const { isLiked, likesCount, postId } = post;
 
-const PostLikeButton: FC<IPostLikeButtonProps> = ({ isLiked, countLikes, postId }) => {
     const [localIsLiked, setLocalIsLiked] = useState<boolean>(isLiked);
-    const [localCountLikes, setLocalCountLikes] = useState<number>(countLikes);
+    const [localCountLikes, setLocalCountLikes] = useState<number>(likesCount);
 
     const [like] = useLikePostMutation();
     const [unlike] = useUnlikePostMutation();

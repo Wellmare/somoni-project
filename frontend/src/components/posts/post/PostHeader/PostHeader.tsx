@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
-import { IPost } from '../../../../types/redux/posts/IPost';
+import { PostContext } from '../../../../context/PostContext';
 import PostAuthor from '../PostAuthor/PostAuthor';
 import PostDeleteButton from '../PostDeleteButton/PostDeleteButton';
 import PostEditButton from '../PostEditButton/PostEditButton';
@@ -13,18 +13,17 @@ import PostEditButton from '../PostEditButton/PostEditButton';
 //     isMyPost: boolean;
 //     postId: string;
 // }
-interface IPostHeaderProps {
-    post: IPost;
-}
+const PostHeader: FC = () => {
+    const { post } = useContext(PostContext);
+    if (post === null) {
+        return null;
+    }
 
-const PostHeader: FC<IPostHeaderProps> = ({ post }) => {
-    const { isMyPost, username, date, id, photo, author } = post;
-    const postId = id.toString();
-    const userId = author.toString();
+    const { isMyPost, username, avatarLink, dateString, userId, postId } = post;
 
     return (
         <div className={classNames('flex', 'justify-between', 'items-center')}>
-            <PostAuthor username={username} photo={photo} userId={userId} date={date} />
+            <PostAuthor username={username} photo={avatarLink} userId={userId} date={dateString} />
             {isMyPost && (
                 <div className={classNames('flex', 'items-center')}>
                     <PostEditButton postId={postId} />

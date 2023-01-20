@@ -1,10 +1,10 @@
 export interface IComment {
-    id: number;
+    commentId: string;
     content: string;
     date: string;
-    author: number;
-    post: number;
-    photo: string;
+    authorId: string;
+    postId: number;
+    avatarLink: string;
     username: string;
     isMyComment: boolean;
 }

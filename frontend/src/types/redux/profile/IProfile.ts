@@ -1,5 +1,5 @@
 import { LinkType } from '../LinkType';
-import { IPost } from '../posts/IPost';
+import { IPostServerResponse } from '../posts/IPostServerResponse';
 
 export interface IProfile {
     next: LinkType;
@@ -13,5 +13,5 @@ export interface IProfile {
     isMyProfile: boolean;
     id: string;
 
-    results: IPost[] | null;
+    results: IPostServerResponse[] | null;
 }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useFilePicker } from 'use-file-picker';
 
@@ -10,6 +10,7 @@ import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import { composeFormData } from '../../../../utils/composeFormData';
 import Button from '../../../common/Button/Button';
 import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
+import FormInput from '../../../common/FormInput/FormInput';
 import PhotoInput from '../../../common/PhotoInput/PhotoInput';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
@@ -81,7 +82,30 @@ const RegisterForm: FC = () => {
                     <PasswordInput control={control} />
                 </div>
                 <div className={'mb-3'}>
-                    <PasswordInput control={control} label={'password2'} id={'password2'} />
+                    <Controller
+                        render={({ field, fieldState, formState }) => (
+                            <FormInput
+                                id={'password2'}
+                                error={fieldState.error}
+                                label={'Повтор пароля'}
+                                placeholder={'password'}
+                                {...field}
+                            />
+                        )}
+                        control={control}
+                        name={'password2'}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'Поле обязательно',
+                            },
+                            validate: (value) => {
+                                if (value !== watch('password')) {
+                                    return 'Пароли не совпадают!';
+                                }
+                            },
+                        }}
+                    />
                 </div>
 
                 <div className={'mb-3'}>

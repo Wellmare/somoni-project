@@ -4,7 +4,7 @@ import { useGetUserQuery } from '../../../service/userApiSlice';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import ProfileSkeleton from '../../skeletons/ProfileSkeleton';
-import Profile from '../Profile/Profile';
+import Profile from '../profile-components/Profile/Profile';
 
 interface IProfileWithQueryProps {
     id: string;
@@ -30,7 +30,7 @@ const ProfileWithQuery: FC<IProfileWithQueryProps> = ({ id }) => {
             >
                 {data != null && (
                     <>
-                        <Profile profile={data} withEdit={data.isMyProfile} />
+                        <Profile profile={data} />
                         {data?.results !== null && data.results.length > 0 && (
                             <Pagination countPages={Math.ceil(data.count / 10)} handlePageChange={handlePageChange} />
                         )}

@@ -36,8 +36,8 @@ const CommentHeader: FC<IPostHeaderProps> = ({ onDelete }) => {
                 </div>
             </Link>
             <div className={classNames('flex', 'justify-center', 'items-center')}>
-                {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />}
                 {isMyComment && <CommentEditButton setIsEdit={setIsEdit} />}
+                {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />}
             </div>
         </div>
     );

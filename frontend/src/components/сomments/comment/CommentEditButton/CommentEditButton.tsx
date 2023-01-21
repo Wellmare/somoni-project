@@ -9,7 +9,7 @@ interface ICommentEditButtonProps {
 
 const CommentEditButton: FC<ICommentEditButtonProps> = ({ setIsEdit }) => {
     return (
-        <div className={classNames('cursor-pointer', 'ml-5')} onClick={() => setIsEdit((old) => !old)}>
+        <div className={classNames('cursor-pointer', 'mr-3')} onClick={() => setIsEdit((old) => !old)}>
             <div className={'icon'}>
                 <img src={EditIcon} alt='edit' />
             </div>

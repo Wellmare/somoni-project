@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { useGetPostsQuery } from '../../../service/postsApiSlice';
+import { enhanceIPostServerResponse } from '../../../utils/enhanceIPostServerResponse';
 import Pagination from '../../common/Pagination/Pagination';
 import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import PostsSkeletons from '../../skeletons/PostsSkeletons';
@@ -34,7 +35,7 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage, tag }) => {
             >
                 <Pagination countPages={countPages} handlePageChange={handlePageChange} />
                 {posts?.results?.map((post) => (
-                    <Post post={post} key={post.id} />
+                    <Post post={enhanceIPostServerResponse(post)} key={post.id} />
                 ))}
                 <Pagination countPages={countPages} handlePageChange={handlePageChange} />
             </ServerResponse>

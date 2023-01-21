@@ -3,12 +3,12 @@ import { apiSlice } from './index';
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { IDataToGetProfile, IDataToGetProfileInfo } from '../types/redux/profile/IDataTo';
 import { IDataToEditProfile } from '../types/redux/profile/IDataToEditProfile';
-import { IProfile } from '../types/redux/profile/IProfile';
+import { IPaginatedProfileResponse } from '../types/redux/profile/IPaginatedProfileResponse';
 import { IProfileInfo } from '../types/redux/profile/IProfileInfo';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getUser: builder.query<IProfile, IDataToGetProfile>({
+        getUser: builder.query<IPaginatedProfileResponse, IDataToGetProfile>({
             query: ({ userId, postsPage = 1 }) => ({
                 url: `${apiEndpoints.user}${userId}/`,
                 params: {
@@ -18,7 +18,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Profile'],
         }),
 
-        editUser: builder.mutation<IProfile, FormData>({
+        editUser: builder.mutation<IPaginatedProfileResponse, FormData>({
             query: (formData) => ({
                 url: apiEndpoints.editProfile,
                 method: 'PUT',

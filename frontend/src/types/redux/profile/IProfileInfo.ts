@@ -1,4 +1,4 @@
-import { IProfile } from './IProfile';
+import { IPaginatedProfileResponse } from './IPaginatedProfileResponse';
 
 // export interface IProfileInfo {
 //     username: string;
@@ -9,4 +9,4 @@ import { IProfile } from './IProfile';
 //     // id: string;
 // }
 
-export type IProfileInfo = Omit<IProfile, 'next' & 'previous' & 'count' & 'results'>;
+export type IProfileInfo = Omit<IPaginatedProfileResponse, 'next' & 'previous' & 'count' & 'results'>;

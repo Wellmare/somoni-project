@@ -30,7 +30,7 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
         date,
         avatarLink: photo,
         content,
-        authorId: id.toString(),
+        authorId: author.toString(),
         postId: post,
     };
     const editComment = {

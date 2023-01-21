@@ -89,7 +89,7 @@ const RegisterForm: FC = () => {
                 </div>
 
                 <PhotoInput
-                    image={filesContent?.[0]?.content}
+                    image={filesContent?.[0] === undefined ? null : filesContent[0].content}
                     openFilePicker={openFilePicker}
                     type={IPhotoInputType.circle}
                 />

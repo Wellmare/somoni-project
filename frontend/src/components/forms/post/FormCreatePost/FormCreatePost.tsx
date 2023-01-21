@@ -82,7 +82,7 @@ const FormCreatePost: FC = () => {
                 <TitleInput control={control} />
             </div>
             <PhotoInput
-                image={filesContent?.[0]?.content}
+                image={filesContent?.[0] === undefined ? null : filesContent?.[0].content}
                 openFilePicker={openFilePicker}
                 className={classNames(s.image)}
                 type={IPhotoInputType.square}

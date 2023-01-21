@@ -6,7 +6,6 @@ import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import Button from '../../../common/Button/Button';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
-import Success from '../../../common/Success/Success';
 import CommentContentInput from '../../formInputs/CommentContentInput';
 
 interface CreatePostInputs {
@@ -42,7 +41,7 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
             </Button>
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
-                <Success>Комментарий создан</Success>
+                {/* <Success>Комментарий создан</Success> */}
             </ServerResponse>
         </form>
     );

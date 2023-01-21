@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,13 +8,13 @@ import { useEditUserMutation } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import Button from '../../../common/Button/Button';
 import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
 import PhotoInput from '../../../common/PhotoInput/PhotoInput';
-import s from '../../../common/PhotoInput/PhotoInput.module.scss';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
 import EmailInput from '../../formInputs/EmailInput';
@@ -86,7 +85,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                 <PhotoInput
                     image={filesContent?.[0]?.content === undefined ? photo : filesContent?.[0]?.content}
                     openFilePicker={openFilePicker}
-                    className={classNames(s.avatar)}
+                    type={IPhotoInputType.circle}
                 />
 
                 <div className={'mb-3'}>

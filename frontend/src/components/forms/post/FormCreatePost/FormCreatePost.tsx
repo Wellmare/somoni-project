@@ -8,6 +8,7 @@ import { useFilePicker } from 'use-file-picker';
 import { useCreatePostMutation } from '../../../../service/postsApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
@@ -84,6 +85,7 @@ const FormCreatePost: FC = () => {
                 image={filesContent?.[0]?.content}
                 openFilePicker={openFilePicker}
                 className={classNames(s.image)}
+                type={IPhotoInputType.square}
             />
 
             <div className={'mb-3'}>

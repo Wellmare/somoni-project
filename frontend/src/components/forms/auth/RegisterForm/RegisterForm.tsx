@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -7,12 +6,11 @@ import { useFilePicker } from 'use-file-picker';
 import { useRegister } from '../../../../hooks/useRegister';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import { composeFormData } from '../../../../utils/composeFormData';
 import Button from '../../../common/Button/Button';
 import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
 import PhotoInput from '../../../common/PhotoInput/PhotoInput';
-
-import s from '../../../common/PhotoInput/PhotoInput.module.scss';
 import ServerResponse from '../../../common/ServerResponse/ServerResponse';
 import Success from '../../../common/Success/Success';
 import EmailInput from '../../formInputs/EmailInput';
@@ -93,7 +91,7 @@ const RegisterForm: FC = () => {
                 <PhotoInput
                     image={filesContent?.[0]?.content}
                     openFilePicker={openFilePicker}
-                    className={classNames(s.avatar)}
+                    type={IPhotoInputType.circle}
                 />
 
                 <ServerResponse

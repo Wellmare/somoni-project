@@ -7,6 +7,7 @@ import ServerResponse from '../../components/common/ServerResponse/ServerRespons
 import Post from '../../components/posts/post/Post/Post';
 import Comments from '../../components/сomments/Comments/Comments';
 import { useGetPostQuery } from '../../service/postApiSlice';
+import { enhanceIPostServerResponse } from '../../utils/enhanceIPostServerResponse';
 
 const PostPage: FC = () => {
     const params = useParams();
@@ -27,7 +28,7 @@ const PostPage: FC = () => {
                 messages={[{ statusCode: 404, message: 'Пост не найден' }]}
             >
                 <div className={classNames('w-6/12', 'mx-auto')}>
-                    {post != null && <Post post={post} />}
+                    {post != null && <Post post={enhanceIPostServerResponse(post)} />}
                     <Comments postId={postId} />
                 </div>
             </ServerResponse>

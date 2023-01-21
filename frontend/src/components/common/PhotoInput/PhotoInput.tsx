@@ -19,8 +19,8 @@ const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image, type, ...prop
         return (
             <div className={classNames('mb-3')}>
                 <Avatar size={AvatarSize.large}>
-                    <div {...props} onClick={() => openFilePicker()}>
-                        {image !== null && <img src={image} alt='photo input' />}
+                    <div {...props} onClick={() => openFilePicker()} className={classNames('w-full', 'h-full')}>
+                        {image !== null ? <img src={image} alt='photo input' /> : <div className={s.avatar}></div>}
                     </div>
                 </Avatar>
             </div>

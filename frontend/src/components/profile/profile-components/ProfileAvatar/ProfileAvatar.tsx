@@ -11,7 +11,9 @@ const ProfileAvatar: FC = () => {
 
     return (
         <Avatar size={AvatarSize.large}>
-            <img src={avatarLink} alt={username} />
+            <a href={avatarLink} target={'_blank'} rel='noreferrer'>
+                <img src={avatarLink} alt={username} />
+            </a>
         </Avatar>
     );
 };

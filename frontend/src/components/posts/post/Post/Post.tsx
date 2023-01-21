@@ -6,7 +6,6 @@ import s from './Post.module.scss';
 
 import { IEdit } from '../../../../types/IEdit';
 import { IPost } from '../../../../types/redux/posts/IPost';
-import { IPostServerResponse } from '../../../../types/redux/posts/IPostServerResponse';
 import PostButtons from '../PostButtons/PostButtons';
 import PostContent from '../PostContent/PostContent';
 import PostHeader from '../PostHeader/PostHeader';
@@ -15,43 +14,11 @@ import PostTags from '../PostTags/PostTags';
 import PostTitle from '../PostTitle/PostTitle';
 
 interface ITestPostProps {
-    post: IPostServerResponse;
+    post: IPost;
 }
 
 const Post: FC<ITestPostProps> = ({ post }) => {
-    const {
-        content,
-        username: authorUsername,
-        title,
-        likes: likesCount,
-        id: postId,
-        image: postImageLink,
-        author: authorId,
-        tags,
-        isLiked,
-        isMyPost,
-        photo: avatarLink,
-        date: dateString,
-        comments: commentsCount,
-    } = post;
-
     const [isEdit, setIsEdit] = useState<boolean>(false);
-
-    const enhancedPost: IPost = {
-        tags,
-        isMyPost,
-        postId: postId.toString(),
-        title,
-        content,
-        userId: authorId.toString(),
-        username: authorUsername,
-        isLiked,
-        avatarLink,
-        dateString,
-        postImageLink,
-        likesCount,
-        commentsCount,
-    };
 
     const edit: IEdit = {
         setIsEdit,
@@ -59,7 +26,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
     };
 
     return (
-        <PostContext.Provider value={{ post: enhancedPost, edit }}>
+        <PostContext.Provider value={{ post, edit }}>
             <div className={classNames(s.post)}>
                 <PostHeader />
                 <PostTitle />

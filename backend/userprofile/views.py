@@ -20,8 +20,14 @@ from django.core.mail import EmailMessage
 
 @api_view(['POST'])
 def send_email(request):
-    msg = EmailMessage('Request Callback',
-                       'Here is the message.', to=[request.data['email']])
+    try:
+        text = request.data['body']
+        title = request.data['title']
+        msg = EmailMessage(title,
+                           text, to=[request.data['email']])
+    except:
+        msg = EmailMessage('Request Callback',
+                           'Here is the message.', to=[request.data['email']])
     msg.send()
     return Response('почта отправлена')
 class userResultsSetPagination(PageNumberPagination):

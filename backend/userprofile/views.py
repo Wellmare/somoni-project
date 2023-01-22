@@ -18,10 +18,10 @@ from userprofile.serializer import profile_serializer
 
 from django.core.mail import EmailMessage
 
-@api_view(['GET'])
+@api_view(['POST'])
 def send_email(request):
     msg = EmailMessage('Request Callback',
-                       'Here is the message.', to=['danila0605danila@yandex.ru'])
+                       'Here is the message.', to=[request.data['email']])
     msg.send()
     return Response('почта отправлена')
 class userResultsSetPagination(PageNumberPagination):

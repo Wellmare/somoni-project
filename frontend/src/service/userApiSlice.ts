@@ -30,6 +30,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: apiEndpoints.editProfile,
             }),
+            providesTags: ['Profile'],
         }),
         getUserInfo: builder.query<IProfileInfo, IDataToGetProfileInfo>({
             query: ({ userId }) => ({

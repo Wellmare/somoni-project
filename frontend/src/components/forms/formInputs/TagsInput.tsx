@@ -12,7 +12,7 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
                 <FormInput
                     id={'tags'}
                     error={fieldState.error}
-                    label={'Тэги'}
+                    label={'Тэги (через пробел)'}
                     placeholder={'Tag tag tag...'}
                     {...field}
                     {...props}

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+from  dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -185,10 +187,10 @@ CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'http://localhost:3000']
 
 AUTH_USER_MODEL = 'myapi.User'
 
-DEFAULT_FROM_EMAIL = 'djangotest55552@mail.ru'
-EMAIL_HOST = 'smtp.mail.ru'
+DEFAULT_FROM_EMAIL = os.getenv("FROM_EMAIL")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'djangotest55552@mail.ru'
-EMAIL_HOST_PASSWORD = 'BuWS05139ydvJpgZyZqE'
+EMAIL_HOST_USER = os.getenv("EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")

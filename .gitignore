@@ -3,7 +3,7 @@ venv
 backend/frontend/node_modules
 backend/frontend//.pnp
 backend/frontend/.pnp.js
-
+backend/.env
 # testing
 backend/frontend//coverage
 

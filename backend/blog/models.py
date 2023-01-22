@@ -26,6 +26,12 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+
+        if img.height > 1300 or img.width > 1300:
+            output_size = (1300, 1300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
 
 
 class PostLike(models.Model):

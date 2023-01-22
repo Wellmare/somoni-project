@@ -29,6 +29,17 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         try:
+            tags = validated_data['tags'][0]
+            tags = tags.split()
+            for tag in tags:
+                if ('#' in tag):
+                    raise serializers.ValidationError(
+                        {"tag": "invalid character = '#'"})
+                else:
+                    pass
+        except KeyError:
+            pass
+        try:
             post = Post()
             post.title = validated_data['title']
             post.content = validated_data['content']
@@ -45,7 +56,10 @@ class CreatePostSerializer(serializers.ModelSerializer):
                 tags = validated_data['tags'][0]
                 tags = tags.split()
                 for tag in tags:
-                    post.tags.add(tag)
+                    if not ('#' in tag):
+                        post.tags.add(tag)
+                    else:
+                        pass
             except KeyError:
                 pass
 
@@ -55,6 +69,17 @@ class CreatePostSerializer(serializers.ModelSerializer):
         return post
 
     def update(self, instance, validated_data):
+        try:
+            tags = validated_data['tags'][0]
+            tags = tags.split()
+            for tag in tags:
+                if ('#' in tag):
+                    raise serializers.ValidationError(
+                        {"tag": "invalid character = '#'"})
+                else:
+                    pass
+        except KeyError:
+            pass
         try:
             instance.title = validated_data.get("title", instance.title)
             instance.content = validated_data.get("content", instance.content)
@@ -66,9 +91,16 @@ class CreatePostSerializer(serializers.ModelSerializer):
                 instance.tags.clear()
                 tags = tags.split()
                 for tag in tags:
-                    instance.tags.add(tag)
+                    if not ('#' in tag):
+                        instance.tags.add(tag)
+                    else:
+                        pass
             except KeyError:
                 pass
+
+
+
+
         except KeyError:
             raise serializers.ValidationError(
                 {"detail": "some field is missing"})

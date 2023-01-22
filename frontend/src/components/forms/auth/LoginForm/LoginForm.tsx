@@ -5,10 +5,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useLogin } from '../../../../hooks/useLogin';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
-import Button from '../../../common/Button/Button';
-import ButtonLink from '../../../common/ButtonLink/ButtonLink';
-import ServerResponse from '../../../common/ServerResponse/ServerResponse';
-import Success from '../../../common/Success/Success';
+import Button from '../../../../ui/Button/Button';
+import ButtonLink from '../../../../ui/ButtonLink/ButtonLink';
+import Success from '../../../../ui/Success/Success';
+import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import PasswordInput from '../../formInputs/PasswordInput';
 import UsernameInput from '../../formInputs/UsernameInput';
 

@@ -1,8 +1,8 @@
 import React, { FC, useContext } from 'react';
 
 import { ProfileContext } from '../../../../context/ProfileContext';
-import Info from '../../../common/Info/Info';
-import Post from '../../../posts/post/Post/Post';
+import Info from '../../../../ui/Info/Info';
+import Post from '../../../posts/post-components/Post/Post';
 
 const ProfilePosts: FC = () => {
     const { posts } = useContext(ProfileContext);

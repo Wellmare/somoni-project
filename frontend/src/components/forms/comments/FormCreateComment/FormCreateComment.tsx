@@ -3,9 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useCreateCommentMutation } from '../../../../service/commentsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import Button from '../../../../ui/Button/Button';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
-import Button from '../../../common/Button/Button';
-import ServerResponse from '../../../common/ServerResponse/ServerResponse';
+import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import CommentContentInput from '../../formInputs/CommentContentInput';
 
 interface CreatePostInputs {

@@ -9,17 +9,17 @@ import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
+import Button from '../../../../ui/Button/Button';
+import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
+import s from '../../../../ui/PhotoInput/PhotoInput.module.scss';
+import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
-import Button from '../../../common/Button/Button';
-import FormInputDraft from '../../../common/FormInputDraft/FormInputDraft';
-import PhotoInput from '../../../common/PhotoInput/PhotoInput';
-import s from '../../../common/PhotoInput/PhotoInput.module.scss';
-import ServerResponse from '../../../common/ServerResponse/ServerResponse';
-import Success from '../../../common/Success/Success';
+import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import TagsInput from '../../formInputs/TagsInput';
 import TitleInput from '../../formInputs/TitleInput';
+import FormInputDraft from '../../inputs/FormInputDraft/FormInputDraft';
 
 interface EditPostInputs {
     title: string;

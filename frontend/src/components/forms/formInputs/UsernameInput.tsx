@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { ICustomInputProps } from '../../../types/ICustomInputProps';
-import FormInput from '../../common/FormInput/FormInput';
+import FormInput from '../inputs/FormInput/FormInput';
 
 const UsernameInput: FC<ICustomInputProps> = ({ control, ...props }) => {
     return (

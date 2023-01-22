@@ -4,10 +4,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useEditCommentMutation } from '../../../../service/commentsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import Button from '../../../../ui/Button/Button';
+import Success from '../../../../ui/Success/Success';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
-import Button from '../../../common/Button/Button';
-import ServerResponse from '../../../common/ServerResponse/ServerResponse';
-import Success from '../../../common/Success/Success';
+import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import CommentContentInput from '../../formInputs/CommentContentInput';
 
 interface EditCommentInputs {

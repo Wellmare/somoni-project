@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import ServerResponse from '../../components/common/ServerResponse/ServerResponse';
 import EditProfileForm from '../../components/forms/profile/EditProfileForm/EditProfileForm';
+import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
 import { useGetDataToEditUserQuery } from '../../service/userApiSlice';
 
 const EditProfilePage: FC = () => {

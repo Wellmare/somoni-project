@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Error from '../../components/common/Error/Error';
-import ServerResponse from '../../components/common/ServerResponse/ServerResponse';
 import FormEditPost from '../../components/forms/post/FormEditPost/FormEditPost';
+import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
 import { useGetPostQuery } from '../../service/postApiSlice';
+import Error from '../../ui/Error/Error';
 
 const EditPostPage: FC = () => {
     const { id: postId } = useParams();

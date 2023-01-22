@@ -8,9 +8,9 @@ import { useAuth } from '../../../hooks/useAuth';
 import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
 import { ButtonColors } from '../../../types/UI/Button.types';
+import ButtonLink from '../../../ui/ButtonLink/ButtonLink';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
-import ButtonLink from '../../common/ButtonLink/ButtonLink';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import HeaderProfileSkeleton from '../../skeletons/HeaderProfileSkeleton';
 import HeaderProfile from '../HeaderProfile/HeaderProfile';
 

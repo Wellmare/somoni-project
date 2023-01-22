@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 import { useAppSelector } from '../../../hooks/reduxHooks';
 import { selectIsAuth } from '../../../redux/slices/authSlice';
 import { useGetCommentsQuery } from '../../../service/commentsApiSlice';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
 import FormCreateComment from '../../forms/comments/FormCreateComment/FormCreateComment';
-import Comment from '../comment/Comment/Comment';
+import ServerResponse from '../../server/ServerResponse/ServerResponse';
+import Comment from '../comment-components/Comment/Comment';
 
 interface ICommentsProps {
     postId: string;

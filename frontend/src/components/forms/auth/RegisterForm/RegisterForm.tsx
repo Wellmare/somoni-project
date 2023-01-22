@@ -7,16 +7,16 @@ import { useRegister } from '../../../../hooks/useRegister';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
+import Button from '../../../../ui/Button/Button';
+import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
+import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
-import Button from '../../../common/Button/Button';
-import { ErrorsFromData } from '../../../common/ErrorsFromData/ErrorsFromData';
-import FormInput from '../../../common/FormInput/FormInput';
-import PhotoInput from '../../../common/PhotoInput/PhotoInput';
-import ServerResponse from '../../../common/ServerResponse/ServerResponse';
-import Success from '../../../common/Success/Success';
+import { ErrorsFromData } from '../../../server/ErrorsFromData/ErrorsFromData';
+import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import EmailInput from '../../formInputs/EmailInput';
 import PasswordInput from '../../formInputs/PasswordInput';
 import UsernameInput from '../../formInputs/UsernameInput';
+import FormInput from '../../inputs/FormInput/FormInput';
 
 interface RegisterPageInputs {
     avatar: string;

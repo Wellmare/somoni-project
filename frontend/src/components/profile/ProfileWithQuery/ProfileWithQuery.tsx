@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 
 import { useGetUserQuery } from '../../../service/userApiSlice';
-import Pagination from '../../common/Pagination/Pagination';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import Pagination from '../../../ui/Pagination/Pagination';
+import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import ProfileSkeleton from '../../skeletons/ProfileSkeleton';
 import Profile from '../profile-components/Profile/Profile';
 

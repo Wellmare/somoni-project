@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 
 import { ProfileContext } from '../../../../context/ProfileContext';
 import { AvatarSize } from '../../../../types/UI/Avatar.types';
-import Avatar from '../../../common/Avatar/Avatar';
+import Avatar from '../../../../ui/Avatar/Avatar';
 
 const ProfileAvatar: FC = () => {
     const { profile } = useContext(ProfileContext);

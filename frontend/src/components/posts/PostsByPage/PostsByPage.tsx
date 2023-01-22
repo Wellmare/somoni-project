@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
 import { useGetPostsQuery } from '../../../service/postsApiSlice';
+import Pagination from '../../../ui/Pagination/Pagination';
 import { enhanceIPostServerResponse } from '../../../utils/enhanceIPostServerResponse';
-import Pagination from '../../common/Pagination/Pagination';
-import ServerResponse from '../../common/ServerResponse/ServerResponse';
+import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import PostsSkeletons from '../../skeletons/PostsSkeletons';
-import Post from '../post/Post/Post';
+import Post from '../post-components/Post/Post';
 
 interface IPostsByPageProps {
     page: number;

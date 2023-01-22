@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Error from '../../components/common/Error/Error';
-import ServerResponse from '../../components/common/ServerResponse/ServerResponse';
-import Post from '../../components/posts/post/Post/Post';
+import Post from '../../components/posts/post-components/Post/Post';
+import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
 import Comments from '../../components/сomments/Comments/Comments';
 import { useGetPostQuery } from '../../service/postApiSlice';
+import Error from '../../ui/Error/Error';
 import { enhanceIPostServerResponse } from '../../utils/enhanceIPostServerResponse';
 
 const PostPage: FC = () => {

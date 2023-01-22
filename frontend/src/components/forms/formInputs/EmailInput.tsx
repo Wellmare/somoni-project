@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 import { emailRegExp } from '../../../other/emailRegExp';
 import { ICustomInputProps } from '../../../types/ICustomInputProps';
-import FormInput from '../../common/FormInput/FormInput';
+import FormInput from '../inputs/FormInput/FormInput';
 
 const EmailInput: FC<ICustomInputProps> = ({ control, ...props }) => {
     return (

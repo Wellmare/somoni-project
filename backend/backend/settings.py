@@ -184,3 +184,11 @@ CORS_ORIGIN_WHITELIST = (
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'http://localhost:3000']
 
 AUTH_USER_MODEL = 'myapi.User'
+
+DEFAULT_FROM_EMAIL = 'djangotest55552@mail.ru'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'djangotest55552@mail.ru'
+EMAIL_HOST_PASSWORD = 'BuWS05139ydvJpgZyZqE'

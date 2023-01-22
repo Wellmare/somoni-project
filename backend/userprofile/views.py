@@ -16,7 +16,14 @@ from collections import OrderedDict
 
 from userprofile.serializer import profile_serializer
 
+from django.core.mail import EmailMessage
 
+@api_view(['GET'])
+def send_email(request):
+    msg = EmailMessage('Request Callback',
+                       'Here is the message.', to=['danila0605danila@yandex.ru'])
+    msg.send()
+    return Response('почта отправлена')
 class userResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'

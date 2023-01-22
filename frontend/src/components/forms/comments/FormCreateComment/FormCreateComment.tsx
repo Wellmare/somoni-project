@@ -23,7 +23,6 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
     const [createComment, { data, error, isError, isLoading, isSuccess }] = useCreateCommentMutation();
 
     const onSubmit: SubmitHandler<CreatePostInputs> = ({ content }) => {
-        console.log(content);
         doAsyncFunc(async () => {
             await createComment({ content, postId });
             setValue('content', '');

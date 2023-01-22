@@ -15,7 +15,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                     page: postsPage,
                 },
             }),
-            providesTags: ['Profile'],
+            providesTags: ['Profile', 'Auth'],
         }),
 
         editUser: builder.mutation<IPaginatedProfileResponse, FormData>({
@@ -30,13 +30,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: apiEndpoints.editProfile,
             }),
-            providesTags: ['Profile'],
+            providesTags: ['Profile', 'Auth'],
         }),
         getUserInfo: builder.query<IProfileInfo, IDataToGetProfileInfo>({
             query: ({ userId }) => ({
                 url: `${apiEndpoints.userInfo}${userId}`,
             }),
-            providesTags: ['Profile'],
+            providesTags: ['Profile', 'Auth'],
         }),
 
         // editPost: builder.mutation<IPost, IDataToEditPost>({

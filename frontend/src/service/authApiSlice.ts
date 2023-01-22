@@ -16,6 +16,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                     password,
                 },
             }),
+            invalidatesTags: ['Auth'],
         }),
         register: builder.mutation<IRegisterResponse, FormData>({
             query: (formData) => ({
@@ -23,6 +24,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: formData,
             }),
+            invalidatesTags: ['Auth'],
         }),
         logout: builder.mutation<undefined, IDataToLogout>({
             query: ({ refresh }) => ({

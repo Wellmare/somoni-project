@@ -2,8 +2,11 @@ import React, { FC, useContext } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import comment from '../../../../assets/svg/comment.svg';
+import s from './PostCommentButton.module.scss';
+
+import { ReactComponent as CommentIcon } from '../../../../assets/svg/comment.svg';
 import { PostContext } from '../../../../context/PostContext';
+import Icon from '../../../../ui/Icon/Icon';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 import PostButton from '../PostButton/PostButton';
 
@@ -15,7 +18,9 @@ const PostCommentButton: FC = () => {
     return (
         <Link to={pathsToNavigate.post(postId)}>
             <PostButton count={commentsCount}>
-                <img src={comment} alt='comment' />
+                <Icon customTypeClassName={s.comment}>
+                    <CommentIcon />
+                </Icon>
             </PostButton>
         </Link>
     );

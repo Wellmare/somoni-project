@@ -1,5 +1,9 @@
 .post {
-  background: #945b5b;
+  background: var(--post-background);
+  color: var(--post-text);
+  border: var(--post-border);
+  border-radius: var(--post-border-radius);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;

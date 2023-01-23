@@ -1,0 +1,15 @@
+:root {
+  --post-border-radius: .7rem;
+}
+
+:root[data-theme="light"] {
+  --post-background: #FFFFFF;
+  --post-border: 3px solid #E0E0E0;
+  --post-text: var(--text-color-primary)
+}
+
+:root[data-theme="dark"] {
+  --post-background: #22272B;
+  --post-border: 3px solid #31363A;
+  --post-text: var(--text-color-primary)
+}

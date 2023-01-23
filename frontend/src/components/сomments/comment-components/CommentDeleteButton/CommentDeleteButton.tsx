@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react';
 
-import deleteIcon from '../../../../assets/svg/delete.svg';
+import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete.svg';
+import { IconType } from '../../../../types/UI/IconType';
 import Alert from '../../../../ui/Alert/Alert';
+import Icon from '../../../../ui/Icon/Icon';
 
 interface ICommentDeleteButtonProps {
     onDelete: () => void;
@@ -12,9 +14,12 @@ const CommentDeleteButton: FC<ICommentDeleteButtonProps> = ({ onDelete }) => {
 
     return (
         <>
-            <div className={'icon'} onClick={() => setIsOpen(true)}>
-                <img src={deleteIcon} alt='delete' />
-            </div>
+            {/* <div className={'icon'} onClick={() => setIsOpen(true)}> */}
+            {/*     <img src={deleteIcon} alt='delete' /> */}
+            {/* </div> */}
+            <Icon type={IconType.red} onClick={() => setIsOpen(true)}>
+                <DeleteIcon />
+            </Icon>
             <Alert
                 title={'Удалить комментарий?'}
                 text={'Отменить это действие будет невозможно'}

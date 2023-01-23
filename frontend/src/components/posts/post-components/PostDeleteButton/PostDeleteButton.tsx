@@ -2,12 +2,14 @@ import React, { FC, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import deleteIcon from '../../../../assets/svg/delete.svg';
+import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete.svg';
+
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useDeletePostMutation } from '../../../../service/postsApiSlice';
+import { IconType } from '../../../../types/UI/IconType';
 import Alert from '../../../../ui/Alert/Alert';
+import Icon from '../../../../ui/Icon/Icon';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
-import s from '../PostButton/PostButton.module.scss';
 
 interface IPostDeleteButtonProps {
     postId: string;
@@ -34,9 +36,9 @@ const PostDeleteButton: FC<IPostDeleteButtonProps> = ({ postId }) => {
 
     return (
         <>
-            <div className={s.button} onClick={openDeleteAlert}>
-                <img src={deleteIcon} alt='delete' />
-            </div>
+            <Icon onClick={openDeleteAlert} type={IconType.red}>
+                <DeleteIcon />
+            </Icon>
             <Alert
                 title={'Удалить пост?'}
                 text={'Отменить это действие будет невозможно'}

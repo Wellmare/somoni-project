@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import editIcon from '../../../../assets/svg/edit.svg';
+import { ReactComponent as EditIcon } from '../../../../assets/svg/edit.svg';
+import { IconType } from '../../../../types/UI/IconType';
+import Icon from '../../../../ui/Icon/Icon';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
-import s from '../PostButton/PostButton.module.scss';
 
 interface IPostEditButtonProps {
     postId: string;
@@ -13,9 +14,9 @@ interface IPostEditButtonProps {
 const PostEditButton: FC<IPostEditButtonProps> = ({ postId }) => {
     return (
         <Link to={pathsToNavigate.editPost(postId)}>
-            <div className={s.button}>
-                <img src={editIcon} alt='edit' />
-            </div>
+            <Icon type={IconType.primary}>
+                <EditIcon />
+            </Icon>
         </Link>
     );
 };

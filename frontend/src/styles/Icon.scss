@@ -1,8 +1,13 @@
-.icon {
-  width: max-content;
-  cursor: pointer;
+:root {
+  --icon-size: 1.5rem;
+}
 
-  img {
-    width: 1.5rem;
-  }
+:root[data-theme="light"] {
+  --icon-red-color: red;
+  --icon-primary-color: #000
+}
+
+:root[data-theme="dark"] {
+  --icon-red-color: red;
+  --icon-primary-color: #fff
 }

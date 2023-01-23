@@ -7,11 +7,12 @@ import { IconType } from '../../types/UI/IconType';
 
 interface IIconProps {
     children: ReactNode;
-    type: IconType;
+    type?: IconType;
     onClick?: () => void;
+    customTypeClassName?: string;
 }
 
-const Icon: FC<IIconProps> = ({ children, onClick, type }) => {
+const Icon: FC<IIconProps> = ({ children, onClick, type, customTypeClassName }) => {
     let typeClassName = '';
     switch (type) {
         case IconType.primary:
@@ -22,7 +23,10 @@ const Icon: FC<IIconProps> = ({ children, onClick, type }) => {
             break;
     }
     return (
-        <div className={classNames(s.button, typeClassName)} onClick={onClick}>
+        <div
+            className={classNames(s.button, customTypeClassName !== undefined ? customTypeClassName : typeClassName)}
+            onClick={onClick}
+        >
             {children}
         </div>
     );

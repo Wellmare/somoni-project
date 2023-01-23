@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 
 import s from './PostLikeButton.module.scss';
 
-import liked from '../../../../assets/svg/liked.svg';
-import nonLiked from '../../../../assets/svg/non-liked.svg';
+// import nonLiked from '../../../../assets/svg/non-liked.svg';
+import { ReactComponent as LikedIcon } from '../../../../assets/svg/liked.svg';
+import { ReactComponent as NonLikedIcon } from '../../../../assets/svg/non-liked.svg';
+
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { PostContext } from '../../../../context/PostContext';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import { selectIsAuth } from '../../../../redux/slices/authSlice';
 import { useLikePostMutation, useUnlikePostMutation } from '../../../../service/postApiSlice';
+import { IconType } from '../../../../types/UI/IconType';
+import Icon from '../../../../ui/Icon/Icon';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import PostButton from '../PostButton/PostButton';
 
@@ -47,7 +51,9 @@ const PostLikeButton: FC = () => {
         return (
             <Link to={PathsToNavigate.LOGIN}>
                 <PostButton count={localCountLikes}>
-                    <img src={nonLiked} alt='like' className={s.nonLiked} />
+                    <Icon type={IconType.primary}>
+                        <NonLikedIcon />
+                    </Icon>
                 </PostButton>
             </Link>
         );
@@ -56,9 +62,15 @@ const PostLikeButton: FC = () => {
     return (
         <PostButton count={localCountLikes} onClick={onLike}>
             {localIsLiked ? (
-                <img src={liked} alt='like' className={s.liked} />
+                // <img src={LikedIcon} alt='like' className={s.liked} />
+                <Icon customTypeClassName={s.liked}>
+                    <LikedIcon />
+                </Icon>
             ) : (
-                <img src={nonLiked} alt='like' className={s.nonLiked} />
+                // <img src={nonLiked} alt='like' className={s.nonLiked} />
+                <Icon customTypeClassName={s.nonLiked}>
+                    <NonLikedIcon />
+                </Icon>
             )}
         </PostButton>
     );

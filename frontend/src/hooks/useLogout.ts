@@ -18,12 +18,12 @@ export const useLogout = (): IUseLogoutResponse => {
     const logoutUser = (data?: { refresh: string }): void => {
         doAsyncFunc(async () => {
             try {
-                dispatch(logoutState());
                 if (data?.refresh !== undefined) {
                     await logout({ refresh: data.refresh }).unwrap();
                 } else if (refreshTokenFromState !== undefined) {
                     await logout({ refresh: refreshTokenFromState }).unwrap();
                 }
+                dispatch(logoutState());
             } catch (e) {
                 logoutState();
             }

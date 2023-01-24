@@ -29,6 +29,7 @@ export const useLogin = (): IUseLoginResponse => {
                 const response = await login({ username, password }).unwrap();
                 dispatch(setAuthTokens(response));
                 navigate(PathsToNavigate.MAIN);
+                document.location.reload();
             } catch (e) {
                 console.log(e);
             }

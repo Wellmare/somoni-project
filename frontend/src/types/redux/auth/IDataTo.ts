@@ -13,3 +13,10 @@ export interface IDataToRegister {
 export interface IDataToLogout {
     refresh: string;
 }
+
+export interface IDataToChangePassword {
+    refresh: string;
+    password: string;
+    password2: string;
+    oldPassword: string;
+}

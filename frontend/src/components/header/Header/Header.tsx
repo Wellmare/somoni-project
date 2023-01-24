@@ -3,6 +3,8 @@ import React, { FC, useEffect } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
+import s from './Header.module.scss';
+
 import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
 import { useLogout } from '../../../hooks/useLogout';
@@ -33,7 +35,7 @@ const Header: FC = () => {
     }, [isAuth]);
 
     return (
-        <header className={classNames('p-5', 'flex', 'justify-between', 'bg-green-700', 'mb-3', 'items-center')}>
+        <header className={classNames('p-5', 'flex', 'justify-between', 'mb-3', 'items-center', s.header)}>
             <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
             <div className={classNames('flex', 'justify-center', 'items-center')}>
                 <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>

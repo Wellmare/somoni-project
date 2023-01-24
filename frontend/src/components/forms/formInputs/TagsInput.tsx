@@ -20,6 +20,14 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
             )}
             control={control}
             name={'tags'}
+            rules={{
+                validate: (value) => {
+                    const regexp = /#/;
+                    if (regexp.test(value.toString())) {
+                        return 'Символ # не может быть использован в тэгах';
+                    }
+                },
+            }}
         />
     );
 };

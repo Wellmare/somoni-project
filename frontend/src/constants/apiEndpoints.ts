@@ -9,4 +9,5 @@ export const apiEndpoints = {
     user: 'user/',
     editProfile: 'edit-profile/',
     userInfo: 'user-info/',
+    changePassword: 'password/change/',
 };

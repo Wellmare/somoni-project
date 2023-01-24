@@ -1,7 +1,7 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToLogin, IDataToLogout } from '../types/redux/auth/IDataTo';
+import { IDataToLogin, IDataToLogout, IDataToChangePassword } from '../types/redux/auth/IDataTo';
 import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
 import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
 
@@ -32,8 +32,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: { refresh },
             }),
+            invalidatesTags: ['Auth'],
+        }),
+        changePassword: builder.mutation<undefined, IDataToChangePassword>({
+            query: ({ refresh, password, password2, oldPassword }) => ({
+                url: apiEndpoints.changePassword,
+                method: 'PUT',
+                body: { refresh, password, password2, old_password: oldPassword },
+            }),
         }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useChangePasswordMutation } = authApiSlice;

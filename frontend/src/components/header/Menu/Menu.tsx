@@ -7,10 +7,13 @@ import { Link } from 'react-router-dom';
 import s from './Menu.module.scss';
 
 import '@szhsin/react-menu/dist/transitions/slide.css';
+import { ReactComponent as ArrowDownIcon } from '../../../assets/svg/arrow-down.svg';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
-import { LinkType } from '../../../types/redux/LinkType';
 import { Theme } from '../../../types/Theme';
+import { AvatarSize } from '../../../types/UI/Avatar.types';
+import Avatar from '../../../ui/Avatar/Avatar';
+import Icon from '../../../ui/Icon/Icon';
 import { pathsToNavigate } from '../../../utils/pathsToNavigate';
 
 const menuClassName = ({ state }: { state: string }): string =>
@@ -22,7 +25,7 @@ const menuItemClassName = ({ hover, disabled }: { hover: boolean; disabled: bool
 const MenuItem = (props?: MenuItemProps): JSX.Element => <MenuItemInner {...props} className={menuItemClassName} />;
 
 interface IMenuProps {
-    photo: LinkType;
+    photo: string;
     id: string;
 }
 
@@ -38,8 +41,13 @@ const Menu: FC<IMenuProps> = ({ photo, id }) => {
     return (
         <ReactMenu
             menuButton={
-                <div className={classNames('cursor-pointer', s.avatar)}>
-                    {photo !== null ? <img src={photo} alt='profile photo' /> : 'Menu'}
+                <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}>
+                    <Avatar size={AvatarSize.small}>
+                        <img src={photo} alt='profile photo' />
+                    </Avatar>
+                    <Icon customTypeClassName={s.arrowIcon}>
+                        <ArrowDownIcon />
+                    </Icon>
                 </div>
             }
             transition

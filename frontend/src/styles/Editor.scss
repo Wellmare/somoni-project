@@ -1,10 +1,115 @@
+:root[data-theme="light"] {
+  --editor-background: #ffffff;
+  --editor-border: 1px solid #afafaf;
+  --editor-active-color: #282828;
+  --ql-action-color: #000;
+  --ql-picker-background: #d3d3d3;
+  --ql-editor-a-color: #4052b6;
+  --ql-toolbar-color: #8d8d8d;
+}
+
+:root[data-theme="dark"] {
+  --editor-background: #282d34;
+  --editor-border: 1px solid #383c44;
+  --editor-active-color: #cccccc;
+  --ql-action-color: #93c1e1;
+  --ql-picker-background: #282d34;
+  --ql-editor-a-color: #6172ab;
+  --ql-toolbar-color: #777777;
+}
+
+.ql-container {
+  background: var(--editor-background);
+}
+
+.ql-editor a {
+  color: var(--ql-editor-a-color);
+}
+
+.ql-picker-options {
+  background: var(--ql-picker-background) !important;
+}
+
+.ql-tooltip, .ql-tooltip * {
+  background: var(--editor-background) !important;
+  //border: var(--editor-border);
+  box-shadow: none !important;
+  color: var(--text-color-primary) !important;
+}
+
+.ql-editor .ql-tooltip {
+  border: var(--editor-border);
+}
+.ql-snow .ql-editor {
+  border-radius: 0;
+}
+
+.ql-action {
+  color: var(--ql-action-color) !important;
+}
+
+.ql-toolbar.ql-snow {
+  border: var(--editor-border);
+  color: var(--text-color-primary) !important;
+}
+
+.ql-toolbar.ql-snow * {
+  color: var(--text-color-primary) !important;
+
+  svg > * {
+    stroke: var(--ql-toolbar-color);
+  }
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button:focus .ql-stroke,
+.ql-snow .ql-toolbar button:focus .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar button:hover .ql-stroke-miter, .ql-snow.ql-toolbar button:focus .ql-stroke-miter, .ql-snow .ql-toolbar button:focus .ql-stroke-miter, .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
+  stroke: var(--editor-active-color) !important;
+  color: var(--editor-active-color) !important;
+}
+
+//.ql-snow.ql-toolbar button:hover,
+//.ql-snow .ql-toolbar button:hover,
+//.ql-snow.ql-toolbar button:focus,
+//.ql-snow .ql-toolbar button:focus,
+//.ql-snow.ql-toolbar button.ql-active,
+//.ql-snow .ql-toolbar button.ql-active,
+//.ql-snow.ql-toolbar .ql-picker-label:hover,
+//.ql-snow .ql-toolbar .ql-picker-label:hover,
+//.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+//.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+//.ql-snow.ql-toolbar .ql-picker-item:hover,
+//.ql-snow .ql-toolbar .ql-picker-item:hover,
+//.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+//.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+//  svg > * {
+//    stroke: var(--editor-active-color);
+//    color: var(--editor-active-color);
+//  }
+//}
+
+
 .ql-editor {
   //min-height: 10rem !important;
   //max-height: 50vh;
   //overflow: hidden;
+  border: var(--editor-border);
   height: max-content;
   overflow-y: auto;
-  padding: 0;
+  padding: .5rem .3rem;
+  border-radius: .6rem;
 }
 
 .editor-padding .ql-editor {
@@ -18,6 +123,10 @@
   height: max-content;
   font-family: 'Montserrat', sans-serif;
   font-size: var(--font-size-normal);
+
+  border: none !important;
+  border-radius: .6rem;
+  padding: 0;
 }
 
 .ql-hidden {

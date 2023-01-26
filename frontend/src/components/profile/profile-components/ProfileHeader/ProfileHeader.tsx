@@ -1,9 +1,10 @@
+import classNames from 'classnames';
 import React, { FC, useContext } from 'react';
 
 import { ProfileContext } from '../../../../context/ProfileContext';
-import EditProfileButton from '../EditProfileButton/EditProfileButton';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import ProfileBio from '../ProfileBio/ProfileBio';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const ProfileHeader: FC = () => {
     const { profile } = useContext(ProfileContext);
@@ -11,11 +12,13 @@ const ProfileHeader: FC = () => {
     const { username, isMyProfile } = profile;
 
     return (
-        <div>
-            <ProfileAvatar />
-            <h2>{username}</h2>
-            <ProfileBio />
-            {isMyProfile && <EditProfileButton />}
+        <div className={classNames('flex', 'justify-around', 'items-center', 'w-6/12', 'mx-auto')}>
+            <div>
+                <ProfileAvatar />
+                <h2>{username}</h2>
+                <ProfileBio />
+            </div>
+            <div>{isMyProfile && <ProfileMenu />}</div>
         </div>
     );
 };

@@ -83,8 +83,11 @@ class CreatePostSerializer(serializers.ModelSerializer):
         try:
             instance.title = validated_data.get("title", instance.title)
             instance.content = validated_data.get("content", instance.content)
-            if validated_data['image']:
-                instance.image = validated_data.get("image", instance.image)
+            try:
+                if validated_data['image']:
+                    instance.image = validated_data.get("image", instance.image)
+            except:
+                pass
             instance.save()
             try:
                 tags = validated_data['tags'][0]

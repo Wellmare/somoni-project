@@ -39,6 +39,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Profile', 'Auth'],
         }),
 
+        deleteProfile: builder.mutation<undefined, undefined>({
+            query: () => ({
+                url: apiEndpoints.editProfile,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Profile', 'Auth'],
+        }),
+
         // editPost: builder.mutation<IPost, IDataToEditPost>({
         //     query: ({ formData, id }) => ({
         //         url: `${apiEndpoints.post}${id}`,
@@ -64,4 +72,5 @@ export const {
     useGetUserInfoQuery,
     useLazyGetUserInfoQuery,
     useGetDataToEditUserQuery,
+    useDeleteProfileMutation,
 } = userApiSlice;

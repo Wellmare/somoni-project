@@ -81,3 +81,9 @@
     stroke: var(--menu-arrow-color);
   }
 }
+
+.threeDots {
+  svg > path {
+    fill: var(--icon-primary-color);
+  }
+}

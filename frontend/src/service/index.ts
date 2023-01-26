@@ -43,6 +43,13 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         );
         if (refreshResult.data !== null) {
             // store the new token
+            const newTokens = refreshResult.data as ITokens;
+
+            if (newTokens === undefined || !('refresh' in newTokens) || !('access' in newTokens)) {
+                console.log('Tokens is undefined!');
+                return result;
+            }
+
             api.dispatch(setAuthTokens(refreshResult.data as ITokens));
             // retry the initial query
             result = await baseQuery(args, api, extraOptions);

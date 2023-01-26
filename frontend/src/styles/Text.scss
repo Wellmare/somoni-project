@@ -6,11 +6,13 @@
 :root[data-theme="light"] {
   --text-color-primary: #000;
   --text-color-green: #7AC9B9;
-  --text-color-secondary: #888686
+  --text-color-secondary: #888686;
+  --text-color-red: #ad0d0d
 }
 
 :root[data-theme="dark"] {
   --text-color-primary: #DDDDDD;
   --text-color-green: #509B8C;
-  --text-color-secondary: #B5B5B5
+  --text-color-secondary: #B5B5B5;
+  --text-color-red: #8f1d1d
 }

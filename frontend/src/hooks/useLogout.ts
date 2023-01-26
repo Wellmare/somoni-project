@@ -22,14 +22,26 @@ export const useLogout = (): IUseLogoutResponse => {
     const logoutUser = (data?: { refresh: string }): void => {
         doAsyncFunc(async () => {
             try {
-                if (data?.refresh !== undefined) {
-                    await logout({ refresh: data.refresh }).unwrap();
-                } else if (refreshTokenFromState !== undefined) {
-                    await logout({ refresh: refreshTokenFromState }).unwrap();
-                }
-                dispatch(logoutState());
-                navigate(PathsToNavigate.MAIN);
-                document.location.reload();
+                if (refreshTokenFromState === undefined && data === undefined) return null;
+                const refresh =
+                    data !== undefined
+                        ? data.refresh
+                        : refreshTokenFromState === undefined
+                        ? ''
+                        : refreshTokenFromState;
+
+                const logoutPromise = logout({ refresh }).unwrap() as Promise<unknown>;
+                const logoutStatePromise = dispatch(logoutState()) as unknown as Promise<unknown>;
+
+                Promise.all([logoutPromise, logoutStatePromise])
+                    .then(() => {
+                        console.log('promises done');
+                        navigate(PathsToNavigate.MAIN);
+                        document.location.reload();
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
             } catch (e) {
                 logoutState();
             }

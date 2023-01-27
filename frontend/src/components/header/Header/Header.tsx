@@ -12,6 +12,7 @@ import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
+import SearchByTagForm from '../../forms/SearchByTagForm/SearchByTagForm';
 import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import HeaderProfileSkeleton from '../../skeletons/HeaderProfileSkeleton';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
@@ -43,6 +44,8 @@ const Header: FC = () => {
                     <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
                 </div>
             )}
+
+            <SearchByTagForm />
 
             {!isAuth && (
                 <div className={classNames('flex', 'justify-between', 'items-center')}>

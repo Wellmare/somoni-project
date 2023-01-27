@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import { ICustomInputProps } from '../../../types/ICustomInputProps';
 import FormInput from '../inputs/FormInput/FormInput';
 
-const PasswordInput: FC<ICustomInputProps> = ({ control, ...props }) => {
+const PasswordInput: FC<ICustomInputProps> = ({ control, name, ...props }) => {
     return (
         <Controller
             render={({ field, fieldState, formState }) => (
@@ -18,7 +18,7 @@ const PasswordInput: FC<ICustomInputProps> = ({ control, ...props }) => {
                 />
             )}
             control={control}
-            name={'password'}
+            name={name !== undefined ? name : 'password'}
             rules={{
                 required: {
                     value: true,

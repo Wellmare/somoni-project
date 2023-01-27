@@ -10,11 +10,12 @@ import Input from '../../../../ui/Input/Input';
 export interface IInputProps {
     id: string;
     error: FieldError | undefined;
-    label: string;
+    label: string | null;
     placeholder: string;
+    inputClassName?: string;
 }
 
-const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, ...props }) => {
+const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassName, ...props }) => {
     const [isError, setIsError] = useState<boolean>(false);
     useEffect(() => {
         setIsError(error?.message !== undefined);
@@ -22,10 +23,19 @@ const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, ...props })
 
     return (
         <div>
-            <label htmlFor={id} className={classNames('block')}>
-                {label}
-            </label>
-            <Input type={InputType.filled} placeholder={placeholder} id={id} isError={isError} {...props} />
+            {label != null && (
+                <label htmlFor={id} className={classNames('block')}>
+                    {label}
+                </label>
+            )}
+            <Input
+                type={InputType.filled}
+                placeholder={placeholder}
+                id={id}
+                isError={isError}
+                className={inputClassName}
+                {...props}
+            />
             {isError && <p className={classNames(s.error)}>{error?.message}</p>}
         </div>
     );

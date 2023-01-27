@@ -53,9 +53,6 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
 
                 {/* Для мобилы */}
                 <div className={classNames('block', 'sm:hidden', 'w-full')}>
-                    <Link to={PathsToNavigate.CREATE_POST}>
-                        <MenuItem onClick={onChangeTheme}>Создать пост</MenuItem>
-                    </Link>
                     <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
                 </div>
             </Menu>
@@ -100,8 +97,17 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
                 </Link>
 
                 <div className={s.menuDivider} />
-                <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
+
+                <Link to={PathsToNavigate.CREATE_POST}>
+                    <MenuItem>Создать пост</MenuItem>
+                </Link>
+
                 <div className={s.menuDivider} />
+
+                <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
+
+                <div className={s.menuDivider} />
+
                 <MenuItem onClick={() => logoutUser()}>Выйти</MenuItem>
             </div>
         </Menu>

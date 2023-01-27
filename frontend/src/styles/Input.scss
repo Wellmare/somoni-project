@@ -5,8 +5,6 @@
 }
 
 :root[data-theme="dark"] {
-  //--input-error-border: 3px solid #851414;
-
   // outline
   --input-outline-background: rgba(0, 0, 0, 0);
   --input-outline-border: 2px solid #737373;
@@ -16,13 +14,11 @@
   // filled
   --input-filled-background: #31363A;
   --input-filled-border: 3px solid #292C2F;
-  --input-filled-placeholder: #D4D4D4;
+  --input-filled-placeholder: #868686;
   --input-filled-text: #FFFFFF;
 }
 
 :root[data-theme="light"] {
-  //--input-error-border: 3px solid #881212;
-
   // outline
   --input-outline-background: rgba(0, 0, 0, 0);
   --input-outline-border: 3px solid #BBBBBB;
@@ -32,6 +28,6 @@
   // filled
   --input-filled-background: #F2F2F2;
   --input-filled-border: 2px solid #DCDCDC;
-  --input-filled-placeholder: #707070;
-  --input-filled-text: #4D4D4D;
+  --input-filled-placeholder: #7e7e7e;
+  --input-filled-text: #2a2a2a;
 }

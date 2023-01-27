@@ -9,11 +9,12 @@ import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
 import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
-import { ButtonColors } from '../../../types/UI/Button.types';
-import ButtonLink from '../../../ui/ButtonLink/ButtonLink';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import Button from '../../../ui/Button/Button';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import HeaderProfileSkeleton from '../../skeletons/HeaderProfileSkeleton';
+import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import HeaderProfile from '../HeaderProfile/HeaderProfile';
 
 const Header: FC = () => {
@@ -37,18 +38,19 @@ const Header: FC = () => {
     return (
         <header className={classNames('p-5', 'flex', 'justify-between', 'mb-3', 'items-center', s.header)}>
             <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
-            <div className={classNames('flex', 'justify-center', 'items-center')}>
-                <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
-            </div>
+            {/* <div className={classNames('flex', 'justify-center', 'items-center')}> */}
+            {/*     <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link> */}
+            {/* </div> */}
 
             {!isAuth && (
-                <ButtonLink
-                    color={ButtonColors.green}
-                    linkTo={PathsToNavigate.LOGIN}
-                    onClick={() => navigate(PathsToNavigate.LOGIN)}
-                >
-                    Вход
-                </ButtonLink>
+                <div className={classNames('flex', 'justify-between', 'items-center')}>
+                    <Link to={PathsToNavigate.LOGIN} className={'mr-5'}>
+                        <Button size={ButtonSizes.sm} color={ButtonColors.green} className={''}>
+                            Вход
+                        </Button>
+                    </Link>
+                    <HeaderMenu isAuth={false} />
+                </div>
             )}
             {isAuth && (
                 <ServerResponse

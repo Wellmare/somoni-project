@@ -1,16 +1,16 @@
 @mixin avatar($size) {
   width: $size;
-  min-width: 50px;
+  min-width: 40px;
   height: $size;
-  min-height: 50px;
+  min-height: 30px;
 
   border-radius: 50%;
 
-  img {
+  img, svg {
     width: $size;
-    min-width: 50px;
+    //min-width: 50px;
     height: $size;
-    min-height: 50px;
+    //min-height: 50px;
 
 
     border-radius: 50%;

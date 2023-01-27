@@ -29,7 +29,7 @@ export const enhanceIPostServerResponse = (postServerResponse: IPostServerRespon
         isLiked,
         avatarLink,
         dateString,
-        postImageLink,
+        postImageLink: postImageLink === 'null' ? null : postImageLink,
         likesCount,
         commentsCount,
     };

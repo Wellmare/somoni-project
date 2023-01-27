@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import s from './PostLikeButton.module.scss';
 
-// import nonLiked from '../../../../assets/svg/non-liked.svg';
 import { ReactComponent as LikedIcon } from '../../../../assets/svg/liked.svg';
 import { ReactComponent as NonLikedIcon } from '../../../../assets/svg/non-liked.svg';
 
@@ -13,7 +12,6 @@ import { PostContext } from '../../../../context/PostContext';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import { selectIsAuth } from '../../../../redux/slices/authSlice';
 import { useLikePostMutation, useUnlikePostMutation } from '../../../../service/postApiSlice';
-import { IconType } from '../../../../types/UI/IconType';
 import Icon from '../../../../ui/Icon/Icon';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import PostButton from '../PostButton/PostButton';
@@ -51,7 +49,7 @@ const PostLikeButton: FC = () => {
         return (
             <Link to={PathsToNavigate.LOGIN}>
                 <PostButton count={localCountLikes}>
-                    <Icon type={IconType.primary}>
+                    <Icon customTypeClassName={s.nonLiked}>
                         <NonLikedIcon />
                     </Icon>
                 </PostButton>

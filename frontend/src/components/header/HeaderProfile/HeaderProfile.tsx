@@ -13,7 +13,7 @@ const HeaderProfile: FC<IProfileProps> = ({ username, photo, id }) => {
     return (
         <div className={classNames('flex', 'items-center')}>
             <div className={'pr-2'}>{username}</div>
-            <HeaderMenu photo={photo} id={id} />
+            <HeaderMenu isAuth={true} photo={photo} id={id} />
         </div>
     );
 };

@@ -1,7 +1,7 @@
 @import "../../styles/Avatar";
 
 .small {
-  @include avatar($size: min(2rem, 100px))
+  @include avatar($size: min(2.2rem, 100px))
 }
 
 .medium {

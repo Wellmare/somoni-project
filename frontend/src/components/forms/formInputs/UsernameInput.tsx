@@ -24,6 +24,10 @@ const UsernameInput: FC<ICustomInputProps> = ({ control, ...props }) => {
                     value: true,
                     message: 'Поле обязательно',
                 },
+                pattern: {
+                    value: /^[A-Za-z0-9@.+_-]+$/,
+                    message: 'Поле может содержать только буквы, цифры и знаки @ . + - _',
+                },
             }}
         />
     );

@@ -11,11 +11,11 @@ interface IInputProps {
     placeholder?: string;
     // id?: string;
     // width?: string;
-    // className?: string;
+    className?: string;
     [x: string]: unknown;
 }
 
-const Input: FC<IInputProps> = ({ type, placeholder, isError, ...props }) => {
+const Input: FC<IInputProps> = ({ type, placeholder, isError, className, ...props }) => {
     return (
         <input
             type='text'
@@ -23,6 +23,7 @@ const Input: FC<IInputProps> = ({ type, placeholder, isError, ...props }) => {
                 s.input,
                 type === InputType.filled ? s.filled : s.outline,
                 isError === true ? s.error : '',
+                className,
             )}
             placeholder={placeholder}
             {...props}

@@ -10,9 +10,9 @@ const Posts: FC<IPostsProps> = ({ tag }) => {
     const [page, setPage] = useState<number>(1);
 
     return (
-        <>
+        <div>
             <PostsByPage page={page} setPage={setPage} tag={tag} />
-        </>
+        </div>
     );
 };
 

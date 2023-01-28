@@ -3,11 +3,11 @@
 }
 
 :root[data-theme="light"] {
-  --icon-red-color: red;
+  --icon-red-color: #ce1212;
   --icon-primary-color: #000
 }
 
 :root[data-theme="dark"] {
-  --icon-red-color: red;
-  --icon-primary-color: #fff
+  --icon-red-color: #ab3030;
+  --icon-primary-color: #cccccc
 }

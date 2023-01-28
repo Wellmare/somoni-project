@@ -1,6 +1,8 @@
 import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import s from './PostTitle.module.scss';
+
 import { PostContext } from '../../../../context/PostContext';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
 
@@ -12,7 +14,7 @@ const PostTitle: FC = () => {
 
     return (
         <Link to={pathsToNavigate.post(postId)}>
-            <h3>{title}</h3>
+            <h3 className={s.title}>{title}</h3>
         </Link>
     );
 };

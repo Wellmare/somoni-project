@@ -8,7 +8,7 @@ const Layout: FC = () => {
     return (
         <div>
             <Header />
-            <main>
+            <main className={'flex justify-center items-center'}>
                 <Outlet />
             </main>
             <Footer />

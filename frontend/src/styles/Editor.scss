@@ -40,6 +40,7 @@
 .ql-editor .ql-tooltip {
   border: var(--editor-border);
 }
+
 .ql-snow .ql-editor {
   border-radius: 0;
 }
@@ -132,4 +133,28 @@
 .ql-hidden {
   height: 0;
   display: none;
+}
+
+.editor-no-styles {
+  &.quill {
+    margin: 0;
+  }
+
+  .ql-editor {
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+  }
+
+  .ql-container {
+    border-radius: .6rem;
+    background: none;
+  }
+}
+
+.editor-post-content {
+  &.quill {
+    margin-top: 1rem;
+  }
 }

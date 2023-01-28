@@ -19,14 +19,14 @@ interface IPostAuthorProps {
 
 const PostAuthor: FC<IPostAuthorProps> = ({ photo, username, userId, date }) => {
     return (
-        <Link to={pathsToNavigate.user(userId)} className={s.link}>
+        <Link to={pathsToNavigate.user(userId)} className={s.container}>
             <div className={classNames('flex', 'justify-start', 'items-center')}>
                 <div>
                     <Avatar size={AvatarSize.small}>
                         <img src={photo} alt={username} />
                     </Avatar>
                 </div>
-                <div className={classNames('ml-5')}>
+                <div className={classNames('ml-3')}>
                     <div>{username}</div>
                     <PostDate date={date} />
                 </div>

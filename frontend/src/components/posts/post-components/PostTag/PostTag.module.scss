@@ -1,8 +1,14 @@
 .tag {
-  background: #cb6363;
-  border-radius: 1rem;
+  background: var(--tag-background-color);
+  border: var(--tag-border);
+  border-radius: var(--tag-border-radius);
   margin-right: .5rem;
   cursor: pointer;
-  padding: .5rem 1rem;
-  border: none;
+  padding: var(--tag-padding);
+
+  transition: .1s;
+}
+.tag:hover {
+  background: var(--tag-hover-background-color);
+  border: var(--tag-hover-border);
 }

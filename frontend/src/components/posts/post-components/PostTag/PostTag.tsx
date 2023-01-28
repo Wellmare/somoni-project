@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import s from './PostTag.module.scss';
 
@@ -11,15 +11,10 @@ interface ITagProps {
 }
 
 const PostTag: FC<ITagProps> = ({ tag }) => {
-    const navigate = useNavigate();
-    const onClickTag = (): void => {
-        navigate(pathsToNavigate.tag(tag));
-    };
-
     return (
-        <div className={classNames(s.tag)} onClick={onClickTag}>
-            {tag}
-        </div>
+        <Link to={pathsToNavigate.tag(tag)}>
+            <div className={classNames(s.tag)}>{tag}</div>
+        </Link>
     );
 };
 

@@ -30,9 +30,11 @@ const Post: FC<ITestPostProps> = ({ post }) => {
             <div className={classNames(s.post)}>
                 <PostHeader />
                 <PostTitle />
-                <PostImage />
                 <PostContent />
-                <PostTags />
+                <PostImage />
+                <div className={'mb-3 mt-2'}>
+                    <PostTags />
+                </div>
                 <PostButtons />
             </div>
         </PostContext.Provider>

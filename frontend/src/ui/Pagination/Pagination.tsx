@@ -5,11 +5,12 @@ import ReactPaginate from 'react-paginate';
 import s from './Pagination.module.scss';
 
 interface IPaginationProps {
+    currentPage: number;
     countPages: number;
     handlePageChange: (page: { selected: number }) => void;
 }
 
-const Pagination: FC<IPaginationProps> = ({ handlePageChange, countPages }) => {
+const Pagination: FC<IPaginationProps> = ({ currentPage, handlePageChange, countPages }) => {
     return (
         <ReactPaginate
             pageCount={countPages}
@@ -34,6 +35,7 @@ const Pagination: FC<IPaginationProps> = ({ handlePageChange, countPages }) => {
             //
             activeClassName={s.active}
             renderOnZeroPageCount={undefined}
+            forcePage={currentPage}
         />
     );
 };

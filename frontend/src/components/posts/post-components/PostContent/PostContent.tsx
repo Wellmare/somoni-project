@@ -11,7 +11,12 @@ const PostContent: FC = () => {
 
     return (
         <>
-            <ReactQuill value={content} readOnly={true} theme={'bubble'} className={classNames('mt-4')} />
+            <ReactQuill
+                value={content}
+                readOnly={true}
+                theme={'bubble'}
+                className={classNames('editor-no-styles', 'editor-post-content')}
+            />
         </>
     );
 };

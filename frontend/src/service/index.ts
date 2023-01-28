@@ -31,8 +31,6 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     if (authTokens === null) return result;
 
     if (!isTokenExpired(authTokens.access)) {
-        // noinspection UnnecessaryLocalVariableJS
-        const result = await baseQuery(args, api, extraOptions);
         return result;
     }
 

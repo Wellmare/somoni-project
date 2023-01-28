@@ -32,7 +32,11 @@ const ProfileWithQuery: FC<IProfileWithQueryProps> = ({ id }) => {
                     <>
                         <Profile profile={data} />
                         {data?.results !== null && data.results.length > 0 && (
-                            <Pagination countPages={Math.ceil(data.count / 10)} handlePageChange={handlePageChange} />
+                            <Pagination
+                                currentPage={page - 1}
+                                countPages={Math.ceil(data.count / 10)}
+                                handlePageChange={handlePageChange}
+                            />
                         )}
                     </>
                 )}

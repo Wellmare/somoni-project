@@ -33,11 +33,11 @@ const PostsByPage: FC<IPostsByPageProps> = ({ page, setPage, tag }) => {
                 messages={[{ statusCode: 404, message: 'Посты не найдены' }]}
                 loader={<PostsSkeletons />}
             >
-                <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+                <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
                 {posts?.results?.map((post) => (
                     <Post post={enhanceIPostServerResponse(post)} key={post.id} />
                 ))}
-                <Pagination countPages={countPages} handlePageChange={handlePageChange} />
+                <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
             </ServerResponse>
         </>
     );

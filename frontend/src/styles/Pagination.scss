@@ -1,0 +1,28 @@
+:root {
+  --pagination-item-text-color: var(--text-color-primary);
+
+}
+
+:root[data-theme="light"] {
+  --pagination-item-background: #adadad;
+  --pagination-item-hover-background: #bebebe;
+
+  --pagination-item-active-background: #64987c;
+  --pagination-item-hover-active-background: #74a88c;
+
+  --pagination-buttons-background: #8d8d8d;
+  --pagination-buttons-hover-background: #808080;
+}
+
+:root[data-theme="dark"] {
+  --pagination-item-background: #292d34;
+  --pagination-item-hover-background: #393c44;
+
+  --pagination-item-active-background: #066056;
+  --pagination-item-hover-active-background: #1C6758;
+  //--pagination-item-active-background: #758686;
+  //--pagination-item-hover-active-background: #1C6758;
+
+  --pagination-buttons-background: #414750;
+  --pagination-buttons-hover-background: #646464;
+}

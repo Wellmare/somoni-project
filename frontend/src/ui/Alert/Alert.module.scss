@@ -16,7 +16,7 @@ $modal-border-radius: .8rem;
   width: 50vw;
   margin-left: auto;
   margin-right: auto;
-  background: white;
+  background: var(--modal-background-color);
   outline: none;
   border-radius: $modal-border-radius;
   transform: translateY(-10vh);
@@ -31,7 +31,7 @@ $modal-border-radius: .8rem;
 }
 
 .alertHeader {
-  background: #d2d2d2;
+  background: var(--modal-header-background-color);
   //border-bottom: 1px solid black;
   padding: 1rem;
 
@@ -44,5 +44,5 @@ $modal-border-radius: .8rem;
   font-weight: 500;
 }
 .text {
-  color: #1a1a1a;
+  color: var(--modal-text-color);
 }

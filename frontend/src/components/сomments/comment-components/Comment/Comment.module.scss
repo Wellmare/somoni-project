@@ -1,15 +1,8 @@
-@import "../../../../styles/Avatar";
-
-.avatar {
-  @include avatar($size: min(4rem, 100px))
+.comment {
+  background: var(--comment-background);
+  color: var(--comment-text);
+  border: var(--comment-border);
+  border-radius: var(--comment-border-radius);
+  margin-top: .8rem;
+  padding: .2rem .5rem .4rem .5rem;
 }
-
-//.comment {
-//  display: flex;
-//  justify-content: space-between;
-//  align-items: center;
-//}
-//.content {
-//  margin-left: 1rem;
-//  width: 100%;
-//}

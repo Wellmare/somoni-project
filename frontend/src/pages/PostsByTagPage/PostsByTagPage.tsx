@@ -5,7 +5,7 @@ import Posts from '../../components/posts/Posts/Posts';
 
 const PostsByTagPage: FC = () => {
     const params = useParams();
-    const tag = params.tag;
+    const tag = params.tag !== undefined ? params.tag.toLowerCase() : undefined;
 
     return <Posts tag={tag} />;
 };

@@ -1,8 +1,19 @@
 .non-liked svg > path {
   fill: #9D9594;
 }
-.liked svg > path {
-  fill: #AC5549;
-  stroke: #522929;
-  stroke-width: 2px;
+
+:root[data-theme="dark"] {
+  .liked svg > path {
+    fill: #9D9594;
+    stroke: #9D9594;
+    stroke-width: 2px;
+  }
+}
+
+:root[data-theme="light"] {
+  .liked svg > path {
+    fill: #AC5549;
+    stroke: #522929;
+    stroke-width: 2px;
+  }
 }

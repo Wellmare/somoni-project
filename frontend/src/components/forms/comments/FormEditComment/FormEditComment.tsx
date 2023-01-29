@@ -21,11 +21,11 @@ interface IFormEditCommentProps {
 }
 
 const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsEdit }) => {
-    const { control, handleSubmit, setValue } = useForm<EditCommentInputs>({
+    const { control, handleSubmit } = useForm<EditCommentInputs>({
         mode: 'onSubmit',
         defaultValues: { content },
     });
-    const [editComment, { data, error, isError, isLoading, isSuccess }] = useEditCommentMutation();
+    const [editComment, { error, isError, isLoading, isSuccess }] = useEditCommentMutation();
 
     const onSubmit: SubmitHandler<EditCommentInputs> = ({ content }) => {
         doAsyncFunc(async () => {
@@ -35,9 +35,11 @@ const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsE
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={classNames('w-full', 'pl-5')}>
-            <div className={classNames('flex', 'justify-between', 'items-end')}>
-                <CommentContentInput control={control} />
+        <form onSubmit={handleSubmit(onSubmit)} className={classNames('w-full', 'px-2')}>
+            <div className={classNames('flex', 'justify-between', 'items-end', 'w-full')}>
+                <div className={'w-full mr-3'}>
+                    <CommentContentInput label={null} control={control} style={{ width: '100%' }} />
+                </div>
 
                 <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
                     Редактировать

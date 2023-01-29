@@ -13,7 +13,7 @@ const CommentContent: FC = () => {
     const { setIsEdit, isEdit } = edit;
 
     return (
-        <div className={classNames('pl-3')}>
+        <div className={classNames('px-2')}>
             {isEdit ? (
                 <FormEditComment content={content} commentId={commentId} setIsEdit={setIsEdit} />
             ) : (

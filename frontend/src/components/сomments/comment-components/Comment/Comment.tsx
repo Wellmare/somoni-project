@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 
+import s from './Comment.module.scss';
+
 import { CommentContext } from '../../../../context/CommentContext';
 import { useDeleteCommentMutation } from '../../../../service/commentsApiSlice';
 import { IComment } from '../../../../types/redux/comments/IComment';
@@ -45,21 +47,7 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
                 edit: editComment,
             }}
         >
-            <div>
-                {/* <Link to={pathsToNavigate.user(author.toString())}> */}
-                {/*     <Avatar size={AvatarSize.small}> */}
-                {/*         <img src={avatar} alt={username} /> */}
-                {/*     </Avatar> */}
-                {/*     <p>{username}</p> */}
-                {/* </Link> */}
-                {/* {isEdit ? ( */}
-                {/*     <FormEditComment content={content} commentId={id.toString()} setIsEdit={setIsEdit} /> */}
-                {/* ) : ( */}
-                {/*     <div className={s.content}>{content}</div> */}
-                {/* )} */}
-
-                {/* {isMyComment && !isEdit && <CommentDeleteButton onDelete={onDelete} />} */}
-                {/* {isMyComment && <CommentEditButton setIsEdit={setIsEdit} />} */}
+            <div className={s.comment}>
                 <CommentHeader onDelete={onDelete} />
                 <CommentContent />
             </div>

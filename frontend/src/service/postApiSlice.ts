@@ -17,14 +17,20 @@ export const postApiSlice = apiSlice.injectEndpoints({
                 url: `${apiEndpoints.post}${id}/like/`,
                 method: 'POST',
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Single Post', id: arg.id }],
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Single Post', id: arg.id },
+                { type: 'Post', id: arg.id },
+            ],
         }),
         unlikePost: builder.mutation<undefined, IDataToLikePost>({
             query: ({ id }) => ({
                 url: `${apiEndpoints.post}${id}/like/`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Single Post', id: arg.id }],
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Single Post', id: arg.id },
+                { type: 'Post', id: arg.id },
+            ],
         }),
     }),
 });

@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React, { FC, useContext } from 'react';
 
+import s from './ProfileHeader.module.scss';
+
 import { ProfileContext } from '../../../../context/ProfileContext';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import ProfileBio from '../ProfileBio/ProfileBio';
@@ -12,13 +14,15 @@ const ProfileHeader: FC = () => {
     const { username, isMyProfile } = profile;
 
     return (
-        <div className={classNames('flex', 'justify-around', 'items-center', 'w-6/12', 'mx-auto')}>
-            <div>
+        <div className={classNames('flex', 'justify-around', 'items-start', 'w-full', 'mx-auto')}>
+            <div className={classNames('flex', 'justify-start', 'items-start')}>
                 <ProfileAvatar />
-                <h2>{username}</h2>
-                <ProfileBio />
+                <div className={'ml-4'}>
+                    <h2 className={s.username}>{username}</h2>
+                    <ProfileBio />
+                </div>
             </div>
-            <div>{isMyProfile && <ProfileMenu />}</div>
+            <div className={'mt-5'}>{isMyProfile && <ProfileMenu />}</div>
         </div>
     );
 };

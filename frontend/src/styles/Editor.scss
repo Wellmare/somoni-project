@@ -1,3 +1,8 @@
+:root {
+  --editor-border-radius: .5rem
+}
+
+
 :root[data-theme="light"] {
   --editor-background: #ffffff;
   --editor-border: 1px solid #afafaf;
@@ -35,6 +40,7 @@
   //border: var(--editor-border);
   box-shadow: none !important;
   color: var(--text-color-primary) !important;
+  border-radius: var(--editor-border-radius) var(--editor-border-radius) 0 0;
 }
 
 .ql-editor .ql-tooltip {
@@ -42,11 +48,15 @@
 }
 
 .ql-snow .ql-editor {
-  border-radius: 0;
+  //border-radius: 0;
 }
 
 .ql-action {
   color: var(--ql-action-color) !important;
+}
+
+.ql-toolbar {
+  border-radius: var(--editor-border-radius) var(--editor-border-radius) 0 0;
 }
 
 .ql-toolbar.ql-snow {
@@ -110,7 +120,8 @@
   height: max-content;
   overflow-y: auto;
   padding: .5rem .3rem;
-  border-radius: .6rem;
+  //border-radius: .6rem;
+  border-radius: 0 0 var(--editor-border-radius) var(--editor-border-radius);
 }
 
 .editor-padding .ql-editor {
@@ -126,8 +137,10 @@
   font-size: var(--font-size-normal);
 
   border: none !important;
-  border-radius: .6rem;
+  //border-radius: .6rem;
   padding: 0;
+  border-radius: 0 0 var(--editor-border-radius) var(--editor-border-radius);
+
 }
 
 .ql-hidden {

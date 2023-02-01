@@ -15,7 +15,7 @@ const Profile: FC<IProfileProps> = ({ profile }) => {
 
     return (
         <ProfileContext.Provider value={{ profile: enhancedProfile, posts }}>
-            <div>
+            <div className={'w-screen'}>
                 <div className={'mb-4'}>
                     <ProfileHeader />
                 </div>

@@ -27,7 +27,7 @@ const PostPage: FC = () => {
                 isSuccess={isSuccess}
                 messages={[{ statusCode: 404, message: 'Пост не найден' }]}
             >
-                <div className={classNames('w-6/12', 'mx-auto')}>
+                <div className={classNames('w-screen')}>
                     {post != null && <Post post={enhanceIPostServerResponse(post)} />}
                     <Comments postId={postId} />
                 </div>

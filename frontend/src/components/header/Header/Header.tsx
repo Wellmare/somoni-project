@@ -36,16 +36,30 @@ const Header: FC = () => {
     }, [isAuth]);
 
     return (
-        <header className={classNames('p-5', 'flex', 'justify-between', 'mb-3', 'items-center', s.header)}>
+        <header
+            className={classNames(
+                'p-2',
+                'sm:p-3',
+                'md:p-4',
+                'lg:p-5',
+                'flex',
+                'justify-between',
+                'mb-3',
+                'items-center',
+                s.header,
+            )}
+        >
             <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
 
-            {isAuth && (
-                <div className={classNames('flex', 'justify-center', 'items-center')}>
-                    <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
-                </div>
-            )}
+            <div className='on-desktop'>
+                {isAuth && (
+                    <div className={classNames('flex', 'justify-center', 'items-center')}>
+                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
+                    </div>
+                )}
 
-            <SearchByTagForm />
+                <SearchByTagForm />
+            </div>
 
             {!isAuth && (
                 <div className={classNames('flex', 'justify-between', 'items-center')}>

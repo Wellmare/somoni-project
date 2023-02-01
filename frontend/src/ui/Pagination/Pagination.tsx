@@ -20,11 +20,11 @@ const Pagination: FC<IPaginationProps> = ({ currentPage, handlePageChange, count
             previousLabel={'<'}
             nextLabel={'>'}
             //
-            pageClassName={s.pageItem}
+            pageClassName={classNames(s.pageItem, 'p-4', 'sm:px-5', 'md:px-6', 'lg:px-7')}
             pageLinkClassName={s.pageLink}
-            previousClassName={classNames(s.pageItem, s.buttons)}
+            previousClassName={classNames(s.pageItem, s.buttons, 'p-4', 'sm:p-5', 'md:p-6', 'lg:p-7')}
             previousLinkClassName={s.pageLink}
-            nextClassName={classNames(s.pageItem, s.buttons)}
+            nextClassName={classNames(s.pageItem, s.buttons, 'p-4', 'sm:p-5', 'md:p-6', 'lg:p-7')}
             nextLinkClassName={s.pageLink}
             //
             breakLabel='...'

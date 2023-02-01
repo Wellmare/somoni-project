@@ -3,6 +3,8 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useFilePicker } from 'use-file-picker';
 
+import s from './RegisterForm.module.scss';
+
 import { useRegister } from '../../../../hooks/useRegister';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
@@ -74,7 +76,15 @@ const RegisterForm: FC = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+                <div className={'flex justify-center'}>
+                    <PhotoInput
+                        image={filesContent?.[0] === undefined ? null : filesContent[0].content}
+                        openFilePicker={openFilePicker}
+                        type={IPhotoInputType.circle}
+                    />
+                </div>
+
                 <div className={'mb-3'}>
                     <UsernameInput control={control} />
                 </div>
@@ -108,15 +118,9 @@ const RegisterForm: FC = () => {
                     />
                 </div>
 
-                <div className={'mb-3'}>
+                <div className={'mb-5'}>
                     <EmailInput control={control} />
                 </div>
-
-                <PhotoInput
-                    image={filesContent?.[0] === undefined ? null : filesContent[0].content}
-                    openFilePicker={openFilePicker}
-                    type={IPhotoInputType.circle}
-                />
 
                 <ServerResponse
                     responseError={error}
@@ -138,7 +142,7 @@ const RegisterForm: FC = () => {
                     <Success>Успешная регистрация!</Success>
                 </ServerResponse>
 
-                <Button color={ButtonColors.green} size={ButtonSizes.sm}>
+                <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
                     Зарегистрироваться
                 </Button>
             </form>

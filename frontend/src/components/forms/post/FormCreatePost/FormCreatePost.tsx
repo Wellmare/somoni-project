@@ -100,7 +100,7 @@ const FormCreatePost: FC = () => {
                 <Success>Пост создан</Success>
             </ServerResponse>
 
-            <Button color={ButtonColors.green} size={ButtonSizes.md}>
+            <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
                 Создать
             </Button>
         </form>

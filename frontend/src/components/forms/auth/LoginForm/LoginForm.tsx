@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import s from './LoginForm.module.scss';
+
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useLogin } from '../../../../hooks/useLogin';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
@@ -30,7 +32,7 @@ const LoginForm: FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
             <div className={'mb-3'}>
                 <UsernameInput control={control} />
             </div>

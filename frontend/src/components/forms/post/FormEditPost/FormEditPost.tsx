@@ -106,7 +106,7 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 <Success>Пост изменен</Success>
             </ServerResponse>
-            <Button color={ButtonColors.green} size={ButtonSizes.md}>
+            <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
                 Изменить
             </Button>
         </form>

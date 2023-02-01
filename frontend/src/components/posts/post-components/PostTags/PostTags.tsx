@@ -10,7 +10,7 @@ const PostTags: FC = () => {
     const { tags } = post;
 
     return (
-        <div className={classNames('flex', 'justify-start', 'items-center')}>
+        <div className={classNames('flex', 'justify-start', 'items-center', 'flex-wrap')}>
             {tags.map((tag) => (
                 <PostTag tag={tag} key={tag} />
             ))}

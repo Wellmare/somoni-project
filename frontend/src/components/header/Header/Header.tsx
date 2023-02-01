@@ -53,8 +53,8 @@ const Header: FC = () => {
 
             <div className='on-desktop'>
                 {isAuth && (
-                    <div className={classNames('flex', 'justify-center', 'items-center')}>
-                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Create post</Link>
+                    <div className={classNames('flex', 'justify-center', 'items-center', 'mr-10')}>
+                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Создать пост</Link>
                     </div>
                 )}
 

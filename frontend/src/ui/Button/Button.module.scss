@@ -6,8 +6,8 @@
   //box-shadow: 0 .3rem 20px #021505;
 
   //&:hover {
-    //transform: translateY(-.15rem);
-    //box-shadow: 0 6px 7px #05210c;
+  //transform: translateY(-.15rem);
+  //box-shadow: 0 6px 7px #05210c;
   //}
 
   //&:active {
@@ -67,15 +67,16 @@
   }
 
   &.sm {
-    padding: 0.5rem var(--btn-padding-sm);
+    padding: var(--btn-padding-sm);
   }
 ;
 
   &.md {
-    padding: 0.5rem var(--btn-padding-md);
-  };
+    padding: var(--btn-padding-md);
+  }
+;
 
   &.lg {
-    padding: 0.5rem var(--btn-padding-lg);
+    padding: var(--btn-padding-lg);
   }
 }

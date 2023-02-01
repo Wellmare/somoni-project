@@ -39,3 +39,61 @@ code {
 :root[data-theme="dark"] {
   --background-color: #171C20
 }
+
+@media (max-width: 640px) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+
+@media (min-width: 640px) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: 768px) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: 1024px) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: 1280px) {
+  .on-desktop {
+    display: inherit;
+  }
+  .on-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 1536px) {
+  .on-desktop {
+    display: inherit;
+  }
+  .on-mobile {
+    display: none;
+    transform: translateX(100px);
+  }
+}
+
+

@@ -27,7 +27,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
 
     return (
         <PostContext.Provider value={{ post, edit }}>
-            <div className={classNames(s.post)}>
+            <div className={classNames(s.post, 'w-11/12', 'sm:w-11/12', 'md:w-11/12', 'lg:w-8/12', 'xl:w-6/12')}>
                 <PostHeader />
                 <PostTitle />
                 <PostContent />

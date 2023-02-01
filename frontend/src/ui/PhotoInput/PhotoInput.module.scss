@@ -18,7 +18,10 @@
   //height: 200px;
   height: 100%;
   width: 100%;
-  border: 2px dashed black;
+
+  background-color: var(--photo-input-background);
+  border: 2px dashed var(--photo-input-border);
+
   border-radius: 50%;
 
   .img {
@@ -28,9 +31,11 @@
 }
 
 .square {
-  @include square($size: 30vw);
+  @include square($size: 100%);
 
-  border: 2px dashed black;
+  background-color: var(--photo-input-background);
+  border: 2px dashed var(--photo-input-border);
+
   border-radius: 1rem;
 
   & img {

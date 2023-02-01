@@ -16,6 +16,9 @@
   --input-filled-border: 3px solid #292C2F;
   --input-filled-placeholder: #868686;
   --input-filled-text: #FFFFFF;
+
+  --photo-input-background: #313b3d;
+  --photo-input-border: #4f545b;
 }
 
 :root[data-theme="light"] {
@@ -30,4 +33,7 @@
   --input-filled-border: 2px solid #DCDCDC;
   --input-filled-placeholder: #7e7e7e;
   --input-filled-text: #2a2a2a;
+
+  --photo-input-background: #e0e0e0;
+  --photo-input-border: #000;
 }

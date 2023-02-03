@@ -93,6 +93,7 @@ class get_create_post(generics.ListCreateAPIView):
         try:
             tag = get_object_or_404(Tag, slug=self.kwargs['tag_slug'])
             object_list = Post.objects.filter(tags__in=[tag])
+
             if self.request.user.is_authenticated:
                 return object_list.annotate(
                     isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
@@ -112,6 +113,19 @@ class get_create_post(generics.ListCreateAPIView):
                 ).order_by(
                     '-date')
         return Post.objects.all().order_by('-date')
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        if len(queryset)==0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated:

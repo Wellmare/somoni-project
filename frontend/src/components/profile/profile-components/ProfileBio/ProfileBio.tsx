@@ -7,7 +7,7 @@ const ProfileBio: FC = () => {
     if (profile === null) return null;
     const { bio } = profile;
 
-    return <div>Статус: {bio}</div>;
+    return <div>Статус: {bio === null || bio === '' ? 'Не установлен' : bio}</div>;
 };
 
 export default ProfileBio;

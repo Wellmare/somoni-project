@@ -22,21 +22,23 @@ const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassN
     }, [error]);
 
     return (
-        <div>
-            {label != null && (
-                <label htmlFor={id} className={classNames('block')}>
-                    {label}
-                </label>
-            )}
-            <Input
-                type={InputType.filled}
-                placeholder={placeholder}
-                id={id}
-                isError={isError}
-                className={inputClassName}
-                {...props}
-            />
-            {isError && <p className={classNames(s.error)}>{error?.message}</p>}
+        <div className={'flex justify-center'}>
+            <div className={s.container}>
+                {label != null && (
+                    <label htmlFor={id} className={classNames('block')}>
+                        {label}
+                    </label>
+                )}
+                <Input
+                    type={InputType.filled}
+                    placeholder={placeholder}
+                    id={id}
+                    isError={isError}
+                    className={inputClassName}
+                    {...props}
+                />
+                {isError && <p className={classNames(s.error)}>{error?.message}</p>}
+            </div>
         </div>
     );
 };

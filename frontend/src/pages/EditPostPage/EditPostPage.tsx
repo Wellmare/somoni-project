@@ -1,5 +1,8 @@
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+
+import s from './EditPostPage.module.scss';
 
 import FormEditPost from '../../components/forms/post/FormEditPost/FormEditPost';
 import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
@@ -19,15 +22,17 @@ const EditPostPage: FC = () => {
     }
 
     return (
-        <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
-            {data !== undefined && (
-                <FormEditPost
-                    defaultValues={{ tags: data.tags.join(' '), content: data.content, title: data.title }}
-                    image={data.image}
-                    postId={postId}
-                />
-            )}
-        </ServerResponse>
+        <div className={classNames('w-screen', 'sm:w-screen', 'md:w-9/12', 'lg:w-7/12', 'xl:w-6/12', s.maxWidth)}>
+            <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                {data !== undefined && (
+                    <FormEditPost
+                        defaultValues={{ tags: data.tags.join(' '), content: data.content, title: data.title }}
+                        image={data.image}
+                        postId={postId}
+                    />
+                )}
+            </ServerResponse>
+        </div>
     );
 };
 

@@ -1,8 +1,9 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
+
+import s from './FormEditPost.module.scss';
 
 import { useEditPostMutation } from '../../../../service/postsApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
@@ -11,7 +12,6 @@ import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
 import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
-import s from '../../../../ui/PhotoInput/PhotoInput.module.scss';
 import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
@@ -83,7 +83,7 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
             <div className={'mb-3'}>
                 <TitleInput control={control} />
             </div>
@@ -91,7 +91,6 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
             <PhotoInput
                 image={filesContent?.[0]?.content == null ? image : filesContent[0].content}
                 openFilePicker={openFilePicker}
-                className={classNames(s.image)}
                 type={IPhotoInputType.square}
             />
 

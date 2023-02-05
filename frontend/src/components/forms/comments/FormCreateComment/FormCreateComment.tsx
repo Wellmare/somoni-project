@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -30,14 +31,23 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={'mb-3 w-full'}>
-                <CommentContentInput control={control} style={{ width: '100%' }} />
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className={'w-screen'}>
+            <div className={classNames('w-11/12', 'sm:w-11/12', 'md:w-11/12', 'lg:w-8/12', 'xl:w-6/12', 'mx-auto')}>
+                <div className={'flex justify-between items-end'}>
+                    <div className={'inline-block'}>
+                        <CommentContentInput control={control} />
+                    </div>
 
-            <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>
-                Создать
-            </Button>
+                    <Button
+                        color={ButtonColors.green}
+                        size={ButtonSizes.sm}
+                        type={'submit'}
+                        className={'inline-block align-bottom ml-auto h-10'}
+                    >
+                        Создать
+                    </Button>
+                </div>
+            </div>
 
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 {/* <Success>Комментарий создан</Success> */}

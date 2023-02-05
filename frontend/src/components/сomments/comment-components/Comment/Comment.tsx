@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 
 import s from './Comment.module.scss';
@@ -47,7 +48,17 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
                 edit: editComment,
             }}
         >
-            <div className={s.comment}>
+            <div
+                className={classNames(
+                    s.comment,
+                    'w-11/12',
+                    'sm:w-11/12',
+                    'md:w-11/12',
+                    'lg:w-8/12',
+                    'xl:w-6/12',
+                    'mx-auto',
+                )}
+            >
                 <CommentHeader onDelete={onDelete} />
                 <CommentContent />
             </div>

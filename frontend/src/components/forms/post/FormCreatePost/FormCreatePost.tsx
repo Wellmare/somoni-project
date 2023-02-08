@@ -11,11 +11,13 @@ import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
+import Error from '../../../../ui/Error/Error';
 import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
 import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
+import { ErrorsFromData } from '../../../server/ErrorsFromData/ErrorsFromData';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import TagsInput from '../../formInputs/TagsInput';
 import TitleInput from '../../formInputs/TitleInput';
@@ -30,6 +32,7 @@ export interface FormCreatePostInputs {
 const FormCreatePost: FC = () => {
     const { handleSubmit, control, setValue, watch } = useForm<FormCreatePostInputs>({
         mode: 'onBlur',
+        defaultValues: { content: '' },
     });
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',
@@ -88,14 +91,27 @@ const FormCreatePost: FC = () => {
             />
 
             <div className={'mb-3'}>
-                <FormInputDraft control={control} name={'content'} watch={watch} setValue={setValue} />
+                <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
+                {watch('content') === '' && <Error>Контент не может быть пустым</Error>}
             </div>
 
             <div className={'mb-3'}>
                 <TagsInput control={control} />
             </div>
 
-            <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+            <ServerResponse
+                responseError={error}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                messages={[
+                    {
+                        statusCode: 400,
+                        message: 'Не хватает полей',
+                        customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
+                    },
+                ]}
+            >
                 <Success>Пост создан</Success>
             </ServerResponse>
 

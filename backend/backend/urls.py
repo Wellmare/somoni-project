@@ -23,13 +23,12 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework import routers
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('blog.urls')),
     path('api/', include('myapi.urls')),
     path('api/', include('userprofile.urls')),
+    path('api/password-reset/', include('password_reset.urls')),
 ]
 
 if settings.DEBUG:

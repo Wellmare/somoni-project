@@ -95,7 +95,7 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
             />
 
             <div className={'mb-3'}>
-                <FormInputDraft control={control} name={'content'} watch={watch} setValue={setValue} />
+                <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
             </div>
 
             <div className={'mb-3'}>

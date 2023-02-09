@@ -3,6 +3,7 @@ export { default as LoginPage } from './LoginPage/LoginPage';
 export { default as RegisterPage } from './RegisterPage/RegisterPage';
 export { default as ChangePasswordPage } from './ChangePasswordPage/ChangePasswordPage';
 export { default as RestorePasswordPage } from './RestorePasswordPage/RestorePasswordPage';
+export { default as RestorePasswordConfirmPage } from './RestorePasswordConfirmPage/RestorePasswordConfirmPage';
 export { default as PostPage } from './PostPage/PostPage';
 export { default as EditPostPage } from './EditPostPage/EditPostPage';
 export { default as WelcomePage } from './WelcomePage/WelcomePage';

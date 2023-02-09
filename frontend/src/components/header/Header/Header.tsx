@@ -11,6 +11,7 @@ import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
+import Logo from '../../../ui/Logo/Logo';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import SearchByTagForm from '../../forms/SearchByTagForm/SearchByTagForm';
 import ServerResponse from '../../server/ServerResponse/ServerResponse';
@@ -49,7 +50,9 @@ const Header: FC = () => {
                 s.header,
             )}
         >
-            <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>Logo somoni</Link>
+            <Link to={isAuth ? PathsToNavigate.MAIN : PathsToNavigate.WELCOME}>
+                <Logo />
+            </Link>
 
             <div className='on-desktop'>
                 {isAuth && (

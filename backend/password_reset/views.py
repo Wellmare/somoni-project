@@ -7,7 +7,7 @@ from django.contrib.auth.password_validation import validate_password, get_passw
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from rest_framework import exceptions
+from rest_framework import exceptions, status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -57,9 +57,12 @@ class ResetPasswordValidateToken(GenericAPIView):
     authentication_classes = ()
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response({'status': 'OK'})
+        try:
+            serializer = self.serializer_class(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            return Response({'status': 'OK'})
+        except:
+            return Response({'status': 'not'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class ResetPasswordConfirm(GenericAPIView):
@@ -73,13 +76,18 @@ class ResetPasswordConfirm(GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        password = serializer.validated_data['password']
-        password2 = serializer.validated_data['password2']
-        token = serializer.validated_data['token']
+        try:
+            serializer.is_valid(raise_exception=True)
+            password = serializer.validated_data['password']
+            password2 = serializer.validated_data['password2']
+            token = serializer.validated_data['token']
+        except:
+            return Response({'status': 'not'}, status=status.HTTP_401_UNAUTHORIZED)
 
         # find token
+
         reset_password_token = ResetPasswordToken.objects.filter(key=token).first()
+
 
         # change users password (if we got to this code it means that the user is_active)
         if reset_password_token.user.eligible_for_reset():

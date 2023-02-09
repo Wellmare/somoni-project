@@ -6,7 +6,7 @@ import Header from '../header/Header/Header';
 
 const Layout: FC = () => {
     return (
-        <div>
+        <div className={'cont'}>
             <Header />
             <main className={'flex justify-center items-center'}>
                 <Outlet />

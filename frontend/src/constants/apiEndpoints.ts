@@ -10,4 +10,6 @@ export const apiEndpoints = {
     editProfile: 'edit-profile/',
     userInfo: 'user-info/',
     changePassword: 'password/change/',
+    restorePassword: 'password-reset/',
+    restorePasswordConfirm: 'password-reset/confirm/',
 };

@@ -1,16 +1,19 @@
+import os
+
 from django.conf import settings
 from django.db import models
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from .tokens import get_token_generator
 
-
-
 from django.dispatch import receiver
 from django.urls import reverse
 from .signals import reset_password_token_created
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+
 # Prior to Django 1.5, the AUTH_USER_MODEL setting does not exist.
 # Note that we don't perform this code in the compat module due to
 # bug report #1297
@@ -111,6 +114,7 @@ def clear_expired(expiry_time):
     """
     ResetPasswordToken.objects.filter(created_at__lte=expiry_time).delete()
 
+
 def eligible_for_reset(self):
     if not self.is_active:
         # if the user is active we dont bother checking
@@ -123,26 +127,18 @@ def eligible_for_reset(self):
         # otherwise return True because we dont care about the result of has_usable_password()
         return True
 
+
 # add eligible_for_reset to the user class
 UserModel = get_user_model()
 UserModel.add_to_class("eligible_for_reset", eligible_for_reset)
 
 
-
-
-
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
-
-    email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
-
-    send_mail(
-        # title:
-        "Password Reset for {title}".format(title="Some website title"),
-        # message:
-        email_plaintext_message,
-        # from:
-        "djangotest55552@mail.ru",
-        # to:
-        [reset_password_token.user.email]
-    )
+    # email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
+    subject = "Password Reset for {title}".format(title="Some website title")
+    html_message = render_to_string('email_reset_password.html',
+                                    {'token': reset_password_token.key, 'domain': os.getenv('FRONT_DOMAIN')})
+    msg = EmailMultiAlternatives(subject=subject, to=[reset_password_token.user.email])
+    msg.attach_alternative(html_message, 'text/html')
+    msg.send()

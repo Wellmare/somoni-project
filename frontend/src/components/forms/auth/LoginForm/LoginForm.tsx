@@ -72,6 +72,11 @@ const LoginForm: FC = () => {
                     Еще не зарегистрирован?
                 </ButtonLink>
             </div>
+            <div className={'mt-5'}>
+                <ButtonLink color={ButtonColors.green} linkTo={PathsToNavigate.RESTORE_PASSWORD}>
+                    Забыли пароль?
+                </ButtonLink>
+            </div>
         </form>
     );
 };

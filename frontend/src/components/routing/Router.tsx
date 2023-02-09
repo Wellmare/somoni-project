@@ -7,7 +7,7 @@ import PrivateRoute from './PrivateRoute';
 
 import { Paths } from '../../constants/Paths';
 import { routingData } from '../../constants/routingData';
-import { PageNotFound } from '../../pages';
+import { PageNotFound, WelcomePage } from '../../pages';
 
 const Router: FC = () => {
     const routes = routingData.map(({ path, Element, withAuth }, i) => {
@@ -32,10 +32,19 @@ const Router: FC = () => {
 
     return (
         <Routes>
+            <Route
+                path={'/'}
+                element={
+                    <PrivateRoute renderTerm={(isAuth) => !isAuth} pathWhenIncorrect={Paths.MAIN}>
+                        <WelcomePage />
+                    </PrivateRoute>
+                }
+            />
+
             <Route path={'/'} element={<Layout />}>
                 {routes}
+                <Route path={'*'} element={<PageNotFound />} />
             </Route>
-            <Route path={'*'} element={<PageNotFound />} />
         </Routes>
     );
 };

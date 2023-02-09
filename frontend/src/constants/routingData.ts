@@ -10,7 +10,6 @@ import {
     RegisterPage,
     RestorePasswordConfirmPage,
     RestorePasswordPage,
-    WelcomePage,
 } from '../pages';
 import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
@@ -23,11 +22,11 @@ export const routingData: IRouteData[] = [
         Element: LoginPage,
         withAuth: false,
     },
-    {
-        path: Paths.WELCOME,
-        Element: WelcomePage,
-        withAuth: false,
-    },
+    // {
+    //     path: Paths.WELCOME,
+    //     Element: WelcomePage,
+    //     withAuth: false,
+    // },
     {
         path: Paths.REGISTER,
         Element: RegisterPage,

@@ -1,7 +1,13 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToLogin, IDataToLogout, IDataToChangePassword } from '../types/redux/auth/IDataTo';
+import {
+    IDataToLogin,
+    IDataToLogout,
+    IDataToChangePassword,
+    IDataToRestorePassword,
+    IDataToConfirmRestorePassword,
+} from '../types/redux/auth/IDataTo';
 import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
 import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
 
@@ -41,7 +47,34 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { refresh, password, password2, old_password: oldPassword },
             }),
         }),
+        restorePassword: builder.mutation<undefined, IDataToRestorePassword>({
+            query: ({ email }) => ({
+                url: apiEndpoints.restorePassword,
+                method: 'POST',
+                body: {
+                    email,
+                },
+            }),
+        }),
+        restorePasswordConfirm: builder.mutation<undefined, IDataToConfirmRestorePassword>({
+            query: ({ password2, password, token }) => ({
+                url: apiEndpoints.restorePasswordConfirm,
+                method: 'POST',
+                body: {
+                    password2,
+                    password,
+                    token,
+                },
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useChangePasswordMutation } = authApiSlice;
+export const {
+    useLoginMutation,
+    useRegisterMutation,
+    useLogoutMutation,
+    useChangePasswordMutation,
+    useRestorePasswordMutation,
+    useRestorePasswordConfirmMutation,
+} = authApiSlice;

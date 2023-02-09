@@ -7,14 +7,14 @@ import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
 
 interface IButtonProps {
     color: ButtonColors;
-    size: ButtonSizes;
+    size?: ButtonSizes;
     children: ReactNode;
     className?: string;
     [x: string]: any;
 }
 
 const Button: FC<IButtonProps> = ({ size, color, children, className, ...props }) => {
-    let sizeClass: string;
+    let sizeClass = '';
     switch (size) {
         case ButtonSizes.sm:
             sizeClass = s.sm;

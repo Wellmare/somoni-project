@@ -8,6 +8,7 @@ import {
     MainPage,
     PostPage,
     RegisterPage,
+    RestorePasswordConfirmPage,
     RestorePasswordPage,
     WelcomePage,
 } from '../pages';
@@ -70,6 +71,11 @@ export const routingData: IRouteData[] = [
     {
         path: Paths.RESTORE_PASSWORD,
         Element: RestorePasswordPage,
+        withAuth: false,
+    },
+    {
+        path: Paths.RESTORE_PASSWORD_CONFIRM,
+        Element: RestorePasswordConfirmPage,
         withAuth: false,
     },
     {

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, HTMLProps } from 'react';
 
 import s from './Input.module.scss';
 
@@ -12,10 +12,10 @@ interface IInputProps {
     // id?: string;
     // width?: string;
     className?: string;
-    [x: string]: unknown;
+    htmlProps?: HTMLProps<HTMLInputElement>;
 }
 
-const Input: FC<IInputProps> = ({ type, placeholder, isError, className, ...props }) => {
+const Input: FC<IInputProps> = ({ type, placeholder, isError, className, htmlProps, ...props }) => {
     return (
         <input
             type='text'
@@ -27,6 +27,7 @@ const Input: FC<IInputProps> = ({ type, placeholder, isError, className, ...prop
             )}
             placeholder={placeholder}
             {...props}
+            {...htmlProps}
         />
     );
 };

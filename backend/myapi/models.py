@@ -1,3 +1,5 @@
+import hashlib
+
 from PIL import Image
 from django.apps import apps
 from django.contrib import auth
@@ -119,7 +121,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     photo = models.ImageField(default='default.png', upload_to='profile_pics', null=True)
     bio = models.CharField(max_length=255, null=True, blank=True)
-
+    activate_key_email = models.CharField(max_length=500, unique=True)
+    activate_key_username = models.CharField(max_length=500, unique=True)
+    isEmailConfimed = models.BooleanField(default=False)
     objects = UserManager()
 
     EMAIL_FIELD = "email"
@@ -149,12 +153,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
 
-        img = Image.open(self.photo.path)
+        hash = hashlib.sha1()
+        hash.update(str(self.email).encode())
+        self.activate_key = hash.hexdigest()
+        hash.update(str(self.username).encode())
+        self.activate_key_username = hash.hexdigest()
+        try:
+            img = Image.open(self.photo.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.photo.path)
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.photo.path)
+        except ValueError:
+            pass

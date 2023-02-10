@@ -1,4 +1,8 @@
+import os
+
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import UpdateAPIView
@@ -17,6 +21,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.http import Http404
 
 
 class logout(APIView):
@@ -49,6 +54,7 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -109,10 +115,39 @@ class ChangePasswordView(UpdateAPIView):
                 try:
                     if list.token != serializer.data.get("refresh"):
                         RefreshToken(list.token).blacklist()
-                    else: pass
+                    else:
+                        pass
 
                 except TokenError:
                     pass
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def activate_email(request):
+    try:
+        key_email = request.data['key_email']
+        key_username = request.data['key_username']
+        user = get_object_or_404(User, activate_key_email=key_email, activate_key_username=key_username)
+        if user:
+            user.isEmailConfimed = True
+            user.save()
+    except KeyError:
+        return Response({'не все поля заполненны'}, status=status.HTTP_400_BAD_REQUEST)
+    except Http404:
+        return Response({'ключи невалидны'}, status=status.HTTP_401_UNAUTHORIZED)
+    return Response({key_email, key_username, user.username}, status=status.HTTP_200_OK)
+
+
+def send_msg_activate_email(request, user=None):
+    if not user:
+        user = request.user
+    subject = f"Email confirm for {user.username}".format(title="Some website title")
+    html_message = render_to_string('email_reset_password.html',
+                                    {'token': f'{user.activate_key_username}/{user.activate_key_username}/', 'domain': os.getenv('FRONT_DOMAIN')})
+    msg = EmailMultiAlternatives(subject=subject, to=[user.email])
+    msg.attach_alternative(html_message, 'text/html')
+    msg.send()

@@ -1,3 +1,8 @@
+import os
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
 from myapi.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
@@ -51,11 +56,20 @@ class RegisterSerializer(serializers.ModelSerializer):
                 user.set_password(validated_data['password'])
                 user.save()
 
+                subject = f"Email confirm for {user.username}".format(title="Some website title")
+                html_message = render_to_string('email_confirm_password.html',
+                                                {'token_username': user.activate_key_username,
+                                                 'token_email': user.activate_key_username,
+                                                 'domain': os.getenv('FRONT_DOMAIN')})
+                msg = EmailMultiAlternatives(subject=subject, to=[user.email])
+                msg.attach_alternative(html_message, 'text/html')
+                msg.send()
+
 
 
         except KeyError:
             raise serializers.ValidationError(
-                    {"detail": "some field is missing"})
+                {"detail": "some field is missing"})
 
         return user
 

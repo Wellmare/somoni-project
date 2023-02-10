@@ -11,6 +11,5 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='auth_register'),
     path('logout/', views.logout.as_view(), name="logout"),
     path('password/change/', views.ChangePasswordView.as_view(), name="logout"),
-    path('test/', views.testEndPoint, name='test'),
-    path('', views.getRoutes)
+    path('email-confirm/', views.activate_email),
 ]

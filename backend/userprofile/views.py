@@ -18,18 +18,27 @@ from userprofile.serializer import profile_serializer
 
 from django.core.mail import EmailMessage
 
+import os
+import time
+import hashlib
+
+
+def _createHash():
+    """This function generate 10 character long hash"""
+    hash = hashlib.sha1()
+    hash.update(str(get_object_or_404(User, username='admin').email).encode())
+    return hash.hexdigest()
+
+
 @api_view(['POST'])
 def send_email(request):
-    try:
-        text = request.data['body']
-        title = request.data['title']
-        msg = EmailMessage(title,
-                           text, to=[request.data['email']])
-    except:
-        msg = EmailMessage('Request Callback',
-                           'Here is the message.', to=[request.data['email']])
+    a = _createHash()
+    msg = EmailMessage('Request Callback',
+                       f'Here is the message.{a}', to=['morozovd0605@gmail.com'])
     msg.send()
-    return Response('почта отправлена')
+    return Response(f'{a}')
+
+
 class userResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
@@ -89,6 +98,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('isMyProfile', isMyProfile),
                     ('results', data)
                 ]))
+
 
 class profile(generics.ListCreateAPIView):
     pagination_class = userResultsSetPagination

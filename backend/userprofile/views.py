@@ -186,7 +186,8 @@ def getprofile(request, pk):
             "bio": user.bio,
             "id": user.id,
             "email": user.email,
-            "isMyProfile": True
+            "isMyProfile": True,
+            "isEmailConfimed": user.isEmailConfimed
         })
     else:
         user = get_object_or_404(User, id=pk)

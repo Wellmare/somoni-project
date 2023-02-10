@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, HTMLProps, useEffect, useState } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import s from './FormInput.module.scss';
@@ -13,9 +13,11 @@ export interface IInputProps {
     label: string | null;
     placeholder: string;
     inputClassName?: string;
+    htmlProps?: HTMLProps<HTMLInputElement>;
+    [x: string]: any;
 }
 
-const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassName, ...props }) => {
+const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassName, htmlProps, ...props }) => {
     const [isError, setIsError] = useState<boolean>(false);
     useEffect(() => {
         setIsError(error?.message !== undefined);
@@ -32,7 +34,7 @@ const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassN
                 <Input
                     type={InputType.filled}
                     placeholder={placeholder}
-                    id={id}
+                    htmlProps={{ id, autoComplete: 'on', ...htmlProps }}
                     isError={isError}
                     className={inputClassName}
                     {...props}

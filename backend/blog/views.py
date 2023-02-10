@@ -131,6 +131,8 @@ class get_create_post(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
@@ -166,6 +168,8 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
 
             serializer = self.get_serializer(instance, data=request.data, partial=partial)
             serializer.is_valid(raise_exception=True)
@@ -189,6 +193,8 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)
@@ -257,6 +263,8 @@ class get_create_comments(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
@@ -291,6 +299,8 @@ class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
 
             serializer = self.get_serializer(instance, data=request.data, partial=partial)
             serializer.is_valid(raise_exception=True)
@@ -314,6 +324,8 @@ class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
+            if not request.user.isEmailConfirmed:
+                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
             self.perform_destroy(instance)
             post = instance.post
             post.comments -= 1

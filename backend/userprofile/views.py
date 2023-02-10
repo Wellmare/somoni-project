@@ -187,7 +187,7 @@ def getprofile(request, pk):
             "id": user.id,
             "email": user.email,
             "isMyProfile": True,
-            "isEmailConfimed": user.isEmailConfimed
+            "isEmailConfimed": user.isEmailConfimed,
         })
     else:
         user = get_object_or_404(User, id=pk)
@@ -196,5 +196,6 @@ def getprofile(request, pk):
             "photo": request.build_absolute_uri(user.photo.url),
             "bio": user.bio,
             "id": user.id,
-            "isMyProfile": False
+            "isMyProfile": False,
+            "isEmailConfimed": False,
         })

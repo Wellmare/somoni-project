@@ -32,23 +32,7 @@ html, body {
   height: 100%;
 }
 
-.cont{
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-
-footer {
-  position: sticky!important;
-  top: 100%;
-  padding-top:25px;
-  padding-bottom:25px;
-}
-
-
-#root{
+#root {
   min-height: 100%;
   position: relative;
 }

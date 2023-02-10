@@ -42,7 +42,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('bio', user.bio),
                     ('email', user.email),
                     ('isMyProfile', isMyProfile),
-                    ('isEmailConfirmed', user.isEmailConfimed),
+                    ('isEmailConfirmed', user.isEmailConfirmed),
                     ('results', data)
                 ]))
             else:
@@ -68,7 +68,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('email', user.email),
                     ('id', user.id),
                     ('isMyProfile', isMyProfile),
-                    ('isEmailConfirmed', user.isEmailConfimed),
+                    ('isEmailConfirmed', user.isEmailConfirmed),
                     ('results', data)
                 ]))
             else:

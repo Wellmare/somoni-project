@@ -11,7 +11,7 @@ import Button from '../../ui/Button/Button';
 
 const WelcomePage: FC = () => {
     return (
-        <div className={classNames('w-screen cont')}>
+        <div className={classNames('w-screen', s.cont)}>
             <div className={'text-right mr-5 mt-5'}>
                 <Link to={PathsToNavigate.MAIN}>Пропустить</Link>
                 {/* <ButtonLink color={ButtonColors.green} linkTo={PathsToNavigate.MAIN}> */}

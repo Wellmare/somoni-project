@@ -59,6 +59,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('bio', user.bio),
                     ('email', user.email),
                     ('isMyProfile', isMyProfile),
+                    ('isEmailConfirmed', user.isEmailConfirmed),
                     ('results', data)
                 ]))
             else:
@@ -84,6 +85,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('email', user.email),
                     ('id', user.id),
                     ('isMyProfile', isMyProfile),
+                    ('isEmailConfirmed', user.isEmailConfirmed),
                     ('results', data)
                 ]))
             else:
@@ -187,7 +189,7 @@ def getprofile(request, pk):
             "id": user.id,
             "email": user.email,
             "isMyProfile": True,
-            "isEmailConfimed": user.isEmailConfimed,
+            "isEmailConfirmed": user.isEmailConfirmed,
         })
     else:
         user = get_object_or_404(User, id=pk)
@@ -197,5 +199,5 @@ def getprofile(request, pk):
             "bio": user.bio,
             "id": user.id,
             "isMyProfile": False,
-            "isEmailConfimed": False,
+            "isEmailConfirmed": False,
         })

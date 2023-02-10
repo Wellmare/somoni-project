@@ -21,7 +21,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     photo = serializers.ImageField(source='author.photo', read_only=True)
     tags = TagListSerializerField(required=False)
     isMyPost = serializers.BooleanField(read_only=True, default=False)
-
+    isEmailConfirmed = serializers.BooleanField(read_only=True, source='author.isEmailConfirmed')
     class Meta:
         model = Post
         fields = '__all__'

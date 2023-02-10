@@ -123,7 +123,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     bio = models.CharField(max_length=255, null=True, blank=True)
     activate_key_email = models.CharField(max_length=500, unique=True)
     activate_key_username = models.CharField(max_length=500, unique=True)
-    isEmailConfimed = models.BooleanField(default=False)
+    isEmailConfirmed = models.BooleanField(default=False)
     objects = UserManager()
 
     EMAIL_FIELD = "email"

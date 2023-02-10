@@ -82,11 +82,13 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <PhotoInput
-                    image={filesContent?.[0]?.content === undefined ? photo : filesContent?.[0]?.content}
-                    openFilePicker={openFilePicker}
-                    type={IPhotoInputType.circle}
-                />
+                <div className={'flex justify-center'}>
+                    <PhotoInput
+                        image={filesContent?.[0]?.content === undefined ? photo : filesContent?.[0]?.content}
+                        openFilePicker={openFilePicker}
+                        type={IPhotoInputType.circle}
+                    />
+                </div>
 
                 <div className={'mb-3'}>
                     <UsernameInput control={control} />

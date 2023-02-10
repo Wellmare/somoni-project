@@ -15,6 +15,7 @@ const PasswordInput: FC<ICustomInputProps> = ({ control, name, ...props }) => {
                     placeholder={'password'}
                     {...field}
                     {...props}
+                    htmlProps={{ type: 'password' }}
                 />
             )}
             control={control}

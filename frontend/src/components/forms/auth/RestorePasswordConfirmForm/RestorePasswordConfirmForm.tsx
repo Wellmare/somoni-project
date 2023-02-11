@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useRestorePasswordConfirmMutation } from '../../../../service/authApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { LoaderSize } from '../../../../types/UI/Loader.types';
 import Button from '../../../../ui/Button/Button';
+import Loader from '../../../../ui/Loader/Loader';
 import Success from '../../../../ui/Success/Success';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { ErrorsFromData } from '../../../server/ErrorsFromData/ErrorsFromData';
@@ -84,6 +86,7 @@ const RestorePasswordConfirmForm: FC<IRestorePasswordConfirmFormProps> = ({ toke
                     isError={isError}
                     isLoading={isLoading}
                     isSuccess={isSuccess}
+                    loader={<Loader size={LoaderSize.sm} />}
                     messages={[
                         {
                             statusCode: 401,

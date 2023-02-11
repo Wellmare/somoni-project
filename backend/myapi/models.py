@@ -159,7 +159,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         hash = hashlib.sha1()
         hash.update(str(self.email).encode())
-        self.activate_key = hash.hexdigest()
+        self.activate_key_email = hash.hexdigest()
         hash.update(str(self.username).encode())
         self.activate_key_username = hash.hexdigest()
         try:

@@ -17,7 +17,6 @@ import Avatar from '../../../ui/Avatar/Avatar';
 import Error from '../../../ui/Error/Error';
 import Icon from '../../../ui/Icon/Icon';
 import { pathsToNavigate } from '../../../utils/pathsToNavigate';
-import SearchByTagForm from '../../forms/SearchByTagForm/SearchByTagForm';
 import Menu, { MenuItem } from '../../Menu/Menu';
 
 interface IMenuProps {
@@ -54,9 +53,6 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
 
                 {/* Для мобилы */}
                 <div className={classNames('on-mobile', s.menuOnMobile)}>
-                    <MenuItem>
-                        <SearchByTagForm />
-                    </MenuItem>
                     <MenuItem onClick={onChangeTheme}>Сменить тему</MenuItem>
                 </div>
             </Menu>
@@ -105,10 +101,6 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
                 <Link to={PathsToNavigate.CREATE_POST}>
                     <MenuItem>Создать пост</MenuItem>
                 </Link>
-
-                <MenuItem>
-                    <SearchByTagForm />
-                </MenuItem>
 
                 <div className={s.menuDivider} />
 

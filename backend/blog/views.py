@@ -1,3 +1,5 @@
+from urllib.parse import unquote
+
 from myapi.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -93,7 +95,7 @@ class get_create_post(generics.ListCreateAPIView):
 
     def get_queryset(self):
         try:
-            tag = get_object_or_404(Tag, slug=self.kwargs['tag_slug'])
+            tag = get_object_or_404(Tag, slug=unquote(self.kwargs['tag_slug']))
             object_list = Post.objects.filter(tags__in=[tag])
 
             if self.request.user.is_authenticated:

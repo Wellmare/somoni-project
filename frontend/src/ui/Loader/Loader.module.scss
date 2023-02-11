@@ -1,6 +1,6 @@
-$color1: #a5a7bb;
-$color2: #a496a4;
-$color3: #554d73;
+$color1: var(--loader-color1);
+$color2: var(--loader-color2);
+$color3: var(--loader-color3);
 
 //body {
 //  background-color: #eee;
@@ -17,8 +17,18 @@ $color3: #554d73;
 }
 
 .loader {
-  width: 150px;
-  height: 150px;
+  &.sm {
+    width: var(--loader-size-sm);
+    height: var(--loader-size-sm);
+  }
+  &.md {
+    width: var(--loader-size-md);
+    height: var(--loader-size-md);
+  }
+  &.lg {
+    width: var(--loader-size-lg);
+    height: var(--loader-size-lg);
+  }
 }
 svg {
   width: 90%;

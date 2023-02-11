@@ -1,0 +1,17 @@
+:root {
+  --loader-size-sm: 5rem;
+  --loader-size-md: 8rem;
+  --loader-size-lg: 10rem;
+}
+
+:root[data-theme="light"] {
+  --loader-color1: #a5a7bb;
+  --loader-color2: #a496a4;
+  --loader-color3: #554d73;
+}
+
+:root[data-theme="dark"] {
+  --loader-color1: #a5a7bb;
+  --loader-color2: #a496a4;
+  --loader-color3: #554d73;
+}

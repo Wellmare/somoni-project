@@ -1,11 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { ErrorsFromData } from '../../components/server/ErrorsFromData/ErrorsFromData';
 import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
 import { PathsToNavigate } from '../../constants/Paths';
 import { useConfirmEmailMutation } from '../../service/authApiSlice';
-import { ButtonColors } from '../../types/UI/Button.types';
+import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
 import Button from '../../ui/Button/Button';
 import Error from '../../ui/Error/Error';
 import Success from '../../ui/Success/Success';
@@ -29,7 +28,7 @@ const ConfirmEmailPage: FC = () => {
     }, []);
 
     return (
-        <>
+        <div>
             <ServerResponse
                 responseError={error}
                 isError={isError}
@@ -42,12 +41,16 @@ const ConfirmEmailPage: FC = () => {
                     },
                 ]}
             >
-                <Success>Почта успешно подтверждена!</Success>
-                <Link to={PathsToNavigate.MAIN}>
-                    <Button color={ButtonColors.green}>На главную</Button>
+                <div>
+                    <Success>Почта успешно подтверждена!</Success>
+                </div>
+                <Link to={PathsToNavigate.MAIN} className={'flex justify-center mt-5'}>
+                    <Button color={ButtonColors.green} size={ButtonSizes.sm}>
+                        На главную
+                    </Button>
                 </Link>
             </ServerResponse>
-        </>
+        </div>
     );
 };
 

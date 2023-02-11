@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
@@ -6,12 +6,16 @@ import { useFilePicker } from 'use-file-picker';
 
 import s from './FormCreatePost.module.scss';
 
+import { useAppSelector } from '../../../../hooks/reduxHooks';
+import { selectUserId } from '../../../../redux/slices/authSlice';
 import { useCreatePostMutation } from '../../../../service/postsApiSlice';
+import { useGetUserInfoQuery } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
 import Error from '../../../../ui/Error/Error';
+import EmailConfirmModal from '../../../../ui/modals/EmailConfirmModal/EmailConfirmModal';
 import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
 import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
@@ -39,6 +43,11 @@ const FormCreatePost: FC = () => {
         maxFileSize: 10,
         readAs: 'DataURL',
     });
+    const userId = useAppSelector(selectUserId);
+    if (userId === null) return <Error>User id не найден!</Error>;
+    const { data } = useGetUserInfoQuery({ userId });
+
+    const [emailConfirmModalIsOpen, setEmailConfirmModalIsOpen] = useState(true);
 
     const [createPost, { isError, isLoading, isSuccess, error }] = useCreatePostMutation();
     const navigate = useNavigate();
@@ -80,49 +89,54 @@ const FormCreatePost: FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-            <div className={'mb-3'}>
-                <TitleInput control={control} />
-            </div>
-            <PhotoInput
-                image={filesContent?.[0] === undefined ? null : filesContent?.[0].content}
-                openFilePicker={openFilePicker}
-                type={IPhotoInputType.square}
-            />
+        <>
+            {data?.isEmailConfirmed === false && (
+                <EmailConfirmModal isOpen={emailConfirmModalIsOpen} setIsOpen={setEmailConfirmModalIsOpen} />
+            )}
+            <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+                <div className={'mb-3'}>
+                    <TitleInput control={control} />
+                </div>
+                <PhotoInput
+                    image={filesContent?.[0] === undefined ? null : filesContent?.[0].content}
+                    openFilePicker={openFilePicker}
+                    type={IPhotoInputType.square}
+                />
 
-            <div className={'mb-3'}>
-                <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
-                {watch('content') === '' && <Error>Контент не может быть пустым</Error>}
-            </div>
+                <div className={'mb-3'}>
+                    <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
+                    {watch('content') === '' && <Error>Контент не может быть пустым</Error>}
+                </div>
 
-            <div className={'mb-3'}>
-                <TagsInput control={control} />
-            </div>
+                <div className={'mb-3'}>
+                    <TagsInput control={control} />
+                </div>
 
-            <ServerResponse
-                responseError={error}
-                isError={isError}
-                isLoading={isLoading}
-                isSuccess={isSuccess}
-                messages={[
-                    {
-                        statusCode: 400,
-                        message: 'Не хватает полей',
-                        customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
-                    },
-                    {
-                        statusCode: 401,
-                        message: 'Вы не подтвердили почту!',
-                    },
-                ]}
-            >
-                <Success>Пост создан</Success>
-            </ServerResponse>
+                <ServerResponse
+                    responseError={error}
+                    isError={isError}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    messages={[
+                        {
+                            statusCode: 400,
+                            message: 'Не хватает полей',
+                            customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
+                        },
+                        {
+                            statusCode: 401,
+                            message: 'Вы не подтвердили почту!',
+                        },
+                    ]}
+                >
+                    <Success>Пост создан</Success>
+                </ServerResponse>
 
-            <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
-                Создать
-            </Button>
-        </form>
+                <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
+                    Создать
+                </Button>
+            </form>
+        </>
     );
 };
 

@@ -4,8 +4,8 @@ import ReactModal from 'react-modal';
 
 import s from './Alert.module.scss';
 
-import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
-import Button from '../Button/Button';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import Button from '../../Button/Button';
 
 interface IAlertDeleteProps {
     title: string;

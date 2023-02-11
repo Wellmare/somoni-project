@@ -7,8 +7,10 @@ import s from './LoginForm.module.scss';
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useLogin } from '../../../../hooks/useLogin';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { LoaderSize } from '../../../../types/UI/Loader.types';
 import Button from '../../../../ui/Button/Button';
 import ButtonLink from '../../../../ui/ButtonLink/ButtonLink';
+import Loader from '../../../../ui/Loader/Loader';
 import Success from '../../../../ui/Success/Success';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import PasswordInput from '../../formInputs/PasswordInput';
@@ -44,6 +46,7 @@ const LoginForm: FC = () => {
                 isError={isError}
                 isLoading={isLoading}
                 isSuccess={isSuccess}
+                loader={<Loader size={LoaderSize.sm} />}
                 messages={[
                     {
                         message: 'Неверный логин или пароль',
@@ -60,12 +63,7 @@ const LoginForm: FC = () => {
 
             {/* {error} */}
             <div className={classNames('flex', 'items-center', 'justify-between')}>
-                <Button
-                    color={ButtonColors.green}
-                    size={ButtonSizes.sm}
-                    // className={classNames('bg-cyan-700', 'py-1', 'px-4', 'rounded-md')}
-                    type='submit'
-                >
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} type='submit'>
                     Войти
                 </Button>
                 <ButtonLink color={ButtonColors.blue} linkTo={PathsToNavigate.REGISTER}>

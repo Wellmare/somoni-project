@@ -9,9 +9,11 @@ import s from './RegisterForm.module.scss';
 import { Paths, PathsToNavigate } from '../../../../constants/Paths';
 import { useRegister } from '../../../../hooks/useRegister';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
-import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { ButtonColors } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
+import { LoaderSize } from '../../../../types/UI/Loader.types';
 import Button from '../../../../ui/Button/Button';
+import Loader from '../../../../ui/Loader/Loader';
 import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
 import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
@@ -131,6 +133,7 @@ const RegisterForm: FC = () => {
                     isError={isError}
                     isLoading={isLoading}
                     isSuccess={isSuccess}
+                    loader={<Loader size={LoaderSize.sm} />}
                     messages={[
                         {
                             statusCode: 401,
@@ -153,7 +156,7 @@ const RegisterForm: FC = () => {
                     <Success>Успешная регистрация!</Success>
                 </ServerResponse>
 
-                <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
+                <Button color={ButtonColors.green} className={'w-full py-2'}>
                     Зарегистрироваться
                 </Button>
             </form>

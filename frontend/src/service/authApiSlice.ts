@@ -77,6 +77,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                     key_username: token1,
                 },
             }),
+            invalidatesTags: ['Auth'],
         }),
     }),
 });

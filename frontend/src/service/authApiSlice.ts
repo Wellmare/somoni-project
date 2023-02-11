@@ -7,6 +7,7 @@ import {
     IDataToChangePassword,
     IDataToRestorePassword,
     IDataToConfirmRestorePassword,
+    IDataToConfirmEmail,
 } from '../types/redux/auth/IDataTo';
 import { ILoginResponse } from '../types/redux/auth/ILoginResponse';
 import { IRegisterResponse } from '../types/redux/auth/IRegisterResponse';
@@ -67,6 +68,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 },
             }),
         }),
+        confirmEmail: builder.mutation<undefined, IDataToConfirmEmail>({
+            query: ({ token1, token2 }) => ({
+                url: apiEndpoints.confirmEmail,
+                method: 'POST',
+                body: {
+                    key_email: token1,
+                    key_username: token2,
+                },
+            }),
+        }),
     }),
 });
 
@@ -77,4 +88,5 @@ export const {
     useChangePasswordMutation,
     useRestorePasswordMutation,
     useRestorePasswordConfirmMutation,
+    useConfirmEmailMutation,
 } = authApiSlice;

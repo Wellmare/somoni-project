@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { logout as logoutState } from '../../../../redux/slices/authSlice';
 import { useDeleteProfileMutation } from '../../../../service/userApiSlice';
-import Alert from '../../../../ui/Alert/Alert';
+import Alert from '../../../../ui/modals/Alert/Alert';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 

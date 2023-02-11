@@ -7,8 +7,8 @@ import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete.svg'
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useDeletePostMutation } from '../../../../service/postsApiSlice';
 import { IconType } from '../../../../types/UI/IconType';
-import Alert from '../../../../ui/Alert/Alert';
 import Icon from '../../../../ui/Icon/Icon';
+import Alert from '../../../../ui/modals/Alert/Alert';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 
 interface IPostDeleteButtonProps {

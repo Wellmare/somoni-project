@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react';
 
 import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete.svg';
 import { IconType } from '../../../../types/UI/IconType';
-import Alert from '../../../../ui/Alert/Alert';
 import Icon from '../../../../ui/Icon/Icon';
+import Alert from '../../../../ui/modals/Alert/Alert';
 
 interface ICommentDeleteButtonProps {
     onDelete: () => void;

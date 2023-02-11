@@ -30,3 +30,7 @@ export interface IDataToConfirmRestorePassword {
     password: string;
     password2: string;
 }
+export interface IDataToConfirmEmail {
+    token1: string;
+    token2: string;
+}

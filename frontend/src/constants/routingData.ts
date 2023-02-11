@@ -11,6 +11,7 @@ import {
     RestorePasswordConfirmPage,
     RestorePasswordPage,
 } from '../pages';
+import ConfirmEmailPage from '../pages/ConfirmEmailPage/ConfirmEmailPage';
 import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
 import UserPage from '../pages/UserPage/UserPage';
@@ -84,7 +85,7 @@ export const routingData: IRouteData[] = [
     },
     {
         path: `${Paths.CONFIRM_EMAIL}/:token1/:token2`,
-        Element: ChangePasswordPage,
+        Element: ConfirmEmailPage,
         withAuth: true,
     },
 ];

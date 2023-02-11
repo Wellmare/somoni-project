@@ -13,7 +13,7 @@ interface SearchFormInputs {
 }
 
 const SearchByTagForm: FC = () => {
-    const { control, handleSubmit } = useForm<SearchFormInputs>({ mode: 'onSubmit' });
+    const { control, handleSubmit } = useForm<SearchFormInputs>({ mode: 'onSubmit', defaultValues: { tag: '' } });
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<SearchFormInputs> = ({ tag }) => {
@@ -36,10 +36,10 @@ const SearchByTagForm: FC = () => {
                 control={control}
                 name={'tag'}
                 rules={{
-                    required: {
-                        value: true,
-                        message: 'Поле обязательно',
-                    },
+                    // required: {
+                    //     value: true,
+                    //     message: 'Поле обязательно',
+                    // },
                     validate: (value) => {
                         if (value !== undefined) {
                             if (value.toString().includes('#')) {

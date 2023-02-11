@@ -79,6 +79,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Auth'],
         }),
+        sendConfirmEmail: builder.mutation<undefined, null>({
+            query: () => ({
+                url: apiEndpoints.sendConfirmEmail,
+                method: 'POST',
+            }),
+        }),
     }),
 });
 
@@ -90,4 +96,5 @@ export const {
     useRestorePasswordMutation,
     useRestorePasswordConfirmMutation,
     useConfirmEmailMutation,
+    useSendConfirmEmailMutation,
 } = authApiSlice;

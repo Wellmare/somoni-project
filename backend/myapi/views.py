@@ -133,13 +133,13 @@ def activate_email(request):
         key_username = request.data['key_username']
         user = get_object_or_404(User, activate_key_email=key_email, activate_key_username=key_username)
         if user:
-            user.isEmailConfimed = True
+            user.isEmailConfirmed = True
             user.save()
     except KeyError:
         return Response({'не все поля заполненны'}, status=status.HTTP_400_BAD_REQUEST)
     except Http404:
         return Response({'ключи невалидны'}, status=status.HTTP_401_UNAUTHORIZED)
-    return Response({key_email, key_username, user.username}, status=status.HTTP_200_OK)
+    return Response({'активирован'}, status=status.HTTP_200_OK)
 
 
 def send_msg_activate_email(request, user=None):

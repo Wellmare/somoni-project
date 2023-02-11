@@ -15,6 +15,7 @@ interface IServerResponseProps {
     isLoading: boolean;
     isSuccess: boolean;
     loader?: ReactNode;
+    onSuccess?: () => void;
 }
 
 const ServerResponse: FC<IServerResponseProps> = ({
@@ -25,6 +26,7 @@ const ServerResponse: FC<IServerResponseProps> = ({
     isSuccess,
     isLoading,
     loader,
+    onSuccess,
 }) => {
     const messagesErrors = messages !== undefined ? messages : [];
 
@@ -38,6 +40,7 @@ const ServerResponse: FC<IServerResponseProps> = ({
                 isError={isError}
             />
             {isLoading && loaderOnLoading}
+            {isSuccess && onSuccess?.()}
             {isSuccess && <>{children}</>}
         </>
     );

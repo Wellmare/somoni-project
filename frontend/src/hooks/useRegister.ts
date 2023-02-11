@@ -17,7 +17,7 @@ interface IUseRegisterResponse {
 
 export const useRegister = (): IUseRegisterResponse => {
     const [register, { error, isError, data, isSuccess, isLoading }] = useRegisterMutation();
-    const { loginUser } = useLogin();
+    const { loginUser } = useLogin(false);
 
     const registerUser = (formData: FormData, loginData: IDataToLogin): void => {
         doAsyncFunc(async () => {

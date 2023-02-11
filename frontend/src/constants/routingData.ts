@@ -86,6 +86,5 @@ export const routingData: IRouteData[] = [
     {
         path: `${Paths.CONFIRM_EMAIL}/:token1/:token2`,
         Element: ConfirmEmailPage,
-        withAuth: true,
     },
 ];

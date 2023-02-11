@@ -110,6 +110,10 @@ const FormCreatePost: FC = () => {
                         message: 'Не хватает полей',
                         customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
                     },
+                    {
+                        statusCode: 401,
+                        message: 'Вы не подтвердили почту!',
+                    },
                 ]}
             >
                 <Success>Пост создан</Success>

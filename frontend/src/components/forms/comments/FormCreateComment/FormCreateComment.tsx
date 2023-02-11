@@ -47,11 +47,16 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                         Создать
                     </Button>
                 </div>
+                <ServerResponse
+                    responseError={error}
+                    isError={isError}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    messages={[{ statusCode: 401, message: 'Вы не подтвердили почту!' }]}
+                >
+                    {/* <Success>Комментарий создан</Success> */}
+                </ServerResponse>
             </div>
-
-            <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
-                {/* <Success>Комментарий создан</Success> */}
-            </ServerResponse>
         </form>
     );
 };

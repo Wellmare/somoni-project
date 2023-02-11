@@ -59,7 +59,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                 subject = f"Email confirm for {user.username}".format(title="Some website title")
                 html_message = render_to_string('email_confirm_password.html',
                                                 {'token_username': user.activate_key_username,
-                                                 'token_email': user.activate_key_username,
+                                                 'token_email': user.activate_key_email,
                                                  'domain': os.getenv('FRONT_DOMAIN')})
                 msg = EmailMultiAlternatives(subject=subject, to=[user.email])
                 msg.attach_alternative(html_message, 'text/html')

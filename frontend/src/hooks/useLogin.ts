@@ -18,7 +18,7 @@ interface IUseLoginResponse {
     error: FetchBaseQueryError | null;
 }
 
-export const useLogin = (): IUseLoginResponse => {
+export const useLogin = (withRedirect: boolean): IUseLoginResponse => {
     const [login, { error, isError, data, isLoading, isSuccess }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -28,8 +28,10 @@ export const useLogin = (): IUseLoginResponse => {
             try {
                 const response = await login({ username, password }).unwrap();
                 dispatch(setAuthTokens(response));
-                navigate(PathsToNavigate.MAIN);
-                document.location.reload();
+                if (withRedirect) {
+                    navigate(PathsToNavigate.MAIN);
+                    document.location.reload();
+                }
             } catch (e) {
                 console.log(e);
             }

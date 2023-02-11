@@ -141,13 +141,17 @@ def activate_email(request):
         return Response({'ключи невалидны'}, status=status.HTTP_401_UNAUTHORIZED)
     return Response({'активирован'}, status=status.HTTP_200_OK)
 
-
-def send_msg_activate_email(request, user=None):
-    if not user:
-        user = request.user
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def send_msg_activate_email(request):
+    user = request.user
     subject = f"Email confirm for {user.username}".format(title="Some website title")
-    html_message = render_to_string('email_reset_password.html',
-                                    {'token': f'{user.activate_key_username}/{user.activate_key_username}/', 'domain': os.getenv('FRONT_DOMAIN')})
+    html_message = render_to_string('email_confirm_password.html',
+                                    {'token_username': user.activate_key_username,
+                                     'token_email': user.activate_key_email,
+                                     'domain': os.getenv('FRONT_DOMAIN')})
     msg = EmailMultiAlternatives(subject=subject, to=[user.email])
     msg.attach_alternative(html_message, 'text/html')
     msg.send()
+    return Response({'письмо отправленно'}, status=status.HTTP_201_CREATED)
+

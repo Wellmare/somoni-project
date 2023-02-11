@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout/', views.logout.as_view(), name="logout"),
     path('password/change/', views.ChangePasswordView.as_view(), name="logout"),
     path('email-confirm/', views.activate_email),
+    path('email-confirm/send/', views.send_msg_activate_email)
 ]

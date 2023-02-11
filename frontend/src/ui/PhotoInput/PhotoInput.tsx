@@ -17,7 +17,7 @@ interface IPhotoInputProps {
 const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image, type, ...props }) => {
     if (type === IPhotoInputType.circle) {
         return (
-            <div className={classNames('mb-3')}>
+            <div className={classNames('mb-2')}>
                 <Avatar size={AvatarSize.large}>
                     <div {...props} onClick={() => openFilePicker()} className={classNames('w-full', 'h-full')}>
                         {image !== null ? <img src={image} alt='photo input' /> : <div className={s.avatar}></div>}
@@ -28,7 +28,7 @@ const PhotoInput: FC<IPhotoInputProps> = ({ openFilePicker, image, type, ...prop
     }
 
     return (
-        <div className={classNames('mb-3')}>
+        <div className={classNames('mb-2')}>
             <div {...props} onClick={() => openFilePicker()} className={s.square}>
                 {image !== null && <img src={image} alt='photo input' />}
             </div>

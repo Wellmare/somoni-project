@@ -1,10 +1,15 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { useAppSelector } from '../../../../hooks/reduxHooks';
+import { selectUserId } from '../../../../redux/slices/authSlice';
 import { useCreateCommentMutation } from '../../../../service/commentsApiSlice';
+import { useGetUserInfoQuery } from '../../../../service/userApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import Button from '../../../../ui/Button/Button';
+import Error from '../../../../ui/Error/Error';
+import EmailConfirmModal from '../../../../ui/modals/EmailConfirmModal/EmailConfirmModal';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import CommentContentInput from '../../formInputs/CommentContentInput';
@@ -30,12 +35,38 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
         });
     };
 
+    const [emailConfirmModalIsOpen, setEmailConfirmModalIsOpen] = useState(false);
+    const [isFirstModalOpen, setIsFirstModalOpen] = useState(true);
+
+    const userId = useAppSelector(selectUserId);
+    if (userId === null) return <Error>User id не найден!</Error>;
+    const { data: userInfoData } = useGetUserInfoQuery({ userId });
+
+    const onFocus = (): void => {
+        if (userInfoData?.isEmailConfirmed === false) {
+            setEmailConfirmModalIsOpen(true);
+        }
+    };
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={'w-screen'}>
+            <EmailConfirmModal
+                required={false}
+                isOpen={emailConfirmModalIsOpen}
+                setIsOpen={(isOpen) => {
+                    setEmailConfirmModalIsOpen(isOpen);
+                    setIsFirstModalOpen(false);
+                }}
+            />
+
             <div className={classNames('w-11/12', 'sm:w-11/12', 'md:w-11/12', 'lg:w-8/12', 'xl:w-6/12', 'mx-auto')}>
                 <div className={'flex justify-between items-end'}>
                     <div className={'inline-block'}>
-                        <CommentContentInput control={control} />
+                        <CommentContentInput
+                            control={control}
+                            onFocus={isFirstModalOpen ? onFocus : null}
+                            disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen}
+                        />
                     </div>
 
                     <Button

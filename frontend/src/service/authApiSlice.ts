@@ -73,8 +73,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: apiEndpoints.confirmEmail,
                 method: 'POST',
                 body: {
-                    key_email: token1,
-                    key_username: token2,
+                    key_email: token2,
+                    key_username: token1,
                 },
             }),
         }),

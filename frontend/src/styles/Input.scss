@@ -1,6 +1,6 @@
 :root {
-  --input-font-size: 1.2rem;
-  --input-padding: .5rem .8rem;
+  --input-font-size: 1.1rem;
+  --input-padding: .4rem .7rem;
   --input-border-radius: .5rem;
 }
 
@@ -12,8 +12,10 @@
   --input-outline-text: #6F6F6F;
 
   // filled
+  //--input-filled-background: #31363A;
   --input-filled-background: #31363A;
-  --input-filled-border: 3px solid #292C2F;
+  //--input-filled-border: 3px solid #292C2F;
+  --input-filled-border: 3px solid #454b4d;
   --input-filled-placeholder: #868686;
   --input-filled-text: #FFFFFF;
 

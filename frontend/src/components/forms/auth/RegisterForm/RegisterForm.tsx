@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
 import s from './RegisterForm.module.scss';
 
+import { Paths, PathsToNavigate } from '../../../../constants/Paths';
 import { useRegister } from '../../../../hooks/useRegister';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
@@ -34,6 +36,7 @@ const RegisterForm: FC = () => {
     });
 
     const { error, registerUser, isSuccess, isError, isLoading } = useRegister();
+    const navigate = useNavigate();
 
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({
         accept: 'image/*',
@@ -138,7 +141,14 @@ const RegisterForm: FC = () => {
                             message: 'Не хватает полей',
                             customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
                         },
+                        {
+                            statusCode: 500,
+                            message: 'Ошибка на сервере! Попробуйте позже или сообщите администратору',
+                        },
                     ]}
+                    onSuccess={() => {
+                        navigate(PathsToNavigate.MAIN, { state: { from: Paths.REGISTER } });
+                    }}
                 >
                     <Success>Успешная регистрация!</Success>
                 </ServerResponse>

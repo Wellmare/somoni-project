@@ -5,4 +5,5 @@ export interface IProfile {
     email?: string;
     isMyProfile: boolean;
     profileId: string;
+    isEmailConfirmed: boolean;
 }

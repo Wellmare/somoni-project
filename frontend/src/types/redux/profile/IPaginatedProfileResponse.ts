@@ -8,4 +8,5 @@ export interface IPaginatedProfileResponse extends IPaginatedResponse<IPostServe
     email?: string;
     isMyProfile: boolean;
     id: string;
+    isEmailConfirmed: boolean;
 }

@@ -10,7 +10,6 @@ import EmailSendedModal from '../../ui/modals/EmailSendedModal/EmailSendedModal'
 const MainPage: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { state } = useLocation();
-    console.log(state?.from);
 
     useEffect(() => {
         if (state?.from === Paths.REGISTER) {

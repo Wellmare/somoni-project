@@ -5,9 +5,13 @@ import ReactModal from 'react-modal';
 
 import { Link } from 'react-router-dom';
 
+import ServerResponse from '../../../components/server/ServerResponse/ServerResponse';
 import { PathsToNavigate } from '../../../constants/Paths';
+import { useSendConfirmEmailMutation } from '../../../service/authApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import Button from '../../Button/Button';
+import Success from '../../Success/Success';
 import s from '../Alert/Alert.module.scss';
 
 interface IEmailConfirmModalProps {
@@ -17,11 +21,14 @@ interface IEmailConfirmModalProps {
 }
 
 const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpen, setIsOpen }) => {
-    // const [sendEmail] = use
+    const [sendEmail, { isSuccess, error, isError, isLoading }] = useSendConfirmEmailMutation();
 
     const onSuccess = (): void => {
-        setIsOpen(false);
+        // setIsOpen(false);
         console.log('send');
+        doAsyncFunc(async () => {
+            await sendEmail(null);
+        });
     };
 
     return (
@@ -47,6 +54,9 @@ const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpe
                         подтвердите почту. <br /> Без подтверждения почты вы{' '}
                         <i>не сможете создавать посты и писать комментарии</i>
                     </p>
+                    <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                        <Success>Письмо отправлено</Success>
+                    </ServerResponse>
                     <div className={classNames('mt-3', 'flex', 'justify-end', 'items-center')}>
                         {required ? (
                             <Link to={PathsToNavigate.MAIN}>

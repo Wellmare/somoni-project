@@ -22,7 +22,7 @@ interface LoginFormInputs {
 const LoginForm: FC = () => {
     const { handleSubmit, control } = useForm<LoginFormInputs>({ mode: 'onBlur' });
 
-    const { isLoading, loginUser, error, isError, isSuccess } = useLogin();
+    const { isLoading, loginUser, error, isError, isSuccess } = useLogin(true);
 
     const onSubmit: SubmitHandler<LoginFormInputs> = (data): void => {
         loginUser({

@@ -12,4 +12,6 @@ export const apiEndpoints = {
     changePassword: 'password/change/',
     restorePassword: 'password-reset/',
     restorePasswordConfirm: 'password-reset/confirm/',
+    confirmEmail: 'email-confirm/',
+    sendConfirmEmail: 'email-confirm/send/',
 };

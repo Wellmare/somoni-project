@@ -100,6 +100,7 @@ const RegisterForm: FC = () => {
                                 label={'Повтор пароля'}
                                 placeholder={'password'}
                                 {...field}
+                                htmlProps={{ type: 'password' }}
                             />
                         )}
                         control={control}

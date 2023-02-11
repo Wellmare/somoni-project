@@ -60,6 +60,7 @@ const RestorePasswordConfirmForm: FC<IRestorePasswordConfirmFormProps> = ({ toke
                                 label={'Повтор пароля'}
                                 placeholder={'password'}
                                 {...field}
+                                htmlProps={{ type: 'password' }}
                             />
                         )}
                         control={control}

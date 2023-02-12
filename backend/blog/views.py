@@ -278,6 +278,11 @@ class get_create_comments(generics.ListCreateAPIView):
         post = get_object_or_404(Post, id=self.kwargs['pk'])
         comments = Comments.objects.filter(post=post).order_by('-date')
         if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                return comments \
+                    .annotate(isMyComment=Exists(Comments.objects.filter(
+                    id=OuterRef('pk')))) \
+                    .order_by('-date')
             return comments \
                 .annotate(isMyComment=Exists(Comments.objects.filter(
                 author=self.request.user, id=OuterRef('pk')))) \
@@ -312,6 +317,11 @@ class comment_detail_view(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         comments = Comments.objects.all().order_by('-date')
         if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                return comments \
+                    .annotate(isMyComment=Exists(Comments.objects.filter(
+                    id=OuterRef('pk')))) \
+                    .order_by('-date')
             return comments \
                 .annotate(isMyComment=Exists(Comments.objects.filter(
                 author=self.request.user, id=OuterRef('pk')))) \

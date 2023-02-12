@@ -8,8 +8,10 @@ const Layout: FC = () => {
     return (
         <div className={'cont'}>
             <Header />
-            <main className={'flex justify-center items-center'}>
-                <Outlet />
+            <main className={'w-screen'}>
+                <div className='container'>
+                    <Outlet />
+                </div>
             </main>
             <Footer />
         </div>

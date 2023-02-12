@@ -4,6 +4,8 @@ import { DefaultValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useFilePicker } from 'use-file-picker';
 
+import s from './EditProfileForm.module.scss';
+
 import { useEditUserMutation } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
@@ -81,7 +83,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className={`${s.form} mx-auto`}>
                 <div className={'flex justify-center'}>
                     <PhotoInput
                         image={filesContent?.[0]?.content === undefined ? photo : filesContent?.[0]?.content}
@@ -119,7 +121,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                 >
                     <Success>Профиль изменен!</Success>
                 </ServerResponse>
-                <Button size={ButtonSizes.md} color={ButtonColors.green} type={'submit'}>
+                <Button size={ButtonSizes.md} color={ButtonColors.green} type={'submit'} className={'w-full mt-3'}>
                     Изменить
                 </Button>
             </form>

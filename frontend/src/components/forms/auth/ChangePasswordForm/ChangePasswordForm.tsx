@@ -3,6 +3,8 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
 
+import s from './ChangePasswordForm.module.scss';
+
 import { PathsToNavigate } from '../../../../constants/Paths';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import { selectTokens } from '../../../../redux/slices/authSlice';
@@ -50,7 +52,7 @@ const ChangePasswordForm: FC = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
                 <div className={'mb-3'}>
                     <PasswordInput
                         control={control}
@@ -110,7 +112,7 @@ const ChangePasswordForm: FC = () => {
                     <Success>Успешная смена пароля!</Success>
                 </ServerResponse>
 
-                <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'success'}>
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'success'} className={'mt-3'}>
                     Изменить пароль
                 </Button>
             </form>

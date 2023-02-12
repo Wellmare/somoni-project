@@ -15,12 +15,12 @@ const Profile: FC<IProfileProps> = ({ profile }) => {
 
     return (
         <ProfileContext.Provider value={{ profile: enhancedProfile, posts }}>
-            <div className={'w-screen'}>
-                <div className={'mb-4'}>
-                    <ProfileHeader />
-                </div>
-                <ProfilePosts />
+            {/* <div className={'w-screen'}> */}
+            <div className={'mb-4'}>
+                <ProfileHeader />
             </div>
+            <ProfilePosts />
+            {/* </div> */}
         </ProfileContext.Provider>
     );
 };

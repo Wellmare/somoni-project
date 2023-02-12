@@ -33,14 +33,14 @@ html, body {
   height: 100%;
 }
 
-.cont{
+.cont {
   position: absolute;
   left: 0;
   height: 100%;
   width: 100%;
 }
 
-#root{
+#root {
   min-height: 100%;
   position: relative;
 }
@@ -56,6 +56,32 @@ code {
 
 :root[data-theme="dark"] {
   --background-color: #171C20
+}
+
+.container {
+  width: 91.666667%;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+
+  @media (min-width: 640px) {
+    width: 91.666667%;
+  }
+
+  @media (min-width: 768px) {
+    width: 91.666667%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 66.666667%;
+  }
+  @media (min-width: 1280px) {
+    width: 50%;
+  }
 }
 
 @media (max-width: 640px) {

@@ -59,6 +59,33 @@ code {
   --background-color: #171C20
 }
 
+.text-wrap {
+  //white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  //white-space: pre-wrap; /* Opera 4-6 */
+  //white-space: -o-pre-wrap; /* Opera 7 */
+  //white-space: pre-wrap; /* css-3 */
+  //word-wrap: break-word; /* Internet Explorer 5.5+ */
+  //white-space: pre-wrap; /* Newer versions of Chrome/Safari*/
+  word-break: break-all;
+  white-space: normal;
+
+  @media (min-width: 640px) {
+    word-break: break-all;
+  }
+
+  @media (min-width: 768px) {
+    word-break: break-word;
+  }
+
+  //@media (min-width: 1024px) {
+  //  width: 66.666667%;
+  //}
+  //@media (min-width: 1280px) {
+  //  width: 50%;
+  //}
+}
+
+
 .container {
   width: 91.666667%;
 

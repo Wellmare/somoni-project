@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -23,8 +22,9 @@ interface IFormCreateCommentProps {
 }
 
 const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
-    const { control, handleSubmit, setValue } = useForm<CreatePostInputs>({
+    const { control, handleSubmit, setValue, watch } = useForm<CreatePostInputs>({
         mode: 'onSubmit',
+        defaultValues: { content: '' },
     });
     const [createComment, { data, error, isError, isLoading, isSuccess }] = useCreateCommentMutation();
 
@@ -49,7 +49,7 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={'w-screen'}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <EmailConfirmModal
                 required={false}
                 isOpen={emailConfirmModalIsOpen}
@@ -59,35 +59,40 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                 }}
             />
 
-            <div className={classNames('w-11/12', 'sm:w-11/12', 'md:w-11/12', 'lg:w-8/12', 'xl:w-6/12', 'mx-auto')}>
-                <div className={'flex justify-between items-end'}>
-                    <div className={'inline-block'}>
-                        <CommentContentInput
-                            control={control}
-                            onFocus={isFirstModalOpen ? onFocus : null}
-                            disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen}
-                        />
-                    </div>
+            <CommentContentInput
+                control={control}
+                onFocus={isFirstModalOpen ? onFocus : null}
+                disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen}
+            />
 
-                    <Button
-                        color={ButtonColors.green}
-                        size={ButtonSizes.sm}
-                        type={'submit'}
-                        className={'inline-block align-bottom ml-auto h-10'}
-                    >
-                        Создать
-                    </Button>
-                </div>
-                <ServerResponse
-                    responseError={error}
-                    isError={isError}
-                    isLoading={isLoading}
-                    isSuccess={isSuccess}
-                    messages={[{ statusCode: 401, message: 'Вы не подтвердили почту!' }]}
+            <div className={'flex justify-end'}>
+                <Button
+                    color={ButtonColors.primary}
+                    size={ButtonSizes.sm}
+                    onClick={() => setValue('content', '')}
+                    type={'button'}
                 >
-                    {/* <Success>Комментарий создан</Success> */}
-                </ServerResponse>
+                    Отмена
+                </Button>
+                <Button
+                    color={ButtonColors.green}
+                    size={ButtonSizes.sm}
+                    type={'submit'}
+                    disabled={watch('content') === ''}
+                >
+                    Оставить комментарий
+                </Button>
             </div>
+
+            <ServerResponse
+                responseError={error}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                messages={[{ statusCode: 401, message: 'Вы не подтвердили почту!' }]}
+            >
+                {/* <Success>Комментарий создан</Success> */}
+            </ServerResponse>
         </form>
     );
 };

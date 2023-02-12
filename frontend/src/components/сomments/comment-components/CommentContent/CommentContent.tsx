@@ -3,7 +3,6 @@ import React, { FC, useContext } from 'react';
 
 import { CommentContext } from '../../../../context/CommentContext';
 import FormEditComment from '../../../forms/comments/FormEditComment/FormEditComment';
-import s from '../Comment/Comment.module.scss';
 
 const CommentContent: FC = () => {
     const { comment, edit } = useContext(CommentContext);
@@ -17,7 +16,7 @@ const CommentContent: FC = () => {
             {isEdit ? (
                 <FormEditComment content={content} commentId={commentId} setIsEdit={setIsEdit} />
             ) : (
-                <div className={s.content}>{content}</div>
+                <div className={'text-wrap'}>{content}</div>
             )}
         </div>
     );

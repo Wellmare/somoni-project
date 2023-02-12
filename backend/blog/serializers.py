@@ -55,10 +55,11 @@ class CreatePostSerializer(serializers.ModelSerializer):
                 tags = validated_data['tags'][0]
                 tags = tags.split()
                 for tag in tags:
-                    if not ('#' in tag):
+                    if ((not ('#' in tag)) and (not ('.' in tag))):
                         post.tags.add(tag)
                     else:
-                        pass
+                        raise serializers.ValidationError(
+                            {"tag": "invalid character = '#' or '.'"})
             except KeyError:
                 pass
 
@@ -72,9 +73,9 @@ class CreatePostSerializer(serializers.ModelSerializer):
             tags = validated_data['tags'][0]
             tags = tags.split()
             for tag in tags:
-                if ('#' in tag):
+                if (('#' in tag) or ('.' in tag)):
                     raise serializers.ValidationError(
-                        {"tag": "invalid character = '#'"})
+                        {"tag": "invalid character = '#' or '.'"})
                 else:
                     pass
         except KeyError:

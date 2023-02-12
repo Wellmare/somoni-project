@@ -10,8 +10,8 @@ from myapi.models import User
 class profile_serializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'bio', 'photo', 'id')
-        read_only_fields = ('id', )
+        fields = ('username', 'email', 'bio', 'photo', 'id', 'isEmailConfirmed')
+        read_only_fields = ('id', 'isEmailConfirmed',)
 
     def update(self, instance, validated_data):
         old_email = instance.email

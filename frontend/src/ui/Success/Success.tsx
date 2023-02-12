@@ -6,7 +6,7 @@ interface ISuccessProps {
 }
 
 const Success: FC<ISuccessProps> = ({ children }) => {
-    return <div className={classNames('text-green-600')}>{children}</div>;
+    return <div className={classNames('text-green-600', 'text-center')}>{children}</div>;
 };
 
 export default Success;

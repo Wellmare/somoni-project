@@ -45,6 +45,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('email', user.email),
                     ('isMyProfile', isMyProfile),
                     ('isEmailConfirmed', user.isEmailConfirmed),
+                    ('id', user.id),
                     ('results', data)
                 ]))
             else:
@@ -56,6 +57,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('photo', self.request.build_absolute_uri(user.photo.url)),
                     ('bio', user.bio),
                     ('isMyProfile', isMyProfile),
+                    ('id', user.id),
                     ('results', data)
                 ]))
         except ValueError:
@@ -71,6 +73,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('id', user.id),
                     ('isMyProfile', isMyProfile),
                     ('isEmailConfirmed', user.isEmailConfirmed),
+                    ('id', user.id),
                     ('results', data)
                 ]))
             else:
@@ -83,6 +86,7 @@ class userResultsSetPagination(PageNumberPagination):
                     ('bio', user.bio),
                     ('id', user.id),
                     ('isMyProfile', isMyProfile),
+                    ('id', user.id),
                     ('results', data)
                 ]))
 

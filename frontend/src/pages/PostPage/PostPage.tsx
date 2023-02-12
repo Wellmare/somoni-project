@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -27,10 +26,8 @@ const PostPage: FC = () => {
                 isSuccess={isSuccess}
                 messages={[{ statusCode: 404, message: 'Пост не найден' }]}
             >
-                <div className={classNames('w-screen')}>
-                    {post != null && <Post post={enhanceIPostServerResponse(post)} />}
-                    <Comments postId={postId} />
-                </div>
+                {post != null && <Post post={enhanceIPostServerResponse(post)} />}
+                <Comments postId={postId} />
             </ServerResponse>
         </>
     );

@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
@@ -14,7 +13,7 @@ const RestorePasswordConfirmPage: FC = () => {
     if (token === null) return <Error>Токен не найден!</Error>;
 
     return (
-        <div className={classNames('w-screen', 'sm:w-screen', 'md:w-9/12', 'lg:w-7/12', 'xl:w-6/12', s.maxWidth)}>
+        <div className={`${s.maxWidth} mx-auto`}>
             <RestorePasswordConfirmForm token={token} />
         </div>
     );

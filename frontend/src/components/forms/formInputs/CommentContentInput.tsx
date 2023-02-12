@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { ICustomInputProps } from '../../../types/ICustomInputProps';
-import FormInput from '../inputs/FormInput/FormInput';
+import FormTextarea from '../inputs/FormTextarea/FormTextarea';
 
 const CommentContentInput: FC<ICustomInputProps> = ({ control, ...props }) => {
     return (
@@ -11,21 +11,23 @@ const CommentContentInput: FC<ICustomInputProps> = ({ control, ...props }) => {
             control={control}
             name={'content'}
             render={({ fieldState, field, formState }) => (
-                <FormInput
+                <FormTextarea
                     id={'content'}
                     error={fieldState.error}
-                    label={'Комментарий'}
-                    placeholder={'Вааау!'}
+                    label={null}
+                    placeholder={'Написать комментарий'}
                     {...field}
                     {...props}
                 />
             )}
-            rules={{
-                required: {
-                    value: true,
-                    message: 'Поле обязательно',
-                },
-            }}
+            // rules={
+            //     {
+            //         // required: {
+            //         //     value: true,
+            //         //     message: 'Поле обязательно',
+            //         // },
+            //     }
+            // }
         />
     );
 };

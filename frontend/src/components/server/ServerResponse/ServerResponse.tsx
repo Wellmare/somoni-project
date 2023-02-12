@@ -1,6 +1,6 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError as TypeFetchBaseQueryError } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 
 import { IMessageToStatusCode } from '../../../types/IMessageToStatusCode';
 import Loader from '../../../ui/Loader/Loader';
@@ -32,6 +32,12 @@ const ServerResponse: FC<IServerResponseProps> = ({
 
     const loaderOnLoading = loader !== undefined ? loader : <Loader />;
 
+    useEffect(() => {
+        if (onSuccess != null) {
+            onSuccess();
+        }
+    }, [isSuccess]);
+
     return (
         <>
             <FetchBaseQueryError
@@ -40,7 +46,6 @@ const ServerResponse: FC<IServerResponseProps> = ({
                 isError={isError}
             />
             {isLoading && loaderOnLoading}
-            {isSuccess && onSuccess?.()}
             {isSuccess && <>{children}</>}
         </>
     );

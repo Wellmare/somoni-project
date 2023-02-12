@@ -59,7 +59,7 @@ const RestorePasswordForm: FC = () => {
                 <Success>Письмо должно прийти на почту!</Success>
             </ServerResponse>
 
-            <Button color={ButtonColors.green} size={ButtonSizes.md} type={'submit'} className={'mt-5'}>
+            <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'} className={'mt-5'}>
                 Восстановить пароль
             </Button>
         </form>

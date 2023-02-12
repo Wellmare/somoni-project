@@ -14,7 +14,7 @@ const PostTitle: FC = () => {
 
     return (
         <Link to={pathsToNavigate.post(postId)}>
-            <h3 className={s.title}>{title}</h3>
+            <h3 className={`${s.title} text-wrap`}>{title}</h3>
         </Link>
     );
 };

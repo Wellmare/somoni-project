@@ -1,8 +1,8 @@
 .comment {
-  background: var(--comment-background);
-  color: var(--comment-text);
-  border: var(--comment-border);
-  border-radius: var(--comment-border-radius);
-  margin-top: .8rem;
-  padding: .2rem .5rem .4rem .5rem;
+  //background: var(--comment-background);
+  //color: var(--comment-text);
+  //border: var(--comment-border);
+  //border-radius: var(--comment-border-radius);
+  margin: var(--comment-margin);
+  padding: var(--comment-padding);
 }

@@ -5,6 +5,7 @@ import s from './Post.module.scss';
 
 import { IEdit } from '../../../../types/IEdit';
 import { IPost } from '../../../../types/redux/posts/IPost';
+import Card from '../../../../ui/Card/Card';
 import PostButtons from '../PostButtons/PostButtons';
 import PostContent from '../PostContent/PostContent';
 import PostHeader from '../PostHeader/PostHeader';
@@ -26,7 +27,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
 
     return (
         <PostContext.Provider value={{ post, edit }}>
-            <div className={s.post}>
+            <Card className={s.post}>
                 <PostHeader />
                 <PostTitle />
                 <PostContent />
@@ -35,7 +36,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
                     <PostTags />
                 </div>
                 <PostButtons />
-            </div>
+            </Card>
         </PostContext.Provider>
     );
 };

@@ -6,6 +6,7 @@ import { CommentContext } from '../../../../context/CommentContext';
 import { useDeleteCommentMutation } from '../../../../service/commentsApiSlice';
 import { IComment } from '../../../../types/redux/comments/IComment';
 import { ICommentServerResponse } from '../../../../types/redux/comments/ICommentServerResponse';
+import Card from '../../../../ui/Card/Card';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import CommentContent from '../CommentContent/CommentContent';
 import CommentHeader from '../CommentHeader/CommentHeader';
@@ -47,10 +48,12 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
                 edit: editComment,
             }}
         >
-            <div className={s.comment}>
+            {/* <div className={s.comment}> */}
+            <Card className={s.comment}>
                 <CommentHeader onDelete={onDelete} />
                 <CommentContent />
-            </div>
+            </Card>
+            {/* </div> */}
         </CommentContext.Provider>
     );
 };

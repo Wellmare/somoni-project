@@ -18,6 +18,7 @@ const Comments: FC<ICommentsProps> = ({ postId }) => {
     return (
         <>
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                <h3 className={'font-medium mt-4 mb-3 text-center'}>Все комментарии: </h3>
                 {isAuth && <FormCreateComment postId={postId} />}
                 {data?.results?.map((comment) => (
                     <Comment comment={comment} key={comment.id} />

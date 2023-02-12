@@ -27,7 +27,7 @@ const Button: FC<IButtonProps> = ({ size, color, children, className, ...props }
             break;
     }
 
-    let colorClass: string;
+    let colorClass = '';
     switch (color) {
         case ButtonColors.green:
             colorClass = s.green;
@@ -40,6 +40,9 @@ const Button: FC<IButtonProps> = ({ size, color, children, className, ...props }
             break;
         case ButtonColors.red:
             colorClass = s.red;
+            break;
+        case ButtonColors.primary:
+            colorClass = s.primary;
             break;
     }
 

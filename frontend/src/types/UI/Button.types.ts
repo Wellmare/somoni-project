@@ -3,6 +3,7 @@ export const enum ButtonColors {
     blue = 'blue',
     red = 'red',
     gray = 'gray',
+    primary = 'primary',
 }
 export const enum ButtonSizes {
     sm = 'small',

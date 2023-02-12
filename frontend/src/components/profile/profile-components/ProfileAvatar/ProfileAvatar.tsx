@@ -10,11 +10,13 @@ const ProfileAvatar: FC = () => {
     const { username, avatarLink } = profile;
 
     return (
-        <Avatar size={AvatarSize.large}>
-            <a href={avatarLink} target={'_blank'} rel='noreferrer'>
-                <img src={avatarLink} alt={username} />
-            </a>
-        </Avatar>
+        <div className={'flex-shrink-0'}>
+            <Avatar size={AvatarSize.large}>
+                <a href={avatarLink} target={'_blank'} rel='noreferrer'>
+                    <img src={avatarLink} alt={username} />
+                </a>
+            </Avatar>
+        </div>
     );
 };
 

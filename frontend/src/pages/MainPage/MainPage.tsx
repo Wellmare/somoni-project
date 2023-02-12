@@ -7,25 +7,33 @@ import Posts from '../../components/posts/Posts/Posts';
 import { Paths } from '../../constants/Paths';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { selectUserId } from '../../redux/slices/authSlice';
-import { useGetUserInfoQuery } from '../../service/userApiSlice';
+import { useLazyGetUserInfoQuery } from '../../service/userApiSlice';
 import EmailNotConfirmedCard from '../../ui/EmailNotConfirmedCard/EmailNotConfirmedCard';
-import Error from '../../ui/Error/Error';
 import EmailSendedModal from '../../ui/modals/EmailSendedModal/EmailSendedModal';
+import { doAsyncFunc } from '../../utils/doAsyncFunc';
 
 const MainPage: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { state } = useLocation();
-
-    const userId = useAppSelector(selectUserId);
-    if (userId === null) return <Error>User id не найден</Error>;
-
-    const { data } = useGetUserInfoQuery({ userId });
 
     useEffect(() => {
         if (state?.from === Paths.REGISTER) {
             setIsOpen(true);
         }
     }, []);
+
+    const userId = useAppSelector(selectUserId);
+    // if (userId === null) return <Error>User id не найден</Error>;
+
+    const [getUserInfo, { data }] = useLazyGetUserInfoQuery();
+    useEffect(() => {
+        if (userId !== null) {
+            doAsyncFunc(async () => {
+                console.log('fetch user info');
+                await getUserInfo({ userId });
+            });
+        }
+    }, [userId]);
 
     return (
         <>

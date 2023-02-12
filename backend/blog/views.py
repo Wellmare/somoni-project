@@ -103,6 +103,12 @@ class get_create_post(generics.ListCreateAPIView):
             object_list = Post.objects.filter(tags__in=[tag])
 
             if self.request.user.is_authenticated:
+                if self.request.user.is_superuser:
+                    return object_list.annotate(
+                        isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                        isMyPost=Exists(Post.objects.filter(id=OuterRef('pk')))
+                    ).order_by(
+                        '-date')
                 return object_list.annotate(
                     isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
                     isMyPost=Exists(Post.objects.filter(
@@ -114,6 +120,12 @@ class get_create_post(generics.ListCreateAPIView):
 
         except KeyError:
             if self.request.user.is_authenticated:
+                if self.request.user.is_superuser:
+                    return Post.objects.annotate(
+                        isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                        isMyPost=Exists(Post.objects.filter(id=OuterRef('pk')))
+                    ).order_by(
+                        '-date')
                 return Post.objects.annotate(
                     isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
                     isMyPost=Exists(Post.objects.filter(
@@ -122,10 +134,9 @@ class get_create_post(generics.ListCreateAPIView):
                     '-date')
         return Post.objects.all().order_by('-date')
 
-
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        if len(queryset)==0:
+        if len(queryset) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -162,6 +173,12 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                return Post.objects \
+                    .annotate(isLiked=Exists(PostLike.objects.filter(
+                    user=self.request.user, post_id=OuterRef('pk'))),
+                    isMyPost=Exists(Post.objects.filter(id=OuterRef('pk')))) \
+                    .order_by('title')
             return Post.objects \
                 .annotate(isLiked=Exists(PostLike.objects.filter(
                 user=self.request.user, post_id=OuterRef('pk'))),
@@ -352,6 +369,12 @@ class get_post_for_user(generics.ListCreateAPIView):
     def get_queryset(self):
         user = get_object_or_404(User, id=self.kwargs['pk'])
         if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                return Post.objects.filter(author=user).annotate(
+                    isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
+                    isMyPost=Exists(Post.objects.filter(id=OuterRef('pk')))
+                ).order_by(
+                    '-date')
             return Post.objects.filter(author=user).annotate(
                 isLiked=Exists(PostLike.objects.filter(user=self.request.user, post_id=OuterRef('pk'))),
                 isMyPost=Exists(Post.objects.filter(

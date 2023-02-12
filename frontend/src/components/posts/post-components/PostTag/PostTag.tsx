@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import s from './PostTag.module.scss';
 
@@ -13,7 +13,7 @@ interface ITagProps {
 const PostTag: FC<ITagProps> = ({ tag }) => {
     return (
         <Link to={pathsToNavigate.tag(tag)}>
-            <div className={classNames(s.tag)}>{tag}</div>
+            <div className={classNames(s.tag, 'text-wrap')}>{tag}</div>
         </Link>
     );
 };

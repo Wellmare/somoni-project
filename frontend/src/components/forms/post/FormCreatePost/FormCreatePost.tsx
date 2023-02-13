@@ -105,7 +105,6 @@ const FormCreatePost: FC = () => {
 
                 <div className={'mb-3'}>
                     <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
-                    {watch('content') === '' && <Error>Контент не может быть пустым</Error>}
                 </div>
 
                 <div className={'mb-3'}>
@@ -132,7 +131,11 @@ const FormCreatePost: FC = () => {
                     <Success>Пост создан</Success>
                 </ServerResponse>
 
-                <Button color={ButtonColors.green} className={'w-full py-2.5'}>
+                <Button
+                    color={ButtonColors.green}
+                    className={'w-full py-2.5'}
+                    disabled={watch('content') === '<p><br></p>' || watch('content') === '' || watch('title') === ''}
+                >
                     Создать
                 </Button>
             </form>

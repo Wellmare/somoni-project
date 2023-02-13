@@ -11,7 +11,7 @@ import { selectUserId } from '../../../../redux/slices/authSlice';
 import { useCreatePostMutation } from '../../../../service/postsApiSlice';
 import { useGetUserInfoQuery } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
-import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { ButtonColors } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
 import Error from '../../../../ui/Error/Error';
@@ -132,7 +132,7 @@ const FormCreatePost: FC = () => {
                     <Success>Пост создан</Success>
                 </ServerResponse>
 
-                <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>
+                <Button color={ButtonColors.green} className={'w-full py-2.5'}>
                     Создать
                 </Button>
             </form>

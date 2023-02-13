@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import ReactModal from 'react-modal';
 
@@ -22,9 +22,12 @@ interface IEmailConfirmModalProps {
 
 const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpen, setIsOpen }) => {
     const [sendEmail, { isSuccess, error, isError, isLoading }] = useSendConfirmEmailMutation();
+    const [isSended, setIsSended] = useState(false);
 
     const onSuccess = (): void => {
         // setIsOpen(false);
+        if (isSended) return;
+
         console.log('send');
         doAsyncFunc(async () => {
             await sendEmail(null);
@@ -54,7 +57,13 @@ const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpe
                         подтвердите почту. <br /> Без подтверждения почты вы{' '}
                         <i>не сможете создавать посты и писать комментарии</i>
                     </p>
-                    <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                    <ServerResponse
+                        responseError={error}
+                        isError={isError}
+                        isLoading={isLoading}
+                        isSuccess={isSuccess}
+                        onSuccess={() => setIsSended(true)}
+                    >
                         <Success>Письмо отправлено</Success>
                     </ServerResponse>
                     <div className={classNames('mt-3', 'flex', 'justify-end', 'items-center')}>
@@ -65,6 +74,7 @@ const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpe
                                     size={ButtonSizes.sm}
                                     onClick={() => setIsOpen(false)}
                                     className={'mr-3'}
+                                    type={'button'}
                                 >
                                     На главную
                                 </Button>
@@ -75,11 +85,18 @@ const EmailConfirmModal: FC<IEmailConfirmModalProps> = ({ required = true, isOpe
                                 size={ButtonSizes.sm}
                                 onClick={() => setIsOpen(false)}
                                 className={'mr-3'}
+                                type={'button'}
                             >
                                 Нет
                             </Button>
                         )}
-                        <Button color={ButtonColors.green} size={ButtonSizes.sm} onClick={onSuccess}>
+                        <Button
+                            color={ButtonColors.green}
+                            size={ButtonSizes.sm}
+                            onClick={onSuccess}
+                            disabled={isSended}
+                            type={'button'}
+                        >
                             Отправить письмо
                         </Button>
                     </div>

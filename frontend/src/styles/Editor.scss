@@ -171,3 +171,11 @@
     margin-top: 1rem;
   }
 }
+
+.editor-comment {
+  .ql-toolbar {
+    button:not(.ql-bold, .ql-italic, .ql-link), .ql-header {
+      display: none;
+    }
+  }
+}

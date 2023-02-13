@@ -68,7 +68,6 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
         doAsyncFunc(async () => {
             try {
                 await editProfile(formData);
-                navigate(pathsToNavigate.user(id));
             } catch (e) {
                 console.log(e);
             }
@@ -108,6 +107,9 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                             customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
                         },
                     ]}
+                    onSuccess={() => {
+                        navigate(pathsToNavigate.user(id));
+                    }}
                 >
                     <Success>Профиль изменен!</Success>
                 </ServerResponse>

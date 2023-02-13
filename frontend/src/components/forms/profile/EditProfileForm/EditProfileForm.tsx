@@ -21,10 +21,8 @@ import { ErrorsFromData } from '../../../server/ErrorsFromData/ErrorsFromData';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import EmailInput from '../../formInputs/EmailInput';
 import StatusInput from '../../formInputs/StatusInput';
-import UsernameInput from '../../formInputs/UsernameInput';
 
 interface EditProfileInputs {
-    username: string;
     email: string;
     bio: string;
 }
@@ -52,10 +50,6 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
 
     const onSubmit: SubmitHandler<EditProfileInputs> = (data) => {
         const dataToForm: IFormDataItem[] = [
-            {
-                name: 'username',
-                value: data.username,
-            },
             {
                 name: 'email',
                 value: data.email,
@@ -90,10 +84,6 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                         openFilePicker={openFilePicker}
                         type={IPhotoInputType.circle}
                     />
-                </div>
-
-                <div className={'mb-3'}>
-                    <UsernameInput control={control} />
                 </div>
                 <div className={'mb-3'}>
                     <EmailInput control={control} />

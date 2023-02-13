@@ -12,7 +12,6 @@ const EditProfilePage: FC = () => {
                 {data !== undefined && (
                     <EditProfileForm
                         defaultValues={{
-                            username: data.username,
                             bio: data.bio === null ? undefined : data.bio,
                             email: data.email,
                         }}

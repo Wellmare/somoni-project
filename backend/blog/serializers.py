@@ -30,12 +30,19 @@ class CreatePostSerializer(serializers.ModelSerializer):
         try:
             tags = validated_data['tags'][0]
             tags = tags.split()
+            if len(tags) > 10:
+                raise serializers.ValidationError(
+                    {"tag": "Максимальное колличество тэгов - 10"})
+            str = ''
             for tag in tags:
-                if ('#' in tag):
+                if (('#' in tag) or ('.' in tag)):
                     raise serializers.ValidationError(
-                        {"tag": "invalid character = '#'"})
-                else:
-                    pass
+                        {"tag": "invalid character = '#' or '.'"})
+                if len(tag) > 25:
+                    str += f'"{tag}", '
+            raise serializers.ValidationError(
+                {"tag": [f'В тэгах {str} колличество символов больше 25']})
+
         except KeyError:
             pass
         try:
@@ -72,12 +79,19 @@ class CreatePostSerializer(serializers.ModelSerializer):
         try:
             tags = validated_data['tags'][0]
             tags = tags.split()
+            if len(tags)>10:
+                raise serializers.ValidationError(
+                    {"tag": ["Максимальное колличество тэгов - 10"]})
+            str = ''
             for tag in tags:
                 if (('#' in tag) or ('.' in tag)):
                     raise serializers.ValidationError(
                         {"tag": "invalid character = '#' or '.'"})
-                else:
-                    pass
+                if len(tag)>25:
+                    str += f'"{tag}", '
+            raise serializers.ValidationError(
+                {"tag": [f'В тэгах {str} колличество символов больше 25']})
+
         except KeyError:
             pass
         try:

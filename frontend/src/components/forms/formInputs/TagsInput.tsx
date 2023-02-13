@@ -23,7 +23,7 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
             rules={{
                 validate: (value) => {
                     if (value !== undefined) {
-                        const regexp = /#/;
+                        const regexp = /[.#]/g;
                         if (regexp.test(value.toString())) {
                             return 'Символ # не может быть использован в тэгах';
                         }

@@ -9,7 +9,7 @@ import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
 import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
-import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
+import { ButtonColors } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
 import Logo from '../../../ui/Logo/Logo';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
@@ -66,8 +66,8 @@ const Header: FC = () => {
 
             {!isAuth && (
                 <div className={classNames('flex', 'justify-between', 'items-center')}>
-                    <Link to={PathsToNavigate.LOGIN} className={'mr-5'}>
-                        <Button size={ButtonSizes.sm} color={ButtonColors.green} className={''}>
+                    <Link to={PathsToNavigate.LOGIN} className={'mr-3'}>
+                        <Button color={ButtonColors.green} className={'py-2.5 px-3'}>
                             Вход
                         </Button>
                     </Link>

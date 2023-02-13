@@ -11,7 +11,7 @@ import Error from '../../../../ui/Error/Error';
 import EmailConfirmModal from '../../../../ui/modals/EmailConfirmModal/EmailConfirmModal';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
-import CommentContentInput from '../../formInputs/CommentContentInput';
+import FormInputDraft from '../../inputs/FormInputDraft/FormInputDraft';
 
 interface CreatePostInputs {
     content: string;
@@ -59,13 +59,23 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                 }}
             />
 
-            <CommentContentInput
-                control={control}
+            {/* <CommentContentInput */}
+            {/*    control={control} */}
+            {/*    onFocus={isFirstModalOpen ? onFocus : null} */}
+            {/*    disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen} */}
+            {/* /> */}
+
+            <FormInputDraft
+                name={'content'}
+                watch={watch}
+                setValue={setValue}
                 onFocus={isFirstModalOpen ? onFocus : null}
                 disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen}
+                className={'editor-comment'}
+                formats={['bold', 'italic', 'link']}
             />
 
-            <div className={'flex justify-end'}>
+            <div className={'flex justify-end mt-3'}>
                 <Button
                     color={ButtonColors.primary}
                     size={ButtonSizes.sm}
@@ -78,7 +88,7 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                     color={ButtonColors.green}
                     size={ButtonSizes.sm}
                     type={'submit'}
-                    disabled={watch('content') === ''}
+                    disabled={watch('content') === '' || watch('content') === '<p><br></p>'}
                 >
                     Оставить комментарий
                 </Button>

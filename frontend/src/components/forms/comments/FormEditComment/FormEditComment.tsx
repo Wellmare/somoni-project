@@ -8,7 +8,7 @@ import Button from '../../../../ui/Button/Button';
 import Success from '../../../../ui/Success/Success';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
-import CommentContentInput from '../../formInputs/CommentContentInput';
+import FormInputDraft from '../../inputs/FormInputDraft/FormInputDraft';
 
 interface EditCommentInputs {
     content: string;
@@ -21,7 +21,7 @@ interface IFormEditCommentProps {
 }
 
 const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsEdit }) => {
-    const { control, handleSubmit } = useForm<EditCommentInputs>({
+    const { control, handleSubmit, watch, setValue } = useForm<EditCommentInputs>({
         mode: 'onSubmit',
         defaultValues: { content },
     });
@@ -38,7 +38,14 @@ const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsE
         <form onSubmit={handleSubmit(onSubmit)} className={classNames('w-full', 'px-2')}>
             <div className={classNames('flex', 'justify-between', 'items-end', 'w-full')}>
                 <div className={'w-full mr-3'}>
-                    <CommentContentInput label={null} control={control} style={{ width: '100%' }} />
+                    {/* <CommentContentInput label={null} control={control} style={{ width: '100%' }} /> */}
+                    <FormInputDraft
+                        name={'content'}
+                        watch={watch}
+                        setValue={setValue}
+                        className={'editor-comment'}
+                        formats={['bold', 'italic', 'link']}
+                    />
                 </div>
 
                 <Button color={ButtonColors.green} size={ButtonSizes.sm} type={'submit'}>

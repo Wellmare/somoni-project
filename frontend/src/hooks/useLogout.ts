@@ -30,18 +30,11 @@ export const useLogout = (): IUseLogoutResponse => {
                         ? ''
                         : refreshTokenFromState;
 
-                const logoutPromise = logout({ refresh }).unwrap() as Promise<unknown>;
-                const logoutStatePromise = dispatch(logoutState()) as unknown as Promise<unknown>;
+                await logout({ refresh }).unwrap();
+                dispatch(logoutState());
 
-                Promise.all([logoutPromise, logoutStatePromise])
-                    .then(() => {
-                        console.log('promises done');
-                        navigate(PathsToNavigate.MAIN);
-                        document.location.reload();
-                    })
-                    .catch((e) => {
-                        console.log(e);
-                    });
+                navigate(PathsToNavigate.MAIN);
+                document.location.reload();
             } catch (e) {
                 logoutState();
             }

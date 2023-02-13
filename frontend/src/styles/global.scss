@@ -142,10 +142,10 @@ code {
 
 @media (min-width: 1024px) {
   .on-desktop {
-    display: none;
+    display: inherit;
   }
   .on-mobile {
-    display: inherit;
+    display: none;
   }
 }
 

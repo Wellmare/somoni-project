@@ -25,7 +25,7 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
                     if (value !== undefined) {
                         const regexp = /[.#]/g;
                         if (regexp.test(value.toString())) {
-                            return 'Символ # не может быть использован в тэгах';
+                            return 'Символ # или . не может быть использован в тэгах';
                         }
                     }
                 },

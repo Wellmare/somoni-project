@@ -33,7 +33,7 @@ const ServerResponse: FC<IServerResponseProps> = ({
     const loaderOnLoading = loader !== undefined ? loader : <Loader />;
 
     useEffect(() => {
-        if (onSuccess != null) {
+        if (isSuccess && onSuccess != null) {
             onSuccess();
         }
     }, [isSuccess]);

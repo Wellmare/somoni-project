@@ -8,7 +8,6 @@ import s from './HeaderMenu.module.scss';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { ReactComponent as ArrowDownIcon } from '../../../assets/svg/arrow-down.svg';
 import { ReactComponent as DefaultProfile } from '../../../assets/svg/default-profile.svg';
-import { PathsToNavigate } from '../../../constants/Paths';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
 import { Theme } from '../../../types/Theme';
@@ -96,11 +95,11 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
                     <MenuItem>Профиль</MenuItem>
                 </Link>
 
-                <div className={s.menuDivider} />
+                {/* <div className={s.menuDivider} /> */}
 
-                <Link to={PathsToNavigate.CREATE_POST}>
-                    <MenuItem>Создать пост</MenuItem>
-                </Link>
+                {/* <Link to={PathsToNavigate.CREATE_POST}> */}
+                {/*    <MenuItem>Создать пост</MenuItem> */}
+                {/* </Link> */}
 
                 <div className={s.menuDivider} />
 

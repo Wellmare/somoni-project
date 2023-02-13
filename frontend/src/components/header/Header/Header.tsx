@@ -55,14 +55,14 @@ const Header: FC = () => {
             </Link>
 
             <div className='on-desktop'>
-                {isAuth && (
-                    <div className={classNames('flex', 'justify-center', 'items-center', 'mr-10')}>
-                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Создать пост</Link>
-                    </div>
-                )}
-
                 <SearchByTagForm />
             </div>
+
+            {isAuth && (
+                <div className={classNames('flex', 'justify-center', 'items-center')}>
+                    <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Создать пост</Link>
+                </div>
+            )}
 
             {!isAuth && (
                 <div className={classNames('flex', 'justify-between', 'items-center')}>

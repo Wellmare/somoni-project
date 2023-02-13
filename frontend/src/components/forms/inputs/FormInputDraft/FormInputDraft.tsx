@@ -13,12 +13,13 @@ import { FormCreatePostInputs } from '../../post/FormCreatePost/FormCreatePost';
 interface IFormInputDraftProps {
     name: string;
     setValue: SetFieldValue<FormCreatePostInputs>;
-    watch: UseFormWatch<FormCreatePostInputs>;
+    watch: UseFormWatch<any>;
+    className?: string;
 
     [x: string]: any;
 }
 
-const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, ...props }) => {
+const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, className = '', ...props }) => {
     const onEditorStateChange = (editorState: EditorState): void => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
@@ -33,7 +34,8 @@ const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, ...pr
                 theme='snow'
                 value={editorContent}
                 onChange={onEditorStateChange}
-                className={'editor-padding'}
+                className={`editor-padding ${className}`}
+                {...props}
             />
         </>
     );

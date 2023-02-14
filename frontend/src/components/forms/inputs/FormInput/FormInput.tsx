@@ -5,6 +5,7 @@ import { FieldError } from 'react-hook-form';
 import s from './FormInput.module.scss';
 
 import { InputType } from '../../../../types/UI/Input.types';
+import Error from '../../../../ui/Error/Error';
 import Input from '../../../../ui/Input/Input';
 
 export interface IInputProps {
@@ -39,7 +40,8 @@ const FormInput: FC<IInputProps> = ({ id, error, label, placeholder, inputClassN
                     className={inputClassName}
                     {...props}
                 />
-                {isError && <p className={classNames(s.error)}>{error?.message}</p>}
+                {/* {isError && <p className={classNames(s.error)}>{error?.message}</p>} */}
+                {isError && <Error>{error?.message}</Error>}
             </div>
         </div>
     );

@@ -11,7 +11,9 @@ interface IProfileProps {
 
 const HeaderProfile: FC<IProfileProps> = ({ username, photo, id }) => {
     return (
-        <div className={classNames('flex', 'items-end', 'flex-col', 'md:items-center', 'sm:flex-row')}>
+        <div
+            className={classNames('flex', 'items-end', 'justify-center', 'flex-col', 'md:items-center', 'sm:flex-row')}
+        >
             <div className={'pr-2 hidden md:block sm:text-right'}>{username}</div>
             <HeaderMenu isAuth={true} photo={photo} id={id} />
         </div>

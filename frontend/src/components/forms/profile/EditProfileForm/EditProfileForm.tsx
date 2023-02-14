@@ -12,7 +12,7 @@ import { LinkType } from '../../../../types/redux/LinkType';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
-import EmailConfirmModal from '../../../../ui/modals/EmailConfirmModal/EmailConfirmModal';
+import EmailSendedModal from '../../../../ui/modals/EmailSendedModal/EmailSendedModal';
 import PhotoInput from '../../../../ui/PhotoInput/PhotoInput';
 import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
@@ -78,7 +78,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
 
     return (
         <>
-            <EmailConfirmModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+            <EmailSendedModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
             <form onSubmit={handleSubmit(onSubmit)} className={`${s.form} mx-auto`}>
                 <div className={'flex justify-center'}>
                     <PhotoInput
@@ -111,7 +111,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                         },
                     ]}
                     onSuccess={() => {
-                        if (data?.isEmailConfirmed === false) {
+                        if (data?.isEmailChanged === false) {
                             return setIsModalOpen(true);
                         }
                         navigate(pathsToNavigate.user(id));

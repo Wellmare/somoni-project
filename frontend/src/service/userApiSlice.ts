@@ -18,7 +18,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Profile', 'Auth'],
         }),
 
-        editUser: builder.mutation<IPaginatedProfileResponse, FormData>({
+        editUser: builder.mutation<{ isEmailChanged: boolean; profile: IPaginatedProfileResponse }, FormData>({
             query: (formData) => ({
                 url: apiEndpoints.editProfile,
                 method: 'PUT',

@@ -111,7 +111,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                         },
                     ]}
                     onSuccess={() => {
-                        if (data?.isEmailChanged === false) {
+                        if (data?.isEmailChanged === true) {
                             return setIsModalOpen(true);
                         }
                         navigate(pathsToNavigate.user(id));

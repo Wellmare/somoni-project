@@ -1,13 +1,13 @@
 // /* eslint-disable */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { EditorState } from 'draft-js';
 import React, { FC } from 'react';
-import { SetFieldValue, UseFormWatch } from 'react-hook-form';
+import { FieldError, SetFieldValue, UseFormWatch } from 'react-hook-form';
 
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
 
+import Error from '../../../../ui/Error/Error';
 import { FormCreatePostInputs } from '../../post/FormCreatePost/FormCreatePost';
 
 interface IFormInputDraftProps {
@@ -15,15 +15,26 @@ interface IFormInputDraftProps {
     setValue: SetFieldValue<FormCreatePostInputs>;
     watch: UseFormWatch<any>;
     className?: string;
+    errorField: FieldError | undefined;
+    onChange: (value: string) => void;
 
     [x: string]: any;
 }
 
-const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, className = '', ...props }) => {
-    const onEditorStateChange = (editorState: EditorState): void => {
+const FormInputDraft: FC<IFormInputDraftProps> = ({
+    name,
+    watch,
+    setValue,
+    className = '',
+    errorField,
+    onChange,
+    ...props
+}) => {
+    const onEditorStateChange = (value: string): void => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
-        setValue(name, editorState);
+        setValue(name, value);
+        onChange(value);
     };
 
     const editorContent = watch('content');
@@ -37,6 +48,7 @@ const FormInputDraft: FC<IFormInputDraftProps> = ({ name, watch, setValue, class
                 className={`editor-padding ${className}`}
                 {...props}
             />
+            {errorField?.message != null && <Error>{errorField.message}</Error>}
         </>
     );
 };

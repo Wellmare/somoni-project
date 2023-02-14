@@ -34,7 +34,15 @@ export interface FormCreatePostInputs {
 }
 
 const FormCreatePost: FC = () => {
-    const { handleSubmit, control, setValue, watch } = useForm<FormCreatePostInputs>({
+    const {
+        handleSubmit,
+        control,
+        setValue,
+        watch,
+        setError,
+        clearErrors,
+        formState: { errors },
+    } = useForm<FormCreatePostInputs>({
         mode: 'onBlur',
         defaultValues: { content: '' },
     });
@@ -104,7 +112,21 @@ const FormCreatePost: FC = () => {
                 />
 
                 <div className={'mb-3'}>
-                    <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
+                    <FormInputDraft
+                        name={'content'}
+                        watch={watch}
+                        setValue={setValue}
+                        onChange={(value) => {
+                            if (value.length > 3000) {
+                                setError('content', {
+                                    message: 'Текст превышает лимит в 3000 символов',
+                                });
+                            } else {
+                                clearErrors('content');
+                            }
+                        }}
+                        errorField={errors.content}
+                    />
                 </div>
 
                 <div className={'mb-3'}>

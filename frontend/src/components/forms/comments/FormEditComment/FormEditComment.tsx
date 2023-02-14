@@ -21,7 +21,14 @@ interface IFormEditCommentProps {
 }
 
 const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsEdit }) => {
-    const { control, handleSubmit, watch, setValue } = useForm<EditCommentInputs>({
+    const {
+        handleSubmit,
+        watch,
+        setValue,
+        setError,
+        clearErrors,
+        formState: { errors },
+    } = useForm<EditCommentInputs>({
         mode: 'onSubmit',
         defaultValues: { content },
     });
@@ -45,6 +52,16 @@ const FormEditComment: FC<IFormEditCommentProps> = ({ content, commentId, setIsE
                         setValue={setValue}
                         className={'editor-comment'}
                         formats={['bold', 'italic', 'link']}
+                        onChange={(value) => {
+                            if (value.length > 500) {
+                                setError('content', {
+                                    message: 'Текст превышает лимит в 500 символов',
+                                });
+                            } else {
+                                clearErrors('content');
+                            }
+                        }}
+                        errorField={errors.content}
                     />
                 </div>
 

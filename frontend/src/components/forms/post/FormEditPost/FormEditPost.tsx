@@ -16,6 +16,7 @@ import Success from '../../../../ui/Success/Success';
 import { composeFormData } from '../../../../utils/composeFormData';
 import { doAsyncFunc } from '../../../../utils/doAsyncFunc';
 import { pathsToNavigate } from '../../../../utils/pathsToNavigate';
+import { ErrorsFromData } from '../../../server/ErrorsFromData/ErrorsFromData';
 import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 import TagsInput from '../../formInputs/TagsInput';
 import TitleInput from '../../formInputs/TitleInput';
@@ -34,7 +35,15 @@ interface IFormEditPostProps {
 }
 
 const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) => {
-    const { handleSubmit, control, setValue, watch } = useForm<EditPostInputs>({
+    const {
+        handleSubmit,
+        control,
+        setValue,
+        watch,
+        setError,
+        clearErrors,
+        formState: { errors },
+    } = useForm<EditPostInputs>({
         mode: 'onBlur',
         defaultValues,
     });
@@ -95,14 +104,44 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
             />
 
             <div className={'mb-3'}>
-                <FormInputDraft name={'content'} watch={watch} setValue={setValue} />
+                <FormInputDraft
+                    name={'content'}
+                    watch={watch}
+                    setValue={setValue}
+                    onChange={(value) => {
+                        if (value.length > 3000) {
+                            setError('content', {
+                                message: 'Текст превышает лимит в 3000 символов',
+                            });
+                        } else {
+                            clearErrors('content');
+                        }
+                    }}
+                    errorField={errors.content}
+                />
             </div>
 
             <div className={'mb-3'}>
                 <TagsInput control={control} />
             </div>
 
-            <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+            <ServerResponse
+                responseError={error}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                messages={[
+                    {
+                        statusCode: 400,
+                        message: 'Не хватает полей',
+                        customFunc: (errorResponse) => <ErrorsFromData errorsData={errorResponse.data} />,
+                    },
+                    {
+                        statusCode: 401,
+                        message: 'Вы не подтвердили почту!',
+                    },
+                ]}
+            >
                 <Success>Пост изменен</Success>
             </ServerResponse>
             <Button color={ButtonColors.green} size={ButtonSizes.md} className={'w-full'}>

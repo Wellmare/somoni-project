@@ -22,7 +22,14 @@ interface IFormCreateCommentProps {
 }
 
 const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
-    const { control, handleSubmit, setValue, watch } = useForm<CreatePostInputs>({
+    const {
+        handleSubmit,
+        setValue,
+        watch,
+        setError,
+        clearErrors,
+        formState: { errors },
+    } = useForm<CreatePostInputs>({
         mode: 'onSubmit',
         defaultValues: { content: '' },
     });
@@ -73,6 +80,16 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                 disabled={userInfoData?.isEmailConfirmed === false && !isFirstModalOpen}
                 className={'editor-comment'}
                 formats={['bold', 'italic', 'link']}
+                onChange={(value) => {
+                    if (value.length > 500) {
+                        setError('content', {
+                            message: 'Текст превышает лимит в 500 символов',
+                        });
+                    } else {
+                        clearErrors('content');
+                    }
+                }}
+                errorField={errors.content}
             />
 
             <div className={'flex justify-end mt-3'}>

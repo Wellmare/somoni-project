@@ -3,3 +3,10 @@
   border-bottom: var(--header-border);
   color: var(--header-text-color);
 }
+
+
+.plusIcon {
+  svg > path {
+    fill: var(--icon-primary-color);
+  }
+}

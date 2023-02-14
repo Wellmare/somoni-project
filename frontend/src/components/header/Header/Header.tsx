@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 
 import s from './Header.module.scss';
 
+import { ReactComponent as PlusIcon } from '../../../assets/svg/plus.svg';
 import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
 import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
-import { ButtonColors } from '../../../types/UI/Button.types';
+import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
+import Icon from '../../../ui/Icon/Icon';
 import Logo from '../../../ui/Logo/Logo';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import SearchByTagForm from '../../forms/SearchByTagForm/SearchByTagForm';
@@ -58,52 +60,64 @@ const Header: FC = () => {
                 <SearchByTagForm />
             </div>
 
-            {isAuth && (
-                <div className={classNames('flex', 'justify-center', 'items-center')}>
-                    <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>Создать пост</Link>
-                </div>
-            )}
+            <div className={'flex'}>
+                {isAuth && (
+                    <div className={classNames('flex', 'justify-center', 'items-center')}>
+                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>
+                            <Button color={ButtonColors.green} size={ButtonSizes.sm} className={'hidden md:block mr-6'}>
+                                <span>Создать</span>
+                            </Button>
 
-            {!isAuth && (
-                <div className={classNames('flex', 'justify-between', 'items-center')}>
-                    <Link to={PathsToNavigate.LOGIN} className={'mr-3'}>
-                        <Button color={ButtonColors.green} className={'py-2.5 px-3'}>
-                            Вход
-                        </Button>
-                    </Link>
-                    <HeaderMenu isAuth={false} />
-                </div>
-            )}
-            {isAuth && (
-                <ServerResponse
-                    responseError={error}
-                    isError={isError}
-                    isLoading={isLoading}
-                    isSuccess={isSuccess}
-                    loader={<HeaderProfileSkeleton />}
-                    messages={[
-                        {
-                            statusCode: 401,
-                            message: 'Профиль не найден',
-                            customFunc: (errorResponse) => {
-                                logoutUser();
-                                return null;
+                            <Button color={ButtonColors.green} className={'block sm:block md:hidden px-3 py-2 mr-4'}>
+                                <Icon customTypeClassName={s.plusIcon}>
+                                    <PlusIcon />
+                                </Icon>
+                            </Button>
+                        </Link>
+                    </div>
+                )}
+
+                {!isAuth && (
+                    <div className={classNames('flex', 'justify-between', 'items-center')}>
+                        <Link to={PathsToNavigate.LOGIN} className={'mr-3'}>
+                            <Button color={ButtonColors.green} className={'py-2.5 px-3'}>
+                                Вход
+                            </Button>
+                        </Link>
+                        <HeaderMenu isAuth={false} />
+                    </div>
+                )}
+                {isAuth && (
+                    <ServerResponse
+                        responseError={error}
+                        isError={isError}
+                        isLoading={isLoading}
+                        isSuccess={isSuccess}
+                        loader={<HeaderProfileSkeleton />}
+                        messages={[
+                            {
+                                statusCode: 401,
+                                message: 'Профиль не найден',
+                                customFunc: (errorResponse) => {
+                                    logoutUser();
+                                    return null;
+                                },
                             },
-                        },
-                        {
-                            statusCode: 500,
-                            message: 'Ошибка сервера!',
-                            customFunc: (errorResponse) => {
-                                console.log('500');
-                                logoutUser();
-                                return null;
+                            {
+                                statusCode: 500,
+                                message: 'Ошибка сервера!',
+                                customFunc: (errorResponse) => {
+                                    console.log('500');
+                                    logoutUser();
+                                    return null;
+                                },
                             },
-                        },
-                    ]}
-                >
-                    {data != null && <HeaderProfile username={data.username} photo={data.photo} id={data.id} />}
-                </ServerResponse>
-            )}
+                        ]}
+                    >
+                        {data != null && <HeaderProfile username={data.username} photo={data.photo} id={data.id} />}
+                    </ServerResponse>
+                )}
+            </div>
         </header>
     );
 };

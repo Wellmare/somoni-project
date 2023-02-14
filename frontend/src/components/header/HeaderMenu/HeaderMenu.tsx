@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import s from './HeaderMenu.module.scss';
 
 import '@szhsin/react-menu/dist/transitions/slide.css';
-import { ReactComponent as ArrowDownIcon } from '../../../assets/svg/arrow-down.svg';
 import { ReactComponent as DefaultProfile } from '../../../assets/svg/default-profile.svg';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useLogout } from '../../../hooks/useLogout';
@@ -14,7 +13,6 @@ import { Theme } from '../../../types/Theme';
 import { AvatarSize } from '../../../types/UI/Avatar.types';
 import Avatar from '../../../ui/Avatar/Avatar';
 import Error from '../../../ui/Error/Error';
-import Icon from '../../../ui/Icon/Icon';
 import { pathsToNavigate } from '../../../utils/pathsToNavigate';
 import Menu, { MenuItem } from '../../Menu/Menu';
 
@@ -34,15 +32,18 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
         return (
             <Menu
                 menuButton={
-                    <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}>
-                        <Avatar size={AvatarSize.small}>
-                            {/* <img src={notAuthAvatar} alt='not authed avatar' /> */}
-                            <DefaultProfile />
-                        </Avatar>
-                        <Icon customTypeClassName={s.arrowIcon}>
-                            <ArrowDownIcon />
-                        </Icon>
-                    </div>
+                    <>
+                        {/* <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}> */}
+                        <div className={'cursor-pointer'}>
+                            <Avatar size={AvatarSize.small}>
+                                <DefaultProfile />
+                            </Avatar>
+                        </div>
+                        {/* <Icon customTypeClassName={s.arrowIcon}> */}
+                        {/*    <ArrowDownIcon /> */}
+                        {/* </Icon> */}
+                        {/* </div> */}
+                    </>
                 }
             >
                 {/* Для пк */}
@@ -68,14 +69,18 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
     return (
         <Menu
             menuButton={
-                <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}>
-                    <Avatar size={AvatarSize.small}>
-                        <img src={photo} alt='profile photo' />
-                    </Avatar>
-                    <Icon customTypeClassName={s.arrowIcon}>
-                        <ArrowDownIcon />
-                    </Icon>
-                </div>
+                <>
+                    {/* <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}> */}
+                    <div className={'cursor-pointer'}>
+                        <Avatar size={AvatarSize.small}>
+                            <img src={photo} alt='profile photo' />
+                        </Avatar>
+                    </div>
+                    {/* <Icon customTypeClassName={s.arrowIcon}> */}
+                    {/*    <ArrowDownIcon /> */}
+                    {/* </Icon> */}
+                    {/* </div> */}
+                </>
             }
         >
             {/* Для пк */}

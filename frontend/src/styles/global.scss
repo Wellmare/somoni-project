@@ -28,6 +28,9 @@ body {
   background: var(--background-color);
   color: var(--text-color-primary);
   overflow-x: hidden;
+
+  overflow-wrap: break-word;
+
 }
 
 html, body {
@@ -65,31 +68,48 @@ $xl2: 1536px;
   --background-color: #171C20
 }
 
-.text-wrap {
+//.text-wrap {
   //white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
   //white-space: pre-wrap; /* Opera 4-6 */
   //white-space: -o-pre-wrap; /* Opera 7 */
   //white-space: pre-wrap; /* css-3 */
   //word-wrap: break-word; /* Internet Explorer 5.5+ */
   //white-space: pre-wrap; /* Newer versions of Chrome/Safari*/
-  word-break: break-all;
-  white-space: normal;
+  //word-break: break-all;
+  //white-space: normal;
+  //
+  //@media (min-width: $sm) {
+  //  word-break: break-all;
+  //}
+  //
+  //@media (min-width: $md) {
+  //  word-break: break-word;
+  //}
+  //-webkit-hyphens: auto;
+  //
+  //-moz-hyphens: auto;
+  //
+  //-ms-hyphens: auto;
+  //-ms-hyphenate-limit-chars: 6 3 3;
+  //-ms-hyphenate-limit-lines: 2;
+  //-ms-hyphenate-limit-zone: 8%;
+  //
+  //hyphens: auto;
+  //hyphenate-limit-chars: 6 3 3;
+  //hyphenate-limit-lines: 2;
+  //hyphenate-limit-last: always;
+  //hyphenate-limit-zone: 8%;
 
-  @media (min-width: $sm) {
-    word-break: break-all;
-  }
-
-  @media (min-width: $md) {
-    word-break: break-word;
-  }
-
+  //word-wrap: break-word;
+  //hyphens: auto;
+  //overflow-wrap: break-word;
   //@media (min-width: 1024px) {
   //  width: 66.666667%;
   //}
   //@media (min-width: 1280px) {
   //  width: 50%;
   //}
-}
+//}
 
 
 .container {

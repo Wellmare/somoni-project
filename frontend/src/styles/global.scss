@@ -51,6 +51,12 @@ code {
   monospace;
 }
 
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xl2: 1536px;
+
 :root[data-theme="light"] {
   --background-color: #EEEEEE
 }
@@ -69,11 +75,11 @@ code {
   word-break: break-all;
   white-space: normal;
 
-  @media (min-width: 640px) {
+  @media (min-width: $sm) {
     word-break: break-all;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: $md) {
     word-break: break-word;
   }
 
@@ -96,23 +102,34 @@ code {
   //justify-content: center;
   //align-items: center;
 
-  @media (min-width: 640px) {
+  @media (min-width: $sm) {
     width: 91.666667%;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: $md) {
     width: 91.666667%;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: $lg) {
     width: 66.666667%;
   }
-  @media (min-width: 1280px) {
+  @media (min-width: $xl) {
     width: 50%;
   }
+  @media (min-width: $xl2) {
+    width: 40%;
+  }
 }
 
-@media (max-width: 640px) {
+.on-desktop {
+  display: inherit;
+}
+.on-mobile {
+  display: none;
+}
+
+
+@media (max-width: $sm) {
   .on-desktop {
     display: none;
   }
@@ -121,8 +138,7 @@ code {
   }
 }
 
-
-@media (min-width: 640px) {
+@media (min-width: $sm) {
   .on-desktop {
     display: none;
   }
@@ -131,7 +147,7 @@ code {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $md) {
   .on-desktop {
     display: none;
   }
@@ -140,7 +156,7 @@ code {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: $lg) {
   .on-desktop {
     display: inherit;
   }
@@ -148,24 +164,3 @@ code {
     display: none;
   }
 }
-
-@media (min-width: 1280px) {
-  .on-desktop {
-    display: inherit;
-  }
-  .on-mobile {
-    display: none;
-  }
-}
-
-@media (min-width: 1536px) {
-  .on-desktop {
-    display: inherit;
-  }
-  .on-mobile {
-    display: none;
-    transform: translateX(100px);
-  }
-}
-
-

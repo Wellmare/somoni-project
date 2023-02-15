@@ -18,7 +18,7 @@ const ProfileHeader: FC = () => {
             <div className={classNames('flex', 'justify-start', 'items-start', 'flex-col', 'sm:flex-row')}>
                 <ProfileAvatar />
                 <div className={'ml-4'}>
-                    <h2 className={`${s.username} text-wrap`}>{username}</h2>
+                    <h2 className={`${s.username}`}>{username}</h2>
                     <ProfileBio />
                 </div>
             </div>

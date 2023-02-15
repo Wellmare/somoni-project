@@ -13,7 +13,7 @@ interface ITagProps {
 const PostTag: FC<ITagProps> = ({ tag }) => {
     return (
         <Link to={pathsToNavigate.tag(tag)}>
-            <div className={classNames(s.tag, 'text-wrap')}>{tag}</div>
+            <div className={classNames(s.tag)}>{tag}</div>
         </Link>
     );
 };

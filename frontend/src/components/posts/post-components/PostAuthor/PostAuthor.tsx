@@ -27,7 +27,7 @@ const PostAuthor: FC<IPostAuthorProps> = ({ photo, username, userId, date }) => 
                     </Avatar>
                 </div>
                 <div className={classNames('ml-3')}>
-                    <div className={`${s.author} text-wrap`}>{username}</div>
+                    <div className={`${s.author}`}>{username}</div>
                     <PostDate date={date} />
                 </div>
             </div>

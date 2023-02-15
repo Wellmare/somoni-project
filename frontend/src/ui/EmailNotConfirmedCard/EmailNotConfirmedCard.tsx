@@ -15,7 +15,7 @@ const EmailNotConfirmedCard: FC /* <IEmailNotConfirmedCardProps> */ = () => {
     return (
         <>
             <EmailConfirmModal isOpen={isOpen} setIsOpen={setIsOpen} required={false} />
-            <Card className={'flex justify-between items-center'}>
+            <Card className={'flex justify-between items-center flex-wrap'}>
                 <h2>Ваш email не подтвержден</h2>
                 <Button color={ButtonColors.blue} size={ButtonSizes.sm} onClick={() => setIsOpen(true)}>
                     Подтвердить

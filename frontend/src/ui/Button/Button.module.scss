@@ -85,15 +85,25 @@
 
   &.sm {
     padding: var(--btn-padding-sm);
+    @media (max-width: 300px) {
+      padding-left: .2rem;
+      padding-right: .2rem;
+    }
   }
 ;
 
   &.md {
     padding: var(--btn-padding-md);
+    @media (max-width: 300px) {
+      padding: var(--btn-padding-sm);
+    }
   }
 ;
 
   &.lg {
     padding: var(--btn-padding-lg);
+    @media (max-width: 300px) {
+      padding: var(--btn-padding-sm);
+    }
   }
 }

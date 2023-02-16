@@ -77,6 +77,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             } else {
                 console.log('no data');
                 await api.dispatch(logout());
+                release();
             }
         } catch (e) {
             console.log(e);

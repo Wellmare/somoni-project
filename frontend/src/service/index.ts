@@ -73,7 +73,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
                 console.log('set auth');
                 // noinspection ES6RedundantAwait
-                return await baseQuery(args, api, extraOptions);
+                result = await baseQuery(args, api, extraOptions);
             } else {
                 console.log('no data');
                 await api.dispatch(logout());

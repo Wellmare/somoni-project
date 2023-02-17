@@ -39,7 +39,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: { refresh },
             }),
-            invalidatesTags: ['Auth'],
         }),
         changePassword: builder.mutation<undefined, IDataToChangePassword>({
             query: ({ refresh, password, password2, oldPassword }) => ({

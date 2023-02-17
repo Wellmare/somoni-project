@@ -30,21 +30,48 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 ) => {
     // wait until the mutex is available without locking it
     await mutex.waitForUnlock();
+    // const release = (): void => mutex.release();
 
     let result = await baseQuery(args, api, extraOptions);
     const authTokens = (api.getState() as RootState).auth?.authTokens;
 
     // console.log('authTokens', authTokens);
 
-    if (authTokens === null) return result;
-
-    if (!isTokenExpired(authTokens.access)) {
+    if (authTokens === null || authTokens.access === '' || authTokens.refresh === '') {
         return result;
     }
 
+    console.log('isTokenExpired', isTokenExpired(authTokens.access));
+    const tokenIsExpired = isTokenExpired(authTokens.access);
+
+    if (!tokenIsExpired && result.error === undefined) {
+        return result;
+    }
+
+    let resultData: { code: string } | null = null;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    if (result.error?.data != null && 'code' in result?.error?.data) {
+        resultData = result.error.data as { code: string };
+    }
+
+    if (resultData?.code != null) {
+        const code = resultData.code;
+        if (code === 'user_not_found' || (code === 'token_not_valid' && !tokenIsExpired)) {
+            console.log('user not found');
+            api.dispatch(logout());
+            return result;
+        }
+        // console.log('code', code);
+    }
+
+    // console.log('mutex.isLocked', mutex.isLocked());
+
     if (!mutex.isLocked()) {
         const release = await mutex.acquire();
+
         try {
+            // console.log('TRY REFRESH FETCH');
             const refreshResult = await baseQuery(
                 {
                     url: apiEndpoints.refreshToken,
@@ -56,6 +83,10 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                 api,
                 extraOptions,
             );
+            console.log(refreshResult);
+            if ('error' in refreshResult) {
+                throw new Error('Fetch error');
+            }
             if (refreshResult.data !== null) {
                 // store the new token
                 // console.log(refreshResult);
@@ -76,11 +107,12 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                 result = await baseQuery(args, api, extraOptions);
             } else {
                 console.log('no data');
+                console.log('logout state');
                 await api.dispatch(logout());
-                release();
             }
         } catch (e) {
             console.log(e);
+            console.log('logout state');
             api.dispatch(logout());
         } finally {
             // release must be called once the mutex should be released again.

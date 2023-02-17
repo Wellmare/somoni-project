@@ -35,7 +35,7 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
                     <>
                         {/* <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}> */}
                         <div className={'cursor-pointer'}>
-                            <Avatar size={AvatarSize.small}>
+                            <Avatar size={AvatarSize.medium}>
                                 <DefaultProfile />
                             </Avatar>
                         </div>
@@ -72,7 +72,7 @@ const HeaderMenu: FC<IMenuProps> = ({ isAuth, photo, id }) => {
                 <>
                     {/* <div className={classNames('cursor-pointer', 'flex', 'items-center', s.menuButton)}> */}
                     <div className={'cursor-pointer'}>
-                        <Avatar size={AvatarSize.small}>
+                        <Avatar size={AvatarSize.medium}>
                             <img src={photo} alt='profile photo' />
                         </Avatar>
                     </div>

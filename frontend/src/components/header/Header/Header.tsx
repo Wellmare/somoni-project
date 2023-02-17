@@ -8,7 +8,6 @@ import s from './Header.module.scss';
 import { ReactComponent as PlusIcon } from '../../../assets/svg/plus.svg';
 import { PathsToNavigate } from '../../../constants/Paths';
 import { useAuth } from '../../../hooks/useAuth';
-import { useLogout } from '../../../hooks/useLogout';
 import { useLazyGetUserInfoQuery } from '../../../service/userApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
@@ -22,9 +21,8 @@ import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import HeaderProfile from '../HeaderProfile/HeaderProfile';
 
 const Header: FC = () => {
-    const { isAuth, user, userId } = useAuth();
+    const { isAuth, userId } = useAuth();
     const [getUserInfo, { isError, error, data, isSuccess, isLoading }] = useLazyGetUserInfoQuery();
-    const { logoutUser } = useLogout();
 
     useEffect(() => {
         if (isAuth && userId != null) {
@@ -98,19 +96,6 @@ const Header: FC = () => {
                             {
                                 statusCode: 401,
                                 message: 'Профиль не найден',
-                                customFunc: (errorResponse) => {
-                                    logoutUser();
-                                    return null;
-                                },
-                            },
-                            {
-                                statusCode: 500,
-                                message: 'Ошибка сервера!',
-                                customFunc: (errorResponse) => {
-                                    console.log('500');
-                                    logoutUser();
-                                    return null;
-                                },
                             },
                         ]}
                     >

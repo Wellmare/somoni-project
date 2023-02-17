@@ -5,7 +5,7 @@
 }
 
 .medium {
-  @include avatar($size: min(6rem, 200px))
+  @include avatar($size: min(3.2rem, 200px))
 }
 
 .large {

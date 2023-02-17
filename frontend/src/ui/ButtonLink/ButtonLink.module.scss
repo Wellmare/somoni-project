@@ -1,0 +1,22 @@
+.link {
+  cursor: pointer;
+
+  &.blue {
+    color: #4b819f;
+  }
+
+  &.green {
+    color: #2b8c7a;
+  }
+  &.red {
+    color: #b21e1e;
+  }
+
+  &.gray {
+    color: #9d9d9d;
+  }
+
+  &.primary {
+    color: var(--text-color-primary);
+  }
+}

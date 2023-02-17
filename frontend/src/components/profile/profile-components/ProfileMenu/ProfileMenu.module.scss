@@ -1,0 +1,18 @@
+.deleteButton > * {
+  color: var(--text-color-red);
+}
+
+:root[data-theme="light"] {
+  .threeDots {
+    svg > path {
+      fill: black;
+    }
+  }
+}
+:root[data-theme="dark"] {
+  .threeDots {
+    svg > path {
+      fill: #DDDDDD;
+    }
+  }
+}

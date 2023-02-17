@@ -1,0 +1,15 @@
+:root {
+  //--post-border-radius: .7rem;
+}
+
+:root[data-theme="light"] {
+  --header-background: #FFFFFF;
+  --header-border: .2rem solid #E0E0E0;
+  --header-text-color: var(--text-color-primary);
+}
+
+:root[data-theme="dark"] {
+  --header-background: #22272B;
+  --header-border: .2rem solid #31363A;
+  --header-text-color: var(--text-color-primary);
+}

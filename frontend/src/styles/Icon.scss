@@ -1,0 +1,13 @@
+:root {
+  --icon-size: 1.5rem;
+}
+
+:root[data-theme="light"] {
+  --icon-red-color: #ce1212;
+  --icon-primary-color: #000
+}
+
+:root[data-theme="dark"] {
+  --icon-red-color: #ab3030;
+  --icon-primary-color: #cccccc
+}

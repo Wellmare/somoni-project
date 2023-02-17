@@ -1,8 +1,8 @@
-import { Link } from './Link';
+import { LinkType } from './LinkType';
 
 export interface IPaginatedResponse<ResultType> {
     count: number;
-    next: Link;
-    previous: Link;
+    next: LinkType;
+    previous: LinkType;
     results: ResultType;
 }

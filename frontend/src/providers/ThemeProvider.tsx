@@ -7,7 +7,13 @@ import { getDataFromLocalStorage, setDataToLocalStorage } from '../utils/localSt
 
 const getTheme = (): Theme => {
     const theme = getDataFromLocalStorage<Theme>(localStorageKeys.THEME);
-    return theme !== null ? theme : Theme.LIGHT;
+
+    if (theme !== null) return theme;
+
+    if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
+        return Theme.DARK;
+    }
+    return Theme.LIGHT;
 };
 
 interface ThemeProviderProps {

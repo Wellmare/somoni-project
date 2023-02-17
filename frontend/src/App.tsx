@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 
-import Routing from './components/Routing/Routing';
-import TestLogin from './components/TestLogin';
+import Router from './components/routing/Router';
 
 const App: FC = () => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     return (
         <>
-            <TestLogin />
-            {/* <TestFormCreatePost /> */}
-            {/* <TestPosts /> */}
-            <Routing />
+            <Router />
         </>
     );
 };

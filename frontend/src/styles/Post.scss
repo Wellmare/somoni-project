@@ -1,0 +1,26 @@
+:root {
+  //--post-border-radius: .7rem;
+
+  --post-button-padding: .2rem .5rem;
+  --post-button-border-radius: .5rem;
+}
+
+:root[data-theme="light"] {
+  //--post-background: #FFFFFF;
+  //--post-border: 3px solid #E0E0E0;
+  //--post-text: var(--text-color-primary);
+
+  --post-button-background: #D0D0D0;
+  --post-button-border: 2px solid #B4ACAC;
+  --post-button-color: var(--text-color-primary)
+}
+
+:root[data-theme="dark"] {
+  //--post-background: #22272B;
+  //--post-border: 3px solid #31363A;
+  //--post-text: var(--text-color-primary);
+
+  --post-button-background: #30373a;
+  --post-button-border: 2px solid #444b4d;
+  --post-button-color: var(--text-color-primary)
+}

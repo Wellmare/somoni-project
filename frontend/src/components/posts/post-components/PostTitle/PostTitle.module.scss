@@ -1,0 +1,8 @@
+.title {
+  font-size: var(--font-size-large);
+  transition: .2s;
+  font-weight: 500;
+}
+.title:hover {
+  opacity: 90%;
+}

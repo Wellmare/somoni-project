@@ -1,0 +1,20 @@
+:root {
+  --tag-padding: .2rem .3rem;
+  --tag-border-radius: .5rem;
+}
+
+:root[data-theme="light"] {
+  --tag-background-color: #D0D0D0;
+  --tag-border: 2px solid #B4ACAC;
+
+  --tag-hover-background-color: #dedede;
+  --tag-hover-border: 2px solid #c2bbbb;
+}
+
+:root[data-theme="dark"] {
+  --tag-background-color: #3d4549;
+  --tag-border: 2px solid #4c5356;
+
+  --tag-hover-background-color: #495154;
+  --tag-hover-border: 2px solid #5d6467;
+}

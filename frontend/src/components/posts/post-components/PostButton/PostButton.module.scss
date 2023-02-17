@@ -1,0 +1,12 @@
+.postButton {
+  background: var(--post-button-background);
+  border: var(--post-button-border);
+  color: var(--post-button-color);
+  padding: var(--post-button-padding);
+  margin-right: .4rem;
+  border-radius: var(--post-button-border-radius);
+
+  &:hover {
+    opacity: 90%;
+  }
+}

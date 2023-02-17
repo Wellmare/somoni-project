@@ -1,0 +1,109 @@
+.button {
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  cursor: pointer;
+  transition: .2s;
+  //box-shadow: 0 .3rem 20px #021505;
+
+  //&:hover {
+  //transform: translateY(-.15rem);
+  //box-shadow: 0 6px 7px #05210c;
+  //}
+
+  //&:active {
+  //  transform: translateY(.15rem);
+  //}
+
+
+  &.green {
+    color: var(--text-color-button-green);
+    background-color: var(--bg-button-green);
+
+    &:hover {
+      background-color: var(--bg-button-green-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-green-active);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+
+      &:hover {
+        background-color: var(--bg-button-green);
+      }
+      &:active {
+        background-color: var(--bg-button-green);
+      }
+    }
+  }
+
+  &.blue {
+    color: var(--text-color-button-blue);
+    background-color: var(--bg-button-blue);
+
+    &:hover {
+      background-color: var(--bg-button-blue-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-blue-active);
+    }
+  }
+
+  &.red {
+    color: var(--text-color-button-red);
+    background-color: var(--bg-button-red);
+
+    &:hover {
+      background-color: var(--bg-button-red-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-red-active);
+    }
+  }
+
+  &.gray {
+    color: var(--text-color-button-gray);
+    background-color: var(--bg-button-gray);
+
+    &:hover {
+      background-color: var(--bg-button-gray-hover);
+    }
+
+    &:active {
+      background-color: var(--bg-button-gray-active);
+    }
+  }
+
+  &.primary {
+    color: var(--text-color-primary);
+    //border: 2px solid var(--text-color-primary);
+  }
+
+  &.sm {
+    padding: var(--btn-padding-sm);
+    @media (max-width: 300px) {
+      padding-left: .2rem;
+      padding-right: .2rem;
+    }
+  }
+;
+
+  &.md {
+    padding: var(--btn-padding-md);
+    @media (max-width: 300px) {
+      padding: var(--btn-padding-sm);
+    }
+  }
+;
+
+  &.lg {
+    padding: var(--btn-padding-lg);
+    @media (max-width: 300px) {
+      padding: var(--btn-padding-sm);
+    }
+  }
+}

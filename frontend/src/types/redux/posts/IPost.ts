@@ -1,15 +1,25 @@
-import { Link } from '../Link';
+import { Tag } from '../../Tag';
+import { LinkType } from '../LinkType';
 
 export interface IPost {
-    id: number;
+    postId: string;
+
     title: string;
     content: string;
-    likes: number;
-    comments: number;
-    image: Link;
-    author: number;
-    date: string;
-    isLiked: boolean;
+
+    likesCount: number;
+    commentsCount: number;
+
+    postImageLink: LinkType;
+
+    userId: string;
     username: string;
-    photo: Link;
+    avatarLink: string;
+
+    dateString: string;
+    isLiked: boolean;
+
+    isMyPost: boolean;
+
+    tags: Tag[];
 }

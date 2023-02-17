@@ -1,26 +1,34 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import TestComments from '../../components/TestComments';
-import TestPost from '../../components/TestPost';
-import { useGetCommentsQuery } from '../../service/commentsApiSlice';
+import Post from '../../components/posts/post-components/Post/Post';
+import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
+import Comments from '../../components/сomments/Comments/Comments';
 import { useGetPostQuery } from '../../service/postApiSlice';
+import Error from '../../ui/Error/Error';
+import { enhanceIPostServerResponse } from '../../utils/enhanceIPostServerResponse';
 
 const PostPage: FC = () => {
     const params = useParams();
-    if (params.id === undefined) {
-        return <>Post not found</>;
+    const postId = params.id;
+    if (postId === undefined) {
+        return <Error>Нет id поста</Error>;
     }
 
-    const { isLoading: postsIsLoading, data: post } = useGetPostQuery({ id: params.id });
-    const { data: comments, isLoading: commentsIsLoading } = useGetCommentsQuery({ postId: params.id });
+    const { isLoading, data: post, error, isError, isSuccess } = useGetPostQuery({ id: postId });
 
     return (
         <>
-            {postsIsLoading && 'Loading...'}
-            {post != null && <TestPost post={post} />}
-            {commentsIsLoading && 'Loading...'}
-            {comments?.results != null && <TestComments comments={comments.results} postId={params.id} />}
+            <ServerResponse
+                responseError={error}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                messages={[{ statusCode: 404, message: 'Пост не найден' }]}
+            >
+                {post != null && <Post post={enhanceIPostServerResponse(post)} />}
+                <Comments postId={postId} />
+            </ServerResponse>
         </>
     );
 };

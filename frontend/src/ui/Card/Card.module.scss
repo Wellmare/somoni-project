@@ -1,0 +1,12 @@
+.card {
+  background: var(--card-background);
+  color: var(--card-text);
+  border: var(--card-border);
+  border-radius: var(--card-border-radius);
+
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem auto;
+}

@@ -5,4 +5,13 @@ export const apiEndpoints = {
     posts: 'posts/',
     post: 'post/',
     comment: 'comment/',
+    logout: 'logout/',
+    user: 'user/',
+    editProfile: 'edit-profile/',
+    userInfo: 'user-info/',
+    changePassword: 'password/change/',
+    restorePassword: 'password-reset/',
+    restorePasswordConfirm: 'password-reset/confirm/',
+    confirmEmail: 'email-confirm/',
+    sendConfirmEmail: 'email-confirm/send/',
 };

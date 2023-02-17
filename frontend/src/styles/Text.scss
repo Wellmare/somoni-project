@@ -1,0 +1,19 @@
+:root {
+  --font-size-normal: 1rem;
+  --font-size-small: .7rem;
+  --font-size-large: 1.2rem;
+}
+
+:root[data-theme="light"] {
+  --text-color-primary: #000;
+  --text-color-green: #7AC9B9;
+  --text-color-secondary: #888686;
+  --text-color-red: #b20000
+}
+
+:root[data-theme="dark"] {
+  --text-color-primary: #DDDDDD;
+  --text-color-green: #509B8C;
+  --text-color-secondary: #B5B5B5;
+  --text-color-red: #c2302f
+}

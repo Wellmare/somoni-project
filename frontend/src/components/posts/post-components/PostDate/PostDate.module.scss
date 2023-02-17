@@ -1,0 +1,17 @@
+.date {
+  font-size: .9rem;
+  opacity: 90%;
+}
+
+@media (max-width: 640px) {
+  .date {
+    font-size: .8rem;
+  }
+}
+
+
+@media (min-width: 640px) {
+  .date {
+    font-size: .9rem;
+  }
+}

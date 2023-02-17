@@ -1,0 +1,11 @@
+:root[data-theme="light"] {
+  --modal-background-color: #EEEEEE;
+  --modal-header-background-color: #d7d7d7;
+  --modal-text-color: var(--text-color-primary);
+}
+
+:root[data-theme="dark"] {
+  --modal-background-color: #262b33;
+  --modal-header-background-color: #333841;
+  --modal-text-color: var(--text-color-primary);
+}

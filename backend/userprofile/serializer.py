@@ -10,8 +10,8 @@ from myapi.models import User
 class profile_serializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'bio', 'photo', 'id', 'isEmailConfirmed')
-        read_only_fields = ('id', 'isEmailConfirmed', 'username',)
+        fields = ('username', 'email', 'bio', 'photo', 'id',)
+        read_only_fields = ('id', 'username',)
 
     def update(self, instance, validated_data):
         old_email = instance.email
@@ -33,6 +33,8 @@ class profile_serializer(serializers.ModelSerializer):
                 msg = EmailMultiAlternatives(subject=subject, to=[instance.email])
                 msg.attach_alternative(html_message, 'text/html')
                 msg.send()
+                instance.isEmailConfirmed = False
+                self.isEmailChanged = True
         except KeyError:
             raise serializers.ValidationError(
                 {"detail": "some field is missing"})

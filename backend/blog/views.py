@@ -216,8 +216,6 @@ class post_detail_view(generics.RetrieveUpdateDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if request.user == instance.author or request.user.is_superuser:
-            if not request.user.isEmailConfirmed:
-                return Response({'не прошел подтверждение почты'}, status=status.HTTP_401_UNAUTHORIZED)
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({'зарегайся сначала, либо ты не автор поста'}, status=status.HTTP_200_OK)

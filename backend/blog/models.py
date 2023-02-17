@@ -14,7 +14,7 @@ from django.urls import reverse
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, default=15, on_delete=models.SET_DEFAULT)
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
     image = models.ImageField(upload_to='post_images', null=True, blank=True)
@@ -44,7 +44,7 @@ class PostLike(models.Model):
 
 class Comments(models.Model):
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, default=15, on_delete=models.SET_DEFAULT)
     date = models.DateTimeField(default=timezone.now)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='link')
     def __str__(self):

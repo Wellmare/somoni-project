@@ -40,8 +40,9 @@ class CreatePostSerializer(serializers.ModelSerializer):
                         {"tag": "invalid character = '#' or '.'"})
                 if len(tag) > 25:
                     str += f'"{tag}", '
-            raise serializers.ValidationError(
-                {"tag": [f'В тэгах {str} колличество символов больше 25']})
+            if str:
+                raise serializers.ValidationError(
+                    {"tag": [f'В тэгах {str} колличество символов больше 25']})
 
         except KeyError:
             pass

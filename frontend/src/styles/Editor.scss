@@ -118,7 +118,7 @@
   //overflow: hidden;
   border: var(--editor-border);
   height: max-content;
-  overflow-y: auto;
+  //overflow-y: auto;
   padding: .5rem .3rem;
   //border-radius: .6rem;
   border-radius: 0 0 var(--editor-border-radius) var(--editor-border-radius);
@@ -177,5 +177,11 @@
     button:not(.ql-bold, .ql-italic, .ql-link), .ql-header {
       display: none;
     }
+  }
+}
+
+.editor-limited {
+  .ql-editor {
+    max-height: 16.4rem;
   }
 }

@@ -1,0 +1,2 @@
+export const CREATE_POST_MAX_LENGTH = 4800;
+export const CREATE_COMMENT_MAX_LENGTH = 500;

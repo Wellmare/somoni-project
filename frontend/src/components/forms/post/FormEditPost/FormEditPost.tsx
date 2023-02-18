@@ -5,6 +5,7 @@ import { useFilePicker } from 'use-file-picker';
 
 import s from './FormEditPost.module.scss';
 
+import { CREATE_POST_MAX_LENGTH } from '../../../../constants/formsMaxLenght';
 import { useEditPostMutation } from '../../../../service/postsApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
@@ -109,9 +110,9 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
                     watch={watch}
                     setValue={setValue}
                     onChange={(value) => {
-                        if (value.length > 3000) {
+                        if (value.length > CREATE_POST_MAX_LENGTH) {
                             setError('content', {
-                                message: 'Текст превышает лимит в 3000 символов',
+                                message: `Текст превышает лимит в ${CREATE_POST_MAX_LENGTH} символов`,
                             });
                         } else {
                             clearErrors('content');

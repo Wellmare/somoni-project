@@ -6,6 +6,7 @@ import { useFilePicker } from 'use-file-picker';
 
 import s from './FormCreatePost.module.scss';
 
+import { CREATE_POST_MAX_LENGTH } from '../../../../constants/formsMaxLenght';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import { selectUserId } from '../../../../redux/slices/authSlice';
 import { useCreatePostMutation } from '../../../../service/postsApiSlice';
@@ -117,9 +118,9 @@ const FormCreatePost: FC = () => {
                         watch={watch}
                         setValue={setValue}
                         onChange={(value) => {
-                            if (value.length > 3000) {
+                            if (value.length > CREATE_POST_MAX_LENGTH) {
                                 setError('content', {
-                                    message: 'Текст превышает лимит в 3000 символов',
+                                    message: `Текст превышает лимит в ${CREATE_POST_MAX_LENGTH} символов`,
                                 });
                             } else {
                                 clearErrors('content');

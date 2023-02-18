@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { CREATE_COMMENT_MAX_LENGTH } from '../../../../constants/formsMaxLenght';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import { selectUserId } from '../../../../redux/slices/authSlice';
 import { useCreateCommentMutation } from '../../../../service/commentsApiSlice';
@@ -81,9 +82,9 @@ const FormCreateComment: FC<IFormCreateCommentProps> = ({ postId }) => {
                 className={'editor-comment'}
                 formats={['bold', 'italic', 'link']}
                 onChange={(value) => {
-                    if (value.length > 500) {
+                    if (value.length > CREATE_COMMENT_MAX_LENGTH) {
                         setError('content', {
-                            message: 'Текст превышает лимит в 500 символов',
+                            message: `Текст превышает лимит в ${CREATE_COMMENT_MAX_LENGTH} символов`,
                         });
                     } else {
                         clearErrors('content');

@@ -124,6 +124,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     activate_key_email = models.CharField(max_length=500, unique=True)
     activate_key_username = models.CharField(max_length=500, unique=True)
     isEmailConfirmed = models.BooleanField(default=False)
+    following = models.ManyToManyField('self', verbose_name='Подписки', related_name='followers', symmetrical=False,
+                                       blank=True)
+    count_followers = models.IntegerField(default=0)
+    count_following = models.IntegerField(default=0)
     objects = UserManager()
 
     EMAIL_FIELD = "email"

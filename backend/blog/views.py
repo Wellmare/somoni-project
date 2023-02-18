@@ -46,7 +46,9 @@ class userResultsSetPagination(PageNumberPagination):
                     ('isMyProfile', isMyProfile),
                     ('isEmailConfirmed', user.isEmailConfirmed),
                     ('id', user.id),
-                    ('results', data)
+                    ('results', data),
+                    ('count_followers', user.count_followers),
+                    ('count_following', user.count_following)
                 ]))
             else:
                 return Response(OrderedDict([
@@ -58,7 +60,9 @@ class userResultsSetPagination(PageNumberPagination):
                     ('bio', user.bio),
                     ('isMyProfile', isMyProfile),
                     ('id', user.id),
-                    ('results', data)
+                    ('results', data),
+                    ('count_followers', user.count_followers),
+                    ('count_following', user.count_following)
                 ]))
         except ValueError:
             if isMyProfile:
@@ -74,7 +78,9 @@ class userResultsSetPagination(PageNumberPagination):
                     ('isMyProfile', isMyProfile),
                     ('isEmailConfirmed', user.isEmailConfirmed),
                     ('id', user.id),
-                    ('results', data)
+                    ('results', data),
+                    ('count_followers', user.count_followers),
+                    ('count_following', user.count_following)
                 ]))
             else:
                 return Response(OrderedDict([
@@ -87,7 +93,9 @@ class userResultsSetPagination(PageNumberPagination):
                     ('id', user.id),
                     ('isMyProfile', isMyProfile),
                     ('id', user.id),
-                    ('results', data)
+                    ('results', data),
+                    ('count_followers', user.count_followers),
+                    ('count_following', user.count_following)
                 ]))
 
 

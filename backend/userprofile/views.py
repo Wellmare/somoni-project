@@ -14,7 +14,7 @@ from django.db.models import Exists, OuterRef
 from rest_framework.pagination import PageNumberPagination
 from collections import OrderedDict
 
-from userprofile.serializer import profile_serializer
+from userprofile.serializer import profile_serializer, follow_serializer
 
 from django.core.mail import EmailMessage
 

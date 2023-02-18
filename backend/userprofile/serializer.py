@@ -39,3 +39,11 @@ class profile_serializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {"detail": "some field is missing"})
         return instance
+
+class follow_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'photo', 'id',)
+        read_only_fields = ('id', 'username', 'photo')
+
+

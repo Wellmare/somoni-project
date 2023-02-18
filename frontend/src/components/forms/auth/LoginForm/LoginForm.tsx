@@ -63,7 +63,7 @@ const LoginForm: FC = () => {
 
             {/* {error} */}
             <div className={classNames('flex', 'items-center', 'justify-between')}>
-                <Button color={ButtonColors.green} size={ButtonSizes.sm} type='submit'>
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} type='submit' className={'mr-2.5'}>
                     Войти
                 </Button>
                 <ButtonLink color={ButtonColors.blue} linkTo={PathsToNavigate.REGISTER}>

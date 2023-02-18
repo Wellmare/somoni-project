@@ -62,15 +62,17 @@ const LoginForm: FC = () => {
             </ServerResponse>
 
             {/* {error} */}
-            <div className={classNames('flex', 'items-center', 'justify-between')}>
-                <Button color={ButtonColors.green} size={ButtonSizes.sm} type='submit' className={'mr-2.5'}>
+            <div className={classNames('flex', 'items-center', 'justify-between', 'flex-col', 'sm:flex-row')}>
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} type='submit' className={'w-full sm:w-max'}>
                     Войти
                 </Button>
-                <ButtonLink color={ButtonColors.blue} linkTo={PathsToNavigate.REGISTER}>
-                    Еще не зарегистрирован?
-                </ButtonLink>
+                <div className={'mt-2 sm:mt-0'}>
+                    <ButtonLink color={ButtonColors.blue} linkTo={PathsToNavigate.REGISTER}>
+                        Еще не зарегистрирован?
+                    </ButtonLink>
+                </div>
             </div>
-            <div className={'mt-5'}>
+            <div className={'mt-5 text-right'}>
                 <ButtonLink color={ButtonColors.green} linkTo={PathsToNavigate.RESTORE_PASSWORD}>
                     Забыли пароль?
                 </ButtonLink>

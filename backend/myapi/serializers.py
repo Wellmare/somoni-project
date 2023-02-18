@@ -54,7 +54,6 @@ class RegisterSerializer(serializers.ModelSerializer):
                 )
                 user.photo = validated_data['photo']
                 user.set_password(validated_data['password'])
-                user.save()
 
                 subject = f"Email confirm for {user.username}".format(title="Some website title")
                 html_message = render_to_string('email_confirm_password.html',
@@ -63,7 +62,13 @@ class RegisterSerializer(serializers.ModelSerializer):
                                                  'domain': os.getenv('FRONT_DOMAIN')})
                 msg = EmailMultiAlternatives(subject=subject, to=[user.email])
                 msg.attach_alternative(html_message, 'text/html')
-                msg.send()
+                try:
+                    msg.send()
+                except:
+                    user.delete()
+                    raise serializers.ValidationError(
+                        {"email": "this field is invalid"})
+                user.save()
 
 
 

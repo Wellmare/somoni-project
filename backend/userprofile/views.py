@@ -164,7 +164,7 @@ class edit_profile(generics.RetrieveUpdateDestroyAPIView):
             isEmailChanged = True
         else:
             isEmailChanged = False
-        return Response({'Profile':serializer.data, 'isEmailChanged': isEmailChanged})
+        return Response({'Profile': serializer.data, 'isEmailChanged': isEmailChanged})
 
     def perform_update(self, serializer):
         serializer.save()
@@ -207,3 +207,67 @@ def getprofile(request, pk):
             "isMyProfile": False,
             "isEmailConfirmed": False,
         })
+
+
+# @api_view(['GET'])
+# def test(request):
+#     print('подписки:')
+#     for user in get_object_or_404(User, id=11).following.all():
+#         print(user.username)
+#     print('подписчики:')
+#     for user in get_object_or_404(User, id=11).followers.all():
+#         print(user.username)
+#     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def follow(request, id):
+    user = get_object_or_404(User, id=id)
+    current_user = request.user
+    if current_user.is_authenticated:
+        profile = current_user
+        if profile in user.followers.all():
+            user.followers.remove(profile)
+            user.count_followers -= 1
+            profile.count_following -= 1
+            user.save()
+            profile.save()
+            return Response({
+                'author': current_user.username,
+                'message': f'Подписаться на {user}',
+                'status': False},
+                status=200)
+        else:
+            user.followers.add(profile)
+            user.count_followers += 1
+            profile.count_following += 1
+            user.save()
+            profile.save()
+            return Response({
+                'author': current_user.username,
+                'message': f'Отписаться от {user}',
+                'status': True},
+                status=200)
+    else:
+        return Response({'error': 'Необходима авторизация на сайте'}, status=400)
+
+
+
+class following_list(generics.ListAPIView):
+    queryset = User.objects.none()
+    serializer_class = follow_serializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        id = self.kwargs['id']
+        return get_object_or_404(User, id=id).following.all()
+
+
+class followers_list(generics.ListAPIView):
+    queryset = User.objects.none()
+    serializer_class = follow_serializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        id = self.kwargs['id']
+        return get_object_or_404(User, id=id).followers.all()

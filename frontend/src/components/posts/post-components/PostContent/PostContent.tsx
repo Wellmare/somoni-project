@@ -4,10 +4,15 @@ import ReactQuill from 'react-quill';
 
 import { PostContext } from '../../../../context/PostContext';
 
-const PostContent: FC = () => {
+interface IPostContentProps {
+    limitContentView: boolean;
+}
+
+const PostContent: FC<IPostContentProps> = ({ limitContentView }) => {
     const { post } = useContext(PostContext);
     if (post === null) return null;
     const { content } = post;
+    // console.log(content.split('<br>'));
 
     return (
         <>
@@ -15,7 +20,11 @@ const PostContent: FC = () => {
                 value={content}
                 readOnly={true}
                 theme={'bubble'}
-                className={classNames('editor-no-styles', 'editor-post-content')}
+                className={classNames(
+                    'editor-no-styles',
+                    'editor-post-content',
+                    limitContentView ? 'editor-limited' : '',
+                )}
             />
         </>
     );

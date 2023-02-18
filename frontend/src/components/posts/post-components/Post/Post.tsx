@@ -15,9 +15,10 @@ import PostTitle from '../PostTitle/PostTitle';
 
 interface ITestPostProps {
     post: IPost;
+    limitContentView?: boolean;
 }
 
-const Post: FC<ITestPostProps> = ({ post }) => {
+const Post: FC<ITestPostProps> = ({ post, limitContentView = false }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const edit: IEdit = {
@@ -30,7 +31,7 @@ const Post: FC<ITestPostProps> = ({ post }) => {
             <Card className={s.post}>
                 <PostHeader />
                 <PostTitle />
-                <PostContent />
+                <PostContent limitContentView={limitContentView} />
                 <PostImage />
                 <div className={'mb-3 mt-2'}>
                     <PostTags />

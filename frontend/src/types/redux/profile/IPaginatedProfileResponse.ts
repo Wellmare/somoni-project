@@ -11,4 +11,5 @@ export interface IPaginatedProfileResponse extends IPaginatedResponse<IPostServe
     isEmailConfirmed: boolean;
     count_followers: number;
     count_following: number;
+    isFollowed: boolean;
 }

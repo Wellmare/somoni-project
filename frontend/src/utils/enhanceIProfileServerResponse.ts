@@ -20,6 +20,7 @@ export const enhanceIProfileServerResponse = (
         count_followers,
         // eslint-disable-next-line @typescript-eslint/naming-convention
         count_following,
+        isFollowed,
     } = profileServerResponse;
 
     const enhancedProfile: IProfile = {
@@ -32,6 +33,7 @@ export const enhanceIProfileServerResponse = (
         isEmailConfirmed,
         countFollowers: count_followers,
         countFollowing: count_following,
+        isFollowed,
     };
     if (results === null) {
         return { posts: null, profile: enhancedProfile };

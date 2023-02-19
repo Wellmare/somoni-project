@@ -8,4 +8,5 @@ export interface IProfile {
     isEmailConfirmed: boolean;
     countFollowers: number;
     countFollowing: number;
+    isFollowed: boolean;
 }

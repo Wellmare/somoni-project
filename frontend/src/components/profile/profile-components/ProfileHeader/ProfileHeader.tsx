@@ -11,6 +11,7 @@ import { selectIsAuth } from '../../../../redux/slices/authSlice';
 import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
 import Button from '../../../../ui/Button/Button';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
+import ProfileBio from '../ProfileBio/ProfileBio';
 import ProfileFollowButton from '../ProfileFollowButton/ProfileFollowButton';
 import ProfileStats from '../ProfileStats/ProfileStats';
 
@@ -46,6 +47,7 @@ const ProfileHeader: FC = () => {
             <div className={'flex flex-col items-center'}>
                 <ProfileAvatar />
                 <h2 className={`${s.username}`}>{username}</h2>
+                <ProfileBio />
                 <ProfileStats />
                 <div className={'flex justify-center items-center'}>
                     {!isMyProfile && isAuth && <ProfileFollowButton />}

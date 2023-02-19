@@ -6,3 +6,7 @@ export interface IDataToGetProfile {
 export interface IDataToGetProfileInfo {
     userId: string;
 }
+
+export interface IDataToFollowing {
+    userId: string;
+}

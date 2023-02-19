@@ -1,10 +1,12 @@
 import { apiSlice } from './index';
 
 import { apiEndpoints } from '../constants/apiEndpoints';
-import { IDataToGetProfile, IDataToGetProfileInfo } from '../types/redux/profile/IDataTo';
+import { IPaginatedResponse } from '../types/redux/IPaginatedResponse';
+import { IDataToFollowing, IDataToGetProfile, IDataToGetProfileInfo } from '../types/redux/profile/IDataTo';
 import { IDataToEditProfile } from '../types/redux/profile/IDataToEditProfile';
 import { IPaginatedProfileResponse } from '../types/redux/profile/IPaginatedProfileResponse';
 import { IProfileInfo } from '../types/redux/profile/IProfileInfo';
+import { IUser } from '../types/redux/profile/IUser';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -17,7 +19,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }),
             providesTags: ['Profile', 'Auth'],
         }),
-
         editUser: builder.mutation<{ isEmailChanged: boolean; profile: IPaginatedProfileResponse }, FormData>({
             query: (formData) => ({
                 url: apiEndpoints.editProfile,
@@ -43,6 +44,25 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: apiEndpoints.editProfile,
                 method: 'DELETE',
+            }),
+            invalidatesTags: ['Profile', 'Auth'],
+        }),
+        getFollowersOnProfile: builder.query<IPaginatedResponse<IUser[]>, IDataToFollowing>({
+            query: ({ userId }) => ({
+                url: `${apiEndpoints.user}${userId}/followers/`,
+            }),
+            providesTags: ['Profile'],
+        }),
+        getFollowingOnProfile: builder.query<IPaginatedResponse<IUser[]>, IDataToFollowing>({
+            query: ({ userId }) => ({
+                url: `${apiEndpoints.user}${userId}/following/`,
+            }),
+            providesTags: ['Profile'],
+        }),
+        followToProfile: builder.mutation<undefined, IDataToFollowing>({
+            query: ({ userId }) => ({
+                url: `${apiEndpoints.user}${userId}/follow/`,
+                method: 'POST',
             }),
             invalidatesTags: ['Profile', 'Auth'],
         }),
@@ -73,4 +93,7 @@ export const {
     useLazyGetUserInfoQuery,
     useGetDataToEditUserQuery,
     useDeleteProfileMutation,
+    useGetFollowersOnProfileQuery,
+    useGetFollowingOnProfileQuery,
+    useFollowToProfileMutation,
 } = userApiSlice;

@@ -6,4 +6,6 @@ export interface IProfile {
     isMyProfile: boolean;
     profileId: string;
     isEmailConfirmed: boolean;
+    countFollowers: number;
+    countFollowing: number;
 }

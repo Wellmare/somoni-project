@@ -19,6 +19,7 @@ import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import HeaderProfileSkeleton from '../../skeletons/HeaderProfileSkeleton';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import HeaderProfile from '../HeaderProfile/HeaderProfile';
+import NotificationsMenu from '../NotificationsMenu/NotificationsMenu';
 
 const Header: FC = () => {
     const { isAuth, userId } = useAuth();
@@ -60,19 +61,29 @@ const Header: FC = () => {
 
             <div className={'flex'}>
                 {isAuth && (
-                    <div className={classNames('flex', 'justify-center', 'items-center')}>
-                        <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>
-                            <Button color={ButtonColors.green} size={ButtonSizes.sm} className={'hidden md:block mr-6'}>
-                                <span>Создать</span>
-                            </Button>
+                    <>
+                        <div className={classNames('flex', 'justify-center', 'items-center')}>
+                            <Link to={isAuth ? PathsToNavigate.CREATE_POST : PathsToNavigate.LOGIN}>
+                                <Button
+                                    color={ButtonColors.green}
+                                    size={ButtonSizes.sm}
+                                    className={'hidden md:block mr-6'}
+                                >
+                                    <span>Создать</span>
+                                </Button>
 
-                            <Button color={ButtonColors.green} className={'block sm:block md:hidden px-3 py-2 mr-4'}>
-                                <Icon customTypeClassName={s.plusIcon}>
-                                    <PlusIcon />
-                                </Icon>
-                            </Button>
-                        </Link>
-                    </div>
+                                <Button
+                                    color={ButtonColors.green}
+                                    className={'block sm:block md:hidden px-3 py-2 mr-4'}
+                                >
+                                    <Icon customTypeClassName={s.plusIcon}>
+                                        <PlusIcon />
+                                    </Icon>
+                                </Button>
+                            </Link>
+                        </div>
+                        <NotificationsMenu />
+                    </>
                 )}
 
                 {!isAuth && (

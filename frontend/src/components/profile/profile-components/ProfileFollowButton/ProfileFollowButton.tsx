@@ -12,7 +12,7 @@ import ServerResponse from '../../../server/ServerResponse/ServerResponse';
 const ProfileFollowButton: FC = () => {
     const { profile } = useContext(ProfileContext);
     if (profile === null) return null;
-    const { profileId } = profile;
+    const { profileId, isFollowed } = profile;
 
     const [follow, { isError, error, isSuccess, isLoading }] = useFollowToProfileMutation();
 
@@ -28,9 +28,15 @@ const ProfileFollowButton: FC = () => {
 
     return (
         <>
-            <Button color={ButtonColors.green} size={ButtonSizes.sm} className={'ml-0 md:ml-3'} onClick={onClick}>
-                Подписаться
-            </Button>
+            {isFollowed ? (
+                <Button color={ButtonColors.gray} size={ButtonSizes.sm} className={'ml-0 md:ml-3'} onClick={onClick}>
+                    Отписаться
+                </Button>
+            ) : (
+                <Button color={ButtonColors.green} size={ButtonSizes.sm} className={'ml-0 md:ml-3'} onClick={onClick}>
+                    Подписаться
+                </Button>
+            )}
             <ServerResponse
                 responseError={error}
                 isError={isError}

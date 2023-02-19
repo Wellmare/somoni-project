@@ -13,6 +13,8 @@ import {
 } from '../pages';
 import ConfirmEmailPage from '../pages/ConfirmEmailPage/ConfirmEmailPage';
 import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
+import FollowersPage from '../pages/FollowersPage/FollowersPage';
+import FollowingPage from '../pages/FollowingPage/FollowingPage';
 import PostsByTagPage from '../pages/PostsByTagPage/PostsByTagPage';
 import UserPage from '../pages/UserPage/UserPage';
 import { IRouteData } from '../types/IRouteData';
@@ -41,6 +43,14 @@ export const routingData: IRouteData[] = [
     {
         path: `${Paths.USER}/:id`,
         Element: UserPage,
+    },
+    {
+        path: `${Paths.USER}/:id/followers`,
+        Element: FollowersPage,
+    },
+    {
+        path: `${Paths.USER}/:id/following`,
+        Element: FollowingPage,
     },
     {
         path: `${Paths.EDIT_POST}/:id`,

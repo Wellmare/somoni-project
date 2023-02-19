@@ -1,0 +1,12 @@
+:root {
+  --badge-padding: .1rem .5rem;
+  --badge-border-radius: .3rem;
+}
+
+:root[data-theme="light"] {
+  --badge-bg-red: #ce4747;
+}
+
+:root[data-theme="dark"] {
+  --badge-bg-red: #c91818;
+}

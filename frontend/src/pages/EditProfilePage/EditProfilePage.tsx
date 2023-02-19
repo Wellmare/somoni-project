@@ -25,7 +25,7 @@ const EditProfilePage: FC = () => {
                         id={data.id != null ? data.id : '1'}
                     />
                 )}
-                <div className={'flex justify-center items-center flex-col mt-6 mx-auto'} style={{ width: '400px' }}>
+                <div className={'flex justify-center items-center flex-col mt-6 mx-auto'} style={{ maxWidth: '400px' }}>
                     <Link to={PathsToNavigate.CHANGE_PASSWORD} className={'w-full mb-4'}>
                         <Button color={ButtonColors.blue} size={ButtonSizes.sm} className={'w-full'}>
                             Изменить пароль

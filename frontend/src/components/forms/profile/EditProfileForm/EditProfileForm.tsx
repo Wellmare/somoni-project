@@ -9,7 +9,7 @@ import s from './EditProfileForm.module.scss';
 import { useEditUserMutation } from '../../../../service/userApiSlice';
 import { IFormDataItem } from '../../../../types/IFormDataItem';
 import { LinkType } from '../../../../types/redux/LinkType';
-import { ButtonColors, ButtonSizes } from '../../../../types/UI/Button.types';
+import { ButtonColors } from '../../../../types/UI/Button.types';
 import { IPhotoInputType } from '../../../../types/UI/IPhotoInputType';
 import Button from '../../../../ui/Button/Button';
 import EmailSendedModal from '../../../../ui/modals/EmailSendedModal/EmailSendedModal';
@@ -119,7 +119,7 @@ const EditProfileForm: FC<IEditProfileFormProps> = ({ defaultValues, photo, id }
                 >
                     <Success>Профиль изменен!</Success>
                 </ServerResponse>
-                <Button size={ButtonSizes.md} color={ButtonColors.green} type={'submit'} className={'w-full mt-3'}>
+                <Button color={ButtonColors.green} type={'submit'} className={'w-full mt-3 py-2.5'}>
                     Изменить
                 </Button>
             </form>

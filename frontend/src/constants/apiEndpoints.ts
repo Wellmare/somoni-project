@@ -14,4 +14,8 @@ export const apiEndpoints = {
     restorePasswordConfirm: 'password-reset/confirm/',
     confirmEmail: 'email-confirm/',
     sendConfirmEmail: 'email-confirm/send/',
+
+    getNotifications: 'notifications/',
+    connectToNotification: 'notifications/connect/',
+    notification: 'notification/',
 };

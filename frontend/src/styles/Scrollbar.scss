@@ -1,0 +1,35 @@
+//:root {
+//  --scrollbar-width: 12px;
+//}
+
+:root[data-theme="light"] {
+  --scrollbar-color: rgb(136, 136, 136);
+  --scrollbar-track-color: rgba(87, 87, 87, 0.42);
+}
+
+:root[data-theme="dark"] {
+  --scrollbar-color: #949494;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.22);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  //height: 12px;
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: .4rem;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 5px;
+  border: 3px solid var(--scrollbar-track-color);
+  //border: 3px solid;
+  //margin: .1rem;
+}

@@ -33,6 +33,7 @@ class userResultsSetPagination(PageNumberPagination):
         pk = self.request.parser_context['kwargs']['pk']
         user = get_object_or_404(User, id=pk)
         isMyProfile = self.request.user.id == pk
+        isFollowed = self.request.user in user.followers.all()
         try:
             if isMyProfile:
                 return Response(OrderedDict([
@@ -62,7 +63,8 @@ class userResultsSetPagination(PageNumberPagination):
                     ('id', user.id),
                     ('results', data),
                     ('count_followers', user.count_followers),
-                    ('count_following', user.count_following)
+                    ('count_following', user.count_following),
+                    ('isFollowed', isFollowed)
                 ]))
         except ValueError:
             if isMyProfile:
@@ -95,7 +97,8 @@ class userResultsSetPagination(PageNumberPagination):
                     ('id', user.id),
                     ('results', data),
                     ('count_followers', user.count_followers),
-                    ('count_following', user.count_following)
+                    ('count_following', user.count_following),
+                    ('isFollowed', isFollowed)
                 ]))
 
 

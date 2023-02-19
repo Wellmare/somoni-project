@@ -1,12 +1,13 @@
 import React, { FC, useState } from 'react';
 
 import { IPaginatedResponse } from '../../../types/redux/IPaginatedResponse';
-import { IUser } from '../../../types/redux/profile/IUser';
+import { IUserServerResponse } from '../../../types/redux/profile/IUserServerResponse';
 import Pagination from '../../../ui/Pagination/Pagination';
+import { enhanceIUserServerResponse } from '../../../utils/enhanceIUserServerResponse';
 import ListUser from '../ListUser/ListUser';
 
 interface IListUsersProps {
-    users: IPaginatedResponse<IUser[]>;
+    users: IPaginatedResponse<IUserServerResponse[]>;
 }
 
 const ListUsers: FC<IListUsersProps> = ({ users }) => {
@@ -23,9 +24,10 @@ const ListUsers: FC<IListUsersProps> = ({ users }) => {
     return (
         <div>
             <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
-            {usersList.map((user) => (
-                <ListUser user={user} key={user.profileId} />
-            ))}
+            {usersList.map((user) => {
+                const enhancedUser = enhanceIUserServerResponse(user);
+                return <ListUser user={enhancedUser} key={enhancedUser.profileId} />;
+            })}
             <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
         </div>
     );

@@ -6,7 +6,7 @@ import { IDataToFollowing, IDataToGetProfile, IDataToGetProfileInfo } from '../t
 import { IDataToEditProfile } from '../types/redux/profile/IDataToEditProfile';
 import { IPaginatedProfileResponse } from '../types/redux/profile/IPaginatedProfileResponse';
 import { IProfileInfo } from '../types/redux/profile/IProfileInfo';
-import { IUser } from '../types/redux/profile/IUser';
+import { IUserServerResponse } from '../types/redux/profile/IUserServerResponse';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -47,13 +47,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Profile', 'Auth'],
         }),
-        getFollowersOnProfile: builder.query<IPaginatedResponse<IUser[]>, IDataToFollowing>({
+        getFollowersOnProfile: builder.query<IPaginatedResponse<IUserServerResponse[]>, IDataToFollowing>({
             query: ({ userId }) => ({
                 url: `${apiEndpoints.user}${userId}/followers/`,
             }),
             providesTags: ['Profile'],
         }),
-        getFollowingOnProfile: builder.query<IPaginatedResponse<IUser[]>, IDataToFollowing>({
+        getFollowingOnProfile: builder.query<IPaginatedResponse<IUserServerResponse[]>, IDataToFollowing>({
             query: ({ userId }) => ({
                 url: `${apiEndpoints.user}${userId}/following/`,
             }),

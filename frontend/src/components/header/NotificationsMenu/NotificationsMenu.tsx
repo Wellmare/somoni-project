@@ -7,6 +7,7 @@ import { BadgeColor } from '../../../types/UI/Badge.types';
 import Badge from '../../../ui/Badge/Badge';
 import Icon from '../../../ui/Icon/Icon';
 import Menu from '../../Menu/Menu';
+import Notification from '../../notifications/Notification/Notification';
 import Notifications from '../../notifications/Notifications/Notifications';
 
 // interface INotificationMenuProps {}
@@ -27,6 +28,15 @@ const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
         >
             <div className={s.wrapper}>
                 <h2>Уведомления: </h2>
+                <Notification
+                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                />
+                <Notification
+                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                />
+                <Notification
+                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                />
                 <Notifications />
             </div>
         </Menu>

@@ -10,7 +10,7 @@ const Notifications: FC = () => {
     return (
         <div>
             {notifications.map((notification) => (
-                <Notification notification={notification} key={notification.text} />
+                <Notification notification={notification} key={notification.id} />
             ))}
         </div>
     );

@@ -8,12 +8,15 @@
   --text-color-primary: #000;
   --text-color-green: #7AC9B9;
   --text-color-secondary: #888686;
-  --text-color-red: #b20000
+  --text-color-red: #b20000;
+  //--text-color-link: #6084d9;
+  --text-color-link: #6084d9;
 }
 
 :root[data-theme="dark"] {
   --text-color-primary: #DDDDDD;
   --text-color-green: #509B8C;
   --text-color-secondary: #B5B5B5;
-  --text-color-red: #c2302f
+  --text-color-red: #c2302f;
+  --text-color-link: #7488c2;
 }

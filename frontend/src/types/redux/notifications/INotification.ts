@@ -1,5 +1,6 @@
 export interface INotification {
-    text: string;
-    link: string;
+    html: string;
     date: string;
+    id: string;
+    isRead: boolean;
 }

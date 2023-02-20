@@ -29,13 +29,28 @@ const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
             <div className={s.wrapper}>
                 <h2>Уведомления: </h2>
                 <Notification
-                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                    notification={{
+                        html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+                        date: '2023-02-19T16:40:51.532181+03:00',
+                        id: 'asd',
+                        isRead: false,
+                    }}
                 />
                 <Notification
-                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                    notification={{
+                        html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+                        date: '2023-02-19T16:40:51.532181+03:00',
+                        id: 'asd',
+                        isRead: false,
+                    }}
                 />
                 <Notification
-                    notification={{ text: 'привет мир прпр', date: '2023-02-19T16:40:51.532181+03:00', link: 'lasd' }}
+                    notification={{
+                        html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+                        date: '2023-02-19T16:40:51.532181+03:00',
+                        id: 'asd',
+                        isRead: false,
+                    }}
                 />
                 <Notifications />
             </div>

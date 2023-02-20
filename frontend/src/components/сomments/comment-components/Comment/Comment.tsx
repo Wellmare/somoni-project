@@ -49,7 +49,7 @@ const Comment: FC<ICommentProps> = ({ comment }) => {
             }}
         >
             {/* <div className={s.comment}> */}
-            <Card className={s.comment}>
+            <Card className={s.comment} id={enhancedComment.commentId}>
                 <CommentHeader onDelete={onDelete} />
                 <CommentContent />
             </Card>

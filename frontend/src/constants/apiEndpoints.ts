@@ -15,7 +15,9 @@ export const apiEndpoints = {
     confirmEmail: 'email-confirm/',
     sendConfirmEmail: 'email-confirm/send/',
 
-    getNotifications: 'notifications/',
+    getAllNotifications: 'notifications/all',
+    getLastNotifications: 'notifications/last',
     connectToNotification: 'notifications/connect/',
-    notification: 'notification/',
+    readNotification: (id: string) => `notification/${id}`,
+    readAllNotification: 'notifications/read-all',
 };

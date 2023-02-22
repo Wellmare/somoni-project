@@ -3,6 +3,8 @@ import React, { FC } from 'react';
 import s from './NotificationsMenu.module.scss';
 
 import { ReactComponent as NotificationIcon } from '../../../assets/svg/notification.svg';
+import { useAppSelector } from '../../../hooks/reduxHooks';
+import { selectNotifications } from '../../../redux/slices/notificationsSlice';
 import { BadgeColor } from '../../../types/UI/Badge.types';
 import Badge from '../../../ui/Badge/Badge';
 import Icon from '../../../ui/Icon/Icon';
@@ -10,6 +12,8 @@ import Menu from '../../Menu/Menu';
 import Notifications from '../../notifications/Notifications/Notifications';
 
 const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
+    const notifications = useAppSelector(selectNotifications);
+    const countUnReaded = notifications.filter(({ isRead }) => !isRead).length;
     return (
         <Menu
             menuButton={
@@ -18,7 +22,7 @@ const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
                         <Icon customTypeClassName={s.icon}>
                             <NotificationIcon />
                         </Icon>
-                        <Badge color={BadgeColor.red}>1</Badge>
+                        <Badge color={BadgeColor.red}>{countUnReaded}</Badge>
                     </div>
                 </>
             }

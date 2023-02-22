@@ -1,3 +1,4 @@
+import { url } from '../constants/api';
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { INotification } from '../types/redux/notifications/INotification';
 
@@ -6,7 +7,7 @@ export const connectToNotifications = (
     onMessage: (notification: INotification) => void,
     onError: (event: Event) => void,
 ): EventSource => {
-    const eventSource = new EventSource(apiEndpoints.connectToNotification);
+    const eventSource = new EventSource(`${url}/${apiEndpoints.connectToNotification}`);
 
     eventSource.addEventListener('open', (event) => {
         console.log('SSE connection opened');

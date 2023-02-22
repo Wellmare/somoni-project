@@ -4,7 +4,7 @@ import Router from './components/routing/Router';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 import { selectIsAuth } from './redux/slices/authSlice';
 import { addNotification } from './redux/slices/notificationsSlice';
-import { connectToNotifications } from './service/notifications';
+import { connectToNotifications } from './service/connectToNotifications';
 
 const App: FC = () => {
     const dispatch = useAppDispatch();

@@ -32,6 +32,7 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetAllNotificationsQuery,
+    useLazyGetAllNotificationsQuery,
     useGetLastNotificationsQuery,
     useReadAllNotificationsMutation,
     useReadNotificationMutation,

@@ -3,10 +3,18 @@ import React, { FC } from 'react';
 import s from './Notifications.module.scss';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
-import { readAllNotificationsInState, selectNotifications } from '../../../redux/slices/notificationsSlice';
-import { useReadAllNotificationsMutation } from '../../../service/notificationsApiSlice';
+import {
+    readAllNotificationsInState,
+    selectNotifications,
+    setNotifications,
+} from '../../../redux/slices/notificationsSlice';
+import {
+    useLazyGetAllNotificationsQuery,
+    useReadAllNotificationsMutation,
+} from '../../../service/notificationsApiSlice';
 import { ButtonColors, ButtonSizes } from '../../../types/UI/Button.types';
 import Button from '../../../ui/Button/Button';
+import ButtonLink from '../../../ui/ButtonLink/ButtonLink';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import ServerResponse from '../../server/ServerResponse/ServerResponse';
 import Notification from '../Notification/Notification';
@@ -14,6 +22,7 @@ import Notification from '../Notification/Notification';
 const Notifications: FC = () => {
     const notifications = useAppSelector(selectNotifications);
     const [readAllNotifications, { isError, error, isSuccess, isLoading }] = useReadAllNotificationsMutation();
+    const [getAllNotifications, allNotificationsResult] = useLazyGetAllNotificationsQuery();
     const dispatch = useAppDispatch();
 
     const onReadAllNotifications = (): void => {
@@ -21,6 +30,17 @@ const Notifications: FC = () => {
             try {
                 // await readAllNotifications(undefined).unwrap();
                 dispatch(readAllNotificationsInState(undefined));
+            } catch (e) {
+                console.log(e);
+            }
+        });
+    };
+
+    const onShowAllNotifications = (): void => {
+        doAsyncFunc(async () => {
+            try {
+                const notifications = await getAllNotifications({}).unwrap();
+                dispatch(setNotifications(notifications.data));
             } catch (e) {
                 console.log(e);
             }
@@ -41,6 +61,19 @@ const Notifications: FC = () => {
             {notifications.map((notification) => (
                 <Notification notification={notification} key={notification.id} />
             ))}
+            <div className={'mb-2'}>
+                <ButtonLink color={ButtonColors.green} onClick={onShowAllNotifications}>
+                    Все уведомления
+                </ButtonLink>
+                <ServerResponse
+                    responseError={allNotificationsResult.error}
+                    isError={allNotificationsResult.isError}
+                    isLoading={allNotificationsResult.isLoading}
+                    isSuccess={allNotificationsResult.isSuccess}
+                >
+                    {/*    */}
+                </ServerResponse>
+            </div>
         </div>
     );
 };

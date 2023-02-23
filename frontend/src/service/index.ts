@@ -71,7 +71,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         const release = await mutex.acquire();
 
         try {
-            // console.log('TRY REFRESH FETCH');
+            console.log('TRY REFRESH FETCH');
             const refreshResult = await baseQuery(
                 {
                     url: apiEndpoints.refreshToken,
@@ -83,7 +83,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                 api,
                 extraOptions,
             );
-            console.log(refreshResult);
+            console.log(JSON.stringify(refreshResult));
             if ('error' in refreshResult) {
                 throw new Error('Fetch error');
             }

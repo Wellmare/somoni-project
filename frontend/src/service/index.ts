@@ -37,6 +37,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     // const release = (): void => mutex.release();
 
     let result = await baseQuery(args, api, extraOptions);
+    console.log('result', JSON.stringify(result));
     const authTokens = (api.getState() as RootState).auth?.authTokens;
 
     console.log('authTokens', JSON.stringify(authTokens));

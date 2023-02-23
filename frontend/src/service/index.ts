@@ -35,7 +35,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     let result = await baseQuery(args, api, extraOptions);
     const authTokens = (api.getState() as RootState).auth?.authTokens;
 
-    // console.log('authTokens', authTokens);
+    console.log('authTokens', JSON.stringify(authTokens));
 
     if (authTokens === null || authTokens.access === '' || authTokens.refresh === '') {
         return result;

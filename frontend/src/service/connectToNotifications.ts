@@ -7,7 +7,7 @@ export const connectToNotifications = (
     onMessage: (notification: INotification) => void,
     onError: (event: Event) => void,
 ): EventSource => {
-    const eventSource = new EventSource(`${url}/${apiEndpoints.connectToNotification}`);
+    const eventSource = new EventSource(`${url}/${apiEndpoints.connectToNotification}`, { withCredentials: true });
 
     eventSource.addEventListener('open', (event) => {
         console.log('SSE connection opened');

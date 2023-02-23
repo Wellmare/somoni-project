@@ -1,1 +1,1 @@
-export const url = 'http://backend.somoni.org/api';
+export const url = 'https://backend.somoni.org/api';

@@ -77,20 +77,20 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
         try {
             console.log('TRY REFRESH FETCH');
-            // const refreshResult = await baseQuery(
-            //     {
-            //         url: apiEndpoints.refreshToken,
-            //         method: 'POST',
-            //         body: {
-            //             refresh: authTokens.refresh,
-            //         },
-            //     },
-            //     api,
-            //     extraOptions,
-            // );
-            const refreshResult = await axiosBQ.post<ITokens>(apiEndpoints.refreshToken, {
-                refresh: authTokens.refresh,
-            });
+            const refreshResult = await baseQuery(
+                {
+                    url: apiEndpoints.refreshToken,
+                    method: 'POST',
+                    body: {
+                        refresh: authTokens.refresh,
+                    },
+                },
+                api,
+                extraOptions,
+            );
+            // const refreshResult = await axiosBQ.post<ITokens>(apiEndpoints.refreshToken, {
+            //     refresh: authTokens.refresh,
+            // });
 
             console.log(JSON.stringify(refreshResult));
             // if ('error' in refreshResult) {
@@ -99,7 +99,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             if (refreshResult.data !== null) {
                 // store the new token
                 // console.log(refreshResult);
-                const newTokens = refreshResult.data;
+                const newTokens = refreshResult.data as ITokens;
 
                 if (newTokens === undefined || !('refresh' in newTokens) || !('access' in newTokens)) {
                     console.log('Tokens is undefined!');
@@ -108,7 +108,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
                 // setAuthTokensToLocalStorage(newTokens);
 
-                api.dispatch(setAuthTokens(refreshResult.data));
+                api.dispatch(setAuthTokens(newTokens));
                 // retry the initial query
 
                 console.log('set auth');

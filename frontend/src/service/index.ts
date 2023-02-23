@@ -92,9 +92,9 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             });
 
             console.log(JSON.stringify(refreshResult));
-            if ('error' in refreshResult) {
-                throw new Error('Fetch error');
-            }
+            // if ('error' in refreshResult) {
+            //     throw new Error('Fetch error');
+            // }
             if (refreshResult.data !== null) {
                 // store the new token
                 // console.log(refreshResult);

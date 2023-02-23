@@ -18,6 +18,42 @@ const initialState: INotificationsSlice = {
             id: 'asdasdsdsd',
             isRead: false,
         },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:00',
+            id: 'asdasdsd',
+            isRead: false,
+        },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> оставил комментарий под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:10',
+            id: 'asdasdssdsdsddsd',
+            isRead: false,
+        },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:00',
+            id: 'asdd',
+            isRead: false,
+        },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> оставил комментарий под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:10',
+            id: 'asdasdsddsd',
+            isRead: false,
+        },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> поставил лайк под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:00',
+            id: 'asdasddsd',
+            isRead: false,
+        },
+        {
+            html: '<a href="https://somoni.org/user/50">test_regru</a> оставил комментарий под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+            date: '2023-02-19T16:40:51.532181+03:10',
+            id: 'asdasddssdsdsddsd',
+            isRead: false,
+        },
     ],
 };
 

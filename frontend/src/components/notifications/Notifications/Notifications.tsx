@@ -58,21 +58,23 @@ const Notifications: FC = () => {
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
                 {/*    */}
             </ServerResponse>
-            {notifications.map((notification) => (
-                <Notification notification={notification} key={notification.id} />
-            ))}
-            <div className={'mb-2'}>
-                <ButtonLink color={ButtonColors.green} onClick={onShowAllNotifications}>
-                    Все уведомления
-                </ButtonLink>
-                <ServerResponse
-                    responseError={allNotificationsResult.error}
-                    isError={allNotificationsResult.isError}
-                    isLoading={allNotificationsResult.isLoading}
-                    isSuccess={allNotificationsResult.isSuccess}
-                >
-                    {/*    */}
-                </ServerResponse>
+            <div className={'overflow-y-auto'} style={{ maxHeight: '90vh' }}>
+                {notifications.map((notification) => (
+                    <Notification notification={notification} key={notification.id} />
+                ))}
+                <div className={'mb-2'}>
+                    <ButtonLink color={ButtonColors.green} onClick={onShowAllNotifications}>
+                        Все уведомления
+                    </ButtonLink>
+                    <ServerResponse
+                        responseError={allNotificationsResult.error}
+                        isError={allNotificationsResult.isError}
+                        isLoading={allNotificationsResult.isLoading}
+                        isSuccess={allNotificationsResult.isSuccess}
+                    >
+                        {/*    */}
+                    </ServerResponse>
+                </div>
             </div>
         </div>
     );

@@ -3,5 +3,5 @@ export interface INotification {
     date: string;
     id: string;
     isRead: boolean;
-    mainLink: string;
+    // mainLink: string;
 }

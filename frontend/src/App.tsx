@@ -17,13 +17,13 @@ const App: FC = () => {
     const isAuth = useAppSelector(selectIsAuth);
     const userId = useAppSelector(selectUserId);
     const [getLastNotifications] = useLazyGetLastNotificationsQuery();
-    const navigate = useNavigate();
 
     useEffect(() => {
         setTimeout(() => {
-            sendNotification(htmlToPlainText('<a href="https://sa">Пользователь</a> прислал уведомление'), () =>
-                navigate('/users/12', { relative: 'route' }),
-            );
+            sendNotification(htmlToPlainText('<a href="https://sa">Пользователь</a> прислал уведомление'), (event) => {
+                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                window.open('https://somoni.org/post/2', '_blank');
+            });
         }, 100);
 
         if (isAuth && userId != null) {
@@ -39,7 +39,10 @@ const App: FC = () => {
                         (notification) => {
                             console.log(notification);
                             dispatch(addNotification(notification));
-                            sendNotification(htmlToPlainText(notification.html), () => navigate(notification.mainLink));
+                            sendNotification(htmlToPlainText(notification.html), (event) => {
+                                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                                window.open(notification.mainLink, '_blank');
+                            });
                         },
                         (event) => {
                             console.error('Connection error');

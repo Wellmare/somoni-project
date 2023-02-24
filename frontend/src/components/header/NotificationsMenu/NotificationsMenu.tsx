@@ -13,7 +13,7 @@ import Notifications from '../../notifications/Notifications/Notifications';
 
 const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
     const notifications = useAppSelector(selectNotifications);
-    const countUnReaded = notifications.filter(({ isRead }) => !isRead).length;
+    const countUnReaded = notifications?.filter(({ isRead }) => !isRead).length;
     return (
         <Menu
             menuButton={
@@ -22,7 +22,9 @@ const NotificationsMenu: FC /* <INotificationMenuProps> */ = () => {
                         <Icon customTypeClassName={s.icon}>
                             <NotificationIcon />
                         </Icon>
-                        <Badge color={BadgeColor.red}>{countUnReaded}</Badge>
+                        {countUnReaded !== 0 && countUnReaded != null && (
+                            <Badge color={BadgeColor.red}>{countUnReaded}</Badge>
+                        )}
                     </div>
                 </>
             }

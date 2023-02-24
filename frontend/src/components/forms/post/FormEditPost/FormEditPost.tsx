@@ -45,7 +45,7 @@ const FormEditPost: FC<IFormEditPostProps> = ({ defaultValues, image, postId }) 
         clearErrors,
         formState: { errors },
     } = useForm<EditPostInputs>({
-        mode: 'onBlur',
+        mode: 'onChange',
         defaultValues,
     });
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({

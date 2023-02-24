@@ -44,7 +44,7 @@ const FormCreatePost: FC = () => {
         clearErrors,
         formState: { errors },
     } = useForm<FormCreatePostInputs>({
-        mode: 'onBlur',
+        mode: 'onChange',
         defaultValues: { content: '' },
     });
     const [openFilePicker, { filesContent, plainFiles }] = useFilePicker({

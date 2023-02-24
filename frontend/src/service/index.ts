@@ -37,12 +37,12 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     // const release = (): void => mutex.release();
 
     let result = await baseQuery(args, api, extraOptions);
-    console.log('result', JSON.stringify(result));
+    console.log('result >> ', JSON.stringify({ error: result.error, meta: result.meta }));
     const authTokens = (api.getState() as RootState).auth?.authTokens;
-
-    console.log('authTokens', JSON.stringify(authTokens));
+    console.log('authTokens >> ', JSON.stringify(authTokens));
 
     if (authTokens === null || authTokens.access === '' || authTokens.refresh === '') {
+        console.log('auth tokens null');
         return result;
     }
 
@@ -62,8 +62,8 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
     if (resultData?.code != null) {
         const code = resultData.code;
-        if (code === 'user_not_found' || code === 'token_not_valid') {
-            console.log('user not found');
+        if (code === 'user_not_found') {
+            console.log('! user not found !');
             api.dispatch(logout());
             return result;
         }
@@ -121,7 +121,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                     await api.dispatch(logout());
                 }
             } catch (e) {
-                console.log(e);
+                console.log('refresh error', JSON.stringify(e));
                 console.log('logout state');
                 api.dispatch(logout());
             } finally {

@@ -110,7 +110,7 @@ class get_create_post(generics.ListCreateAPIView):
 
     def get_queryset(self):
         try:
-            tag = get_object_or_404(Tag, slug=unquote(self.kwargs['tag_slug']))
+            tag = get_object_or_404(Tag, slug=unquote(unquote(self.kwargs['tag_slug'])))
             object_list = Post.objects.filter(tags__in=[tag])
 
             if self.request.user.is_authenticated:

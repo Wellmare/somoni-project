@@ -1,6 +1,6 @@
 import { doAsyncFunc } from './doAsyncFunc';
 
-export const sendNotification = (notification: string, onClick?: () => void): void => {
+export const sendNotification = (notification: string, onClick?: (event: Event) => void): void => {
     if (!('Notification' in window)) {
         // Браузер не поддерживает уведомления.
         console.error('Браузер не поддерживает уведомления');

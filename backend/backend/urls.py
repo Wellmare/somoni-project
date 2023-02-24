@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('myapi.urls')),
     path('api/', include('userprofile.urls')),
     path('api/password-reset/', include('password_reset.urls')),
+    path('api/', include('notification.urls')),
 ]
 
 if settings.DEBUG:

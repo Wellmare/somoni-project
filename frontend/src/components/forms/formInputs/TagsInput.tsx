@@ -21,13 +21,9 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
             control={control}
             name={'tags'}
             rules={{
-                validate: (value) => {
-                    if (value !== undefined) {
-                        const regexp = /[.#]/g;
-                        if (regexp.test(value.toString())) {
-                            return 'Символ # или . не может быть использован в тэгах';
-                        }
-                    }
+                pattern: {
+                    value: /^[A-Za-z0-9_\u0400-\u04FF]+$/gu,
+                    message: 'Любые символы, кроме _ запрещены',
                 },
             }}
         />

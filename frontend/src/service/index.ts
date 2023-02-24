@@ -22,6 +22,7 @@ const baseQuery = fetchBaseQuery({
     prepareHeaders: (headers, api) => {
         const tokens = (api.getState() as RootState).auth.authTokens;
         if (tokens === null) return headers;
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         headers.set('Authorization', `Bearer ${tokens.access}`);
         return headers;
     },
@@ -72,65 +73,67 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
     // console.log('mutex.isLocked', mutex.isLocked());
 
-    if (!mutex.isLocked()) {
-        const release = await mutex.acquire();
+    if (result.error != null && result.error.status === 401) {
+        if (!mutex.isLocked()) {
+            const release = await mutex.acquire();
 
-        try {
-            console.log('TRY REFRESH FETCH');
-            const refreshResult = await baseQuery(
-                {
-                    url: apiEndpoints.refreshToken,
-                    method: 'POST',
-                    body: {
-                        refresh: authTokens.refresh,
+            try {
+                console.log('TRY REFRESH FETCH');
+                const refreshResult = await baseQuery(
+                    {
+                        url: apiEndpoints.refreshToken,
+                        method: 'POST',
+                        body: {
+                            refresh: authTokens.refresh,
+                        },
                     },
-                },
-                api,
-                extraOptions,
-            );
-            // const refreshResult = await axiosBQ.post<ITokens>(apiEndpoints.refreshToken, {
-            //     refresh: authTokens.refresh,
-            // });
+                    api,
+                    extraOptions,
+                );
+                // const refreshResult = await axiosBQ.post<ITokens>(apiEndpoints.refreshToken, {
+                //     refresh: authTokens.refresh,
+                // });
 
-            console.log(JSON.stringify(refreshResult));
-            // if ('error' in refreshResult) {
-            //     throw new Error('Fetch error');
-            // }
-            if (refreshResult.data !== null) {
-                // store the new token
-                // console.log(refreshResult);
-                const newTokens = refreshResult.data as ITokens;
+                console.log(JSON.stringify(refreshResult));
+                // if ('error' in refreshResult) {
+                //     throw new Error('Fetch error');
+                // }
+                if (refreshResult.data !== null) {
+                    // store the new token
+                    // console.log(refreshResult);
+                    const newTokens = refreshResult.data as ITokens;
 
-                if (newTokens === undefined || !('refresh' in newTokens) || !('access' in newTokens)) {
-                    console.log('Tokens is undefined!');
-                    return result;
+                    if (newTokens === undefined || !('refresh' in newTokens) || !('access' in newTokens)) {
+                        console.log('Tokens is undefined!');
+                        return result;
+                    }
+
+                    // setAuthTokensToLocalStorage(newTokens);
+
+                    api.dispatch(setAuthTokens(newTokens));
+                    // retry the initial query
+
+                    console.log('set auth');
+                    // noinspection ES6RedundantAwait
+                    result = await baseQuery(args, api, extraOptions);
+                } else {
+                    console.log('no data');
+                    console.log('logout state');
+                    await api.dispatch(logout());
                 }
-
-                // setAuthTokensToLocalStorage(newTokens);
-
-                api.dispatch(setAuthTokens(newTokens));
-                // retry the initial query
-
-                console.log('set auth');
-                // noinspection ES6RedundantAwait
-                result = await baseQuery(args, api, extraOptions);
-            } else {
-                console.log('no data');
+            } catch (e) {
+                console.log(e);
                 console.log('logout state');
-                await api.dispatch(logout());
+                api.dispatch(logout());
+            } finally {
+                // release must be called once the mutex should be released again.
+                release();
             }
-        } catch (e) {
-            console.log(e);
-            console.log('logout state');
-            api.dispatch(logout());
-        } finally {
-            // release must be called once the mutex should be released again.
-            release();
+        } else {
+            // wait until the mutex is available without locking it
+            await mutex.waitForUnlock();
+            result = await baseQuery(args, api, extraOptions);
         }
-    } else {
-        // wait until the mutex is available without locking it
-        await mutex.waitForUnlock();
-        result = await baseQuery(args, api, extraOptions);
     }
 
     return result;

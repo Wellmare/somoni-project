@@ -32,6 +32,9 @@ const App: FC = () => {
                 date: '2022',
             };
             setNewNotifications((notifications) => [not, ...notifications]);
+            setTimeout(() => {
+                setNewNotifications((notifications) => notifications.filter(({ id }) => id !== not.id));
+            }, 5 * 60 * 1000);
         }, 2000);
 
         if (isAuth && userId != null) {
@@ -47,11 +50,17 @@ const App: FC = () => {
                         (notification) => {
                             console.log(notification);
                             dispatch(addNotification(notification));
-                            setNewNotifications((notifications) => [...notifications, notification]);
+                            // setNewNotifications((notifications) => [...notifications, notification]);
                             // sendNotification(htmlToPlainText(notification.html), (event) => {
                             //     event.preventDefault(); // prevent the browser from focusing the Notification's tab
                             //     window.open(notification.mainLink, '_blank');
                             // });
+                            setNewNotifications((notifications) => [notification, ...notifications]);
+                            setTimeout(() => {
+                                setNewNotifications((notifications) =>
+                                    notifications.filter(({ id }) => id !== notification.id),
+                                );
+                            }, 5 * 60 * 1000);
                         },
                         (event) => {
                             console.error('Connection error');

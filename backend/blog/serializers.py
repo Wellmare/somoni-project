@@ -21,6 +21,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     photo = serializers.ImageField(source='author.photo', read_only=True)
     tags = TagListSerializerField(required=False)
     isMyPost = serializers.BooleanField(read_only=True, default=False)
+
     class Meta:
         model = Post
         fields = '__all__'
@@ -80,7 +81,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
         try:
             tags = validated_data['tags'][0]
             tags = tags.split()
-            if len(tags)>10:
+            if len(tags) > 10:
                 raise serializers.ValidationError(
                     {"tag": ["Максимальное колличество тэгов - 10"]})
             str = ''
@@ -88,10 +89,11 @@ class CreatePostSerializer(serializers.ModelSerializer):
                 if (('#' in tag) or ('.' in tag)):
                     raise serializers.ValidationError(
                         {"tag": "invalid character = '#' or '.'"})
-                if len(tag)>25:
+                if len(tag) > 25:
                     str += f'"{tag}", '
-            raise serializers.ValidationError(
-                {"tag": [f'В тэгах {str} колличество символов больше 25']})
+            if str:
+                raise serializers.ValidationError(
+                    {"tag": [f'В тэгах {str} колличество символов больше 25']})
 
         except KeyError:
             pass

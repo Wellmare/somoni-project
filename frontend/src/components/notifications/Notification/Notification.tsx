@@ -16,9 +16,15 @@ import ServerResponse from '../../server/ServerResponse/ServerResponse';
 
 interface INotificationProps {
     notification: INotification;
+    withClose?: boolean;
+    onClose?: () => void;
 }
 
-const Notification: FC<INotificationProps> = ({ notification: { html, date, id, isRead } }) => {
+const Notification: FC<INotificationProps> = ({
+    notification: { html, date, id, isRead },
+    withClose = false,
+    onClose,
+}) => {
     const localDate = getLocalDateFromString(date);
     const dispatch = useAppDispatch();
 
@@ -27,7 +33,7 @@ const Notification: FC<INotificationProps> = ({ notification: { html, date, id, 
     const onReadNotification = (): void => {
         doAsyncFunc(async () => {
             try {
-                // await readNotification({ id }).unwrap();
+                await readNotification({ id }).unwrap();
                 dispatch(setIsReadInState({ isRead: true, id }));
             } catch (e) {
                 console.log(e);
@@ -39,6 +45,11 @@ const Notification: FC<INotificationProps> = ({ notification: { html, date, id, 
         <>
             {/* <Link to={link}> */}
             <Card className={`px-2 py-1 ${s.notification} ${isRead ? s.read : ''}`}>
+                {withClose && (
+                    <div className={'flex justify-end items-center cursor-pointer'} onClick={onClose}>
+                        ✖
+                    </div>
+                )}
                 <div className={'flex justify-between items-center'}>
                     <SanitizeHTML html={html} />
                     {!isRead && (

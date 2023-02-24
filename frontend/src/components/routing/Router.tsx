@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './Layout';
@@ -9,7 +9,7 @@ import { Paths } from '../../constants/Paths';
 import { routingData } from '../../constants/routingData';
 import { PageNotFound, WelcomePage } from '../../pages';
 
-const Router: FC = () => {
+const Router: FC = memo(function Router() {
     const routes = routingData.map(({ path, Element, withAuth }, i) => {
         if (withAuth === undefined) {
             return <Route path={path} element={<Element />} key={i} />;
@@ -47,6 +47,6 @@ const Router: FC = () => {
             </Route>
         </Routes>
     );
-};
+});
 
 export default Router;

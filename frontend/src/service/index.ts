@@ -49,10 +49,14 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     }
 
     let resultData: { code: string } | null = null;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    if (result.error?.data != null && 'code' in result?.error?.data) {
-        resultData = result.error.data as { code: string };
+    try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        if (result.error?.data != null && 'code' in result?.error?.data) {
+            resultData = result.error.data as { code: string };
+        }
+    } catch (e) {
+        console.log(e);
     }
 
     if (resultData?.code != null) {

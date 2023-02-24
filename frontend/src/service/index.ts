@@ -10,7 +10,6 @@ import { apiEndpoints } from '../constants/apiEndpoints';
 import { logout, setAuthTokens } from '../redux/slices/authSlice';
 import { RootState } from '../redux/store';
 import { ITokens } from '../types/redux/auth/ITokens';
-import { isTokenExpired } from '../utils/isTokenExpired';
 
 const axiosBQ = axios.create({ baseURL: url });
 
@@ -47,12 +46,12 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         return result;
     }
 
-    console.log('isTokenExpired', isTokenExpired(authTokens.access));
-    const tokenIsExpired = isTokenExpired(authTokens.access);
+    // console.log('isTokenExpired', isTokenExpired(authTokens.access));
+    // const tokenIsExpired = isTokenExpired(authTokens.access);
 
-    if (!tokenIsExpired && result.error === undefined) {
-        return result;
-    }
+    // if (!tokenIsExpired && result.error === undefined) {
+    //     return result;
+    // }
 
     let resultData: { code: string } | null = null;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,7 +62,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
     if (resultData?.code != null) {
         const code = resultData.code;
-        if (code === 'user_not_found' || (code === 'token_not_valid' && !tokenIsExpired)) {
+        if (code === 'user_not_found' || code === 'token_not_valid') {
             console.log('user not found');
             api.dispatch(logout());
             return result;

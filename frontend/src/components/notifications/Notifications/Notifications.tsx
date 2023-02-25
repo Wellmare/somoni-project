@@ -41,7 +41,7 @@ const Notifications: FC = () => {
         doAsyncFunc(async () => {
             try {
                 const notifications = await getAllNotifications({}).unwrap();
-                dispatch(setNotifications(notifications.data));
+                dispatch(setNotifications(notifications));
             } catch (e) {
                 console.log(e);
             }

@@ -34,7 +34,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         }),
         getUserInfo: builder.query<IProfileInfo, IDataToGetProfileInfo>({
             query: ({ userId }) => ({
-                url: `${apiEndpoints.userInfo}${userId}`,
+                url: `${apiEndpoints.userInfo}${userId}/`,
             }),
             providesTags: ['Profile', 'Auth'],
         }),

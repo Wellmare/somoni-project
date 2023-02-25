@@ -8,7 +8,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getPost: builder.query<IPostServerResponse, IDataToGetPost>({
             query: ({ id }) => ({
-                url: `${apiEndpoints.post}${id}`,
+                url: `${apiEndpoints.post}${id}/`,
             }),
             providesTags: (result) => [{ type: 'Single Post', id: result?.id }],
         }),

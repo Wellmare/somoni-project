@@ -3,15 +3,11 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { Mutex } from 'async-mutex';
 
-import axios from 'axios';
-
 import { url } from '../constants/api';
 import { apiEndpoints } from '../constants/apiEndpoints';
 import { logout, setAuthTokens } from '../redux/slices/authSlice';
 import { RootState } from '../redux/store';
 import { ITokens } from '../types/redux/auth/ITokens';
-
-const axiosBQ = axios.create({ baseURL: url });
 
 // create a new mutex
 const mutex = new Mutex();
@@ -21,7 +17,6 @@ const baseQuery = fetchBaseQuery({
     prepareHeaders: (headers, api) => {
         const tokens = (api.getState() as RootState).auth.authTokens;
         if (tokens === null) return headers;
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         headers.set('Authorization', `Bearer ${tokens.access}`);
         return headers;
     },
@@ -54,10 +49,14 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     // }
 
     let resultData: { code: string } | null = null;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    if (result.error?.data != null && 'code' in result?.error?.data) {
-        resultData = result.error.data as { code: string };
+    try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        if (result.error?.data != null && 'code' in result?.error?.data) {
+            resultData = result.error.data as { code: string };
+        }
+    } catch (e) {
+        console.log(e);
     }
 
     if (resultData?.code != null) {

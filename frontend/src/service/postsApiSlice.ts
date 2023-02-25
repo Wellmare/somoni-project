@@ -12,7 +12,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
                 params: {
                     page,
                 },
-                url: tag !== undefined && tag !== '' ? `${apiEndpoints.posts}${tag}` : apiEndpoints.posts,
+                url: tag !== undefined && tag !== '' ? `${apiEndpoints.posts}${tag}/` : apiEndpoints.posts,
             }),
             providesTags: (result) =>
                 result != null

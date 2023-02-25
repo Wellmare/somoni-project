@@ -1,0 +1,30 @@
+@import './styles/global';
+
+.notifications {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  width: 90vw;
+
+  max-height: 100vh;
+  overflow-y: auto;
+
+  @media (min-width: $sm) {
+    width: 85%;
+  }
+
+  @media (min-width: $md) {
+    width: 75%;
+  }
+
+  @media (min-width: $lg) {
+    width: 50%;
+  }
+  @media (min-width: $xl) {
+    width: 30%;
+  }
+  //@media (min-width: $xl2) {
+  //  width: 40%;
+  //}
+}

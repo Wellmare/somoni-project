@@ -14,7 +14,7 @@ export const commentsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getComments: builder.query<ICommentsServerResponse, IDataToGetComments>({
             query: ({ postId }) => ({
-                url: `${apiEndpoints.post}${postId}/comments`,
+                url: `${apiEndpoints.post}${postId}/comments/`,
             }),
             providesTags: ['Comments'],
             // (result, error, arg) =>

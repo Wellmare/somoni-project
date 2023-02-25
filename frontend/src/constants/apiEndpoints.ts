@@ -14,4 +14,10 @@ export const apiEndpoints = {
     restorePasswordConfirm: 'password-reset/confirm/',
     confirmEmail: 'email-confirm/',
     sendConfirmEmail: 'email-confirm/send/',
+
+    getAllNotifications: 'notifications/all/',
+    getLastNotifications: 'notifications/last/',
+    connectToNotification: 'notifications/connect/',
+    readNotification: (id: string) => `notification/${id}/read/`,
+    readAllNotification: 'notifications/read-all/',
 };

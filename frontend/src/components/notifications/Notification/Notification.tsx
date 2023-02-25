@@ -7,8 +7,10 @@ import { setIsReadInState } from '../../../redux/slices/notificationsSlice';
 import { useReadNotificationMutation } from '../../../service/notificationsApiSlice';
 import { INotification } from '../../../types/redux/notifications/INotification';
 import { ButtonColors } from '../../../types/UI/Button.types';
+import { LoaderSize } from '../../../types/UI/Loader.types';
 import ButtonLink from '../../../ui/ButtonLink/ButtonLink';
 import Card from '../../../ui/Card/Card';
+import Loader from '../../../ui/Loader/Loader';
 import { doAsyncFunc } from '../../../utils/doAsyncFunc';
 import { getLocalDateFromString } from '../../../utils/getLocalDateFromString';
 import SanitizeHTML from '../../SanitizeHtml/SanitizeHtml';
@@ -62,6 +64,7 @@ const Notification: FC<INotificationProps> = ({
                                 isError={isError}
                                 isLoading={isLoading}
                                 isSuccess={isSuccess}
+                                loader={<Loader size={LoaderSize.sm} />}
                             >
                                 {/*    */}
                             </ServerResponse>

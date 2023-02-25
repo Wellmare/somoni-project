@@ -18,6 +18,6 @@ export const apiEndpoints = {
     getAllNotifications: 'notifications/all/',
     getLastNotifications: 'notifications/last/',
     connectToNotification: 'notifications/connect/',
-    readNotification: (id: string) => `notification/${id}/`,
+    readNotification: (id: string) => `notification/${id}/read/`,
     readAllNotification: 'notifications/read-all/',
 };

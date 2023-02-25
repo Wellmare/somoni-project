@@ -20,22 +20,22 @@ const App: FC = () => {
     const [newNotifications, setNewNotifications] = useState<INotification[]>([]);
 
     useEffect(() => {
-        setInterval(() => {
-            // sendNotification(htmlToPlainText('<a href="https://sa">Пользователь</a> прислал уведомление'), (event) => {
-            //     event.preventDefault(); // prevent the browser from focusing the Notification's tab
-            //     window.open('https://somoni.org/post/2', '_blank');
-            // });
-            const not: INotification = {
-                id: '56',
-                isRead: false,
-                html: '<a href="https://somoni.org/user/50">test_regru</a> оставил комментарий под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
-                date: '2022',
-            };
-            setNewNotifications((notifications) => [not, ...notifications]);
-            setTimeout(() => {
-                setNewNotifications((notifications) => notifications.filter(({ id }) => id !== not.id));
-            }, 5 * 60 * 1000);
-        }, 2000);
+        // setInterval(() => {
+        //     // sendNotification(htmlToPlainText('<a href="https://sa">Пользователь</a> прислал уведомление'), (event) => {
+        //     //     event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        //     //     window.open('https://somoni.org/post/2', '_blank');
+        //     // });
+        //     const not: INotification = {
+        //         id: '56',
+        //         isRead: false,
+        //         html: '<a href="https://somoni.org/user/50">test_regru</a> оставил комментарий под пост <a href="https://somoni.org/post/12">Я купил наушники</a>',
+        //         date: '2022',
+        //     };
+        //     setNewNotifications((notifications) => [not, ...notifications]);
+        //     setTimeout(() => {
+        //         setNewNotifications((notifications) => notifications.filter(({ id }) => id !== not.id));
+        //     }, 5 * 60 * 1000);
+        // }, 2000);
 
         if (isAuth && userId != null) {
             try {

@@ -37,7 +37,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: ({ userId }) => ({
                 url: `${apiEndpoints.userInfo}${userId}/`,
             }),
-            providesTags: ['Profile', 'Auth'],
+            providesTags: ['Auth'],
         }),
 
         deleteProfile: builder.mutation<undefined, undefined>({
@@ -64,7 +64,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 url: `${apiEndpoints.user}${userId}/follow/`,
                 method: 'POST',
             }),
-            invalidatesTags: ['Profile', 'Auth'],
+            invalidatesTags: ['Profile'],
         }),
 
         // editPost: builder.mutation<IPost, IDataToEditPost>({

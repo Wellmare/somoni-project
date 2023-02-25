@@ -22,7 +22,7 @@ const TagsInput: FC<ICustomInputProps> = ({ control, ...props }) => {
             name={'tags'}
             rules={{
                 pattern: {
-                    value: /^[A-Za-z0-9_\u0400-\u04FF]+$/gu,
+                    value: /^[A-Za-z0-9_ \u0400-\u04FF]+$/gu,
                     message: 'Любые символы, кроме _ запрещены',
                 },
             }}

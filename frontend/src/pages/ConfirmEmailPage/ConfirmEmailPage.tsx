@@ -1,16 +1,14 @@
+import { PathsToNavigate } from 'app/constants/Paths';
 import React, { FC, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useConfirmEmailMutation } from 'shared/api/auth/authApiSlice';
+import { ServerResponse } from 'shared/components';
+import { doAsyncFunc } from 'shared/lib/doAsyncFunc';
+import { Button, ButtonColors, ButtonSizes } from 'shared/ui/Button';
+import { Error } from 'shared/ui/Error';
+import { Success } from 'shared/ui/Success';
 
-import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
-import { PathsToNavigate } from '../../constants/Paths';
-import { useConfirmEmailMutation } from '../../service/authApiSlice';
-import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
-import Button from '../../ui/Button/Button';
-import Error from '../../ui/Error/Error';
-import Success from '../../ui/Success/Success';
-import { doAsyncFunc } from '../../utils/doAsyncFunc';
-
-const ConfirmEmailPage: FC = () => {
+export const ConfirmEmailPage: FC = () => {
     const { token1, token2 } = useParams<{ token1: string; token2: string }>();
     if (token1 === undefined || token2 === undefined) return <Error>Токены не найдены!</Error>;
 
@@ -53,5 +51,3 @@ const ConfirmEmailPage: FC = () => {
         </div>
     );
 };
-
-export default ConfirmEmailPage;

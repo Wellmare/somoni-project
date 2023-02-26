@@ -1,0 +1,50 @@
+@import 'app/styles/global';
+
+.icon {
+  //width: 1rem;
+  //height: 1rem;
+  svg {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  //svg > path {
+  //
+  //  fill: #cccccc;
+  //  stroke: none;
+  //}
+}
+
+:root[data-theme="light"] {
+  .icon {
+    svg > path {
+      fill: #969696;
+      stroke: none;
+    }
+  }
+}
+
+:root[data-theme="dark"] {
+  .icon {
+    svg > path {
+      fill: #cccccc;
+      stroke: none;
+    }
+  }
+}
+
+
+.wrapper {
+  width: 90vw;
+  user-select: text;
+
+  @media (min-width: $sm) {
+    width: 60vw;
+  }
+  @media (min-width: $md) {
+    width: 40vw;
+  }
+  @media (min-width: $lg) {
+    width: 30vw;
+  }
+}

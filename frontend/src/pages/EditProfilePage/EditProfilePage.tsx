@@ -1,16 +1,13 @@
+import { PathsToNavigate } from 'app/constants/Paths';
 import React, { FC } from 'react';
-
 import { Link } from 'react-router-dom';
+import { useGetDataToEditUserQuery } from 'shared/api/user/userApiSlice';
+import { ServerResponse } from 'shared/components';
+import { Button, ButtonColors, ButtonSizes } from 'shared/ui/Button';
+import { EditProfileForm } from 'widgets/forms';
+import { DeleteProfileAlert } from 'widgets/profile/profile-components';
 
-import EditProfileForm from '../../components/forms/profile/EditProfileForm/EditProfileForm';
-import DeleteProfileAlert from '../../components/profile/profile-components/DeleteProfileAlert/DeleteProfileAlert';
-import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
-import { PathsToNavigate } from '../../constants/Paths';
-import { useGetDataToEditUserQuery } from '../../service/userApiSlice';
-import { ButtonColors, ButtonSizes } from '../../types/UI/Button.types';
-import Button from '../../ui/Button/Button';
-
-const EditProfilePage: FC = () => {
+export const EditProfilePage: FC = () => {
     const { data, error, isError, isLoading, isSuccess } = useGetDataToEditUserQuery(undefined);
     return (
         <>
@@ -43,5 +40,3 @@ const EditProfilePage: FC = () => {
         </>
     );
 };
-
-export default EditProfilePage;

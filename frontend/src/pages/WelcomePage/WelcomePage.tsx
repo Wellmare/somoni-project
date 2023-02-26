@@ -1,15 +1,14 @@
+import { PathsToNavigate } from 'app/constants/Paths';
+import WelcomeImg from 'assets/svg/welcome.png';
 import classNames from 'classnames';
+
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, ButtonColors } from 'shared/ui/Button';
 
 import s from './WelcomePage.module.scss';
 
-import WelcomeImg from '../../assets/svg/welcome.png';
-import { PathsToNavigate } from '../../constants/Paths';
-import { ButtonColors } from '../../types/UI/Button.types';
-import Button from '../../ui/Button/Button';
-
-const WelcomePage: FC = () => {
+export const WelcomePage: FC = () => {
     return (
         <div className={classNames('w-screen cont')}>
             <div className={'text-right mr-5 mt-5'}>
@@ -51,5 +50,3 @@ const WelcomePage: FC = () => {
         </div>
     );
 };
-
-export default WelcomePage;

@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetPostQuery } from 'shared/api/post/postApiSlice';
+import { ServerResponse } from 'shared/components';
+import { Error } from 'shared/ui/Error';
+import { FormEditPost } from 'widgets/forms';
 
 import s from './EditPostPage.module.scss';
 
-import FormEditPost from '../../components/forms/post/FormEditPost/FormEditPost';
-import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
-import { useGetPostQuery } from '../../service/postApiSlice';
-import Error from '../../ui/Error/Error';
-
-const EditPostPage: FC = () => {
+export const EditPostPage: FC = () => {
     const { id: postId } = useParams();
     if (postId === undefined) {
         return <Error>Нет id поста</Error>;
@@ -34,5 +33,3 @@ const EditPostPage: FC = () => {
         </div>
     );
 };
-
-export default EditPostPage;

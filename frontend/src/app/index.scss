@@ -1,0 +1,54 @@
+@use "styles/Button";
+@use "styles/Input";
+@use "styles/Editor";
+@use "styles/Avatar";
+@use "styles/Icon";
+@use "styles/Text";
+@use "styles/Post";
+@use "styles/Header";
+@use "styles/Menu";
+@use "styles/Tag";
+@use "styles/Pagination";
+@use "styles/Comment";
+@use "styles/Alert";
+@use "styles/Logo";
+@use "styles/Loader";
+@use "styles/Card";
+@use "styles/Badge";
+@use "styles/Scrollbar";
+@use "styles/global";
+@import "styles/global";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.container {
+  width: 91.666667%;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+
+  @media (min-width: $sm) {
+    width: 91.666667%;
+  }
+
+  @media (min-width: $md) {
+    width: 91.666667%;
+  }
+
+  @media (min-width: $lg) {
+    width: 66.666667%;
+  }
+  @media (min-width: $xl) {
+    width: 50%;
+  }
+  @media (min-width: $xl2) {
+    width: 40%;
+  }
+}

@@ -1,0 +1,11 @@
+export { FormCreatePost } from './post/FormCreatePost/FormCreatePost';
+export { FormEditPost } from './post/FormEditPost/FormEditPost';
+export { ChangePasswordForm } from './auth/ChangePasswordForm/ChangePasswordForm';
+export { LoginForm } from './auth/LoginForm/LoginForm';
+export { RegisterForm } from './auth/RegisterForm/RegisterForm';
+export { RestorePasswordForm } from './auth/RestorePasswordForm/RestorePasswordForm';
+export { RestorePasswordConfirmForm } from './auth/RestorePasswordConfirmForm/RestorePasswordConfirmForm';
+export { FormCreateComment } from './comments/FormCreateComment/FormCreateComment';
+export { FormEditComment } from './comments/FormEditComment/FormEditComment';
+export { EditProfileForm } from './profile/EditProfileForm/EditProfileForm';
+export { SearchByTagForm } from './SearchByTagForm/SearchByTagForm';

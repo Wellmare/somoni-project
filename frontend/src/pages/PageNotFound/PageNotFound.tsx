@@ -1,12 +1,13 @@
+import { PathsToNavigate } from 'app/constants/Paths';
+
 import React, { FC } from 'react';
+
+import { ButtonColors } from 'shared/ui/Button';
+import { ButtonLink } from 'shared/ui/ButtonLink';
 
 import s from './PageNotFound.module.scss';
 
-import { PathsToNavigate } from '../../constants/Paths';
-import { ButtonColors } from '../../types/UI/Button.types';
-import ButtonLink from '../../ui/ButtonLink/ButtonLink';
-
-const PageNotFound: FC = () => {
+export const PageNotFound: FC = () => {
     return (
         <div className={`text-center flex justify-center items-center ${s.container}`}>
             <div>
@@ -21,5 +22,3 @@ const PageNotFound: FC = () => {
         </div>
     );
 };
-
-export default PageNotFound;

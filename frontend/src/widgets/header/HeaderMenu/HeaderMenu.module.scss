@@ -1,0 +1,24 @@
+.menuDivider {
+  height: 1px;
+  margin: 0.5rem 0.625rem;
+  background-color: var(--menu-divider-color);
+}
+
+.menuButton {
+  background: var(--menu-button-bg);
+  border: var(--menu-button-border);
+  padding: .2rem .5rem;
+  border-radius: .5rem;
+}
+
+
+.threeDots {
+  svg > path {
+    fill: var(--icon-primary-color);
+  }
+}
+
+.menuOnMobile {
+  //max-width: 300px;
+  //width: 50vw;
+}

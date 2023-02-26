@@ -1,18 +1,16 @@
+import { Paths } from 'app/constants/Paths';
 import React, { FC, useEffect, useState } from 'react';
-
 import { useLocation } from 'react-router-dom';
+import { useLazyGetUserInfoQuery } from 'shared/api/user/userApiSlice';
+import { useAppSelector } from 'shared/hooks/reduxHooks';
+import { doAsyncFunc } from 'shared/lib/doAsyncFunc';
+import { selectUserId } from 'shared/store/slices/authSlice';
+import { EmailNotConfirmedCard } from 'widgets/EmailNotConfirmedCard';
+import { SearchByTagForm } from 'widgets/forms';
+import { EmailSendedModal } from 'widgets/modals';
+import { PostsByPage } from 'widgets/PostsByPage';
 
-import SearchByTagForm from '../../components/forms/SearchByTagForm/SearchByTagForm';
-import Posts from '../../components/posts/Posts/Posts';
-import { Paths } from '../../constants/Paths';
-import { useAppSelector } from '../../hooks/reduxHooks';
-import { selectUserId } from '../../redux/slices/authSlice';
-import { useLazyGetUserInfoQuery } from '../../service/userApiSlice';
-import EmailNotConfirmedCard from '../../ui/EmailNotConfirmedCard/EmailNotConfirmedCard';
-import EmailSendedModal from '../../ui/modals/EmailSendedModal/EmailSendedModal';
-import { doAsyncFunc } from '../../utils/doAsyncFunc';
-
-const MainPage: FC = () => {
+export const MainPage: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { state } = useLocation();
 
@@ -45,10 +43,8 @@ const MainPage: FC = () => {
                         <SearchByTagForm />
                     </div>
                 </div>
-                <Posts />
+                <PostsByPage />
             </div>
         </>
     );
 };
-
-export default MainPage;

@@ -1,0 +1,1 @@
+export { preparePathToNavigate } from './preparePathToNavigate';

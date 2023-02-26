@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetPostQuery } from 'shared/api/post/postApiSlice';
+import { ServerResponse } from 'shared/components';
+import { enhanceIPostServerResponse } from 'shared/lib/server/enhanceIPostServerResponse';
+import { Error } from 'shared/ui/Error';
+import { Comments } from 'widgets/Comments';
+import { Post } from 'widgets/post';
 
-import Post from '../../components/posts/post-components/Post/Post';
-import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
-import Comments from '../../components/сomments/Comments/Comments';
-import { useGetPostQuery } from '../../service/postApiSlice';
-import Error from '../../ui/Error/Error';
-import { enhanceIPostServerResponse } from '../../utils/enhanceIPostServerResponse';
-
-const PostPage: FC = () => {
+export const PostPage: FC = () => {
     const params = useParams();
     const postId = params.id;
     if (postId === undefined) {
@@ -32,5 +31,3 @@ const PostPage: FC = () => {
         </>
     );
 };
-
-export default PostPage;

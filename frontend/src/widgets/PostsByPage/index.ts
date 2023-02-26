@@ -1,0 +1,1 @@
+export { PostsByPage } from './PostsByPage';

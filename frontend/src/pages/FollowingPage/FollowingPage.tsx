@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetFollowingOnProfileQuery } from 'shared/api/user/userApiSlice';
+import { ServerResponse } from 'shared/components';
+import { ListUsers } from 'widgets/listUsers';
 
-import ListUsers from '../../components/listUsers/ListUsers/ListUsers';
-import ServerResponse from '../../components/server/ServerResponse/ServerResponse';
-import { useGetFollowingOnProfileQuery } from '../../service/userApiSlice';
-
-const FollowingPage: FC = () => {
+export const FollowingPage: FC = () => {
     const params = useParams();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const id = params.id!;
@@ -19,5 +18,3 @@ const FollowingPage: FC = () => {
         </>
     );
 };
-
-export default FollowingPage;

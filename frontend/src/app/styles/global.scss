@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--background-color);
+  color: var(--text-color-primary);
+  overflow-x: hidden;
+
+  overflow-wrap: break-word;
+
+}
+
+html, body {
+  height: 100%;
+}
+
+.cont {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  min-height: 100%;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xl2: 1536px;
+
+:root[data-theme="light"] {
+  --background-color: #EEEEEE
+}
+
+:root[data-theme="dark"] {
+  --background-color: #171C20
+}
+
+
+.on-desktop {
+  display: inherit;
+}
+
+.on-mobile {
+  display: none;
+}
+
+
+@media (max-width: $sm) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: $sm) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: $md) {
+  .on-desktop {
+    display: none;
+  }
+  .on-mobile {
+    display: inherit;
+  }
+}
+
+@media (min-width: $lg) {
+  .on-desktop {
+    display: inherit;
+  }
+  .on-mobile {
+    display: none;
+  }
+}

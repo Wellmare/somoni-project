@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 
+import { RegisterForm } from 'widgets/forms';
+
 import s from './RegisterPage.module.scss';
 
-import RegisterForm from '../../components/forms/auth/RegisterForm/RegisterForm';
-
-const RegisterPage: FC = () => {
+export const RegisterPage: FC = () => {
     return (
         <div className={`${s.maxWidth} mx-auto`}>
             <RegisterForm />
         </div>
     );
 };
-
-export default RegisterPage;

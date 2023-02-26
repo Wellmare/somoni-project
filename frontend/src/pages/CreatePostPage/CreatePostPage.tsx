@@ -1,15 +1,12 @@
 import React, { FC } from 'react';
+import { FormCreatePost } from 'widgets/forms';
 
 import s from './CreatePostPage.module.scss';
 
-import FormCreatePost from '../../components/forms/post/FormCreatePost/FormCreatePost';
-
-const CreatePostPage: FC = () => {
+export const CreatePostPage: FC = () => {
     return (
         <div className={`${s.maxWidth} mx-auto`}>
             <FormCreatePost />
         </div>
     );
 };
-
-export default CreatePostPage;

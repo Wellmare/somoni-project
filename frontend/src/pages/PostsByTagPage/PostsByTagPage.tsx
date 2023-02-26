@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { SearchByTagForm } from 'widgets/forms';
+import { PostsByPage } from 'widgets/PostsByPage';
 
-import SearchByTagForm from '../../components/forms/SearchByTagForm/SearchByTagForm';
-import Posts from '../../components/posts/Posts/Posts';
-
-const PostsByTagPage: FC = () => {
+export const PostsByTagPage: FC = () => {
     const params = useParams();
     const tag = params.tag !== undefined ? params.tag.toLowerCase() : undefined;
 
@@ -15,9 +14,7 @@ const PostsByTagPage: FC = () => {
                     <SearchByTagForm />
                 </div>
             </div>
-            <Posts tag={tag} />
+            <PostsByPage tag={tag} />
         </div>
     );
 };
-
-export default PostsByTagPage;

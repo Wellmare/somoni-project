@@ -4,6 +4,7 @@ import { IUserServerResponse } from 'shared/api/user/types/IUserServerResponse';
 import { enhanceIUserServerResponse } from 'shared/lib/server/enhanceIUserServerResponse';
 import { IPaginatedResponse } from 'shared/types/server/IPaginatedResponse';
 
+import { Info } from 'shared/ui/Info';
 import { Pagination } from 'widgets/Pagination';
 
 import { ListUser } from '../index';
@@ -25,12 +26,18 @@ export const ListUsers: FC<IListUsersProps> = ({ users }) => {
 
     return (
         <div>
-            <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
-            {usersList.map((user) => {
-                const enhancedUser = enhanceIUserServerResponse(user);
-                return <ListUser user={enhancedUser} key={enhancedUser.profileId} />;
-            })}
-            <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
+            {usersList.length === 0 ? (
+                <Info>Никого нет :(</Info>
+            ) : (
+                <>
+                    <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
+                    {usersList.map((user) => {
+                        const enhancedUser = enhanceIUserServerResponse(user);
+                        return <ListUser user={enhancedUser} key={enhancedUser.profileId} />;
+                    })}
+                    <Pagination currentPage={page - 1} countPages={countPages} handlePageChange={handlePageChange} />
+                </>
+            )}
         </div>
     );
 };

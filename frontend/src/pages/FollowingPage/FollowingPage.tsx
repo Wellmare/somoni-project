@@ -13,6 +13,7 @@ export const FollowingPage: FC = () => {
     return (
         <>
             <ServerResponse responseError={error} isError={isError} isLoading={isLoading} isSuccess={isSuccess}>
+                <h3 className={'font-medium text-center text-xl mb-4'}>Подписки</h3>
                 {data !== undefined && <ListUsers users={data} />}
             </ServerResponse>
         </>

@@ -48,11 +48,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'taggit',
+
     'corsheaders',
     'channels',
     'django_eventstream',
 
 ]
+
 
 MIDDLEWARE = [
     'django_grip.GripMiddleware',
@@ -195,10 +197,14 @@ AUTH_USER_MODEL = 'myapi.User'
 
 DEFAULT_FROM_EMAIL = os.getenv("FROM_EMAIL")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = 2525
-EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 CSRF_COOKIE_SAMESITE = None
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51581994'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Q7YuleN793Tw6T7qLwYJ'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']

@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
 
 from blog.models import Post, PostLike, Comments
+from myapi.models import User
 from .models import Notification
 
 
@@ -43,4 +44,29 @@ def create_notification_new_comments(sender, instance, created, **kwargs):
             notification = Notification()
             notification.html = html
             notification.recipient = instance.post.author
+            notification.save()
+
+
+
+@receiver(m2m_changed, sender=User.following.through)
+def func(sender, instance, action, using, pk_set, **kwargs):
+    print(sender, instance, action, using, sep="\n")
+    notification = Notification()
+    if action == "post_add":
+        for pk in pk_set:
+            user = get_object_or_404(User, id=pk)
+
+            notification.html = f'<a href="{domain}/user/{user.id}">' \
+                                f'{user.username}</a> подписался(подписалась) на Вас'
+            notification.recipient = instance
+            notification.save()
+
+
+    if action == "post_remove":
+        for pk in pk_set:
+            user = get_object_or_404(User, id=pk)
+
+            notification.html = f'<a href="{domain}/user/{user.id}">' \
+                                f'{user.username}</a> отписался(отписалась) от Вас'
+            notification.recipient = instance
             notification.save()

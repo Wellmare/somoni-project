@@ -23,6 +23,7 @@ def Read(request, id):
     notification = get_object_or_404(Notification, id=id)
     notification.isRead = True
     notification.save()
+    return Response({'notification is read'})
 
 
 @api_view(['POST'])
@@ -78,6 +79,6 @@ def stream(request, id):
                 serializer = notifications_serializer(notification, many=False)
                 notification.sent = True
                 notification.save()
-                yield f'data:  {json.dumps(serializer.data)}\n\n'
+                return f'data:  {json.dumps(serializer.data)}\n\n'
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')

@@ -28,8 +28,8 @@ export const Post: FC<ITestPostProps> = ({ post, limitContentView = false }) => 
             <Card className={s.post}>
                 <PostHeader />
                 <PostTitle />
-                <PostContent limitContentView={limitContentView} />
                 <PostImage />
+                <PostContent limitContentView={limitContentView} />
                 <div className={'mb-3 mt-2'}>
                     <PostTags />
                 </div>

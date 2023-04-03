@@ -22,7 +22,10 @@ export const PostContent: FC<IPostContentProps> = ({ limitContentView }) => {
     useEffect(() => {
         if (limitContentView) {
             if (editorRef.current !== null) {
-                if (editorRef.current.clientHeight > 500) {
+                const remToPx = (rem: number): number => {
+                    return parseFloat(window.getComputedStyle(document.documentElement).fontSize) * rem;
+                };
+                if (editorRef.current.clientHeight > remToPx(20)) {
                     setIsHide(true);
                 }
             }

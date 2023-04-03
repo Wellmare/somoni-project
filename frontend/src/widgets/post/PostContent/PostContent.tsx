@@ -2,6 +2,8 @@ import { PostContext } from 'app/context';
 import classNames from 'classnames';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
+import { Link } from 'react-router-dom';
+import { preparePathToNavigate } from 'shared/lib/path';
 import { Button, ButtonColors } from 'shared/ui/Button';
 
 interface IPostContentProps {
@@ -11,7 +13,7 @@ interface IPostContentProps {
 export const PostContent: FC<IPostContentProps> = ({ limitContentView }) => {
     const { post } = useContext(PostContext);
     if (post === null) return null;
-    const { content } = post;
+    const { content, postId } = post;
 
     const editorRef: { current: HTMLDivElement | null } = { current: null };
     const [isHide, setIsHide] = useState(false);
@@ -37,9 +39,11 @@ export const PostContent: FC<IPostContentProps> = ({ limitContentView }) => {
             />
             {isHide && (
                 <div className={'flex justify-start'}>
-                    <Button color={ButtonColors.gray} className={'px-3 py-2 mb-3'}>
-                        Читать далее
-                    </Button>
+                    <Link to={preparePathToNavigate.post(postId)}>
+                        <Button color={ButtonColors.gray} className={'px-3 py-2 mb-3'}>
+                            Читать далее
+                        </Button>
+                    </Link>
                 </div>
             )}
         </div>

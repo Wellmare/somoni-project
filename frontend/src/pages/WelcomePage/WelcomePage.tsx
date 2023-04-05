@@ -20,7 +20,7 @@ export const WelcomePage: FC = () => {
             <div className={classNames(s.flex)}>
                 <img src={WelcomeImg} alt='welcome' className={'h-56 mx-auto object-contain'} />
                 <div className={'text-center mt-5 mb-5'}>
-                    <h1 className={classNames('font-bold', s.h1)}>Привет!</h1>
+                    <h1 className={classNames('font-bold', s.h1)}>Добро пожаловать!</h1>
                     <h3>Читай там, где удобно!</h3>
                 </div>
 

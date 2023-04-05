@@ -14,6 +14,7 @@ export const PostsByTagPage: FC = () => {
                     <SearchByTagForm />
                 </div>
             </div>
+            <h1 className={'text-center bold text-2xl mt-8 mb-6'}>Посты по тегу: {tag}</h1>
             <PostsByPage tag={tag} />
         </div>
     );

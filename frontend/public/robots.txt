@@ -1,0 +1,9 @@
+User-agent: *
+Crawl-delay: 5
+Host: https://somoni.ru
+Disallow: /change-password/
+Disallow: /restore-password/
+Disallow: /restore-password/confirm/
+Disallow: /confirm-email/
+Disallow: /edit-profile/
+Disallow: /edit-post/

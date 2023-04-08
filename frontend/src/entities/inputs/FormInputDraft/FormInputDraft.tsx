@@ -38,6 +38,28 @@ export const FormInputDraft: FC<IFormInputDraftProps> = ({
             <ReactQuill
                 theme='snow'
                 value={editorContent}
+                modules={{
+                    toolbar: [
+                        // 'header',
+                        // 'font',
+                        // 'size',
+                        // 'bold',
+                        // 'italic',
+                        // 'strike',
+                        // 'underline',
+                        // 'link',
+                        // 'list',
+                        // 'blockquote',
+                        // 'align',
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote'],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
+                        ['link'],
+                        ['clean'],
+                    ],
+                }}
                 onChange={onEditorStateChange}
                 className={`editor-padding ${className}`}
                 {...props}
